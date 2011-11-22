@@ -6,11 +6,15 @@ using namespace std;
 
 int main(){
 
-    string message, board = "00000";
+    const int BOARD_SIZE = 5;
+    string message, board = string(BOARD_SIZE, '0');
     int move = 0;
+    bool player1 = false;
 
-    bool player1 = true;
-    do{
+    do
+    {
+        player1 = !player1;
+
         if (player1)
             message = "[1]";
         else
@@ -28,13 +32,11 @@ int main(){
         else
             board[move] = '2';
 
-        player1 = !player1;
-    } while (board[4] == '0');
+    } while (board[BOARD_SIZE-1] == '0');
 
-    if (board[4] == '1')
+    if(player1)
         fprintf(stderr, "player 1 won\n");
-
-    if (board[4] == '2')
+    else
         fprintf(stderr, "player 2 won\n");
 
     cout << "[0] END GAME";
