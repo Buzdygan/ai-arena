@@ -37,6 +37,17 @@ class Bot:
 	def set_filepath(self, fpath):
 		self.filepath = fpath
 
+
+def parse_response(response, player):
+	return "[" + str(player) + "]" + response
+
+def get_players(to_send):
+	return map(lambda x:int(x), to_send[1:].split(']')[0].split(','))
+
+def get_message(to_send):
+	return to_send.split(']')[1]
+
+
 """
 	ListOfBots is a list of objects of class Bot.
 	Bots are meant to know where is theirs executable file is located.
@@ -71,9 +82,22 @@ def play(list_of_bots, game):
 				shell=True,
 				)
 		bot_process_out = bot_process.stdout.read()
-		print bot_process_out
 		bots_process_list.append(bot_process)
 
+	end_game = False;
+	while not end_game:
+		to_send = judge_process.stdout.read()
+		list_players_to_send = get_players(to_send)
+		communicate = get_communicate(to_send)
+		if communicate == "END GAME":
+			end_game = True
+			break
+		for player in list_players_to_send:
+			list_of_bots[player].stdin.write(communicate)
+			response = list_of_bots[player].stdout.read()
+			list_of_responses.append(parse_response(response, player))
+		for response in list_of_responses:
+			judge_process.stdin.write(response)
 		"""
 			komunikacja od Botow idzie do sedziego
 			Komunikacja od sedziego trzeba sparsowac i rozeslac do odpowiednich ziomow
