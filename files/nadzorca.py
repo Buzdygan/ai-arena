@@ -1,6 +1,3 @@
-#!/usr/bin/puthon
-# Filename: nadzorca.py
-
 import subprocess
 import shlex
 import os
@@ -98,7 +95,7 @@ def play(list_of_bots, game):
             list_of_responses.append(parse_response(response, player))
         for response in list_of_responses:
             judge_process.stdin.write(response)
-		"""
+        """
 			komunikacja od Botow idzie do sedziego
 			Komunikacja od sedziego trzeba sparsowac i rozeslac do odpowiednich ziomow
 		"""
