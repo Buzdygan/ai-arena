@@ -1,0 +1,135 @@
+" When started as "evim", evim.vim will already have done these settings.
+if v:progname =~? "evim"
+	finish
+endif
+
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+if has("vms")
+	set nobackup		" do not keep a backup file, use versions instead
+else
+	set backup		" keep a backup file
+endif
+set history=50		" keep 50 lines of command line history
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
+set incsearch		" do incremental searching
+set number
+" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
+" let &guioptions = substitute(&guioptions, "t", "", "g")
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" This is an alternative that also works in block mode, but the deleted
+" text is lost and it only works for putting the current register.
+"vnoremap p "_dp
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+	syntax on
+	set hlsearch
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+	" Enable file type detection.
+	" Use the default filetype settings, so that mail gets 'tw' set to 72,
+	" 'cindent' is on in C files, etc.
+	" Also load indent files, to automatically do language-dependent indenting.
+	filetype plugin indent on
+    filetype plugin on
+
+	" Put these in an autocmd group, so that we can delete them easily.
+	augroup vimrcEx
+	au!
+
+	" For all text files set 'textwidth' to 78 characters.
+	autocmd FileType text setlocal textwidth=78
+
+	" Go home when editting git commit message
+	autocmd BufReadPost COMMIT_EDITMSG exe "normal gg"
+
+	" When editing a file, always jump to the last known cursor position.
+	" Don't do it when the position is invalid or when inside an event handler
+	" (happens when dropping a file on gvim).
+	autocmd BufReadPost *
+		\ if line("'\"") > 0 && line("'\"") <= line("$") |
+		\   exe "normal g`\"" |
+		\ endif
+
+		augroup END
+
+    au BufWinLeave ?* mkview
+    au BufWinEnter ?* silent loadview
+
+else
+
+	set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+set ts=4
+set sw=4
+set sts=4
+set ai
+set nowrap
+set visualbell
+set mouse=a
+set nobackup
+set et
+set dir=/tmp
+set wildmenu
+set foldlevelstart=99
+set scrolloff=3
+
+set bg=dark
+
+if has("gui_running")
+	colorscheme koehler
+
+	" Highlight current row
+	highlight CursorLine term=reverse cterm=NONE ctermbg=black guibg=gray10
+	set cursorline
+
+	" Cursor color
+	highlight Cursor guibg=fg guifg=bg
+endif
+
+nnoremap <silent> <F2> :TlistOpen<CR>
+let Tlist_Close_On_Select = 1
+let Tlist_Ctags_Cmd = "/opt/local/bin/ctags"
+
+set fileencodings=ucs-bom,utf-8,default,latin2,cp1250,latin1
+
+let g:tex_flavor = 'latex'
+
+set tags=~/sio2-git/util/vim-tags/sio2_vim_tags.txt 
+let g:EnhCommentifyBindInNormal = 'No'
+let g:EnhCommentifyBindInVisual = 'No'
+let g:EnhCommentifyBindInInsert = 'No'
+let g:pydiction_location = '~/.vim/pydiction/complete-dict'
+
+nmap \? <Plug>DeComment
+nmap \/ <Plug>Comment
+vmap \? <Plug>DeComment
+vmap \/ <Plug>Comment
+
+map <buffer> <S-e> :w<CR>:!/usr/bin/env python % <CR>
+
+nnoremap <S-N> gT
+nnoremap <S-M> gt
+
+
+nnoremap w b
+nnoremap ; l
+nnoremap l k
+nnoremap j h
+nnoremap k j
