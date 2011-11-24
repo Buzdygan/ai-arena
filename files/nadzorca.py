@@ -56,19 +56,18 @@ def get_message(to_send):
 	which is an executable file
 """
 def play(list_of_bots, game):
+	print('cos')
 	judge_process = subprocess.Popen(
 			args=game.judge_path,
 			stdin=subprocess.PIPE,
 			stdout=subprocess.PIPE,
 			stderr=subprocess.PIPE
 			)
-	while True:
-		l = judge_process.stdout.readline()
-		if not l:
-			break
-		else:
-			print l
-
+	
+	print("przed")
+	l = judge_process.stdout.read()
+	print l
+    
 	bots_process_list = []
 	mem_lim = "ulimit -v %d" % (game.memory_limit)
 	time_lim = "ulimit -t %d" % (game.time_limit)
@@ -83,17 +82,18 @@ def play(list_of_bots, game):
 				)
 		bot_process_out = bot_process.stdout.read()
 		bots_process_list.append(bot_process)
-
+	print("alamakota")
 	end_game = False;
 	while not end_game:
 		to_send = judge_process.stdout.read()
 		list_players_to_send = get_players(to_send)
-		communicate = get_communicate(to_send)
-		if communicate == "END GAME":
+		message = get_message(to_send)
+		print(message)
+		if message == "END GAME":
 			end_game = True
 			break
 		for player in list_players_to_send:
-			list_of_bots[player].stdin.write(communicate)
+			list_of_bots[player].stdin.write(message)
 			response = list_of_bots[player].stdout.read()
 			list_of_responses.append(parse_response(response, player))
 		for response in list_of_responses:
