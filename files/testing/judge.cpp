@@ -21,11 +21,11 @@ int main(){
             message = "[2]";
         message += board;
 
-        fprintf(stderr, "sending message %s\n", message.c_str());
-        cout << message;
+        cerr << "sending message " << message << endl;
+        cout << message << "END" << endl;
 
         cin >> move;
-        fprintf(stderr, "received move %d\n", move);
+        cerr << "received move " <<  move << endl;
 
         if (player1)
             board[move] = '1';
@@ -35,11 +35,11 @@ int main(){
     } while (board[BOARD_SIZE-1] == '0');
 
     if(player1)
-        fprintf(stderr, "player 1 won\n");
+        cerr << "player 1 won " << endl;
     else
-        fprintf(stderr, "player 2 won\n");
+        cerr << "player 2 won" << endl;
 
-    cout << "[0] END GAME";
+    cout << "END" << endl;
 
     return 0;
 }

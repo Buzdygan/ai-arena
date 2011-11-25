@@ -1,4 +1,4 @@
 all:
 	python -mcompileall .
 clean:
-	rm *.pyc
+	rm *.pyc *.py~

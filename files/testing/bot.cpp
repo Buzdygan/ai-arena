@@ -8,11 +8,15 @@ int main(){
     int i = 0;
 
     while (true){
+//        cerr << "oczekiwanie na input" <<endl;
         cin >> board;
+//        cerr << "otrzymano input" << endl;
         i = 0;
-        while (board[i] != '0')
+        while (i < board.length() && board[i] != '0')
             i++;
-        cout << i;
+        if(i >= board.length())
+            return 0;
+        cout << i << "END" << endl;
     }
 
     return 0;

@@ -1,9 +1,13 @@
-#!/usr/bin/puthon
+#!/usr/bin/python
 # Filename: nadzorca.py
 
 import subprocess
-import shlex
 import os
+import tempfile
+import sys
+import threading
+import Queue
+import time
 
 class Game:
     memory_limit = 50  # Memory limit in MB
@@ -39,14 +43,31 @@ class Bot:
 
 
 def parse_response(response, player):
-    return "[" + str(player) + "]" + response
+        return "[" + str(player) + "]" + response
 
 def get_players(to_send):
     return map(lambda x:int(x), to_send[1:].split(']')[0].split(','))
 
 def get_message(to_send):
-    return to_send.split(']')[1]
+    l = to_send.split(']')
+    if len(l) == 1:
+        return l[0]
+    else:
+        return to_send.split(']')[1]
 
+def enqueue_output(out, queue):
+    for line in iter(out.readline, ''):
+        queue.put(line)
+    out.close()
+
+
+def readout(pipe):
+    mes = ''
+    while mes[len(mes)-3:] != 'END':
+#        print mes
+        mes = mes + pipe.read(1)
+    pipe.read(1)
+    return mes[:len(mes)-3]
 
 """
 	ListOfBots is a list of objects of class Bot.
@@ -56,49 +77,47 @@ def get_message(to_send):
 	which is an executable file
 """
 def play(list_of_bots, game):
-    print('cos')
-    judge_process = subprocess.Popen(
-            args=game.judge_path,
-            stdin=subprocess.PIPE,
+    jp = subprocess.Popen(
+            game.judge_path,
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stdin=subprocess.PIPE,
+#            stderr=subprocess.PIPE,
+            shell=True,
             )
-	
-    print("przed")
-    l = judge_process.stdout.read()
-    print l
     
     bots_process_list = []
-    mem_lim = "ulimit -v %d" % (game.memory_limit)
-    time_lim = "ulimit -t %d" % (game.time_limit)
     for bot in list_of_bots:
-        arg_to_execute = "ulimit -v %d -t %d ; ./%s" % (game.memory_limit * 1024, game.time_limit, bot.filepath)
+#        arg_to_execute = "ulimit -v %d -t %d ; ./%s" % (game.memory_limit * 1024, game.time_limit, bot.filepath)
         bot_process = subprocess.Popen(
-                args = arg_to_execute,
+                bot.filepath,
                 stdin = subprocess.PIPE,
                 stdout = subprocess.PIPE,
-                stderr = subprocess.PIPE,
+#                stderr = subprocess.PIPE,
                 shell=True,
                 )
-        bot_process_out = bot_process.stdout.read()
         bots_process_list.append(bot_process)
-    print("alamakota")
+
+    for bot in bots_process_list:
+        print bot.pid
+    
+     
     end_game = False;
     while not end_game:
-        to_send = judge_process.stdout.read()
-        list_players_to_send = get_players(to_send)
+        to_send = readout(jp.stdout)
         message = get_message(to_send)
-        print(message)
-        if message == "END GAME":
+        if message == '':
+            print 'Ending game'
             end_game = True
             break
+        list_players_to_send = get_players(to_send)
+        list_of_responses = []
         for player in list_players_to_send:
-            list_of_bots[player].stdin.write(message)
-            response = list_of_bots[player].stdout.read()
-            list_of_responses.append(parse_response(response, player))
+            message = message + '\n'
+            bots_process_list[player-1].stdin.write(message)
+            response = readout(bots_process_list[player-1].stdout)
+            list_of_responses.append(response)
         for response in list_of_responses:
-            judge_process.stdin.write(response)
-		"""
-			komunikacja od Botow idzie do sedziego
-			Komunikacja od sedziego trzeba sparsowac i rozeslac do odpowiednich ziomow
-		"""
+            response += '\n'
+            jp.stdin.write(response)
+    
+    
