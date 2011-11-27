@@ -39,7 +39,7 @@ int main(){
     else
         cerr << "player 2 won" << endl;
 
-    cout << "END" << endl;
+    cout << "[0] END" << endl;
 
     return 0;
 }

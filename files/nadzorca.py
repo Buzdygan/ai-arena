@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # Filename: nadzorca.py
-
 import subprocess
 import os
 import tempfile
@@ -14,7 +13,7 @@ class Game:
     time_limit = 600	# Time limit in seconds
     judge_path = None	# The binary file of the judge 
 	
-    def __init__(self, mem_limit=None, t_limit=None, j_path=None):
+    def __init__(self, j_path=None, mem_limit=None, t_limit=None):
         if mem_limit:
             self.memory_limit = mem_limit
         if t_limit:
@@ -45,26 +44,31 @@ class Bot:
 def parse_response(response, player):
         return "[" + str(player) + "]" + response
 
-def get_players(to_send):
-    return map(lambda x:int(x), to_send[1:].split(']')[0].split(','))
 
-def get_message(to_send):
+"""
+This function parses a message from judge returning list of players as a first of pair
+and an actual message as a second of pair
+
+Every message coming here must comtain a list of players in brackets like these: '[' and ']'.
+It can contain multiple of any of them, in this case the first pair is treated as a list of players.
+"""
+def parse_message(to_send):
     l = to_send.split(']')
-    if len(l) == 1:
-        return l[0]
-    else:
-        return to_send.split(']')[1]
+    players = map(lambda x:int(x), l[0][1:].split(','))
+    mes = l[1]
+    for t in l[2:]:
+        mes += ']' + t
+    return (players,mes)
 
-def enqueue_output(out, queue):
-    for line in iter(out.readline, ''):
-        queue.put(line)
-    out.close()
-
-
-def readout(pipe):
+"""
+This function reads communicates.
+The assumption is that every communicate ends with chars 'END\n' not case-sensitive
+In addition every 'END\n' frase is considered to be end of a communicate
+"""
+# TODO: Add timeout!
+def readout(pipe, timeout=0):
     mes = ''
-    while mes[len(mes)-3:] != 'END':
-#        print mes
+    while mes[len(mes)-3:].upper() != 'END':
         mes = mes + pipe.read(1)
     pipe.read(1)
     return mes[:len(mes)-3]
@@ -87,9 +91,9 @@ def play(list_of_bots, game):
     
     bots_process_list = []
     for bot in list_of_bots:
-#        arg_to_execute = "ulimit -v %d -t %d ; ./%s" % (game.memory_limit * 1024, game.time_limit, bot.filepath)
+        arg_to_execute = "ulimit -v %d; ulimit -t %d ; ./%s" % (game.memory_limit * 1024, game.time_limit, bot.filepath)
         bot_process = subprocess.Popen(
-                bot.filepath,
+                arg_to_execute,
                 stdin = subprocess.PIPE,
                 stdout = subprocess.PIPE,
 #                stderr = subprocess.PIPE,
@@ -104,20 +108,15 @@ def play(list_of_bots, game):
     end_game = False;
     while not end_game:
         to_send = readout(jp.stdout)
-        message = get_message(to_send)
-        if message == '':
+        (players, message) = parse_message(to_send)
+        if message == ' ':
             print 'Ending game'
             end_game = True
             break
-        list_players_to_send = get_players(to_send)
-        list_of_responses = []
-        for player in list_players_to_send:
+        for player in players:
             message = message + '\n'
             bots_process_list[player-1].stdin.write(message)
-            response = readout(bots_process_list[player-1].stdout)
-            list_of_responses.append(response)
-        for response in list_of_responses:
-            response += '\n'
+            response = readout(bots_process_list[player-1].stdout) + '\n'
             jp.stdin.write(response)
     
     
