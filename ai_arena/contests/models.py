@@ -7,9 +7,79 @@ class Game(models.Model):
     """
 
     name = models.CharField(max_length=255)
-    rules_file = models.FileField(upload_to='rules')
-    judge_file = models.FileField(upload_to='judges')
+    # File with rules of the Game
+    rules_file = models.FileField(upload_to='game_rules')
+    # Executable with judge
+    judge_file = models.FileField(upload_to='game_judges')
 
+class Match(models.Model):
+    """
+        Contains info about single Match. 
+    """
+
+    # Is the match connected with any ranking
+    ranked_match = models.BooleanField()
+    # If match is not ranked, then contest=Null
+    contest = models.ForeignKey(Contest, null=True)
+    # Connected game
+    game = models.ForeignKey(Game)
+    # List of players in the Game
+    players = models.ManyToMany(Bot, related_name="players", null=True, blank=True)
+    # List of players results
+    players_results = models.ManyToMany(MatchBotResult, related_name="players_results",
+            null=True, blank=True)
+
+    # Max time (in miliseconds) for one player
+    time_limit = models.IntegerField(null=True, blank=True)
+    # Max memory (in MB) for one player
+    memory_limit = models.IntegerField(null=True, blank=True)
+
+    # not yet executed
+    STATUS_NOT_PLAYED = 0
+    # everything went ok
+    STATUS_OK = 1
+    # bot timed out
+    STATUS_TIMEOUT = 2
+    # some other failure
+    STATUS_FAILURE = 3
+    
+    # possible statuses of the match result
+    # the list will change in time
+    EXECUTION_STATUSES = (
+        (STATUS_NOT_PLAYED, _('Not Played')),
+        (STATUS_OK, _('Ok')),
+        (STATUS_TIMEOUT, _('Timeout')),
+        (STATUS_FAILURE, _('Failure')),
+    )
+    execution_status = models.IntegerField(choice=EXECUTION_STATUSES)
+
+class MatchBotResult(models.Model):
+    """
+        Stores single result of Bot in the given match.
+        Appart from point score, it keeps info about
+        time and memory usage or some errors during the execution.
+    """
+
+    score = models.DecimalField(max_digits=decimal_places=4)
+    time_used = models.DecimalField(max_digits=decimal_places=4)
+    memory_used = models.DecimalField(max_digits=decimal_places=4)
+    bot = models.ForeignKey(Bot)
+
+    # everything went ok
+    STATUS_OK = 1
+    # bot timed out
+    STATUS_TIMEOUT = 2
+    # some other failure
+    STATUS_FAILURE = 3
+    
+    # possible statuses of the match result
+    # the list will change in time
+    EXECUTION_STATUSES = (
+        (STATUS_OK, _('Ok')),
+        (STATUS_TIMEOUT, _('Timeout')),
+        (STATUS_FAILURE, _('Failure')),
+    )
+    execution_status = models.IntegerField(choice=EXECUTION_STATUSES)
 
 class Contest(models.Model):
     """
@@ -17,7 +87,30 @@ class Contest(models.Model):
         and they results sum up to the ContestRanking.
     """
 
+    name = models.CharField(max_length=255)
+    # Game related to the Contest
     game = models.ForeignKey(Game)
+    # List of Bots participating in the Contest
+    contestants = models.ManyToMany(Bot, related_name="contestants",
+            null=True, blank=True)
+    # Contest regulations
+    regulations_file = models.FileField(upload_to='contests_regulations')
+
+    # Begin and End dates of the contest. Can be null, when
+    # the contest has no deadlines.
+    begin_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+
+
+    # TODO There will be different types of contests
+    # For know just one
+    # Everyone plays with everyone
+    TYPE_GROUP = 1
+    CONTEST_TYPES = (
+        (TYPE_GROUP, _('Type Group')),
+    )
+
+    type = models.IntegerField(choice=CONTEST_TYPES)
 
 class BotContestRanking(models.Model):
     """
@@ -37,68 +130,9 @@ class Bot(models.Model):
     """
 
     name = models.CharField(max_length=255)
-    user = models.ForeignKey(User)
+    owner = models.ForeignKey(User)
     game = models.ForeignKey(Game)
-
-class Match(models.Model):
-    """
-        Contains info about single Match. 
-    """
-
-    # is the match connected with any ranking
-    ranked_match = models.BooleanField()
-    # if match is not ranked, then contest=Null
-    contest = models.ForeignKey(Contest, null=True)
-
-class MatchBotResult(models.Model):
-    """
-        Stores single result of Bot in the given match.
-        Appart from point score, it keeps info about
-        time and memory usage or some errors during the execution.
-    """
-
-    score = models.DecimalField(max_digits=decimal_places=4)
-    time_used = models.DecimalField(max_digits=decimal_places=4)
-    memory_used = models.DecimalField(max_digits=decimal_places=4)
-
-    # everything went ok
-    STATUS_OK = 1
-    # bot timed out
-    STATUS_TIMEOUT = 2
-    # some other failure
-    STATUS_FAILURE = 3
-    
-    # possible statuses of the match result
-    # the list will change in time
-    EXECUTION_STATUSES = (
-        (STATUS_OK, _('Ok')),
-        (STATUS_TIMEOUT, _('Timeout')),
-        (STATUS_FAILURE, _('Failure')),
-    )
-    execution_status = models.IntegerField(choice=EXECUTION_STATUSES)
-    
-
-class MatchResult(models.Model):
-    """
-        Stores results of a single match.
-        Match is connected with the given contest
-    """
-
-
-    # everything went ok
-    STATUS_OK = 1
-    # all the programs had timeouts
-    STATUS_TIMEOUT = 2
-    # some unspecified failure
-    STATUS_FAILURE = 3
-    
-    # possible statuses of the match result
-    # the list will change in time
-    RESULT_STATUSES = (
-        (STATUS_OK, _('Ok')),
-        (STATUS_TIMEOUT, _('Timeout')),
-        (STATUS_FAILURE, _('Failure')),
-    )
-    result_status = models.IntegerField(choice=RESULT_STATUSES)
+    # Executable with Bot program 
+    bot_file = models.FileField(upload_to='game_bots')
 
 
