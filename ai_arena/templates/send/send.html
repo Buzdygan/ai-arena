@@ -1,0 +1,18 @@
+{% extends "send/base_send.html" %}
+
+{% block title %} 
+    Send progarms to challenge
+{% endblock %}
+
+{% block content %}
+<h1> Select programs you want to compare </h1>
+
+{% if error_message %}<p><strong> {{ error_message }} </strong><p> {% endif %}
+
+<form action="/results/" method="POST">
+{% csrf_token %}
+    <div> Program #1:<input type="file" name="prog1" size="40" /> </div>
+    <div> Program #2:<input type="file" name="prog2" size="40" /> </div>
+    <div><input type="submit" value="Send" /></div>
+</form>
+{% endblock %}
