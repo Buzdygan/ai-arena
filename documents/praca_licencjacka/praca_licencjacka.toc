@@ -1,0 +1,14 @@
+\contentsline {chapter}{Wprowadzenie}{5}
+\contentsline {chapter}{\numberline {1}Architektura systemu}{7}
+\contentsline {section}{\numberline {1.1}Nadzorca}{7}
+\contentsline {section}{\numberline {1.2}Scheduler}{7}
+\contentsline {section}{\numberline {1.3}Baza danych}{7}
+\contentsline {section}{\numberline {1.4}API uzytkownika}{7}
+\contentsline {chapter}{\numberline {2}Dokumentacja uzytkowa i opis implementacji}{9}
+\contentsline {chapter}{\numberline {3}Podsumowanie}{11}
+\contentsline {chapter}{\numberline {4}Podzia{\l } prac}{13}
+\contentsline {chapter}{\numberline {5}Spis p{\l }yty}{15}
+\contentsline {chapter}{\numberline {A}Przykladowa gra}{17}
+\contentsline {chapter}{\numberline {B}Przykladowe programy}{19}
+\contentsline {chapter}{\numberline {C}Przebieg przykladowego turnieju}{21}
+\contentsline {chapter}{Bibliografia}{23}
