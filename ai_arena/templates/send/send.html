@@ -12,7 +12,22 @@
 <form action="/results/" method="POST">
 {% csrf_token %}
     <div> Program #1:<input type="file" name="prog1" size="40" /> </div>
+    <div> Language: 
+        <select name="lang1" id="lang1">
+            <option value="C">C</option>
+            <option value="CPP">C++</option>
+            <option value="JAVA">JAVA</option>
+            <option value="PYTHON">Python</option>
+        </select>    
     <div> Program #2:<input type="file" name="prog2" size="40" /> </div>
+    <div> Language: 
+        <select name="lang2" id="lang2">
+            <option value="C">C</option>
+            <option value="CPP">C++</option>
+            <option value="JAVA">JAVA</option>
+            <option value="PYTHON">Python</option>
+        </select>    
+    </div>
     <div><input type="submit" value="Send" /></div>
 </form>
 {% endblock %}
