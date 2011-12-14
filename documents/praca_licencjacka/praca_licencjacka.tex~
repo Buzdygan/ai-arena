@@ -1,0 +1,72 @@
+\documentclass[licencjacka]{pracamgr}
+
+\usepackage{polski}
+\usepackage[latin2]{inputenc}
+
+\author{Szymon Majewski}
+\nralbumu{277556}
+
+\title{Implementacja systemu AI-Arena}
+\tytulang{Implementation of AI-Arena system}
+
+\kierunek{Informatyka}
+
+\opiekun{mgr. Radosława Bartosiaka\\
+  Wydzia{\l} Matematyki Informatyki i Mechaniki\\
+  }
+  
+\date{Maj 2012}
+
+\dziedzina{ 
+11.3 Informatyka\\ 
+}
+
+
+\klasyfikacja{D. Software \\
+D.0. General\\}
+
+
+\keywords{programy walczace, arena}
+ 
+\newtheorem{defi}{Definicja}[section]
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+W pracy przedstawiono implementacje systemu AI-Arena,
+ s{\l}u{\.z}acego do przeprowadzania turniejow programow walczacych.
+\end{abstract}
+
+
+\chapter*{Wprowadzenie}
+\addcontentsline{toc}{chapter}{Wprowadzenie}
+
+\chapter{Architektura systemu}
+
+\section{Nadzorca}
+
+\section{Scheduler}
+
+\section{Baza danych}
+
+\section{API uzytkownika}
+
+
+\chapter{Dokumentacja uzytkowa i opis implementacji}
+
+\chapter{Podsumowanie}
+
+\appendix
+
+\chapter{Przykladowa gra}
+
+\chapter{Przykladowe programy}
+
+\chapter{Przebieg przykladowego turnieju}
+
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Bibliografia}
+\end{thebibliography}
+
+\end{document}
