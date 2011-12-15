@@ -119,4 +119,5 @@ def play(list_of_bots, game):
             response = readout(bots_process_list[player-1].stdout) + '\n'
             jp.stdin.write(response)
     
-    
+def costam():
+    return 5
