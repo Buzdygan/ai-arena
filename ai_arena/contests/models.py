@@ -11,7 +11,8 @@ class Game(models.Model):
     # File with rules of the Game
     rules_file = models.FileField(upload_to='game_rules')
     # Executable with judge
-    judge_file = models.FileField(upload_to='game_judges')
+    judge_bin_file = models.FileField(upload_to='game_judges_binaries')
+    judge_source_file = models.FileField(upload_to='game_judges_sources')
 
 class Bot(models.Model):
     """
@@ -25,7 +26,8 @@ class Bot(models.Model):
     owner = models.ForeignKey(User)
     game = models.ForeignKey(Game)
     # Executable with Bot program 
-    bot_file = models.FileField(upload_to='game_bots')
+    bot_bin_file = models.FileField(upload_to='game_bots_binaries')
+    bot_source_file = models.FileField(upload_to='game_bots_sources')
     bot_lang = models.CharField(max_length='10')
 
 class Contest(models.Model):
