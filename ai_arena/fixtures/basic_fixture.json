@@ -1,5 +1,23 @@
 [
     {
+        "pk": 10,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "bot",
+            "name": "bot",
+            "app_label": "contests"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "botcontestranking",
+            "name": "bot contest ranking",
+            "app_label": "contests"
+        }
+    },
+    {
         "pk": 5,
         "model": "contenttypes.contenttype",
         "fields": {
@@ -9,12 +27,57 @@
         }
     },
     {
+        "pk": 11,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "contest",
+            "name": "contest",
+            "app_label": "contests"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "game",
+            "name": "game",
+            "app_label": "contests"
+        }
+    },
+    {
         "pk": 2,
         "model": "contenttypes.contenttype",
         "fields": {
             "model": "group",
             "name": "group",
             "app_label": "auth"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "logentry",
+            "name": "log entry",
+            "app_label": "admin"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "match",
+            "name": "match",
+            "app_label": "contests"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "contenttypes.contenttype",
+        "fields": {
+            "model": "matchbotresult",
+            "name": "match bot result",
+            "app_label": "contests"
         }
     },
     {
@@ -68,6 +131,65 @@
         "fields": {
             "domain": "example.com",
             "name": "example.com"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "contests.game",
+        "fields": {
+            "rules_file": "",
+            "judge_source_file": "",
+            "judge_bin_file": "game_judges_binaries/nowa/nadz",
+            "name": "nowa"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "contests.game",
+        "fields": {
+            "rules_file": "",
+            "judge_source_file": "game_judges_sources/test_game/test_judge.cpp",
+            "judge_bin_file": "game_judges_binaries/test_game/test_judge",
+            "name": "test_game"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "contests.bot",
+        "fields": {
+            "name": "test_bot",
+            "bot_lang": "cpp",
+            "bot_bin_file": "game_bots_binaries/test_game/test_user/test_bot/test_bot",
+            "bot_source_file": "game_bots_sources/test_game/test_user/test_bot/test_bot.cpp",
+            "game": 9,
+            "owner": 2
+        }
+    },
+    {
+        "pk": 22,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_logentry",
+            "name": "Can add log entry",
+            "content_type": 8
+        }
+    },
+    {
+        "pk": 23,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_logentry",
+            "name": "Can change log entry",
+            "content_type": 8
+        }
+    },
+    {
+        "pk": 24,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_logentry",
+            "name": "Can delete log entry",
+            "content_type": 8
         }
     },
     {
@@ -203,6 +325,168 @@
             "codename": "delete_contenttype",
             "name": "Can delete content type",
             "content_type": 5
+        }
+    },
+    {
+        "pk": 28,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_bot",
+            "name": "Can add bot",
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 29,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_bot",
+            "name": "Can change bot",
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 30,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_bot",
+            "name": "Can delete bot",
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 40,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_botcontestranking",
+            "name": "Can add bot contest ranking",
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 41,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_botcontestranking",
+            "name": "Can change bot contest ranking",
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 42,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_botcontestranking",
+            "name": "Can delete bot contest ranking",
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 31,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_contest",
+            "name": "Can add contest",
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 32,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_contest",
+            "name": "Can change contest",
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 33,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_contest",
+            "name": "Can delete contest",
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 25,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_game",
+            "name": "Can add game",
+            "content_type": 9
+        }
+    },
+    {
+        "pk": 26,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_game",
+            "name": "Can change game",
+            "content_type": 9
+        }
+    },
+    {
+        "pk": 27,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_game",
+            "name": "Can delete game",
+            "content_type": 9
+        }
+    },
+    {
+        "pk": 37,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_match",
+            "name": "Can add match",
+            "content_type": 13
+        }
+    },
+    {
+        "pk": 38,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_match",
+            "name": "Can change match",
+            "content_type": 13
+        }
+    },
+    {
+        "pk": 39,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_match",
+            "name": "Can delete match",
+            "content_type": 13
+        }
+    },
+    {
+        "pk": 34,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_matchbotresult",
+            "name": "Can add match bot result",
+            "content_type": 12
+        }
+    },
+    {
+        "pk": 35,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_matchbotresult",
+            "name": "Can change match bot result",
+            "content_type": 12
+        }
+    },
+    {
+        "pk": 36,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_matchbotresult",
+            "name": "Can delete match bot result",
+            "content_type": 12
         }
     },
     {
