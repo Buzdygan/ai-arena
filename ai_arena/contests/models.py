@@ -1,18 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Game(models.Model):
     """
         Game consists of Judge and Rules.
         It may be used in different Contests.
     """
 
+    # method generating path for uploaded files
+    path = lambda dirname: lambda instance, filename: \
+            '/'.join([dirname, instance.name, filename])
+
     name = models.CharField(max_length=255)
     # File with rules of the Game
-    rules_file = models.FileField(upload_to='game_rules')
+    rules_file = models.FileField(upload_to=path('game_rules'))
     # Executable with judge
-    judge_bin_file = models.FileField(upload_to='game_judges_binaries')
-    judge_source_file = models.FileField(upload_to='game_judges_sources')
+    judge_bin_file = models.FileField(upload_to=path('game_judges_binaries'))
+    judge_source_file = models.FileField(upload_to=path('game_judges_sources'))
+
 
 class Bot(models.Model):
     """
@@ -22,12 +28,17 @@ class Bot(models.Model):
         about Bot's matches is accumulated.
     """
 
+    # method generating path for uploaded files
+    path = lambda dirname: lambda instance, filename: \
+            '/'.join([dirname, instance.game.name,
+                instance.owner.username, instance.name, filename])
+
     name = models.CharField(max_length=255)
     owner = models.ForeignKey(User)
     game = models.ForeignKey(Game)
     # Executable with Bot program 
-    bot_bin_file = models.FileField(upload_to='game_bots_binaries')
-    bot_source_file = models.FileField(upload_to='game_bots_sources')
+    bot_bin_file = models.FileField(upload_to=path('game_bots_binaries'))
+    bot_source_file = models.FileField(upload_to=path('game_bots_sources'))
     bot_lang = models.CharField(max_length='10')
 
 class Contest(models.Model):
@@ -36,6 +47,10 @@ class Contest(models.Model):
         and they results sum up to the ContestRanking.
     """
 
+    # method generating path for uploaded files
+    path = lambda dirname: lambda instance, filename: \
+            '/'.join([dirname, instance.name, filename])
+
     name = models.CharField(max_length=255)
     # Game related to the Contest
     game = models.ForeignKey(Game)
@@ -43,7 +58,7 @@ class Contest(models.Model):
     contestants = models.ManyToManyField(Bot, related_name="contestants",
             null=True, blank=True)
     # Contest regulations
-    regulations_file = models.FileField(upload_to='contests_regulations')
+    regulations_file = models.FileField(upload_to=path('contests_regulations'))
 
     # Begin and End dates of the contest. Can be null, when
     # the contest has no deadlines.
