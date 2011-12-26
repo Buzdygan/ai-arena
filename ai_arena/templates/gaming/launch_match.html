@@ -1,0 +1,12 @@
+{% if game_form %}
+    <form name="game_form" action="/launch_match/" method="post"> {% csrf_token %}
+        {{ game_form.as_p }}
+        <input name="game_form" type="submit" value="Submit" />
+    </form>
+{% endif %}
+{% if bot_form %}
+    <form action="/launch_match/" method="post"> {% csrf_token %}
+        {{ bot_form.as_p }}
+        <input name="bot_form" type="submit" value="Submit" />
+    </form>
+{% endif %}

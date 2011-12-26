@@ -36,4 +36,38 @@ def results(request):
                     'prog2':prog2,
                     'i':i,
                 },
-                context_instance=RequestContext(request));
+                context_instance=RequestContext(request))
+
+from ai_arena.contests.forms import GameSelectForm, BotSelectForm
+from ai_arena.contests.models import Game, Bot
+
+def launch_match(request):
+
+    bot_form = None
+    game_form = None
+    game = None
+    bot = None
+    if request.method == 'POST':
+
+        if 'game_form' in request.POST:
+            game_form = GameSelectForm(request.POST, prefix='game')
+            if game_form.is_valid():
+                game = game_form.cleaned_data['game_field']
+                bot_form = BotSelectForm(game=game)
+
+        if 'bot_form' in request.POST:
+            bot_form = BotSelectForm(request.POST, game=game, prefix='bot')
+            if bot_form.is_valid():
+                bot = bot_form.cleaned_data['bot_field']
+                print(bot.name)
+
+    if not game_form:
+        game_form = GameSelectForm()
+
+    return render_to_response('gaming/launch_match.html',
+            {
+                'game_form':game_form,
+                'bot_form':bot_form,
+            },
+            context_instance=RequestContext(request)
+        )

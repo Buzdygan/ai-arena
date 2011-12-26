@@ -13,13 +13,13 @@ def parse_response(response, player):
 
 
 def parse_message(to_send):
-"""
-    This function parses a message from judge returning list of players as a first of pair
-    and an actual message as a second of pair
+    """
+        This function parses a message from judge returning list of players as a first of pair
+        and an actual message as a second of pair
 
-    Every message coming here must comtain a list of players in brackets like these: '[' and ']'.
-    It can contain multiple of any of them, in this case the first pair is treated as a list of players.
-"""
+        Every message coming here must comtain a list of players in brackets like these: '[' and ']'.
+        It can contain multiple of any of them, in this case the first pair is treated as a list of players.
+    """
     l = to_send.split(']')
     players = map(lambda x:int(x), l[0][1:].split(','))
     mes = l[1]
@@ -29,11 +29,11 @@ def parse_message(to_send):
 
 # TODO: Add timeout!
 def readout(pipe, timeout=0):
-"""
-    This function reads communicates.
-    The assumption is that every communicate ends with chars 'END\n' not case-sensitive
-    In addition every 'END\n' frase is considered to be end of a communicate
-"""
+    """
+        This function reads communicates.
+        The assumption is that every communicate ends with chars 'END\n' not case-sensitive
+        In addition every 'END\n' frase is considered to be end of a communicate
+    """
     mes = ''
     while mes[len(mes)-3:].upper() != 'END':
         mes = mes + pipe.read(1)
@@ -41,12 +41,12 @@ def readout(pipe, timeout=0):
     return mes[:len(mes)-3]
 
 def play(judge_file, players, memory_limit, time_limit):
-"""
-    judge_file - file containing judge program
-    players - list of bots binaries
-    memory_limit (in MB) - maximum memory for one bot
-    time_limit (in sec) - maximum time limit for one bot
-"""
+    """
+        judge_file - file containing judge program
+        players - list of bots binaries
+        memory_limit (in MB) - maximum memory for one bot
+        time_limit (in sec) - maximum time limit for one bot
+    """
     to_execute = "./%s" % judge_file
     jp = subprocess.Popen(
             to_execute,
