@@ -7,22 +7,20 @@ class vModelChoiceField(forms.ModelChoiceField):
 
 class GameSelectForm(forms.Form):
 
-    games = Game.objects.all()
+    games = Game.objects
     game_field = vModelChoiceField(queryset=games)
+    number_of_bots = forms.IntegerField(min_value=2, max_value=4)
 
 class BotSelectForm(forms.Form):
 
-    """
-    def __init__(self, game):
-        bots = Bot.objects.filter(game=game)
-        bot_field = vModelChoiceField(queryset=bots)
-    """
-
     def __init__(self, *args, **kwargs):
         game = kwargs['game']
+        number_of_bots = kwargs['number_of_bots']
         kwargs.pop('game')
+        kwargs.pop('number_of_bots')
         super(BotSelectForm, self).__init__(*args, **kwargs)
         bots = Bot.objects.filter(game=game)
-        self.fields['bot_field'] = vModelChoiceField(queryset=bots)
+        for i in range(number_of_bots):
+            self.fields['bot_field%d' % (i+1)] = vModelChoiceField(queryset=bots)
         
 

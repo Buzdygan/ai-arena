@@ -47,7 +47,7 @@ def play(judge_file, players, memory_limit, time_limit):
         memory_limit (in MB) - maximum memory for one bot
         time_limit (in sec) - maximum time limit for one bot
     """
-    to_execute = "./%s" % judge_file
+    to_execute = "%s" % judge_file
     jp = subprocess.Popen(
             to_execute,
             stdout=subprocess.PIPE,
@@ -57,8 +57,8 @@ def play(judge_file, players, memory_limit, time_limit):
             )
     
     bots_process_list = []
-    for bot in players.all():
-        arg_to_execute = "ulimit -v %d; ulimit -t %d ; ./%s" % (memory_limit * 1024, time_limit, bot.bot_file)
+    for bot_program in players:
+        arg_to_execute = "ulimit -v %d; ulimit -t %d ; %s" % (memory_limit * 1024, time_limit, bot_program)
         bot_process = subprocess.Popen(
                 arg_to_execute,
                 stdin = subprocess.PIPE,
@@ -75,15 +75,20 @@ def play(judge_file, players, memory_limit, time_limit):
     end_game = False;
     while not end_game:
         to_send = readout(jp.stdout)
-        (players, message) = parse_message(to_send)
+        try:
+            (players, message) = parse_message(to_send)
+        except:
+            print 'Ending game'
+            end_game = True
+            break
         if message == ' ':
             print 'Ending game'
             end_game = True
             break
-        for player in players:
+        for bot_process in bots_process_list:
             message = message + '\n'
-            bots_process_list[player-1].stdin.write(message)
-            response = readout(bots_process_list[player-1].stdout) + '\n'
+            bot_process.stdin.write(message)
+            response = readout(bot_process.stdout) + '\n'
             jp.stdin.write(response)
     return 11
     
