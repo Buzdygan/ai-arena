@@ -18,5 +18,7 @@ urlpatterns = patterns('',
     url(r'^$', 'contests.views.index'),
     url(r'^send/$', 'contests.views.send'),
     url(r'^results/$', 'contests.views.results'),
+    url(r'^launch_match/$', 'contests.views.launch_match', name='launch_match'),
+    url(r'^launch_match/(?P<game_id>\d+)/(?P<number_of_bots>\d+)/$', 'contests.views.launch_match', name='launch_game_match'),
 
 )
