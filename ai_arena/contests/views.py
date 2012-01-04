@@ -2,6 +2,9 @@ from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.http import Http404, HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from ai_arena.contests.forms import GameSelectForm, BotSelectForm
+from ai_arena.contests.models import Game, Bot, Match
+from ai_arena.contests.game_launcher import launch_single_match
 from nadzorca import nadzorca
 
 def index(request):
@@ -38,9 +41,36 @@ def results(request):
                 },
                 context_instance=RequestContext(request))
 
-from ai_arena.contests.forms import GameSelectForm, BotSelectForm
-from ai_arena.contests.models import Game, Bot
-from ai_arena.contests.game_launcher import launch_single_match
+
+def match_results_list(request):
+
+    matches = Match.objects.all()
+
+    return render_to_response('results/match_results_list.html',
+            {
+                'matches':matches,
+            },
+            context_instance=RequestContext(request),
+        )
+
+def show_match_result(request, match_id):
+
+    if not match_id:
+        raise Exception("In show_match_result: Noe match_id given")
+
+    match = Match.objects.get(id=match_id)
+
+    players_results = sorted(
+            [player_result for player_result in match.players_results.all()],
+            key=lambda x: -x.score)
+
+    return render_to_response('results/match_result.html',
+            {
+                'game':match.game,
+                'players_results':players_results,
+            },
+            context_instance=RequestContext(request),
+        )
 
 def launch_match(request, game_id=None, number_of_bots=None):
 

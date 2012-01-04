@@ -18,6 +18,8 @@ urlpatterns = patterns('',
     url(r'^$', 'contests.views.index'),
     url(r'^send/$', 'contests.views.send'),
     url(r'^results/$', 'contests.views.results'),
+    url(r'^results/match_results_list/$', 'contests.views.match_results_list', name='match_results_list'),
+    url(r'^results/show_match_result/(?P<match_id>\d+)/$', 'contests.views.show_match_result', name='show_match_result'),
     url(r'^launch_match/$', 'contests.views.launch_match', name='launch_match'),
     url(r'^launch_match/(?P<game_id>\d+)/(?P<number_of_bots>\d+)/$', 'contests.views.launch_match', name='launch_game_match'),
 
