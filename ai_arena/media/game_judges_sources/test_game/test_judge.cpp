@@ -34,14 +34,15 @@ int main(){
 
     } while (board[BOARD_SIZE-1] == '0');
 
-    cout << "[0] END" << endl
+    cout << "[0] END" << endl;
 
-    if(player1)
+    if(player1) {
         cerr << "player 1 won " << endl;
         cout << "[1, 0] END" << endl;
-    else
+    }
+    else {
         cerr << "player 2 won" << endl;
         cout << "[0, 1] END" << endl;
-
+    }
     return 0;
 }

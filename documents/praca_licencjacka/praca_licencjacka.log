@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.12.7)  8 DEC 2011 09:46
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.12.7)  4 JAN 2012 22:30
 entering extended mode
  %&-line parsing enabled.
 **praca_licencjacka.tex
@@ -181,7 +181,7 @@ Dodatek C.
 
 ]
 
-LaTeX Warning: Empty `thebibliography' environment on input line 75.
+LaTeX Warning: Empty `thebibliography' environment on input line 79.
 
 [23] (./praca_licencjacka.aux) ) 
 Here is how much of TeX's memory you used:
@@ -191,13 +191,13 @@ Here is how much of TeX's memory you used:
  3757 multiletter control sequences out of 15000+50000
  13796 words of font info for 38 fonts, out of 3000000 for 9000
  48 hyphenation exceptions out of 8191
- 27i,6n,24p,168b,231s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,6n,24p,645b,231s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/pl/pl
 rm.enc}</usr/share/texmf-texlive/fonts/type1/public/pl/plbx10.pfb></usr/share/t
 exmf-texlive/fonts/type1/public/pl/plbx12.pfb></usr/share/texmf-texlive/fonts/t
 ype1/public/pl/plr10.pfb></usr/share/texmf-texlive/fonts/type1/public/pl/plr12.
 pfb></usr/share/texmf-texlive/fonts/type1/public/pl/plr17.pfb>
-Output written on praca_licencjacka.pdf (25 pages, 69332 bytes).
+Output written on praca_licencjacka.pdf (25 pages, 72047 bytes).
 PDF statistics:
  104 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

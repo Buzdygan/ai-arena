@@ -73,7 +73,7 @@ def play(judge_file, players, memory_limit, time_limit):
     
      
     end_game = False
-    results = []
+    results = 'aaa'
     while not end_game:
         to_send = readout(jp.stdout)
         try:
