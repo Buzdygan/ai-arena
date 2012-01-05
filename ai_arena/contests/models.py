@@ -83,8 +83,8 @@ class MatchBotResult(models.Model):
     """
 
     score = models.DecimalField(max_digits=4, decimal_places=2)
-    time_used = models.DecimalField(max_digits=4, decimal_places=2)
-    memory_used = models.DecimalField(max_digits=4, decimal_places=2)
+    time_used = models.IntegerField(null=True, blank=True)
+    memory_used = models.IntegerField(null=True, blank=True)
     bot = models.ForeignKey(Bot)
 
     # everything went ok
@@ -114,11 +114,11 @@ class Match(models.Model):
     contest = models.ForeignKey(Contest, null=True)
     # Connected game
     game = models.ForeignKey(Game)
-    # List of players in the Game
-    players = models.ManyToManyField(Bot, related_name="players", null=True, blank=True)
     # List of players results
     players_results = models.ManyToManyField(MatchBotResult, related_name="players_results",
             null=True, blank=True)
+
+    match_log = models.TextField()
 
     # Max time (in miliseconds) for one player
     time_limit = models.IntegerField(null=True, blank=True)

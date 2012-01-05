@@ -3,8 +3,8 @@
 \usepackage{polski}
 \usepackage[latin2]{inputenc}
 
-\author{Szymon Majewski}
-\nralbumu{277556}
+\author{Nieistniej±cy Nichilista}
+\nralbumu{123456}
 
 \title{Implementacja systemu AI-Arena}
 \tytulang{Implementation of AI-Arena system}
@@ -26,7 +26,7 @@
 D.0. General\\}
 
 
-\keywords{programy walczace, arena}
+\keywords{programy walczace, arena, sztuczna inteligencja}
  
 \newtheorem{defi}{Definicja}[section]
 
@@ -42,17 +42,23 @@ W pracy przedstawiono implementacje systemu AI-Arena,
 
 \chapter*{Wprowadzenie}
 \addcontentsline{toc}{chapter}{Wprowadzenie}
+System Ai-Arena s³u¿y do przeprowadzania rozgrywek i turniejów ró³nych gier pomiêdzy programami komputerowymi. System ma w zamierzeniu twórców s³u¿yæ osobom zainteresowanym sztuczn± inteligencj± do sprawdzenia swoich umiejêtno¶ci, lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
+
+Praca sk³ada siê z piêciu rozdzia³ów. Pierwszy zawiera opis architektury systemu. W drugim rozdziale zawarto dokumentacjê u¿ytkownika systemu i szczegó³y implementacji. Rozdzia³ trzeci zawiera podsumowanie, rozdzia³ czwart podzia³ prac a rozdzia³ pi±ty spis p³yty do³±czonej do pracy.
 
 \chapter{Architektura systemu}
 
 \section{Nadzorca}
+Warstwa nadzorcy jest odpowiedzialna za uruchamienie rozgrywek pomiêdzy wybranymi graczami, zbieranie informacji o ich wynikach i przekazywnie ich do warstwy schedulera. Nadzorca jest skryptem napisanm w pythonie, którego najwa¿niejsz± czê¶ci± jest metoda play. Metoda ta przyjmuje jako argumenty uruchamialne pliki sêdziego i programów graj±cych, oraz limity czasowy i pamiêciowy dla ka¿dego programu graj±cego. Nastêpnie metoda play przeprowadza odpowiedni± rozgrywkê, zwracaj±c jako wynik ci±gi liczb oznaczaj±ce przydzielone przez sedziego punkty za rozgrywkê, wykorzystane przez programy czasy i pamiêæ RAM.
 
 \section{Scheduler}
+Warstwa schedulera jest odpowiedzialna za ustalanie jakie rozgrywki w turnieju maj± siê odbyæ, zlecanie poszczególnych rozgrywek nadzorcy i zapisywanie otrzymanych od nadzorcy wyników w bazie. Do realizacji warstwy nadzorcy u¿ywany jest program Gearmand0.26.
 
 \section{Baza danych}
 
-\section{API uzytkownika}
 
+\section{API uzytkownika}
+U¿ytkownik komunikuje siê z systemem poprzez interfejs webowy, zaimplementowany w Django. Interfejs pozwala na przesy³anie plików swoich programów graj±cych ... 
 
 \chapter{Dokumentacja uzytkowa i opis implementacji}
 

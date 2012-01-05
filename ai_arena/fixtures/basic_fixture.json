@@ -166,6 +166,58 @@
         }
     },
     {
+        "pk": 2,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 500,
+            "memory_used": 5,
+            "score": 1.00,
+            "bot": 1
+        }
+    },
+    {
+        "pk": 1,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 500,
+            "memory_used": 5,
+            "score": 0.00,
+            "bot": 1
+        }
+    },
+    {
+        "pk": 1,
+        "model": "contests.match",
+        "fields": {
+            "time_limit": 10000,
+            "contest": null,
+            "players_results": [
+                2,
+                1
+            ],
+            "memory_limit": 10000,
+            "game": 9,
+            "ranked_match": false,
+            "match_log": "The game ended successfully"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "contests.match",
+        "fields": {
+            "time_limit": 10000,
+            "contest": null,
+            "players_results": [
+                2,
+                1
+            ],
+            "memory_limit": 32,
+            "game": 9,
+            "ranked_match": false,
+            "match_log": "Game finished successfully."
+        }
+    },
+    {
         "pk": 22,
         "model": "auth.permission",
         "fields": {

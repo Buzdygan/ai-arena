@@ -17,7 +17,7 @@ def parse_message(to_send):
         This function parses a message from judge returning list of players as a first of pair
         and an actual message as a second of pair
 
-        Every message coming here must comtain a list of players in brackets like these: '[' and ']'.
+        Every message coming here must contain a list of players in brackets like these: '[' and ']'.
         It can contain multiple of any of them, in this case the first pair is treated as a list of players.
     """
     l = to_send.split(']')
@@ -72,7 +72,8 @@ def play(judge_file, players, memory_limit, time_limit):
         print bot.pid
     
      
-    end_game = False;
+    end_game = False
+    results = 'aaa'
     while not end_game:
         to_send = readout(jp.stdout)
         try:
@@ -84,13 +85,15 @@ def play(judge_file, players, memory_limit, time_limit):
         if message == ' ':
             print 'Ending game'
             end_game = True
+            results = readout(jp.stdout)
             break
         for bot_process in bots_process_list:
             message = message + '\n'
             bot_process.stdin.write(message)
             response = readout(bot_process.stdout) + '\n'
             jp.stdin.write(response)
-    return 11
+    print results
+    return results
     
 def costam():
     return 5
