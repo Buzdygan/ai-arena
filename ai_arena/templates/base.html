@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="style.css" />
-        <title> {% block title %} This is a base title {% endblock %} </title>
+        <link rel="stylesheet" href="{{ MEDIA_URL }}style.css" />
+        <title> {% block title %} AI-Arena - test your AI skill {% endblock %} </title>
     </head>
 
     <body>
@@ -10,13 +10,25 @@
             {% block sidebar %}
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/login/">Login</a></li>
-                <li><a href="/register/">Register</a></li>
                 <li><a href="/send/">Send</a></li>
                 <li><a href="/launch_match/">Launch Match</a></li>
                 <li><a href="{% url match_results_list %}"> Results List </a></li>
             </ul>
             {% endblock %}
+        </div>
+
+        <div id="loginbar">
+            {% if user.is_authenticated %}
+            <p>
+                Logged as {{ user.username }}.
+                <a href="{% url django.contrib.auth.views.logout %}">Logout</a>
+            </p>
+            {% else %}
+            <p>
+                Hello guest. Please log in. 
+                <a href="{% url django.contrib.auth.views.login %}">Login</a> | <a href="/accounts/register/">Register</a>
+           </p>
+            {% endif %}
         </div>
         
         <div id="content">
