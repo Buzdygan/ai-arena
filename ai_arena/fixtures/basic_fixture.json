@@ -141,7 +141,7 @@
             "judge_source_file": "",
             "judge_bin_file": "game_judges_binaries/nowa/nadz",
             "name": "nowa",
-            "judge_lang": 1
+            "judge_lang": "CPP"
         }
     },
     {
@@ -152,7 +152,7 @@
             "judge_source_file": "game_judges_sources/test_game/test_judge.cpp",
             "judge_bin_file": "game_judges_binaries/test_game/test_judge",
             "name": "test_game",
-            "judge_lang": 1
+            "judge_lang": "CPP"
         }
     },
     {
@@ -160,7 +160,7 @@
         "model": "contests.bot",
         "fields": {
             "name": "test_bot",
-            "bot_lang": 1,
+            "bot_lang": "CPP",
             "bot_bin_file": "game_bots_binaries/test_game/test_user/test_bot/test_bot",
             "bot_source_file": "game_bots_sources/test_game/test_user/test_bot/test_bot.cpp",
             "game": 9,

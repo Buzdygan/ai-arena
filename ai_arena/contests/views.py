@@ -51,7 +51,7 @@ def results(request):
                 context_instance=RequestContext(request))
 
 def compile(src, target, lang):
-    system('make -f ' + settings.MAKEFILE_PATH + ' LANG=' + settings.MAKEFILE_LANG[int(lang)] +
+    system('make -f ' + settings.MAKEFILE_PATH + ' LANG=' + lang +
             ' SRC=' + src + ' TARGET=' + target)
 
 def create_new_game(request):
