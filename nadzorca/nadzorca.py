@@ -92,7 +92,13 @@ def play(judge_file, players, memory_limit, time_limit):
             bot_process.stdin.write(message)
             response = readout(bot_process.stdout) + '\n'
             jp.stdin.write(response)
-    print results
+
+    for bot in bots_process_list:
+        bot.kill()
+
+    jp.kill()
+
+    print(results)
     return results
     
 def costam():

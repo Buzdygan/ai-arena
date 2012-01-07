@@ -148,8 +148,8 @@ def launch_match(request, game_id=None, number_of_bots=None):
                 bots = []
                 for i in range(number_of_bots):
                     bots.append(bot_form.cleaned_data['bot_field%d' % (i+1)])
-                    launch_single_match(game, bots)
-                    return redirect('/')
+                launch_single_match(game, bots)
+                return redirect('/')
 
     if not game_form:
         game_form = GameSelectForm(prefix='game')
