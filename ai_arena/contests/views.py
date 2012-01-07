@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.http import Http404, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from ai_arena.contests.forms import GameSelectForm, BotSelectForm
 from ai_arena.contests.models import Game, Bot, Match
 from ai_arena.contests.game_launcher import launch_single_match
@@ -11,80 +11,8 @@ from nadzorca import nadzorca
 
 
 def index(request):
-    if request.user.is_authenticated():
-        return render_to_response('index.html',
-                {'message': 'Hello ' + request.user.username,},
-                context_instance=RequestContext(request))
-    else:
-        return render_to_response('index.html',
-                {'message': 'Hello guest',},
-                context_instance=RequestContext(request))
-
-def log(request):
-    return render_to_response('login.html',
+    return render_to_response('index.html',
             context_instance=RequestContext(request))
-
-def login_user(request):
-    try:
-        uname = request.POST['username']
-        passwd = request.POST['password']
-    except KeyError:
-        return render_to_response('login.html',
-                {'error_message':'You must fill all fields'},
-                context_instance=RequestContext(request))
-    else:
-        try:
-            user = User.objects.get(username=uname)
-        except User.DoesNotExist:
-            return render_to_response('login.html',
-                    {'error_message':'Username is invalid'},
-                    context_instance=RequestContext(request))
-        else:
-            user = authenticate(username=uname, password=passwd)
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return index(request)
-                else:
-                    return render_to_response('login.html',
-                            {'error_message':'Your account has beed disabled'},
-                            context_instance=RequestContext(request))
-            else:
-                return render_to_response('login.html',
-                        {'error_message':"Username and password don't match"},
-                        context_instance=RequestContext(request))
-
-def register(request):
-    return render_to_response('register.html',
-            context_instance=RequestContext(request))
-
-def register_user(request):
-    try:
-        username = request.POST['username']
-        passwd = request.POST['password']
-        passwd2 = request.POST['password2']
-        email = request.POST['email']
-    except KeyError:
-        return render_to_response('register.html',
-                {
-                    'error_message': 'You must fill all fields',
-                },
-                context_instance=RequestContext(request))
-    else:
-        if passwd != passwd2:
-            return render_to_response('register.html',
-                    {
-                        'error_message': "Passwords don't match",
-                    },
-                    context_instance=RequestContext(request))
-        else:
-            user = User.objects.create_user(username, email, passwd)
-            user.save()
-            return render_to_response('index.html',
-                    {
-                        'message': username,
-                    },
-                    context_instance=RequestContext(request))
 
 
 def send(request):
