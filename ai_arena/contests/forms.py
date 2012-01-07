@@ -30,3 +30,8 @@ class NewGameForm(forms.Form):
     game_rules = forms.FileField()
     game_judge = forms.FileField()
     judge_language = forms.ChoiceField(choices= settings.LANGUAGES)
+
+class SendBotForm(forms.Form):
+    bot_name = forms.CharField(max_length=50)
+    bot_source = forms.FileField()
+    bot_language = forms.ChoiceField(choices = settings.LANGUAGES)

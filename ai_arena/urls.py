@@ -23,6 +23,11 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
    
     url(r'^new_game/$', 'contests.views.create_new_game'),
+    url(r'^game_list/$', 'contests.views.game_list'),
+    url(r'^game_details/(?P<game_id>\d+)/$', 'contests.views.game_details'),
+    
+    url(r'^send_bot/(?P<game_id>\d+)/$', 'contests.views.send_bot'),
+
     url(r'^results/$', 'contests.views.results'),
     url(r'^results/match_results_list/$', 'contests.views.match_results_list', name='match_results_list'),
     url(r'^results/show_match_result/(?P<match_id>\d+)/$', 'contests.views.show_match_result', name='show_match_result'),

@@ -7,6 +7,8 @@ class Game(models.Model):
         Game consists of Judge and Rules.
         It may be used in different Contests.
     """
+    def __unicode__(self):
+        return self.name
 
     # method generating path for uploaded files
     path = lambda dirname: lambda instance, filename: \
@@ -18,7 +20,7 @@ class Game(models.Model):
     # Executable with judge
     judge_bin_file = models.FileField(upload_to=path('game_judges_binaries'))
     judge_source_file = models.FileField(upload_to=path('game_judges_sources'))
-    judge_lang = settings.LANGUAGES
+    judge_lang = models.IntegerField(choices=settings.LANGUAGES)
 
 
 class Bot(models.Model):
@@ -28,6 +30,8 @@ class Bot(models.Model):
         Bot has its own BotContestRanking where the info
         about Bot's matches is accumulated.
     """
+    def __unicode__(self):
+        return self.name
 
     # method generating path for uploaded files
     path = lambda dirname: lambda instance, filename: \
@@ -40,7 +44,7 @@ class Bot(models.Model):
     # Executable with Bot program 
     bot_bin_file = models.FileField(upload_to=path('game_bots_binaries'))
     bot_source_file = models.FileField(upload_to=path('game_bots_sources'))
-    bot_lang = settings.LANGUAGES
+    bot_lang = models.IntegerField(choices=settings.LANGUAGES)
 
 class Contest(models.Model):
     """

@@ -158,11 +158,17 @@ EMAIL_HOST='localhost'
 EMAIL_PORT='1025'
 
 LANGUAGES = (
-    ('C', 'C'),
-    ('CPP', 'C++'),
-    ('JAVA', 'Java'),
-    ('PYTHON', 'Python'),
+    ('0', 'C'),
+    ('1', 'C++'),
+    ('2', 'Java'),
+    ('3', 'Python'),
 )
 
 MAKEFILE_DIR = os.path.abspath('../makefile/')
 MAKEFILE_PATH = MAKEFILE_DIR + '/Makefile'
+MAKEFILE_LANG = {
+    0: 'C',
+    1: 'CPP',
+    2: 'JAVA',
+    3: 'PYTHON',
+}

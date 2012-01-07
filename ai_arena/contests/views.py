@@ -5,13 +5,14 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from ai_arena.contests.forms import GameSelectForm, BotSelectForm
-from ai_arena.contests.forms import NewGameForm
+from ai_arena.contests.forms import NewGameForm, SendBotForm
 from ai_arena.contests.models import Game, Bot, Match
 from ai_arena.contests.game_launcher import launch_single_match
 from os import system
 from nadzorca import nadzorca
 from ai_arena import settings
 from django.core.files import File
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render_to_response('index.html',
@@ -50,7 +51,7 @@ def results(request):
                 context_instance=RequestContext(request))
 
 def compile(src, target, lang):
-    system('make -f ' + settings.MAKEFILE_PATH + ' LANG=' + lang +
+    system('make -f ' + settings.MAKEFILE_PATH + ' LANG=' + settings.MAKEFILE_LANG[int(lang)] +
             ' SRC=' + src + ' TARGET=' + target)
 
 def create_new_game(request):
@@ -87,6 +88,78 @@ def create_new_game(request):
     return render_to_response('gaming/new_game.html',
             {
                 'form': form,
+            },
+            context_instance=RequestContext(request))
+
+def game_list(request):
+    games = Game.objects.all()
+    return render_to_response('gaming/game_list.html',
+            {
+                'games': games,
+            },
+            context_instance=RequestContext(request))
+
+def game_details(request, game_id):
+    if not game_id:
+        raise Exception("In game_details: No game_id given")
+
+    game = Game.objects.get(id=game_id)
+    if game is None:
+        raise Exception("In game_details: Wrong game_id given")
+
+    return render_to_response('gaming/game_details.html',
+            {
+                'game': game,
+            },
+            context_instance=RequestContext(request))
+
+@login_required
+def send_bot(request, game_id):
+    if not game_id:
+        raise Exception("In game_details: No game_id given")
+
+    game = Game.objects.get(id=game_id)
+    if game is None:
+        raise Exception("In game_details: Wrong game_id given")
+    
+    if request.method == 'POST':
+        form = SendBotForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Save known fields
+            bot = Bot()
+            bot.name = request.POST['bot_name']
+            bot.bot_source_file = request.FILES['bot_source']
+            bot.bot_lang = request.POST['bot_language']
+
+            # Add game and owner info
+            bot.game = game
+            bot.owner = request.user
+            bot.save()
+
+            # Compile source file to directory with source file
+            src = settings.MEDIA_ROOT + bot.bot_source_file.name
+            target = settings.MEDIA_ROOT + bot.bot_source_file.name + '.bin' 
+            lang = bot.bot_lang
+            compile(src, target, lang)
+
+            # Use compiled file in object game
+            f = File(open(target))
+            bot.bot_bin_file.save(bot.name, f)
+
+            # Save changes made to game object
+            game.save()
+
+            # Remove compiled file from directory with source
+            system('rm ' + target)
+            
+            return HttpResponseRedirect('/')
+    else:
+        form = SendBotForm()
+    
+    return render_to_response('gaming/send_bot.html',
+            {
+                'form': form,
+                'game_id': game_id,
             },
             context_instance=RequestContext(request))
 
