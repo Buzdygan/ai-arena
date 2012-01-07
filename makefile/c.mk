@@ -1,6 +1,6 @@
-# uniwersalny makefile dla języka C++
+# uniwersalny makefile dla języka C
 
-CC = g++
+CC = gcc
 CFLAGS = -Wall -g
 
 OBJ = $(SRC:.cpp=.o)
@@ -10,5 +10,5 @@ all : $(TARGET)
 $(TARGET) : $(OBJ)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ)
 
-.cpp.o:
+.c.o:
 	$(CC) $(CFLAGS) -c $<  -o $@

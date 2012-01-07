@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from ai_arena import settings
 
 class Game(models.Model):
     """
@@ -18,6 +18,7 @@ class Game(models.Model):
     # Executable with judge
     judge_bin_file = models.FileField(upload_to=path('game_judges_binaries'))
     judge_source_file = models.FileField(upload_to=path('game_judges_sources'))
+    judge_lang = settings.LANGUAGES
 
 
 class Bot(models.Model):
@@ -39,7 +40,7 @@ class Bot(models.Model):
     # Executable with Bot program 
     bot_bin_file = models.FileField(upload_to=path('game_bots_binaries'))
     bot_source_file = models.FileField(upload_to=path('game_bots_sources'))
-    bot_lang = models.CharField(max_length='10')
+    bot_lang = settings.LANGUAGES
 
 class Contest(models.Model):
     """

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+Block content of new_game
+
+{% if form %}
+    {% if form.is_multipart %}
+        <form enctype="multipart/form-data" method="POST" action="/new_game/">
+    {% else %}
+        <form method="POST" action="/new_game/">
+    {% endif %}
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" value="Submit"/>
+</form>
+{% endif %}
+
+{% endblock %}

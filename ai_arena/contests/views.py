@@ -5,10 +5,13 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from ai_arena.contests.forms import GameSelectForm, BotSelectForm
+from ai_arena.contests.forms import NewGameForm
 from ai_arena.contests.models import Game, Bot, Match
 from ai_arena.contests.game_launcher import launch_single_match
+from os import system
 from nadzorca import nadzorca
-
+from ai_arena import settings
+from django.core.files import File
 
 def index(request):
     return render_to_response('index.html',
@@ -46,6 +49,46 @@ def results(request):
                 },
                 context_instance=RequestContext(request))
 
+def compile(src, target, lang):
+    system('make -f ' + settings.MAKEFILE_PATH + ' LANG=' + lang +
+            ' SRC=' + src + ' TARGET=' + target)
+
+def create_new_game(request):
+    if request.method == 'POST':
+        form = NewGameForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Save known fields
+            game = Game()
+            game.name = request.POST['game_name']
+            game.rules_file = request.FILES['game_rules']
+            game.judge_source_file = request.FILES['game_judge']
+            game.judge_lang = request.POST['judge_language']
+            game.save()
+            
+            # Compile source file to directory with source file
+            src = settings.MEDIA_ROOT + game.judge_source_file.name
+            target = settings.MEDIA_ROOT + game.judge_source_file.name + '.bin' 
+            lang = game.judge_lang
+            compile(src, target, lang)
+
+            # Use compiled file in object game
+            f = File(open(target))
+            game.judge_bin_file.save(request.POST['game_name'], f)
+
+            # Save changes made to game object
+            game.save()
+
+            # Remove compiled file from directory with source
+            system('rm ' + target)
+            
+            return HttpResponseRedirect('/')
+    else:
+        form = NewGameForm()
+    return render_to_response('gaming/new_game.html',
+            {
+                'form': form,
+            },
+            context_instance=RequestContext(request))
 
 def match_results_list(request):
 

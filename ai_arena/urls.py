@@ -21,6 +21,8 @@ urlpatterns = patterns('',
 
     url(r'^accounts/', include('registration.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
+   
+    url(r'^new_game/$', 'contests.views.create_new_game'),
     url(r'^results/$', 'contests.views.results'),
     url(r'^results/match_results_list/$', 'contests.views.match_results_list', name='match_results_list'),
     url(r'^results/show_match_result/(?P<match_id>\d+)/$', 'contests.views.show_match_result', name='show_match_result'),
