@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    Game details of game {{ game.id }}
+
+    <div><a href="/send_bot/{{ game.id }}/">Send bot for this game</a></div> 
+{% endblock %}
