@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="{{ MEDIA_URL }}style.css" />
+        <link rel="stylesheet" href="{{ MEDIA_URL }}bootstrap.css" />
         <title> {% block title %} AI-Arena - test your AI skill {% endblock %} </title>
     </head>
 
     <body>
-        <div id="sidebar">
-            {% block sidebar %}
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/launch_match/">Launch Match</a></li>
-                <li><a href="{% url match_results_list %}"> Results List </a></li>
-                <li><a href="/new_game/">Create new game</a></li>
-                <li><a href="/game_list/">Games List</a></li>
-                <li><a href="/send_bot/">Send Bot</a></li>
-            </ul>
-            {% endblock %}
+        <div class="topbar">
+            <div class="topbar-inner">
+                <div class="container">
+                    {% block topbar %}
+                        <div class="row">
+                            <div class="span10">
+                            <ul class="nav">
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/launch_match/">Launch Match</a></li>
+                                <li><a href="{% url match_results_list %}"> Results List </a></li>
+                                <li><a href="/new_game/">Create new game</a></li>
+                                <li><a href="/game_list/">Games List</a></li>
+                                <li><a href="/send_bot/">Send Bot</a></li>
+                            </ul>
+                        </div>
+                            <div class="span6">
+                                {% if user.is_authenticated %}
+                                    <font color="green"> Logged as {{ user.username }}.</font>
+                                    <a href="{% url django.contrib.auth.views.logout %}">Logout</a>
+                                {% else %}
+                                    <font color="green"> Hello guest. Please log in. </font>
+                                    <a href="{% url django.contrib.auth.views.login %}">Login</a> | <a href="/accounts/register/">Register</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
         </div>
-
-        <div id="loginbar">
-            {% if user.is_authenticated %}
-            <p>
-                Logged as {{ user.username }}.
-                <a href="{% url django.contrib.auth.views.logout %}">Logout</a>
-            </p>
-            {% else %}
-            <p>
-                Hello guest. Please log in. 
-                <a href="{% url django.contrib.auth.views.login %}">Login</a> | <a href="/accounts/register/">Register</a>
-           </p>
-            {% endif %}
-        </div>
-        
-        <div id="content">
-            {% block content %}
-                this is a base content
-            {% endblock %}
-        </div>
+    <div class="container" style="padding-top: 50px">
+        {% block content %}
+            this is a base content
+        {% endblock %}
+    </div>
     </body>
 </html>
