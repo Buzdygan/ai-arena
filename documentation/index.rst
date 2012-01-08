@@ -19,7 +19,6 @@ Modules
 
     modules/model.rst
 
-
 Indices and tables
 ==================
 

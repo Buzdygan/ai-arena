@@ -35,3 +35,10 @@ class SendBotForm(forms.Form):
     bot_name = forms.CharField(max_length=50)
     bot_source = forms.FileField()
     bot_language = forms.ChoiceField(choices = settings.LANGUAGES)
+
+class SendBotWithGameForm(forms.Form):
+    games = Game.objects
+    game = vModelChoiceField(queryset=games)
+    bot_name = forms.CharField(max_length=50)
+    bot_source = forms.FileField()
+    bot_language = forms.ChoiceField(choices = settings.LANGUAGES)

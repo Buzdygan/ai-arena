@@ -17,18 +17,17 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^$', 'contests.views.index'),
-    url(r'^send/$', 'contests.views.send'),
 
     url(r'^accounts/', include('registration.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
    
-    url(r'^new_game/$', 'contests.views.create_new_game'),
-    url(r'^game_list/$', 'contests.views.game_list'),
-    url(r'^game_details/(?P<game_id>\d+)/$', 'contests.views.game_details'),
+    url(r'^new_game/$', 'contests.game_views.create_new_game'),
+    url(r'^game_list/$', 'contests.game_views.game_list'),
+    url(r'^game_details/(?P<game_id>\d+)/$', 'contests.game_views.game_details'),
     
-    url(r'^send_bot/(?P<game_id>\d+)/$', 'contests.views.send_bot'),
+    url(r'^send_bot/$', 'contests.bot_views.send_bot_with_game'),
+    url(r'^send_bot/(?P<game_id>\d+)/$', 'contests.bot_views.send_bot'),
 
-    url(r'^results/$', 'contests.views.results'),
     url(r'^results/match_results_list/$', 'contests.views.match_results_list', name='match_results_list'),
     url(r'^results/show_match_result/(?P<match_id>\d+)/$', 'contests.views.show_match_result', name='show_match_result'),
     url(r'^launch_match/$', 'contests.views.launch_match', name='launch_match'),
