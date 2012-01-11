@@ -50,6 +50,7 @@ def play(judge_file, players, memory_limit, time_limit):
             stdout=subprocess.PIPE,
             stdin=subprocess.PIPE,
 #            stderr=subprocess.PIPE,
+            close_fds = True,
             )
     
     bots_process_list = []
@@ -126,15 +127,6 @@ def play(judge_file, players, memory_limit, time_limit):
                     results['exit_status'] = 13
                     game_in_progress = False
                     break
-        for bot_process in bots_process_list:
-            message = message + '\n'
-            bot_process.stdin.write(message)
-            response = readout(bot_process.stdout) + '\n'
-            jp.stdin.write(response)
-
-    for bot in bots_process_list:
-        bot.kill()
-
     jp.kill()
 
     print(results)
