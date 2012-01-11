@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stdio.h>
+#include <cstdlib>
 
 using namespace std;
 
@@ -8,6 +9,7 @@ int main(){
 
     const int BOARD_SIZE = 5;
     string message, board = string(BOARD_SIZE, '0');
+    string rcv, rcv2;
     int move = 0;
     bool player1 = false;
 
@@ -21,12 +23,14 @@ int main(){
             message = "[2]";
         message += board;
 
-        cerr << "sending message " << message << endl;
-        cout << message << "<<<" << endl;
+        cout << message + "<<<" << endl;
 
-        cin >> move;
-        cerr << "received move " <<  move << endl;
+        cin >> rcv;
+        rcv2 = rcv.substr(0, rcv.length() - 3);
+        move = strtol(rcv2.c_str(), NULL, 10);
 
+        cerr << "receive move " << move << '\n';
+        
         if (player1)
             board[move] = '1';
         else
