@@ -86,6 +86,8 @@ class MatchBotResult(models.Model):
         Appart from point score, it keeps info about
         time and memory usage or some errors during the execution.
     """
+    def __unicode__(self):
+        return self.bot.name + ' results'
 
     score = models.DecimalField(max_digits=4, decimal_places=2)
     time_used = models.IntegerField(null=True, blank=True)
@@ -112,6 +114,8 @@ class Match(models.Model):
     """
         Contains info about single Match. 
     """
+    def __unicode__(self):
+        return self.game.name
 
     # Is the match connected with any ranking
     ranked_match = models.BooleanField()
