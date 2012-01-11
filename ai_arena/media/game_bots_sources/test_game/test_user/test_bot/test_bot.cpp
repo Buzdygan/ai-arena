@@ -16,7 +16,7 @@ int main(){
             i++;
         if(i >= board.length())
             return 0;
-        cout << i << "END" << endl;
+        cout << i << "<<<" << endl;
     }
 
     return 0;
