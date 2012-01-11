@@ -17,7 +17,11 @@ Modules
 .. toctree::
     :maxdepth: 2
 
+    modules/nadzorca.rst
     modules/model.rst
+    modules/game_views.rst
+    modules/bot_views.rst
+    modules/compilation.rst
 
 Indices and tables
 ==================
