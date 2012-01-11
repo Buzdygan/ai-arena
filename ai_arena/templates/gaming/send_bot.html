@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if form.is_multipart %}
+    <form enctype="multipart/form-data" method="POST" action="/send_bot/
+        {% if game_id %}{{ game_id }}/{% endif %}">
+        
+    {% else %}
+    <form method="POST" action="/send_bot/
+        {% if game_id %}{{ game_id }}/{% endif %}">
+    {% endif %}
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" class="btn primary" value="Submit"/>
+</form>
+{% endblock %}

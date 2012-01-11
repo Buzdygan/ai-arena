@@ -5,46 +5,18 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from ai_arena.contests.forms import GameSelectForm, BotSelectForm
+from ai_arena.contests.forms import NewGameForm, SendBotForm, SendBotWithGameForm
 from ai_arena.contests.models import Game, Bot, Match
 from ai_arena.contests.game_launcher import launch_single_match
+from os import system
 from nadzorca import nadzorca
-
+from ai_arena import settings
+from django.core.files import File
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render_to_response('index.html',
             context_instance=RequestContext(request))
-
-
-def send(request):
-    return render_to_response('send/send.html',
-            context_instance=RequestContext(request))
-
-def results(request):
-    try:
-        lang1 = request.POST['lang1']
-        prog1 = request.POST['prog1']
-#        lang2 = request.POST['lang2']
-#        prog2 = request.POST['prog2']
-
-        # Here we can perform a play
-        
-        i = nadzorca.costam()
-    except KeyError:
-        return render_to_response('send/send.html',
-                {
-                    'error_message': 'You must fill all the fields',
-                },
-                context_instance=RequestContext(request));
-    else:
-        return render_to_response('send/results.html',
-                {
-                    'lang1':lang1,
-                    'prog1':prog1,
- #                   'lang2':lang2,
- #                   'prog2':prog2,
-                    'i':i,
-                },
-                context_instance=RequestContext(request))
 
 
 def match_results_list(request):
@@ -105,8 +77,8 @@ def launch_match(request, game_id=None, number_of_bots=None):
                 bots = []
                 for i in range(number_of_bots):
                     bots.append(bot_form.cleaned_data['bot_field%d' % (i+1)])
-                    launch_single_match(game, bots)
-                    return redirect('/')
+                launch_single_match(game, bots)
+                return redirect('/')
 
     if not game_form:
         game_form = GameSelectForm(prefix='game')

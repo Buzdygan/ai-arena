@@ -4,13 +4,13 @@
     {% if game_form %}
         <form action="{% url launch_match %}" method="post"> {% csrf_token %}
             {{ game_form.as_p }}
-            <input name="game_form" type="submit" value="Submit" />
+            <input name="game_form" class="btn primary" type="submit" value="Submit" />
         </form>
     {% endif %}
     {% if game_id and bot_form %}
         <form action="{% url launch_game_match game_id number_of_bots %}" method="post"> {% csrf_token %}
             {{ bot_form.as_p }}
-            <input name="bot_form" type="submit" value="Launch match" />
+            <input name="bot_form" class="btn primary" type="submit" value="Launch match" />
         </form>
     {% endif %}
 

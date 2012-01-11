@@ -1,5 +1,7 @@
 from django import forms
+from django.core.files.uploadedfile import SimpleUploadedFile
 from ai_arena.contests.models import Game, Bot
+from ai_arena import settings
 
 class vModelChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
@@ -23,4 +25,20 @@ class BotSelectForm(forms.Form):
         for i in range(number_of_bots):
             self.fields['bot_field%d' % (i+1)] = vModelChoiceField(queryset=bots)
         
+class NewGameForm(forms.Form):
+    game_name = forms.CharField(max_length=50)
+    game_rules = forms.FileField()
+    game_judge = forms.FileField()
+    judge_language = forms.ChoiceField(choices= settings.LANGUAGES)
 
+class SendBotForm(forms.Form):
+    bot_name = forms.CharField(max_length=50)
+    bot_source = forms.FileField()
+    bot_language = forms.ChoiceField(choices = settings.LANGUAGES)
+
+class SendBotWithGameForm(forms.Form):
+    games = Game.objects
+    game = vModelChoiceField(queryset=games)
+    bot_name = forms.CharField(max_length=50)
+    bot_source = forms.FileField()
+    bot_language = forms.ChoiceField(choices = settings.LANGUAGES)
