@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.12.7)  4 JAN 2012 22:30
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.12.7)  18 JAN 2012 20:36
 entering extended mode
  %&-line parsing enabled.
 **praca_licencjacka.tex
@@ -149,57 +149,77 @@ LaTeX Font Info:    External font `plex10' loaded for size
 
 ]
 Rozdzia\PlPrIeC {\l } 1.
-[7] [8
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--55
+
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 60.
+(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
+ [7] [8] [9] [10
 
 ]
 Rozdzia\PlPrIeC {\l } 2.
-[9] [10
-
-]
-Rozdzia\PlPrIeC {\l } 3.
 [11] [12
 
 ]
-Rozdzia\PlPrIeC {\l } 4.
+Rozdzia\PlPrIeC {\l } 3.
 [13] [14
 
 ]
-Rozdzia\PlPrIeC {\l } 5.
+Rozdzia\PlPrIeC {\l } 4.
 [15] [16
 
 ]
-Dodatek A.
+Rozdzia\PlPrIeC {\l } 5.
 [17] [18
 
 ]
-Dodatek B.
+Rozdzia\PlPrIeC {\l } 6.
 [19] [20
 
 ]
-Dodatek C.
+Rozdzia\PlPrIeC {\l } 7.
 [21] [22
 
 ]
+Dodatek A.
+[23] [24
 
-LaTeX Warning: Empty `thebibliography' environment on input line 79.
+]
+Dodatek B.
+[25] [26
 
-[23] (./praca_licencjacka.aux) ) 
+]
+Dodatek C.
+[27] [28
+
+]
+
+LaTeX Warning: Empty `thebibliography' environment on input line 245.
+
+[29] (./praca_licencjacka.aux) ) 
 Here is how much of TeX's memory you used:
- 539 strings out of 495026
- 6834 string characters out of 1181802
- 54466 words of memory out of 3000000
- 3757 multiletter control sequences out of 15000+50000
- 13796 words of font info for 38 fonts, out of 3000000 for 9000
+ 557 strings out of 495026
+ 7137 string characters out of 1181802
+ 57466 words of memory out of 3000000
+ 3772 multiletter control sequences out of 15000+50000
+ 14053 words of font info for 39 fonts, out of 3000000 for 9000
  48 hyphenation exceptions out of 8191
- 27i,6n,24p,645b,231s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,6n,24p,645b,238s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/pl/pl
-rm.enc}</usr/share/texmf-texlive/fonts/type1/public/pl/plbx10.pfb></usr/share/t
-exmf-texlive/fonts/type1/public/pl/plbx12.pfb></usr/share/texmf-texlive/fonts/t
-ype1/public/pl/plr10.pfb></usr/share/texmf-texlive/fonts/type1/public/pl/plr12.
-pfb></usr/share/texmf-texlive/fonts/type1/public/pl/plr17.pfb>
-Output written on praca_licencjacka.pdf (25 pages, 72047 bytes).
+rm.enc}</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/share/texmf-texlive/fonts/type1/public/pl/plbx10.pfb></usr/share/texmf-texliv
+e/fonts/type1/public/pl/plbx12.pfb></usr/share/texmf-texlive/fonts/type1/public
+/pl/plr10.pfb></usr/share/texmf-texlive/fonts/type1/public/pl/plr12.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/pl/plr17.pfb>
+Output written on praca_licencjacka.pdf (31 pages, 89029 bytes).
 PDF statistics:
- 104 PDF objects out of 1000 (max. 8388607)
+ 127 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
