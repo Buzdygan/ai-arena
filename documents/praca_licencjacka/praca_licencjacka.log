@@ -1,16 +1,19 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.12.7)  18 JAN 2012 20:36
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/MacPorts 2011_1) (format=pdflatex 2012.1.22)  12 FEB 2012 23:14
 entering extended mode
+ restricted \write18 enabled.
  %&-line parsing enabled.
 **praca_licencjacka.tex
 (./praca_licencjacka.tex
 LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, polish, loaded.
-(/usr/local/share/texmf/tex/generic/pracamgr/pracamgr.cls
+Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, cz
+ech, slovak, dutch, ukenglish, usenglishmax, basque, french, german-x-2009-06-1
+9, ngerman-x-2009-06-19, german, ngerman, swissgerman, italian, polish, portugu
+ese, spanish, catalan, galician, loaded.
+(./pracamgr.cls
 Document Class: pracamgr 2006/05/05 v0.5.0 Praca magisterska
-(/usr/share/texmf-texlive/tex/latex/base/report.cls
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/report.cls
 Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texmf-texlive/tex/latex/base/size11.clo
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/size11.clo
 File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -26,18 +29,18 @@ File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 ))
-(/usr/share/texmf-texlive/tex/latex/polski/polski.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/polski/polski.sty
 Package: polski 2008/02/24 v1.3.3 Polish language package
 
 Document language package `polski' v1.3.3 <2008/02/24>
    Switching to Polish text encoding and Polish maths fonts.
-(/usr/share/texmf-texlive/tex/latex/base/ot4enc.def
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/ot4enc.def
 File: ot4enc.def 2005/09/27 v1.99g Standard LaTeX file
 )
 LaTeX Font Info:    Try loading font information for OT4+cmr on input line 346.
 
 
-(/usr/share/texmf-texlive/tex/latex/polski/ot4cmr.fd
+(/opt/local/share/texmf-texlive-dist/tex/latex/polski/ot4cmr.fd
 File: ot4cmr.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
@@ -72,16 +75,17 @@ LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/cmsy/b/n --> OMS/plsy/b/n on input line 346.
 )
-(/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
 
-(/usr/share/texmf-texlive/tex/latex/base/latin2.def
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/latin2.def
 File: latin2.def 2008/03/30 v1.1d Input encoding file
 ))
 \c@defi=\count88
- (./praca_licencjacka.aux)
+
+(./praca_licencjacka.aux)
 \openout1 = `praca_licencjacka.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
@@ -99,19 +103,20 @@ LaTeX Font Info:    ... okay on input line 33.
 LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 33.
 LaTeX Font Info:    ... okay on input line 33.
 LaTeX Font Info:    Try loading font information for OML+plm on input line 34.
-(/usr/share/texmf-texlive/tex/latex/polski/omlplm.fd
+
+(/opt/local/share/texmf-texlive-dist/tex/latex/polski/omlplm.fd
 File: omlplm.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    Try loading font information for OMS+plsy on input line 34.
 
 
-(/usr/share/texmf-texlive/tex/latex/polski/omsplsy.fd
+(/opt/local/share/texmf-texlive-dist/tex/latex/polski/omsplsy.fd
 File: omsplsy.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    Try loading font information for OMX+plex on input line 34.
 
 
-(/usr/share/texmf-texlive/tex/latex/polski/omxplex.fd
+(/opt/local/share/texmf-texlive-dist/tex/latex/polski/omxplex.fd
 File: omxplex.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    External font `plex10' loaded for size
@@ -122,7 +127,7 @@ LaTeX Font Info:    External font `plex10' loaded for size
 (Font)              <6> on input line 34.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+{/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
 Underfull \hbox (badness 10000) in paragraph at lines 39--39
 
  []
@@ -149,29 +154,30 @@ LaTeX Font Info:    External font `plex10' loaded for size
 
 ]
 Rozdzia\PlPrIeC {\l } 1.
-
-Underfull \hbox (badness 10000) in paragraph at lines 50--55
-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 60.
-(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
- [7] [8] [9] [10
+[7] [8
 
 ]
 Rozdzia\PlPrIeC {\l } 2.
-[11] [12
+[9] [10
 
 ]
 Rozdzia\PlPrIeC {\l } 3.
-[13] [14
+[11] [12
 
 ]
 Rozdzia\PlPrIeC {\l } 4.
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--65
+
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 70.
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 70.
+ [13] [14]
 [15] [16
 
 ]
@@ -187,39 +193,53 @@ Rozdzia\PlPrIeC {\l } 7.
 [21] [22
 
 ]
-Dodatek A.
+Rozdzia\PlPrIeC {\l } 8.
 [23] [24
 
 ]
-Dodatek B.
+Rozdzia\PlPrIeC {\l } 9.
 [25] [26
 
 ]
-Dodatek C.
+Rozdzia\PlPrIeC {\l } 10.
 [27] [28
 
 ]
+Dodatek A.
+[29] [30
 
-LaTeX Warning: Empty `thebibliography' environment on input line 245.
+]
+Dodatek B.
+[31] [32
 
-[29] (./praca_licencjacka.aux) ) 
+]
+Dodatek C.
+[33] [34
+
+]
+
+LaTeX Warning: Empty `thebibliography' environment on input line 255.
+
+[35] (./praca_licencjacka.aux) ) 
 Here is how much of TeX's memory you used:
- 557 strings out of 495026
- 7137 string characters out of 1181802
- 57466 words of memory out of 3000000
- 3772 multiletter control sequences out of 15000+50000
+ 556 strings out of 494770
+ 7269 string characters out of 3171573
+ 57823 words of memory out of 3000000
+ 3814 multiletter control sequences out of 15000+200000
  14053 words of font info for 39 fonts, out of 3000000 for 9000
- 48 hyphenation exceptions out of 8191
+ 134 hyphenation exceptions out of 8191
  27i,6n,24p,645b,238s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/pl/pl
-rm.enc}</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
-r/share/texmf-texlive/fonts/type1/public/pl/plbx10.pfb></usr/share/texmf-texliv
-e/fonts/type1/public/pl/plbx12.pfb></usr/share/texmf-texlive/fonts/type1/public
-/pl/plr10.pfb></usr/share/texmf-texlive/fonts/type1/public/pl/plr12.pfb></usr/s
-hare/texmf-texlive/fonts/type1/public/pl/plr17.pfb>
-Output written on praca_licencjacka.pdf (31 pages, 89029 bytes).
+{/opt/local/share/texmf-texlive-dist/fonts/enc/
+dvips/pl/plrm.enc}</opt/local/share/texmf-texlive-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/pl
+bx10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/plbx12.pfb>
+</opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/plr10.pfb></opt/loca
+l/share/texmf-texlive-dist/fonts/type1/public/pl/plr12.pfb></opt/local/share/te
+xmf-texlive-dist/fonts/type1/public/pl/plr17.pfb>
+Output written on praca_licencjacka.pdf (37 pages, 79016 bytes).
 PDF statistics:
- 127 PDF objects out of 1000 (max. 8388607)
+ 151 PDF objects out of 1000 (max. 8388607)
+ 104 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
