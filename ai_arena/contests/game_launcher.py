@@ -1,4 +1,3 @@
-from nadzorca import nadzorca
 from decimal import Decimal
 from contests.models import Match, MatchBotResult
 import gearman
@@ -24,5 +23,7 @@ def launch_single_match(game, bots):
 
     arguments = {'game': game, 'bots': bots}
 
+    print('bifor')
     gearman_client = PickleClient(['localhost:4730'])
     gearman_client.submit_job('single_match', arguments)
+    print('submitted')
