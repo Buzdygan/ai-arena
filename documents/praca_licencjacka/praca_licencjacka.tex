@@ -42,19 +42,57 @@ W pracy przedstawiono implementacje systemu AI-Arena,
 
 \chapter*{Wprowadzenie}
 \addcontentsline{toc}{chapter}{Wprowadzenie}
-System Ai-Arena s³u¿y do przeprowadzania rozgrywek i turniejów ró³nych gier pomiêdzy programami komputerowymi. System ma w zamierzeniu twórców s³u¿yæ osobom zainteresowanym sztuczn± inteligencj± do sprawdzenia swoich umiejêtno¶ci, lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
+System Ai-Arena s³u¿y do przeprowadzania rozgrywek i turniejów ró¿nych gier pomiêdzy programami komputerowymi. System ma w zamierzeniu twórców s³u¿yæ osobom zainteresowanym sztuczn± inteligencj± do sprawdzenia swoich umiejêtno¶ci, lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
 
 Praca sk³ada siê z piêciu rozdzia³ów. Pierwszy zawiera opis architektury systemu. W drugim rozdziale zawarto dokumentacjê u¿ytkownika systemu i szczegó³y implementacji. Rozdzia³ trzeci zawiera podsumowanie, rozdzia³ czwart podzia³ prac a rozdzia³ pi±ty spis p³yty do³±czonej do pracy.
 
 \chapter{Podstawowe pojêcia}
 
-\section{Definicje}
+\section{Gra}
+    
+    Gra sk³ada siê z Regu³ i Sêdziego. \\
+    Regu³y okre¶laj± stan pocz±tkowy, dostêpne graczom
+    ruchy oraz warunki zwyciêstwa, przegranej, b±d¼ remisu. Gra powinna byæ co najmniej
+    dwuosobowa. W warunkach serwisu AI-Arena graczami bêd± najczê¶ciej programy komputerowe,
+    nazywane Botami b±d¼ Programami Walcz±cymi. \\
+    Sêdzia to program kontroluj±cy przebieg rozgrywki. Ma za zadanie:
+    \begin{itemize}
+    \item wyznaczyæ stan pocz±tkowy ka¿dej rozgrywki 
+    \item Odbieraæ komunikaty od programów graj±cych, sygnalizujace ich zagrania
+    \item Kontrolowaæ poprawno¶æ zagrañ graczy, oraz uaktualniaæ stan rozgrywki
+    \item Informowaæ Graczy o obecnym stanie rozgrywki
+    \item Rozstrzygaæ czy gra siê zakoñczy³a i przydzielaæ punkty zwyciêstwa graczom.
+    \end{itemize}
+
+\section{Program Walcz±cy}
+    
+
 
 \chapter{Zastosowania w nauce i biznesie internetowym}
 
 \chapter{Podobne platformy}
 
+Obecnie istniej± serwisy internetowe podobne do Ai-Arena. Oto kilka z nich:
+
 \section{Top Coder}
+
+    Bardzo popularny serwis organizuj±cy ró¿nego rodzaju konkursy programistyczne.
+    Jednym z nich s± tzw Marathon Matche, podczas których uczestnicy wysy³aj±
+    programy, które staraj± siê najbardziej optymalnie rozwi±zaæ dany problem, przy czym
+    nie istnieje rozwi±zanie ca³kowicie optymalne.
+
+\section{Ai Challenge}
+
+    Serwis organizuj±cy w sposób cykliczny zawody dla programów walcz±cych. Najczê¶ciej
+    ok 2 konkursy rocznie. Ka¿dy konkurs ma okre¶lony czas trwania i nie mo¿na w nim
+    uczestniczyæ po jego zakoñczeniu.
+
+\section{SPOJ}
+
+    Serwis zawieraj±cy du¿± bazê zadañ algorytmicznych dostêpnych do rozwi±zywania u¿ytkownikom.
+    Zadania nie maj± okre¶lonego terminu rozwi±zywania. Istnieje ranking bior±cy pod uwagê
+    liczbê wszystkich rozwi±zanych przez u¿ytkowników zadañ.
+
 
 \chapter{Use cases}
 \textbf{\Large{Scenariusze u¿ycia systemu przez u¿ytkownika niezalogowanego (Go¶cia)}} 

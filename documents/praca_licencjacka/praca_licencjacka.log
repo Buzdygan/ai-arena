@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/MacPorts 2011_1) (format=pdflatex 2012.1.22)  12 FEB 2012 23:14
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/MacPorts 2011_1) (format=pdflatex 2012.1.22)  14 FEB 2012 13:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -154,7 +154,13 @@ LaTeX Font Info:    External font `plex10' loaded for size
 
 ]
 Rozdzia\PlPrIeC {\l } 1.
-[7] [8
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 60.
+(/opt/local/share/texmf-texlive-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
+ [7] [8
 
 ]
 Rozdzia\PlPrIeC {\l } 2.
@@ -167,18 +173,11 @@ Rozdzia\PlPrIeC {\l } 3.
 ]
 Rozdzia\PlPrIeC {\l } 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 60--65
+Underfull \hbox (badness 10000) in paragraph at lines 98--103
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 70.
-(/opt/local/share/texmf-texlive-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 70.
- [13] [14]
-[15] [16
+[13] [14] [15] [16
 
 ]
 Rozdzia\PlPrIeC {\l } 5.
@@ -218,7 +217,7 @@ Dodatek C.
 
 ]
 
-LaTeX Warning: Empty `thebibliography' environment on input line 255.
+LaTeX Warning: Empty `thebibliography' environment on input line 293.
 
 [35] (./praca_licencjacka.aux) ) 
 Here is how much of TeX's memory you used:
@@ -236,7 +235,7 @@ bx10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/plbx12.pfb>
 </opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/plr10.pfb></opt/loca
 l/share/texmf-texlive-dist/fonts/type1/public/pl/plr12.pfb></opt/local/share/te
 xmf-texlive-dist/fonts/type1/public/pl/plr17.pfb>
-Output written on praca_licencjacka.pdf (37 pages, 79016 bytes).
+Output written on praca_licencjacka.pdf (37 pages, 81361 bytes).
 PDF statistics:
  151 PDF objects out of 1000 (max. 8388607)
  104 compressed objects within 2 object streams
