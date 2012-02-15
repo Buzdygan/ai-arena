@@ -1,9 +1,12 @@
 \contentsline {chapter}{Wprowadzenie}{5}
 \contentsline {chapter}{\numberline {1}Podstawowe poj\k ecia}{7}
-\contentsline {section}{\numberline {1.1}Definicje}{7}
+\contentsline {section}{\numberline {1.1}Gra}{7}
+\contentsline {section}{\numberline {1.2}Program Walcz\k acy}{7}
 \contentsline {chapter}{\numberline {2}Zastosowania w nauce i biznesie internetowym}{9}
 \contentsline {chapter}{\numberline {3}Podobne platformy}{11}
 \contentsline {section}{\numberline {3.1}Top Coder}{11}
+\contentsline {section}{\numberline {3.2}Ai Challenge}{11}
+\contentsline {section}{\numberline {3.3}SPOJ}{11}
 \contentsline {chapter}{\numberline {4}Use cases}{13}
 \contentsline {chapter}{\numberline {5}Metodyka Scrum}{17}
 \contentsline {chapter}{\numberline {6}Architektura systemu}{19}
