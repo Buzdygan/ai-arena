@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^new_game/$', 'contests.game_views.create_new_game'),
     url(r'^game_list/$', 'contests.game_views.game_list'),
     url(r'^game_details/(?P<game_id>\d+)/$', 'contests.game_views.game_details'),
+    url(r'^game_details/(?P<game_id>\d+)/source/$', 'contests.game_views.show_source'),
     
     url(r'^send_bot/$', 'contests.bot_views.send_bot_with_game'),
     url(r'^send_bot/(?P<game_id>\d+)/$', 'contests.bot_views.send_bot'),

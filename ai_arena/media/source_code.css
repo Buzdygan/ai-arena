@@ -1,0 +1,58 @@
+#source_code{
+    width:80%;
+    padding:10px;
+    border:3px solid gray;
+    border-radius:15px;
+    background-color:#FAF8CC;
+
+}
+
+.line_number{
+    color:blue;
+    display:inline-block;
+    width: 40px;
+    text-align:center;
+}
+
+.tab{
+    display:inline-block;
+    width: 12px;
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+}
+
+.space{
+    display:inline-block;
+    width:3px;
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+}
+
+.keyword{
+    display:inline-block;
+    font-weight:bold;
+}
+
+.types{
+    display:inline-block;
+    font-weight:bold;
+    color: #666699;
+}
+
+.string{
+    display:inline-block;
+    color: #990000;
+}
+
+.bool{
+    display:inline-block;
+    color: #9933CC;
+}
+
+.special{
+    display:inline-block;
+    color: #999999;
+    font-weight: bold;
+}
