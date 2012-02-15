@@ -1,8 +1,8 @@
 \contentsline {chapter}{Wprowadzenie}{5}
 \contentsline {chapter}{\numberline {1}Podstawowe poj\k ecia}{7}
 \contentsline {section}{\numberline {1.1}Gra}{7}
-\contentsline {section}{\numberline {1.2}Program Walcz\k acy}{7}
-\contentsline {chapter}{\numberline {2}Zastosowania w nauce i biznesie internetowym}{9}
+\contentsline {section}{\numberline {1.2}Program Walcz\k acy - Bot}{7}
+\contentsline {chapter}{\numberline {2}Zastosowania w nauce i biznesie}{9}
 \contentsline {chapter}{\numberline {3}Podobne platformy}{11}
 \contentsline {section}{\numberline {3.1}Top Coder}{11}
 \contentsline {section}{\numberline {3.2}Ai Challenge}{11}

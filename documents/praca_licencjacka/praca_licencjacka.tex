@@ -51,9 +51,10 @@ Praca sk³ada siê z piêciu rozdzia³ów. Pierwszy zawiera opis architektury systemu
 \section{Gra}
     
     Gra sk³ada siê z Regu³ i Sêdziego. \\
-    Regu³y okre¶laj± stan pocz±tkowy, dostêpne graczom
-    ruchy oraz warunki zwyciêstwa, przegranej, b±d¼ remisu. Gra powinna byæ co najmniej
-    dwuosobowa. W warunkach serwisu AI-Arena graczami bêd± najczê¶ciej programy komputerowe,
+    Regu³y okre¶laj± stan pocz±tkowy, dostêpne graczom ruchy oraz warunki zwyciêstwa, przegranej, b±d¼ remisu. \\
+    Powinny ¶ci¶le okre¶laæ Protokó³ Komunikacji miêdzy Programami Walcz±cymi, a Sêdzi±.
+    Gra powinna byæ co najmniej dwuosobowa. \\
+    W warunkach serwisu AI-Arena graczami bêd± najczê¶ciej programy komputerowe,
     nazywane Botami b±d¼ Programami Walcz±cymi. \\
     Sêdzia to program kontroluj±cy przebieg rozgrywki. Ma za zadanie:
     \begin{itemize}
@@ -64,11 +65,43 @@ Praca sk³ada siê z piêciu rozdzia³ów. Pierwszy zawiera opis architektury systemu
     \item Rozstrzygaæ czy gra siê zakoñczy³a i przydzielaæ punkty zwyciêstwa graczom.
     \end{itemize}
 
-\section{Program Walcz±cy}
+\section{Program Walcz±cy - Bot}
+
+    Jest to program napisany w jednym z obs³ugiwanych przez jêzyk serwisów.
+    Musi byæ przypisany do konkretnej Gry dostêpnej w serwisie.
+    Uczestniczy w rozgrywkach (Meczach) z innymi botami przypisanymi do tej Gry.
+    Ma za zadanie przetwarzaæ informacje o dotychczasowym przebiegu rozgrywki
+    i produkowaæ kolejne posuniêcia, zgodne z regu³ami Gry.
     
 
 
-\chapter{Zastosowania w nauce i biznesie internetowym}
+\chapter{Zastosowania w nauce i biznesie}
+
+    Sztuczna inteligencja jest jedn± z szybciej rozwijaj±cych siê obecnie dziedzin.
+    Zastosowania algorytmów SI siêgaj± prawie wszystkich obszarów nie tylko
+    internetu, ale i codziennego ¿ycia. Serwis AI-Arena pomaga rozwijaæ ga³±¼ tej nauki
+    zwi±zan± z rywalizacj±.\\
+
+    Najprostsze przyk³ady rywalizacji to oczywi¶cie wszelkiego
+    rodzaju gry i sporty. Obecnie komputery s± w stanie wygrywaæ z cz³owiekiem w
+    wiêkszo¶ci gier takich jak szachy, warcaby itp. Coraz bardziej zaawansowani staj± siê przeciwnicy kierowani przez
+    komputer w grach video. Równie¿ w sporcie zaczêto doceniaæ znaczenie metod naukowych
+    do opracowywania optymalnych strategii. Prawdopodobnie kwesti± czasu jest analizowanie
+    gry wirtualnych zespo³ów kierowanych sztuczn± inteligencj±, a nastêpnie wykorzystywanie
+    obserwacji do poprawy gry prawdziwej dru¿yny.\\
+
+    Rywalizacja mo¿e byæ wykorzystana równie¿ jako metoda rozwi±zywania problemów.
+    Przyk³adem takiego podej¶cia s± algorytmy genetyczne, w których najlepsze jednostki
+    pozostaj± w obiegu, ca³y czas udoskanalaj±c swoje podej¶cie do rozwi±zywania danego problemu.\\
+    
+    Serwis AI-Arena ma du¿e zastosowanie w biznesie. Firmy nieustannie rywalizuj± miêdzy sob± w walce
+    o klienta. Serwis umo¿liwia symulowanie takiej rywalizacji i dziêki temu odkrywanie skutecznych
+    algorytmów sztucznej inteligencji, które bêd± podejmowa³y decyzje decyduj±ce o sukcesie
+    wykorzystuj±cej je firmy.\\
+
+    Innym przyk³adem zastosowania AI-Arena s± dzia³ania wojenne. Serwis mo¿e pomóæ w szukaniu
+    algorytmów, które bêd± potrafi³y adaptowaæ siê do ró¿nych warunków i w zale¿no¶ci od nich
+    sugerowaæ najlepsze strategie i taktyki w walce z przeciwnikiem.
 
 \chapter{Podobne platformy}
 
