@@ -6,7 +6,6 @@
 using namespace std;
 
 int main(){
-
     const int BOARD_SIZE = 5;
     string message, board = string(BOARD_SIZE, '0');
     string rcv, rcv2;
