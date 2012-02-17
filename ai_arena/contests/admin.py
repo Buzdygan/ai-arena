@@ -6,5 +6,4 @@ admin.site.register(Bot)
 admin.site.register(Contest)
 admin.site.register(MatchBotResult)
 admin.site.register(Match)
-admin.site.register(BotContestRanking)
 

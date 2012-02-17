@@ -25,3 +25,14 @@ def launch_single_match(game, bots):
 
     gearman_client = PickleClient(['localhost:4730'])
     gearman_client.submit_job('single_match', arguments, background=True)
+
+def launch_contest_match(game, bots, contest):
+    """
+        Launches contest match of given game
+        with given list of bots and contest
+    """
+
+    arguments = {'game': game, 'bots': bots, 'contest':contest}
+
+    gearman_client = PickleClient(['localhost:4730'])
+    gearman_client.submit_job('contest_match', arguments, background=True)

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from itertools import combinations
+from decimal import Decimal
 from ai_arena import settings
 
 class Game(models.Model):
@@ -15,6 +17,8 @@ class Game(models.Model):
             '/'.join([dirname, instance.name, filename])
 
     name = models.CharField(max_length=255)
+    min_players = models.IntegerField(default=2)
+    max_players = models.IntegerField(default=2)
     # File with rules of the Game
     rules_file = models.FileField(upload_to=path('game_rules'))
     # Executable with judge
@@ -46,6 +50,33 @@ class Bot(models.Model):
     bot_source_file = models.FileField(upload_to=path('game_bots_sources'))
     bot_lang = models.CharField(max_length=10, choices=settings.LANGUAGES)
 
+class Ranking(models.Model):
+    """
+        Ranking can be created for a given contest.
+        There are different types of rankings.
+        Basic type is TYPE_GROUP where every players
+        plays against each other.
+    """
+
+    date_updated = models.DateTimeField(null=True, blank=True)
+    TYPE_GROUP = 1
+    RANKING_TYPES = (
+            (TYPE_GROUP, 'Type group'),
+    )
+    type = models.IntegerField(choices=RANKING_TYPES)
+
+class BotRanking(models.Model):
+    """
+        Stores position and overall score of bot
+        in a given ranking
+    """
+
+    ranking = models.ForeignKey(Ranking)
+    bot = models.ForeignKey(Bot)
+    overall_score = models.DecimalField(max_digits=9, decimal_places=2)
+    position = models.IntegerField(null=True, blank=True)
+    matches_played = models.IntegerField(null=True, blank=True)
+
 class Contest(models.Model):
     """
         There are Matches played within the Contest
@@ -67,18 +98,49 @@ class Contest(models.Model):
 
     # Begin and End dates of the contest. Can be null, when
     # the contest has no deadlines.
-    begin_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    begin_date = models.DateTimeField(null=True, blank=True)
+    end_date = models.DateTimeField(null=True, blank=True)
 
-    # TODO There will be different types of contests
-    # For know just one
-    # Everyone plays with everyone
-#    TYPE_GROUP = 1
-#    CONTEST_TYPES = (
-#        (TYPE_GROUP, _('Type Group')),
-#    )
-#
-#    type = models.IntegerField(choice=CONTEST_TYPES)
+    ranking = models.ForeignKey(Ranking, null=True, blank=True)
+
+    def generate_group_ranking(self):
+
+        from contests.game_launcher import launch_contest_match
+
+        if not self.ranking:
+            self.ranking = Ranking(type=Ranking.TYPE_GROUP)
+            self.ranking.save()
+
+        match_size = self.game.min_players
+        played_matches = Match.objects.filter(ranked_match=True, contest=self, game=self.game)
+        played_matches = dict([(sorted([res.bot for res in match.players_results.all()], key=lambda x: x.id),
+                                 match.players_results.all()) for match in played_matches])
+
+        contestants = sorted(self.contestants.all(), key=lambda x: x.id)
+        contestants_ranks = dict([(bot, BotRanking(ranking=self.ranking, bot=bot, 
+                overall_score=Decimal('0.0'), matches_played=0)) for bot in contestants])
+
+        matches_to_play = combinations(contestants, match_size)
+        for match in matches_to_play:
+            if match not in played_matches:
+                print('launch_contest_match')
+                launch_contest_match(self.game, list(match), self)
+            else:
+                results = played_matches[match]
+                for res in results:
+                    rank = contestants_ranks[res.bot]
+                    rank.overall_score += res.score
+                    rank.matches_played += 1
+
+        prev_score = Decimal('-1.0')
+        pos = 0
+        for rank in sorted(contestants_ranks.values(), key = lambda x: x.overall_score, reverse=True):
+            if rank.overall_score != prev_score:
+                prev_score = rank.overall_score
+                pos += 1
+            rank.position = pos
+            rank.save()
+    
 
 class MatchBotResult(models.Model):
     """
@@ -90,7 +152,9 @@ class MatchBotResult(models.Model):
         return self.bot.name + ' results'
 
     score = models.DecimalField(max_digits=4, decimal_places=2)
+    # in miliseconds
     time_used = models.IntegerField(null=True, blank=True)
+    # in MB
     memory_used = models.IntegerField(null=True, blank=True)
     bot = models.ForeignKey(Bot)
 
@@ -151,13 +215,3 @@ class Match(models.Model):
 #        (STATUS_TIMEOUT, _('Timeout')),
 #        (STATUS_FAILURE, _('Failure')),
 #    )
-
-class BotContestRanking(models.Model):
-    """
-        Contains accumulated info from Bot's matches
-        in the given Contest.
-    """
-
-    bot = models.ForeignKey(Bot)
-    contest = models.ForeignKey(Contest)
-
