@@ -101,7 +101,7 @@ class Contest(models.Model):
     begin_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
 
-    ranking = models.ForeignKey(Ranking, null=True, blank=True)
+    ranking = models.ForeignKey(Ranking, null=True, blank=True, on_delete=models.SET_NULL)
 
     def generate_group_ranking(self):
 
@@ -113,24 +113,26 @@ class Contest(models.Model):
 
         match_size = self.game.min_players
         played_matches = Match.objects.filter(ranked_match=True, contest=self, game=self.game)
-        played_matches = dict([(sorted([res.bot for res in match.players_results.all()], key=lambda x: x.id),
-                                 match.players_results.all()) for match in played_matches])
+        matches_results = [match.players_results.all() for match in played_matches]
+        played_matches = [sorted(match.players_results.all().values_list('bot__id', flat=True)) for match in played_matches]
 
         contestants = sorted(self.contestants.all(), key=lambda x: x.id)
-        contestants_ranks = dict([(bot, BotRanking(ranking=self.ranking, bot=bot, 
-                overall_score=Decimal('0.0'), matches_played=0)) for bot in contestants])
+        contestants_ranks = dict([(bot, BotRanking.objects.get_or_create(ranking=self.ranking, bot=bot, 
+                overall_score=Decimal('0.0'), matches_played=0)[0]) for bot in contestants])
+        contestants = [c.id for c in contestants]
 
         matches_to_play = combinations(contestants, match_size)
         for match in matches_to_play:
-            if match not in played_matches:
+            if list(match) not in played_matches:
                 print('launch_contest_match')
-                launch_contest_match(self.game, list(match), self)
-            else:
-                results = played_matches[match]
-                for res in results:
-                    rank = contestants_ranks[res.bot]
-                    rank.overall_score += res.score
-                    rank.matches_played += 1
+                bots = [Bot.objects.get(id=bot_id) for bot_id in match]
+                launch_contest_match(self.game, bots, self)
+
+        for results in matches_results:
+            for res in results:
+                rank = contestants_ranks[res.bot]
+                rank.overall_score += res.score
+                rank.matches_played += 1
 
         prev_score = Decimal('-1.0')
         pos = 0
