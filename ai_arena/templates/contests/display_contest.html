@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p>Contest name: {{ contest.name }} </p>
+    {% if ranking_list %}
+    <p>
+        <table>
+            <tr>
+                <td> Position </td>
+                <td> Bot name </td> 
+                <td> Matches played </td>
+                <td> Score </td>
+            </tr>
+            {% for rank in ranking_list %}
+            <tr>
+                <td> {{ rank.position }} </td>
+                <td> {{ rank.bot.name }} </td>
+                <td> {{ rank.matches_played }} </td>
+                <td> {{ rank.overall_score }} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </p>
+    {% endif %}
+
+{% endblock %}

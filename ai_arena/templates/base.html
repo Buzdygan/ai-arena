@@ -13,14 +13,15 @@
                 <div class="container">
                     {% block topbar %}
                         <div class="row">
-                            <div class="span10">
+                            <div class="span11">
                             <ul class="nav">
                                 <li><a href="/">Home</a></li>
-                                <li><a href="/launch_match/">Launch Match</a></li>
+                                <li><a href="{% url launch_match %}">Launch Match</a></li>
                                 <li><a href="{% url match_results_list %}"> Results List </a></li>
-                                <li><a href="/new_game/">Create new game</a></li>
-                                <li><a href="/game_list/">Games List</a></li>
-                                <li><a href="/send_bot/">Send Bot</a></li>
+                                <li><a href="{% url contests_list %}"> Contests </a></li>
+                                <li><a href="{% url create_new_game %}">Create new game</a></li>
+                                <li><a href="{% url game_list %}">Games List</a></li>
+                                <li><a href="{% url send_bot_with_game %}">Send Bot</a></li>
                             </ul>
                         </div>
                             <div class="span6">
