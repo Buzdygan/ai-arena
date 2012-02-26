@@ -2,6 +2,7 @@ from django import forms
 from django.core.files.uploadedfile import SimpleUploadedFile
 from ai_arena.contests.models import Game, Bot
 from ai_arena import settings
+from django.contrib.admin.widgets import AdminDateWidget
 
 class vModelChoiceField(forms.ModelChoiceField):
     def label_from_instance(self, obj):
@@ -42,3 +43,14 @@ class SendBotWithGameForm(forms.Form):
     bot_name = forms.CharField(max_length=50)
     bot_source = forms.FileField()
     bot_language = forms.ChoiceField(choices = settings.LANGUAGES)
+
+
+class UpdateUserProfileForm(forms.Form):
+    photo = forms.ImageField()
+    about = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
+    interests = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
+    country = forms.CharField(max_length=50)
+    city = forms.CharField(max_length=50)
+    university = forms.CharField(max_length=100)
+    birthsday = forms.DateField(widget=AdminDateWidget())
+

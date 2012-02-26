@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="{{ MEDIA_URL }}bootstrap.css" />
         {% block css %} {% endblock %}
         <title> {% block title %} AI-Arena - test your AI skill {% endblock %} </title>
+        {% block head %} {% endblock %} 
     </head>
 
     <body>
@@ -24,7 +25,7 @@
                         </div>
                             <div class="span6">
                                 {% if user.is_authenticated %}
-                                    <font color="green"> Logged as {{ user.username }}.</font>
+                                <font color="green"> Logged as <a href="/profile/">{{ user.username }}</a>.</font>
                                     <a href="{% url django.contrib.auth.views.logout %}">Logout</a>
                                 {% else %}
                                     <font color="green"> Hello guest. Please log in. </font>

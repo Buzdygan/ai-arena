@@ -15,12 +15,18 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/jsi18n', 'django.views.i18n.javascript_catalog'),
 
     url(r'^$', 'contests.views.index'),
 
-    url(r'^accounts/', include('registration.urls')),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
-   
+    url(r'^profile/$', 'contests.user_views.show_profile'),
+    url(r'^profile/(?P<login>\w+)/$','contests.user_views.show_profile'),
+    url(r'^profile/(?P<login>\w+)/contests/$', 'contests.user_views.show_contests'),
+    url(r'^profile/(?P<login>\w+)/news/$', 'contests.user_views.show_news'),
+    url(r'^profile_edit/$', 'contests.user_views.edit_profile'),
+
     url(r'^new_game/$', 'contests.game_views.create_new_game'),
     url(r'^game_list/$', 'contests.game_views.game_list'),
     url(r'^game_details/(?P<game_id>\d+)/$', 'contests.game_views.game_details'),

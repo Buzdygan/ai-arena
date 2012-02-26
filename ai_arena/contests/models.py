@@ -208,10 +208,39 @@ class Match(models.Model):
 #    STATUS_FAILURE = 3
     
     # possible statuses of the match result
-    # the list will change in time
+    #o the list will change in time
 #    EXECUTION_STATUSES = (
 #        (STATUS_NOT_PLAYED, _('Not Played')),
 #        (STATUS_OK, _('Ok')),
 #        (STATUS_TIMEOUT, _('Timeout')),
 #        (STATUS_FAILURE, _('Failure')),
 #    )
+
+class UserProfile(models.Model):
+    
+    # method generating path for uploaded files
+    path = lambda dirname: lambda instance, filename: \
+            '/'.join([dirname, instance.user.username, filename])
+
+    user = models.ForeignKey(User, unique=True)
+    photo = models.ImageField(upload_to=path('profiles/photos'))
+    
+    about = models.TextField(null=True)
+    country = models.CharField(max_length  = 50, null=True)
+    city = models.CharField(max_length = 50, null=True)
+    university = models.CharField(max_length = 100, null=True)
+    birthsday = models.DateField(null=True)
+    last_login = models.DateField(auto_now=True)
+    interests = models.TextField(null=True)
+
+    def __unicode__(self):
+        return self.user.username 
+    
+
+class UserNews(models.Model):
+    user = models.ForeignKey(User)
+    date = models.DateField(auto_now_add=True)
+    content = models.TextField()
+
+    def __unicode__(self):
+        return self.content
