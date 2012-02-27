@@ -78,9 +78,18 @@ def game_details(request, game_id):
     if game is None:
         raise Exception("In game_details: Wrong game_id given")
 
+    rules = game.rules_file
+    line = rules.readline()
+    game_details = []
+    while line:
+        game_details.append(line)
+        line = rules.readline()
+
+
     return render_to_response('gaming/game_details.html',
             {
                 'game': game,
+                'game_details':game_details,
             },
             context_instance=RequestContext(request))
 

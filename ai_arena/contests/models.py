@@ -241,7 +241,7 @@ class UserProfile(models.Model):
 
 class UserNews(models.Model):
     user = models.ForeignKey(User)
-    date = models.DateField(auto_now_add=True)
+    date_set = models.DateField(auto_now_add=True)
     content = models.TextField()
 
     def __unicode__(self):
