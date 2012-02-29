@@ -29,6 +29,7 @@ def show_match_result(request, match_id):
 
     return render_to_response('results/match_result.html',
             {
+                'match':match,
                 'game':match.game,
                 'players_results':players_results,
             },
