@@ -56,9 +56,10 @@ def show_contests(request, login):
 
     contests = []
     for c in Contest.objects.all():
-        for u in c.contestants:
-            if login == u.username:
+        for bot in c.contestants.all():
+            if login == bot.owner.username:
                 contests.append(c)
+                break
 
     return render_to_response('profile/show_contests.html',
             {

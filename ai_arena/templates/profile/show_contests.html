@@ -2,16 +2,14 @@
 
 {% block main_panel %}
     <div id='main_panel'>
-    {% if news %}
-        <table id='news_table'>
-        {% for n in news %}
-            <tr class='news_row'>
-                <td class='news_cont'>{{ n.content }}</td>
-                <td class='news_date'>{{ n.date_set }}</td>
-            </tr>
-        {% endfor %}
-        <table> 
-    {% endif %}
+        {% if contests %}
+        Contests:
+            <ul>
+                {% for contest in contests %}
+                    <li><a href="{% url show_contest contest.id %}">{{ contest.name }}</a></li>
+                {% endfor %}
+            <ul>
+        {% endif %}
     </div>
 {% endblock %}
 
