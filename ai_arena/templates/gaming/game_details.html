@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 
-{% block content %}
-    Game details of game {{ game.id }}
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL}}game_details.css" />
+{% endblock %}
 
+{% block content %}
     <div><a href="/send_bot/{{ game.id }}/">Send bot for this game</a></div> 
     <div><a href="/game_details/{{game.id}}/source/">Show source of the judge</a></div>
 
+    <div id="description">
+    {% for line in game_details %}
+        {{ line }} <br>
+    {% endfor %}
+    </div>
 {% endblock %}

@@ -8,11 +8,16 @@
     float: left;
 }
 
+#main_panel{
+    float: left;
+}
+
 .first_column{
     width: 100px;
     font-weight:bold;
 }
 
 .second_column{
-
+    width: 500px;
 }
+
