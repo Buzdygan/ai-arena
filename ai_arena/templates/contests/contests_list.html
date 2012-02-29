@@ -1,9 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<ul>
+<table>
+    <tr>
+        <td> Contest name </td>
+        <td> Game name </td>
+        <td> Start date </td>
+        <td> End date </td>
+    </tr>
     {% for contest in contests %}
-        <li><a href="{% url show_contest contest.id %}">{{ contest.name }}</a></li>
+        <tr>
+            <td><a href="{% url show_contest contest.id %}">{{ contest.name }}</a></td>
+            <td><a href="{% url game_details contest.game.id %}">{{ contest.game.name }}</a></td>
+            <td>{{contest.begin_date}}</td>
+            <td>{{contest.end_date}}</td>
+        </tr>
     {% endfor %}
-<ul>
+</table>
 {% endblock %}

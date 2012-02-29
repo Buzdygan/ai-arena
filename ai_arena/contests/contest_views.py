@@ -14,7 +14,6 @@ def contests_list(request):
         )
 
 def show_contest(request, contest_id):
-    print(request)
     contest = Contest.objects.get(id=contest_id)
     if not contest.ranking:
         contest.generate_group_ranking()
