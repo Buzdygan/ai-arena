@@ -35,6 +35,10 @@ def readout(pipe, timeout=0):
         mes = mes + pipe.read(1)
     return mes[:-4]
 
+# A convenience function for readability purposes
+def log(log_list, log_message):
+    log_list.append(log_message)
+
 def play(judge_file, players, memory_limit, time_limit):
     """
         judge_file - file containing judge program
@@ -43,6 +47,7 @@ def play(judge_file, players, memory_limit, time_limit):
         time_limit (in sec) - maximum time limit for one bot
     """
     players_num = len(players)
+    supervisor_log = []
 
     to_execute = "%s" % judge_file
     jp = subprocess.Popen(
@@ -52,7 +57,8 @@ def play(judge_file, players, memory_limit, time_limit):
 #            stderr=subprocess.PIPE,
             close_fds = True,
             )
-    
+    log(supervisor_log, "Started judge succesfully\n")
+
     bots_process_list = []
     for bot_program in players:
         arg_to_execute = "%s" % (bot_program,)
@@ -64,7 +70,8 @@ def play(judge_file, players, memory_limit, time_limit):
                 close_fds = True,
                 )
         bots_process_list.append(bot_process)
-    
+    log(supervisor_log, "Started all bots succesfully\n")
+
     times = []
     memory = []
     for i in range(players_num):
@@ -74,7 +81,8 @@ def play(judge_file, players, memory_limit, time_limit):
     bots = []
     message = ''
     
-    results = {'exit_status' : 0, 'times' : times, 'memory' : memory}
+    results = {'exit_status' : 0, 'times' : times, 'memory' : memory, 
+            'supervisor_log' : supervisor_log}
     
     game_in_progress = True
 
@@ -129,5 +137,5 @@ def play(judge_file, players, memory_limit, time_limit):
                     break
     jp.kill()
 
-    print(results)
+    results['supervisor_log'] = supervisor_log
     return results
