@@ -1,24 +1,26 @@
 \contentsline {chapter}{Wprowadzenie}{5}
 \contentsline {chapter}{\numberline {1}Podstawowe poj\k ecia}{7}
 \contentsline {section}{\numberline {1.1}Gra}{7}
-\contentsline {section}{\numberline {1.2}Program Walcz\k acy - Bot}{7}
+\contentsline {section}{\numberline {1.2}Konkurs}{7}
+\contentsline {section}{\numberline {1.3}Program Walcz\k acy - Bot}{7}
 \contentsline {chapter}{\numberline {2}Zastosowania w nauce i biznesie}{9}
 \contentsline {chapter}{\numberline {3}Podobne platformy}{11}
 \contentsline {section}{\numberline {3.1}Top Coder}{11}
 \contentsline {section}{\numberline {3.2}Ai Challenge}{11}
 \contentsline {section}{\numberline {3.3}SPOJ}{11}
+\contentsline {section}{\numberline {3.4}Tabela por\'ownuj\k aca serwisy}{11}
 \contentsline {chapter}{\numberline {4}Use cases}{13}
 \contentsline {chapter}{\numberline {5}Metodyka Scrum}{17}
 \contentsline {chapter}{\numberline {6}Architektura systemu}{19}
 \contentsline {section}{\numberline {6.1}Nadzorca}{19}
-\contentsline {section}{\numberline {6.2}Scheduler}{19}
-\contentsline {section}{\numberline {6.3}Baza danych}{19}
-\contentsline {section}{\numberline {6.4}API uzytkownika}{19}
-\contentsline {chapter}{\numberline {7}Dokumentacja uzytkowa i opis implementacji}{21}
-\contentsline {chapter}{\numberline {8}Podsumowanie}{23}
-\contentsline {chapter}{\numberline {9}Podzia{\l } prac}{25}
-\contentsline {chapter}{\numberline {10}Spis p{\l }yty}{27}
-\contentsline {chapter}{\numberline {A}Przykladowa gra}{29}
-\contentsline {chapter}{\numberline {B}Przykladowe programy}{31}
-\contentsline {chapter}{\numberline {C}Przebieg przykladowego turnieju}{33}
-\contentsline {chapter}{Bibliografia}{35}
+\contentsline {section}{\numberline {6.2}Scheduler}{20}
+\contentsline {section}{\numberline {6.3}Serwis webowy}{20}
+\contentsline {section}{\numberline {6.4}Baza danych}{21}
+\contentsline {chapter}{\numberline {7}Dokumentacja uzytkowa i opis implementacji}{23}
+\contentsline {chapter}{\numberline {8}Podsumowanie}{25}
+\contentsline {chapter}{\numberline {9}Podzia{\l } prac}{27}
+\contentsline {chapter}{\numberline {10}Spis p{\l }yty}{29}
+\contentsline {chapter}{\numberline {A}Przykladowa gra}{31}
+\contentsline {chapter}{\numberline {B}Przykladowe programy}{33}
+\contentsline {chapter}{\numberline {C}Przebieg przykladowego turnieju}{35}
+\contentsline {chapter}{Bibliografia}{37}

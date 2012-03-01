@@ -2,6 +2,7 @@
 
 \usepackage{polski}
 \usepackage[latin2]{inputenc}
+\usepackage{graphicx}
 
 \author{Nieistniej±cy Nichilista}
 \nralbumu{123456}
@@ -65,6 +66,14 @@ Praca sk³ada siê z piêciu rozdzia³ów. Pierwszy zawiera opis architektury systemu
     \item Rozstrzygaæ czy gra siê zakoñczy³a i przydzielaæ punkty zwyciêstwa graczom.
     \end{itemize}
 
+\section{Konkurs}
+
+    Konkurs mo¿e mieæ okre¶lon± datê zakoñczenia, b±d¼ byæ tzw konkursem sta³ym, w którym nie ma ostatecznego
+    terminu wysy³ania rozwi±zañ. Dla ka¿dego konkursu tworzony jest ranking, b±d¼ drabinka rozgrywek.
+    Okre¶laj± one kolejno¶æ botów, w szczególno¶ci zwyciêzcê, b±d¼ aktualnego lidera konkursu.
+    W przypadku konkursu sta³ego istnieje ranking, który jest posortowany po sumie zdobytych przez bota
+    punktów w meczach, przy czym ka¿dy bot powinien mieæ tê sam± liczbê rozegranych meczy.
+
 \section{Program Walcz±cy - Bot}
 
     Jest to program napisany w jednym z obs³ugiwanych przez jêzyk serwisów.
@@ -72,6 +81,7 @@ Praca sk³ada siê z piêciu rozdzia³ów. Pierwszy zawiera opis architektury systemu
     Uczestniczy w rozgrywkach (Meczach) z innymi botami przypisanymi do tej Gry.
     Ma za zadanie przetwarzaæ informacje o dotychczasowym przebiegu rozgrywki
     i produkowaæ kolejne posuniêcia, zgodne z regu³ami Gry.
+
     
 
 
@@ -120,11 +130,38 @@ Obecnie istniej± serwisy internetowe podobne do Ai-Arena. Oto kilka z nich:
     ok 2 konkursy rocznie. Ka¿dy konkurs ma okre¶lony czas trwania i nie mo¿na w nim
     uczestniczyæ po jego zakoñczeniu.
 
+\section{SIO}
+
+    Projekt od lat wykorzystywany do organizowania konkursów algorytmicznych, w szczególno¶ci
+    polskiej Olimpiady Informatycznej, ale te¿ Miêdzynarodowej Olimpiady Informatycznej.
+    Jest to framework, który mo¿na wykorzystywaæ równie¿ w wersji lokalnej, nie tylko
+    jako serwis internetowy. 
+
 \section{SPOJ}
 
     Serwis zawieraj±cy du¿± bazê zadañ algorytmicznych dostêpnych do rozwi±zywania u¿ytkownikom.
     Zadania nie maj± okre¶lonego terminu rozwi±zywania. Istnieje ranking bior±cy pod uwagê
     liczbê wszystkich rozwi±zanych przez u¿ytkowników zadañ.
+
+\section{MAIN}
+    
+    Posiada du¿± bazê zadañ z olimpiad informatycznych, ale tak¿e kursy
+    umo¿liwiaj±ce pog³êbienie wiedzy algorytmicznej.
+
+
+\section{Tabela porównuj±ca serwisy}
+
+\footnotesize
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+       & Top Coder & Ai Challenge & SPOJ & AI-Arena \\ \hline
+Tematyka & algorytmy & programy walcz±ce & algorytmika & programy walcz±ce \\
+& problemy optymalizacyjne & & & \\ \hline
+Typ konkursów & okresowe & okresowe & sta³e/okresowe & sta³e/okresowe \\ \hline
+Ró¿norodno¶æ & regularne i czêste & konkurs co pó³ roku & du¿a baza zadañ & baza gier modyfikowana \\
+ & konkursy w ró¿nych & & & przez u¿ytkowników \\
+ & kategoriach & & & \\ \hline
+\end{tabular}
 
 
 \chapter{Use cases}
@@ -293,17 +330,77 @@ Obecnie istniej± serwisy internetowe podobne do Ai-Arena. Oto kilka z nich:
 
 \chapter{Architektura systemu}
 
+Na serwis AI-Arena sk³adaj± siê trzy wartwy: nadzorcy, schedulera i serwisu webowego.
+
 \section{Nadzorca}
-Warstwa nadzorcy jest odpowiedzialna za uruchamienie rozgrywek pomiêdzy wybranymi graczami, zbieranie informacji o ich wynikach i przekazywnie ich do warstwy schedulera. Nadzorca jest skryptem napisanm w pythonie, którego najwa¿niejsz± czê¶ci± jest metoda play. Metoda ta przyjmuje jako argumenty uruchamialne pliki sêdziego i programów graj±cych, oraz limity czasowy i pamiêciowy dla ka¿dego programu graj±cego. Nastêpnie metoda play przeprowadza odpowiedni± rozgrywkê, zwracaj±c jako wynik ci±gi liczb oznaczaj±ce przydzielone przez sedziego punkty za rozgrywkê, wykorzystane przez programy czasy i pamiêæ RAM.
+Nadzorca jest j±drem serwisu AI-Arena.
+Warstwa nadzorcy jest odpowiedzialna za uruchamianie rozgrywek pomiêdzy wybranymi graczami,
+zbieranie informacji o ich wynikach i przekazywnie ich do warstwy schedulera.
+Nadzorca jest skryptem napisanym w pythonie, którego najwa¿niejsz± czê¶ci± jest metoda play.
+Metoda ta przyjmuje jako argumenty uruchamialne pliki sêdziego i programów graj±cych, oraz limity czasowy i pamiêciowy dla ka¿dego programu graj±cego.
+Nastêpnie metoda play przeprowadza odpowiedni± rozgrywkê, zwracaj±c jako wynik s³ownik zawieraj±cy:
+\begin{itemize}
+    \item Ci±g liczb oznaczaj±cy przydzielone przez sedziego punkty za rozgrywkê
+    \item Informacje na temat przebiegu rozgrywki
+    \item Czas jaki zu¿y³y programy walcz±ce
+    \item Pamiêæ RAM jak± wykorzystywa³y programy walcz±ce
+\end{itemize}
+
+Rozgrywka zaczyna siê przez uruchomienie programów walcz±cych, oraz sêdziego, kontroluj±cego przebieg rozgrywki.
+Komunikacja miêdzy sêdzi± a poszczególnymi programami odbywa siê za po¶rednictwem nadzorcy, który odczytuje
+komunikaty ze standardowego wyj¶cia programów i wypisuje informacje zwrotne na ich standardowe wej¶cie.
+Format komunikatów od sêdziego i botów powinien byæ wyspecyfikowany dla ka¿dej gry, przy czym powinien on
+byæ zgodny z poni¿szym protoko³em:\\
+\begin{itemize}
+    \item Bot wysy³a komunikaty TYLKO do sêdziego (za po¶rednictwem Nadzorcy)
+    \item Ka¿dy komunikat od Sêdziego musi byæ potwierdzony komunikatem zwrotnym od Bota.
+    \item Komunikaty wysy³ane przez sêdziego maj± nastêpuj±cy format: zaczynaj± siê od nawiasów kwadratowych,
+          w ktorych znajduje siê lista garczy oddzielona przecinkami. Nastêpnie znajduje siê wiadomo¶æ,
+          która zostanie przekazana odpowiednim botom. Komunikat musi koñczy siê ci±giem '<<<' i znakiem
+          nowej linii, n.p: '[1,2,3,4,5]INIT<<<newline'.
+    \item Sêdzia otrzymuje komunikaty zwrotne od botów w takiej kolejno¶ci w jakiej zostali wylistowani.
+    \item Zak³ada siê ¿e ci±g '<<<newline' koñczy komunikat. Wys³anie komunikatu o nieprawid³owym formacie skutkuje zakoñczeniem rozgrywki.
+    \item Komunikaty od nadzorcy do botów i do sêdziego równie¿ koñcz± siê ci±giem znaków '<<<newline'.
+          Dziêki temu mo¿na przesy³aæ komunikaty wielowierszowe.
+    \item Je¶li Sêdzia chce wys³aæ komunikat do wszystkich mo¿e zacz±æ ALBO od wylistowania wszystkich graczy,
+          ALBO u¿yæ skrótu notacyjnego: '[0]' - to jeszcze nie dzia³a, kewstia dopisania jednego if'a
+    \item Ponadto, je¶li Sêdzia stwierdzi³, ¿e gra siê zakoñczy³a i chce poinformowaæ wszystkich o tym,
+          ¿e nast±pi³ koniec gry wysy³a do Nadzorcy komunikat o tre¶ci "[0]END<<<newline".
+          Nastêpnie powinien wys³aæ komunikat zawieraj±cy punktacjê dla wszystkich graczy w postaci: '[score1, score2, ... ]<<<newline'.
+    \item Je¶li sêdzia chce zakoñczyæ dzia³anie którego¶ z graczy nale¿y wys³aæ do niego wiadomo¶æ KILL (np. "[4]KILL<<<newline").
+          Mo¿na te¿ w ten sposób zabiæ wiêksz± liczbê graczy lub nawet wszystkich ("[0]KILL<<<newline")
+    \item Je¶li sêdzia wy¶le komunikat do bota który odszed³ w pokoju, dostanie komunikat zwrotny '\_DEAD\_<<<newline'.
+          Boty powinny unikaæ wysy³ania tego komunikatu, gdy¿ mog± zostaæ uznane za martwe.
+\end{itemize}
+
 
 \section{Scheduler}
-Warstwa schedulera jest odpowiedzialna za ustalanie jakie rozgrywki w turnieju maj± siê odbyæ, zlecanie poszczególnych rozgrywek nadzorcy i zapisywanie otrzymanych od nadzorcy wyników w bazie. Do realizacji warstwy nadzorcy u¿ywany jest program Gearmand0.26.
+Warstwa schedulera ³±czy czê¶æ webow± serwisu z nadzorc±. W ten sposób obie czê¶ci funkcjonuj± niezale¿nie
+i mog± byæ u¿ywane jako osobne produkty. Scheduler jest kolejk± zadañ, w której trzymane s± zlecenia
+rozegrania meczy. Zlecenia te s± przekazywane nadzorcy, a nastêpnie wyniki rozgrywek zwracane przez
+nadzorcê s± zapisywane w bazie.
+Do realizacji warstwy nadzorcy u¿ywany jest program Gearmand0.26.
+
+\section{Serwis webowy}
+U¿ytkownik komunikuje siê z systemem poprzez interfejs webowy, zaimplementowany w Django.
+Interfejs udostêpnie nastêpuj±ce akcje:
+\begin{itemize}
+    \item Za³o¿enie konta
+    \item Dodanie nowej gry do serwisu
+    \item Wys³anie w³asnego programu walcz±cego w wybran± grê dostêpn± w serwisie
+    \item Uruchomienie testowego meczu, miêdzy w³asnym programem, a innym wybranym programem,
+          zg³oszonym do tej samej gry.
+    \item Zg³oszenie programu walcz±cego do konkursu, gdzie bêdzie on rywalizowa³ z pozosta³ymi
+          zg³oszonymi programami.
+    \item Przegl±danie zapisów rozgrywek.
+    \item Przegl±danie aktualnego rankingu konkursu.
+    \item Zapoznanie siê z zasadami wybranego konkursu/gry
+    \item Obejrzenie kodu ¼ród³owego programu sêdziego, dla danej gry.
+\end{itemize}
 
 \section{Baza danych}
-
-
-\section{API uzytkownika}
-U¿ytkownik komunikuje siê z systemem poprzez interfejs webowy, zaimplementowany w Django. Interfejs pozwala na przesy³anie plików swoich programów graj±cych... 
+Za obs³ugê bazy danych odpowiedzialny jest framework Django. Domy¶ln± baz±, na której dzia³a serwis
+jest PostgreSQL, ale nie jest to wymagane.
 
 \chapter{Dokumentacja uzytkowa i opis implementacji}
 
