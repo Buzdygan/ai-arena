@@ -5,12 +5,23 @@
 {% endblock %}
 
 {% block content %}
-    <div><a href="/send_bot/{{ game.id }}/">Send bot for this game</a></div> 
-    <div><a href="/game_details/{{game.id}}/source/">Show source of the judge</a></div>
+    <div id="game_menu">
+        <div><a href="/send_bot/{{ game.id }}/">Send bot for this game</a></div> 
+        <div><a href="/game_details/{{game.id}}/source/">Show source of the judge</a></div>
+        <div><a href="/add_comment/{{game.id}}/">Add comment</a></div>
+    </div>
 
-    <div id="description">
-    {% for line in game_details %}
-        {{ line }} <br>
-    {% endfor %}
+    <div id='main_panel'>
+        <div id="description">
+        {% for line in game_details %}
+            {{ line }} <br>
+        {% endfor %}
+        </div>
+        
+        <div id='comments'>
+            {% for comment in comments %}
+                <div class='comment'>{{ comment }}</div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

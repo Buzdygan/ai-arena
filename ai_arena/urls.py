@@ -32,6 +32,8 @@ urlpatterns = patterns('',
     url(r'^game_list/$', 'contests.game_views.game_list', name='game_list'),
     url(r'^game_details/(?P<game_id>\d+)/$', 'contests.game_views.game_details', name='game_details'),
     url(r'^game_details/(?P<game_id>\d+)/source/$', 'contests.game_views.show_source'),
+
+    url(r'^add_comment/(?P<game_id>\d+)/$', 'contests.comment_views.add_comment'),
     
     url(r'^send_bot/$', 'contests.bot_views.send_bot_with_game', name='send_bot_with_game'),
     url(r'^send_bot/(?P<game_id>\d+)/$', 'contests.bot_views.send_bot'),

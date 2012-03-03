@@ -54,3 +54,5 @@ class UpdateUserProfileForm(forms.Form):
     university = forms.CharField(max_length=100)
     birthsday = forms.DateField(widget=AdminDateWidget())
 
+class AddGameCommentForm(forms.Form):
+    comment = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))

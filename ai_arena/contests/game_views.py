@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from ai_arena import settings
 from ai_arena.contests.forms import NewGameForm
-from ai_arena.contests.models import Game
+from ai_arena.contests.models import Game, GameComment
 from ai_arena.contests.compilation import compile
 
 @login_required
@@ -66,6 +66,15 @@ def game_list(request):
             },
             context_instance=RequestContext(request))
 
+def parse_game_details(game):
+    rules = game.rules_file
+    line = rules.readline()
+    game_details = []
+    while line:
+        game_details.append(line)
+        line = rules.readline()
+    return game_details
+
 def game_details(request, game_id):
     """
         Displays detailed information about game with id equal to game_id
@@ -79,18 +88,13 @@ def game_details(request, game_id):
     if game is None:
         raise Exception("In game_details: Wrong game_id given")
 
-    rules = game.rules_file
-    line = rules.readline()
-    game_details = []
-    while line:
-        game_details.append(line)
-        line = rules.readline()
-
-
+    comments = GameComment.objects.filter(game=game)
+    print(comments)
     return render_to_response('gaming/game_details.html',
             {
                 'game': game,
-                'game_details':game_details,
+                'game_details': parse_game_details(game),
+                'comments': comments,
             },
             context_instance=RequestContext(request))
 
@@ -210,9 +214,6 @@ def show_source(request, game_id):
     #find strings
 
     #find procedure names
-
-            game.save()
-            game.save()
 
     return render_to_response('gaming/show_source.html',
             {

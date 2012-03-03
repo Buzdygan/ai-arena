@@ -4,3 +4,21 @@
     border-radius: 15px;
     background-color: #FAF8CC;
 }
+
+#game_menu{
+    width: 150px;
+    float: left;
+    padding: 15px;
+    margin: 15px;
+}
+
+#main_panel{
+    float: left;
+    width: 60%;
+    margin: 15px;
+}
+
+.comment{
+    background-color: #F0F0F0;
+    margin: 2px;
+}
