@@ -25,6 +25,8 @@ class Game(models.Model):
     judge_bin_file = models.FileField(upload_to=path('game_judges_binaries'))
     judge_source_file = models.FileField(upload_to=path('game_judges_sources'))
     judge_lang = models.CharField(max_length=10, choices=settings.LANGUAGES)
+    moderators = models.ManyToManyField(User, related_name='mod_games',
+            null=True, blank=True)
 
 
 class Bot(models.Model):
@@ -102,6 +104,8 @@ class Contest(models.Model):
     end_date = models.DateTimeField(null=True, blank=True)
 
     ranking = models.ForeignKey(Ranking, null=True, blank=True, on_delete=models.SET_NULL)
+    moderators = models.ManyToManyField(User, related_name='mod_contests',
+            null=True, blank=True)
 
     def generate_group_ranking(self):
 
@@ -246,3 +250,22 @@ class UserNews(models.Model):
 
     def __unicode__(self):
         return self.content
+
+class GameComment(models.Model):
+    user = models.ForeignKey(User)
+    game = models.ForeignKey(Game)
+    date_set = models.DateField(auto_now_add=True)
+    content = models.TextField()
+
+    def __unicode__(self):
+        return self.content
+
+class ContestComment(models.Model):
+    user = models.ForeignKey(User)
+    contest = models.ForeignKey(Contest)
+    date_set = models.DateField(auto_now_add=True)
+    content = models.TextField()
+
+    def __unicode__(self):
+        return self.content
+

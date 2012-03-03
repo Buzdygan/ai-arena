@@ -28,7 +28,8 @@ def create_new_game(request):
             game.judge_source_file = request.FILES['game_judge']
             game.judge_lang = request.POST['judge_language']
             game.save()
-            
+            game.moderators.add(request.user)
+
             # Compile source file to directory with source file
             src = settings.MEDIA_ROOT + game.judge_source_file.name
             target = settings.MEDIA_ROOT + game.judge_source_file.name + '.bin' 
@@ -210,9 +211,13 @@ def show_source(request, game_id):
 
     #find procedure names
 
+            game.save()
+            game.save()
 
     return render_to_response('gaming/show_source.html',
             {
                 'source':source,
             },
             context_instance=RequestContext(request))
+
+        
