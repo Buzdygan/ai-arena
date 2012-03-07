@@ -2,6 +2,7 @@
 
 {% block content %}
     <p>Contest name: {{ contest.name }} </p>
+    <p><a href="{% url add_contestant contest.id %}"> Add contestant </a></p>
     {% if ranking_list %}
     <p>
         <table>
