@@ -20,7 +20,18 @@
         
         <div id='comments'>
             {% for comment in comments %}
-                <div class='comment'>{{ comment }}</div>
+            <div class='comment'>
+                <div class='photo'> 
+                {% if request.user.get_profile %}
+                    <img src='{{ request.user.get_profile.photo }}' class='img_avatar' />
+                {% else %}
+                    <img src='{{ MEDIA_URL }}profiles/photos/default_avatar.jpg' class='img_avatar'/>
+                {% endif %}    
+            </div>
+                <div class='comment_date'>data komentarza</div>
+                <div class='comment_options'>Edycja/usuniecie</div>
+                <div class='comment_content'>{{ comment }}</div>
+            </div>
             {% endfor %}
         </div>
     </div>

@@ -18,7 +18,28 @@
     margin: 15px;
 }
 
+.img_avatar{
+    height: 100px;
+    width: 100px;
+}
+
 .comment{
     background-color: #F0F0F0;
     margin: 2px;
+}
+
+.photo{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    top: 10px;
+    left: 10px;
+    display: inline-block;
+}
+
+.comment_date{
+    position: relative;
+    top: 10px;
+    left: 130px;
+    display: inline-block;
 }
