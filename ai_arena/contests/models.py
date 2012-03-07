@@ -254,7 +254,7 @@ class UserNews(models.Model):
 class GameComment(models.Model):
     user = models.ForeignKey(User)
     game = models.ForeignKey(Game)
-    date_set = models.DateField(auto_now_add=True)
+    date_set = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
 
     def __unicode__(self):
@@ -263,7 +263,7 @@ class GameComment(models.Model):
 class ContestComment(models.Model):
     user = models.ForeignKey(User)
     contest = models.ForeignKey(Contest)
-    date_set = models.DateField(auto_now_add=True)
+    date_set = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
 
     def __unicode__(self):

@@ -18,28 +18,56 @@
     margin: 15px;
 }
 
-.img_avatar{
-    height: 100px;
-    width: 100px;
+#error_msg{
+    color: #FF0000;
+}
+
+table, table th, table td{
+    padding: 2px 2px 2px 2px;
+    border: 0px;
+    margin: 2px;
 }
 
 .comment{
-    background-color: #F0F0F0;
+    background-color: #F3F3F3;
     margin: 2px;
 }
 
 .photo{
     width: 100px;
+}
+
+.img_avatar{
     height: 100px;
-    position: relative;
-    top: 10px;
-    left: 10px;
-    display: inline-block;
+    width: 100px;
+}
+
+.comment_all{
+    padding-right: 2px;
+    margin-right: 2px;
+}
+
+.comment_info_bar{
+    border-bottom: 1px solid gray;
 }
 
 .comment_date{
-    position: relative;
-    top: 10px;
-    left: 130px;
-    display: inline-block;
+    color: #888888;
+}
+
+.comment_options{
+    text-align: right;
+    padding-right: 20px;
+}
+
+.comment_content{
+
+}
+
+.comment_username{
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    font-family: "Comic Sans", Comic Sans MS, cursive;
+    color: #800080;
 }

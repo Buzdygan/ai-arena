@@ -12,6 +12,10 @@
     </div>
 
     <div id='main_panel'>
+        {% if error_msg %}
+            <h1 id='error_msg'> {{ error_msg }} </h1>
+        {% endif %}
+
         <div id="description">
         {% for line in game_details %}
             {{ line }} <br>
@@ -20,18 +24,46 @@
         
         <div id='comments'>
             {% for comment in comments %}
-            <div class='comment'>
-                <div class='photo'> 
-                {% if request.user.get_profile %}
-                    <img src='{{ request.user.get_profile.photo }}' class='img_avatar' />
-                {% else %}
-                    <img src='{{ MEDIA_URL }}profiles/photos/default_avatar.jpg' class='img_avatar'/>
-                {% endif %}    
-            </div>
-                <div class='comment_date'>data komentarza</div>
-                <div class='comment_options'>Edycja/usuniecie</div>
-                <div class='comment_content'>{{ comment }}</div>
-            </div>
+            <table class='comment'>
+                <tr>
+                    <td class='photo'>
+                        <table>
+                            <tr><td>
+                            {% if request.user.get_profile %}
+                                <img src='{{ request.user.get_profile.photo }}' class='img_avatar' />
+                            {% else %}
+                                <img src='{{ MEDIA_URL }}profiles/photos/default_avatar.jpg' class='img_avatar'/>
+                            {% endif %}
+                            </td></tr>
+
+                            <tr><td class='comment_username'>
+                                {{ comment.user.username }} 
+                            </td></tr>
+                        </table>
+                    </td>
+
+                    <td>
+                    <table class='comment_all'>
+                        <tr class='comment_info_bar'>
+                            <td class='comment_date'>
+                                This post was submitted {{ comment.date_set }}
+                            </td>
+                            <td class='comment_options'>
+                                {% if user.is_staff or user.username == comment.user.username or user in moderators %}
+                                Edit | 
+                                <a href='/game_details/{{ game.id }}/delete_comment/{{ comment.id }}/'>Delete</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class='comment_content'>
+                                {{ comment }}
+                            </td>
+                        </tr>
+                    </table>
+                    </td>
+                </tr>
+            </table>
             {% endfor %}
         </div>
     </div>

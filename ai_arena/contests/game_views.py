@@ -75,7 +75,7 @@ def parse_game_details(game):
         line = rules.readline()
     return game_details
 
-def game_details(request, game_id):
+def game_details(request, game_id, error_msg=None):
     """
         Displays detailed information about game with id equal to game_id
         If game_id is not given or there is no Game object with id equal to game_id
@@ -95,6 +95,8 @@ def game_details(request, game_id):
                 'game': game,
                 'game_details': parse_game_details(game),
                 'comments': comments,
+                'moderators': game.moderators.all(),
+                'error_msg': error_msg,
             },
             context_instance=RequestContext(request))
 
