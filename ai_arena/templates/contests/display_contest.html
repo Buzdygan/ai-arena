@@ -1,8 +1,13 @@
 {% extends 'base.html' %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ MEDIA_URL }}game_details.css" />
+{% endblock %}
+
 {% block content %}
     <p>Contest name: {{ contest.name }} </p>
     <p><a href="{% url add_contestant contest.id %}"> Add contestant </a></p>
+    <p><a href="/contests/add_comment/{{ contest.id }}"> Add comment </a></p>
     {% if ranking_list %}
     <p>
         <table>
@@ -25,5 +30,7 @@
         </table>
     </p>
     {% endif %}
+    
+    {% include "gaming/comments.html" %}
 
 {% endblock %}

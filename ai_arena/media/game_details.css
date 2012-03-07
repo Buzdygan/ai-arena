@@ -22,7 +22,7 @@
     color: #FF0000;
 }
 
-table, table th, table td{
+.comment, .comment td{
     padding: 2px 2px 2px 2px;
     border: 0px;
     margin: 2px;

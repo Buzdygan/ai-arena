@@ -96,6 +96,7 @@ def game_details(request, game_id, error_msg=None):
                 'game_details': parse_game_details(game),
                 'comments': comments,
                 'moderators': game.moderators.all(),
+                'is_game_template': True,
                 'error_msg': error_msg,
             },
             context_instance=RequestContext(request))

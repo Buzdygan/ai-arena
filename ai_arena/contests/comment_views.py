@@ -1,33 +1,44 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from ai_arena.contests.models import Game, GameComment
-from ai_arena.contests.forms import AddGameCommentForm
+from ai_arena.contests.models import Game, GameComment, Contest, ContestComment
+from ai_arena.contests.forms import AddCommentForm
 from ai_arena.contests.game_views import game_details
+from ai_arena.contests.contest_views import show_contest
 
 @login_required
-def add_comment(request, game_id):
+def add_comment(request, comment_type, object_id):
+    if comment_type not in ['game_details', 'contests']:
+        return HttpResponseRedirect('/')
+
     if request.method == 'POST':
-        form = AddGameCommentForm(request.POST, request.FILES)
+        form = AddCommentForm(request.POST)
         if form.is_valid():
             user = request.user
-            game = Game.objects.get(id=game_id)
             content = request.POST['comment']
 
-            comment = GameComment(user=user, game=game, content=content)
-            comment.save()
-            
-            return game_details(request, game_id)
-    
-    else:
-        form = AddGameCommentForm()
+            if comment_type == 'game_details':
+                game = Game.objects.get(id=object_id)
+                comment = GameComment(user=user, game=game, content=content)
+                comment.save()
+                return game_detais(request, object_id)
+            else:
+                contest = Contest.objects.get(id=object_id)
+                comment = ContestComment(user=user, game=game, content=content)
+                comment.save()
+                return show_contest(request, object_id)
 
+    else:
+        form = AddCommentForm()
     return render_to_response('gaming/add_comment.html', 
             {
                 'form': form,
-                'game_id': game_id,
+                'object_id': object_id,
+                'comment_type': comment_type,
             },
             context_instance=RequestContext(request))
+
 
 @login_required
 def delete_comment(request, game_id, comment_id):

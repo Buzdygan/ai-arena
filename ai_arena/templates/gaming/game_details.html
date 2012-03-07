@@ -8,7 +8,7 @@
     <div id="game_menu">
         <div><a href="/send_bot/{{ game.id }}/">Send bot for this game</a></div> 
         <div><a href="/game_details/{{game.id}}/source/">Show source of the judge</a></div>
-        <div><a href="/add_comment/{{game.id}}/">Add comment</a></div>
+        <div><a href="/game_details/add_comment/{{game.id}}/">Add comment</a></div>
     </div>
 
     <div id='main_panel'>
@@ -21,50 +21,7 @@
             {{ line }} <br>
         {% endfor %}
         </div>
-        
-        <div id='comments'>
-            {% for comment in comments %}
-            <table class='comment'>
-                <tr>
-                    <td class='photo'>
-                        <table>
-                            <tr><td>
-                            {% if request.user.get_profile %}
-                                <img src='{{ request.user.get_profile.photo }}' class='img_avatar' />
-                            {% else %}
-                                <img src='{{ MEDIA_URL }}profiles/photos/default_avatar.jpg' class='img_avatar'/>
-                            {% endif %}
-                            </td></tr>
 
-                            <tr><td class='comment_username'>
-                                {{ comment.user.username }} 
-                            </td></tr>
-                        </table>
-                    </td>
-
-                    <td>
-                    <table class='comment_all'>
-                        <tr class='comment_info_bar'>
-                            <td class='comment_date'>
-                                This post was submitted {{ comment.date_set }}
-                            </td>
-                            <td class='comment_options'>
-                                {% if user.is_staff or user.username == comment.user.username or user in moderators %}
-                                Edit | 
-                                <a href='/game_details/{{ game.id }}/delete_comment/{{ comment.id }}/'>Delete</a>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class='comment_content'>
-                                {{ comment }}
-                            </td>
-                        </tr>
-                    </table>
-                    </td>
-                </tr>
-            </table>
-            {% endfor %}
-        </div>
+        {% include "gaming/comments.html" %}
     </div>
 {% endblock %}

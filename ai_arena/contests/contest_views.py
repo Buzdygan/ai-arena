@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-from ai_arena.contests.models import Contest, BotRanking
+from ai_arena.contests.models import Contest, BotRanking, ContestComment
 from ai_arena.contests.forms import BotsSelectForm
 
 
@@ -14,17 +14,24 @@ def contests_list(request):
             context_instance=RequestContext(request),
         )
 
-def show_contest(request, contest_id):
+def show_contest(request, contest_id, error_msg=None):
     contest = Contest.objects.get(id=contest_id)
     if not contest.ranking:
         contest.generate_group_ranking()
         contest.save()
     ranking_list = BotRanking.objects.filter(ranking=contest.ranking)
     ranking_list = sorted(ranking_list, key=lambda x: x.position)
+
+    comments = ContestComment.objects.filter(contest=contest)
+    moderators = contest.moderators.all()
     return render_to_response('contests/display_contest.html',
             {
                 'contest': contest,
                 'ranking_list': ranking_list,
+                'comments': comments,
+                'moderators': moderators,
+                'is_contest_template': True,
+                'error_msg': error_msg,
             },
             context_instance=RequestContext(request),
         )
