@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method='POST' action='/add_comment/{{game_id}}/'> 
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+
+{% endblock %}
