@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-from ai_arena.contests.forms import GameSelectForm, BotSelectForm
+from ai_arena.contests.forms import GameSelectForm, BotsSelectForm
 from ai_arena.contests.models import Game, Match
 from ai_arena.contests.game_launcher import launch_single_match
 
@@ -56,10 +56,10 @@ def launch_match(request, game_id=None, number_of_bots=None):
             if game_form.is_valid():
                 game = game_form.cleaned_data['game_field']
                 number_of_bots=int(game_form.cleaned_data['number_of_bots'])
-                bot_form = BotSelectForm(game=game, number_of_bots=number_of_bots, prefix='bot')
+                bot_form = BotsSelectForm(game=game, number_of_bots=number_of_bots, prefix='bot')
 
         if 'bot_form' in request.POST:
-            bot_form = BotSelectForm(request.POST, game=game, number_of_bots=number_of_bots, prefix='bot')
+            bot_form = BotsSelectForm(request.POST, game=game, number_of_bots=number_of_bots, prefix='bot')
             if bot_form.is_valid():
                 bots = []
                 for i in range(number_of_bots):
@@ -71,7 +71,7 @@ def launch_match(request, game_id=None, number_of_bots=None):
         game_form = GameSelectForm(prefix='game')
 
     if game and not bot_form:
-        bot_form = BotSelectForm(game=game, number_of_bots=number_of_bots, prefix='bot')
+        bot_form = BotsSelectForm(game=game, number_of_bots=number_of_bots, prefix='bot')
 
     if game:
         game_id = game.id
