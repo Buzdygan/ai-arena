@@ -5,7 +5,15 @@
 {% endblock %}
 
 {% block content %}
+
     <div id="game_menu">
+    {% if user.is_staff or user in moderators %} 
+    <div id='moderator_panel'>
+        <div><a href="/game_details/{{ game.id }}/edit/">Edit this game</a></div>
+        <div><a href="/game_details/{{ game.id }}/delete/">Delete this game</a></div>
+    </div>
+    {% endif %}
+
         <div><a href="/send_bot/{{ game.id }}/">Send bot for this game</a></div> 
         <div><a href="/game_details/{{game.id}}/source/">Show source of the judge</a></div>
         <div><a href="/game_details/add_comment/{{game.id}}/">Add comment</a></div>
@@ -17,6 +25,7 @@
         {% endif %}
 
         <div id="description">
+            <div id="game_title">{{ game.name }}</div>
         {% for line in game_details %}
             {{ line }} <br>
         {% endfor %}
