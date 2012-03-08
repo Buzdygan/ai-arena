@@ -10,6 +10,7 @@
     {% if user.is_staff or user in moderators %} 
     <div id='moderator_panel'>
         <div><a href="/game_details/{{ game.id }}/edit/">Edit this game</a></div>
+        <div><a href="/game_details/{{ game.id }}/delete/">Delete this game</a></div>
     </div>
     {% endif %}
 

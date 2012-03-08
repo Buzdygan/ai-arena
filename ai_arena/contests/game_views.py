@@ -46,7 +46,7 @@ def create_new_game(request):
             # Remove compiled file from directory with source
             system('rm ' + target)
             
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/game_details/' + str(game.id) + '/')
     else:
         form = NewGameForm()
     return render_to_response('gaming/new_game.html',
@@ -233,10 +233,6 @@ def edit_game(request, game_id):
 
 
     if request.method == 'POST':
-        # when someone wanted to change game name we've got horrible job to do :P
-        # not only we have to change name on object but also in paths to different parts of the object
-
-
         # When somebody updated decsription it's easier to create new file
         # instead of diff with previous one.
         if request.POST['description'] not in [None, ""]:
@@ -304,3 +300,22 @@ def edit_game(request, game_id):
                     'game': game,
                 },
                 context_instance=RequestContext(request))
+
+@login_required
+def delete_game(request, game_id):
+    user = request.user
+    game = Game.objects.get(id=game_id)
+
+    if not user.is_staff and not user in game.moderators.all():
+        return HttpResponseRedirect('/game_details/' + game_id + '/')
+
+    # Not only we have to delete object from database, but also all files related to it
+    gamename = game.name
+    path = settings.MEDIA_ROOT
+    game.delete()
+    
+    system('rm -rf ' + path + 'game_judge_sources/' + gamename + '/')
+    system('rm -rf ' + path + 'game_judge_binaries/' + gamename + '/')
+    system('rm -rf ' + path + 'game_rules/' + gamename + '/')
+
+    return HttpResponseRedirect('/')
