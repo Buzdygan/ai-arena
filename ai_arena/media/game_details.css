@@ -31,6 +31,19 @@
     color: #FF0000;
 }
 
+#game_title{
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-bottom: 3px solid gray;
+    color: #A32550;
+}
+
 .comment, .comment td{
     padding: 2px 2px 2px 2px;
     border: 0px;
