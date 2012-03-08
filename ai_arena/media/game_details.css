@@ -6,10 +6,19 @@
 }
 
 #game_menu{
-    width: 150px;
     float: left;
-    padding: 15px;
     margin: 15px;
+}
+
+#moderator_panel{
+    width: 150px;
+    padding: 15px;
+    margin: 10px;
+    border: 2px solid gray;
+    position: relative;
+    right: 27px;
+    border-radius: 4px;
+    background-color: #FAFEBB;
 }
 
 #main_panel{

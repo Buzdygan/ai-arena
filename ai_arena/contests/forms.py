@@ -56,3 +56,10 @@ class UpdateUserProfileForm(forms.Form):
 
 class AddCommentForm(forms.Form):
     comment = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
+
+class EditGameForm(forms.Form):
+    game_name = forms.CharField(max_length=50, required=False)
+    description = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':15}), required=False)
+    game_rules = forms.FileField(required=False)
+    game_judge = forms.FileField(required=False)
+    judge_language = forms.ChoiceField(choices = settings.LANGUAGES, required=False)

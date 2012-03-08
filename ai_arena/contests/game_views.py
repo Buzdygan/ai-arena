@@ -7,7 +7,7 @@ from django.core.files import File
 from django.contrib.auth.decorators import login_required
 
 from ai_arena import settings
-from ai_arena.contests.forms import NewGameForm
+from ai_arena.contests.forms import NewGameForm, EditGameForm
 from ai_arena.contests.models import Game, GameComment
 from ai_arena.contests.compilation import compile
 
@@ -224,4 +224,83 @@ def show_source(request, game_id):
             },
             context_instance=RequestContext(request))
 
+@login_required
+def edit_game(request, game_id):
+    game = Game.objects.get(id=game_id)
+    user = request.user
+    if not user.is_staff and user not in game.moderators.all():
+        return HttpResponseRedirect('/')
+
+
+    if request.method == 'POST':
+        # when someone wanted to change game name we've got horrible job to do :P
+        # not only we have to change name on object but also in paths to different parts of the object
+
+
+        # When somebody updated decsription it's easier to create new file
+        # instead of diff with previous one.
+        if request.POST['description'] not in [None, ""]:
+            # create new file
+            filepath = game.rules_file.path
+            filename = filepath.split('/')
+            filename = filename[len(filename)-1]
+
+            game.rules_file.delete()
+            f = open(filepath, 'w')
+            f.write(request.POST['description'])
+            f = open(filepath, 'rw')
+
+            # save changes
+            file_to_save = File(f)
+            game.rules_file.save(filename, file_to_save)
+
+
+        # if user updated just rules file we've got an easy job :P
+        if 'game_rules' in request.FILES:
+            game.rules_file.delete()
+            game.rules_file = request.FILES['game_rules']
         
+        # if judge file has changed bigger changes are necessairy
+        game.judge_lang = request.POST['judge_language']    
+        if 'game_judge' in request.FILES:
+            # delete old (no longer needed files
+            game.judge_source_file.delete()
+            game.judge_bin_file.delete()
+
+            #save new instead
+            game.judge_source_file = request.FILES['game_judge']
+            game.save()
+
+            # Recompile source file to directory with source file
+            src = settings.MEDIA_ROOT + game.judge_source_file.name
+            target = settings.MEDIA_ROOT + game.judge_source_file.name + '.bin' 
+            lang = game.judge_lang
+            compile(src, target, lang)
+
+            # Use compiled file in object game
+            f = File(open(target))
+            game.judge_bin_file.save(game.name, f)
+
+            # Save changes made to game object
+            game.save()
+
+            # Remove compiled file from directory with source
+            system('rm ' + target)
+            
+            return HttpResponseRedirect('/game_details/' + game_id + '/')
+
+        game.save()
+        return HttpResponseRedirect('/game_details/' + game_id + '/')
+
+    else:
+        form = EditGameForm(initial={
+                'game_name': game.name,
+                'description': game.rules_file.read(),
+                'judge_language': game.judge_lang,
+            })
+        return render_to_response('gaming/edit_game.html',
+                {
+                    'form': form,
+                    'game': game,
+                },
+                context_instance=RequestContext(request))
