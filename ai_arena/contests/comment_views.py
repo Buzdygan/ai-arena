@@ -22,12 +22,12 @@ def add_comment(request, comment_type, object_id):
                 game = Game.objects.get(id=object_id)
                 comment = GameComment(user=user, game=game, content=content)
                 comment.save()
-                return game_detais(request, object_id)
+                return HttpResponseRedirect('/game_details/' + object_id + '/')
             else:
                 contest = Contest.objects.get(id=object_id)
-                comment = ContestComment(user=user, game=game, content=content)
+                comment = ContestComment(user=user, contest=contest, content=content)
                 comment.save()
-                return show_contest(request, object_id)
+                return HttpResponseRedirect('/contests/show_contest/' + object_id + '/')
 
     else:
         form = AddCommentForm()
