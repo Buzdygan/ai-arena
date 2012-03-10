@@ -39,7 +39,6 @@ def readout(pipe, timeout=10000):
     """
     mes = ''
     while mes[len(mes)-4:] != '<<<\n':
-        pipe.flush()
         (rl, wl, xl)  = select.select([pipe], [], [], timeout)
         if (rl != []):
             letter = pipe.read(1)
