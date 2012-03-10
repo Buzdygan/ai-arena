@@ -31,20 +31,17 @@ def parse_message(to_send):
     return (players,mes[:-1])
 
 # TODO: Add timeout!
-def readout(proc, timeout=10000):
+def readout(pipe, timeout=10000):
     """
         This function reads communicates.
         The assumption is that every communicate ends with chars '<<<\n' not case-sensitive
         In addition every '<<<\n' frase is considered to be end of a communicate
     """
-    pipe = proc.stdout
-    poll_o = select.poll()
-    poll_o.register(pipe, select.POLLIN)
     mes = ''
     while mes[len(mes)-4:] != '<<<\n':
         pipe.flush()
-        l = poll_o.poll(timeout)
-        if (l != []):
+        (rl, wl, xl)  = select.select([pipe], [], [], timeout)
+        if (rl != []):
             letter = pipe.read(1)
             if (letter == ''):
                 raise EOFException()
@@ -107,7 +104,7 @@ def play(judge_file, players, memory_limit, time_limit):
 
     while (game_in_progress):
         try:
-            judge_mes = readout(jp)
+            judge_mes = readout(jp.stdout)
         except TimeoutException:
             results['exit_status'] = 14
             log(supervisor_log, "Timeout reached while waiting for judge message.")
@@ -129,7 +126,7 @@ def play(judge_file, players, memory_limit, time_limit):
         if message == 'END':
             print 'Ending game'
             try:
-                res = readout(jp)
+                res = readout(jp.stdout)
             except TimeoutException:
                 result['exit_status'] = 16
                 log(supervisor_log, "Timeout reached while waiting for scores from judge.")
@@ -167,7 +164,7 @@ def play(judge_file, players, memory_limit, time_limit):
                         message = message + '<<<\n'
                         bot_process.stdin.write(message)
                         try :
-                            response = readout(bot_process) + '<<<\n'
+                            response = readout(bot_process.stdout) + '<<<\n'
                         except TimeoutException:
                             response = '_DEAD_<<<\n'
                             bot_process.kill()
