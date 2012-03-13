@@ -1,27 +1,29 @@
+\contentsline {chapter}{\numberline {1}Metodologia Pracy}{5}
+\contentsline {chapter}{\numberline {2}Wprowadzenie}{7}
 \contentsline {chapter}{Wprowadzenie}{7}
-\contentsline {chapter}{\numberline {1}Podstawowe poj\k ecia}{9}
-\contentsline {section}{\numberline {1.1}Gra}{9}
-\contentsline {section}{\numberline {1.2}Konkurs}{9}
-\contentsline {section}{\numberline {1.3}Program Walcz\k acy - Bot}{9}
-\contentsline {chapter}{\numberline {2}Zastosowania w nauce i biznesie}{11}
-\contentsline {chapter}{\numberline {3}Podobne platformy}{13}
-\contentsline {section}{\numberline {3.1}Top Coder}{13}
-\contentsline {section}{\numberline {3.2}Ai Challenge}{13}
-\contentsline {section}{\numberline {3.3}SIO}{13}
-\contentsline {section}{\numberline {3.4}SPOJ}{13}
-\contentsline {section}{\numberline {3.5}MAIN}{13}
-\contentsline {section}{\numberline {3.6}Tabela por\'ownuj\k aca serwisy}{14}
-\contentsline {chapter}{\numberline {4}Use cases}{15}
-\contentsline {chapter}{\numberline {5}Metodyka Scrum}{19}
-\contentsline {chapter}{\numberline {6}Architektura systemu}{21}
-\contentsline {section}{\numberline {6.1}Nadzorca}{21}
-\contentsline {section}{\numberline {6.2}Scheduler}{22}
-\contentsline {section}{\numberline {6.3}Serwis webowy}{22}
-\contentsline {section}{\numberline {6.4}Baza danych}{23}
-\contentsline {chapter}{\numberline {7}Dokumentacja uzytkowa i opis implementacji}{25}
-\contentsline {chapter}{\numberline {8}Podsumowanie}{27}
-\contentsline {chapter}{\numberline {9}Podzia{\l } prac}{29}
-\contentsline {chapter}{\numberline {10}Spis p{\l }yty}{31}
+\contentsline {chapter}{\numberline {3}Podstawowe poj\k ecia}{9}
+\contentsline {section}{\numberline {3.1}Gra}{9}
+\contentsline {section}{\numberline {3.2}Konkurs}{9}
+\contentsline {section}{\numberline {3.3}Program Walcz\k acy - Bot}{9}
+\contentsline {chapter}{\numberline {4}Zastosowania w nauce i biznesie}{11}
+\contentsline {chapter}{\numberline {5}Podobne platformy}{13}
+\contentsline {section}{\numberline {5.1}Top Coder}{13}
+\contentsline {section}{\numberline {5.2}Ai Challenge}{13}
+\contentsline {section}{\numberline {5.3}SIO}{13}
+\contentsline {section}{\numberline {5.4}SPOJ}{13}
+\contentsline {section}{\numberline {5.5}MAIN}{13}
+\contentsline {section}{\numberline {5.6}Tabela por\'ownuj\k aca serwisy}{14}
+\contentsline {chapter}{\numberline {6}Use cases}{15}
+\contentsline {chapter}{\numberline {7}Metodyka Scrum}{19}
+\contentsline {chapter}{\numberline {8}Architektura systemu}{21}
+\contentsline {section}{\numberline {8.1}Nadzorca}{21}
+\contentsline {section}{\numberline {8.2}Scheduler}{22}
+\contentsline {section}{\numberline {8.3}Serwis webowy}{22}
+\contentsline {section}{\numberline {8.4}Baza danych}{23}
+\contentsline {chapter}{\numberline {9}Dokumentacja uzytkowa i opis implementacji}{25}
+\contentsline {chapter}{\numberline {10}Podsumowanie}{27}
+\contentsline {chapter}{\numberline {11}Podzia{\l } prac}{29}
+\contentsline {chapter}{\numberline {12}Spis p{\l }yty}{31}
 \contentsline {chapter}{\numberline {A}Przykladowa gra}{33}
 \contentsline {chapter}{\numberline {B}Przykladowe programy}{35}
 \contentsline {chapter}{\numberline {C}Przebieg przykladowego turnieju}{37}
