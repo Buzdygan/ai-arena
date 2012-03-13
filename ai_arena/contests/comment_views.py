@@ -49,7 +49,7 @@ def del_comment(request, comment_type, object_id, comment_id):
         object = Game.objects.get(id=object_id)
         comment = GameComment.objects.get(id=comment_id)
     else:
-        object = Contest.objects.get(id=objects_id)
+        object = Contest.objects.get(id=object_id)
         comment = ContestComment.objects.get(id=comment_id)
 
     user = request.user

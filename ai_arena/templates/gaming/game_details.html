@@ -10,7 +10,14 @@
     {% if user.is_staff or user in moderators %} 
     <div id='moderator_panel'>
         <div><a href="/game_details/{{ game.id }}/edit/">Edit this game</a></div>
-        <div><a href="/game_details/{{ game.id }}/delete/">Delete this game</a></div>
+<script>
+function confirm_del_game(){
+    var x = confirm("Are you sure you want to delete this game?");
+    if (x) location="/game_details/{{ game.id }}/delete/";
+}
+
+</script>
+        <div><a href="javascript:void(0);" onClick="confirm_del_game();">Delete this game</a></div>
     </div>
     {% endif %}
 
