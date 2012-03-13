@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block content %}
+
+<form method='POST' action='/{{ comment_type }}/edit_comment/{{ object_id }}/{{ comment_id }}/'>
+{% csrf_token %}
+{{ form.as_p }}
+<p><input type='submit' value='Save' /></p>
+</form>
+
+{% endblock %}

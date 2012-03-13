@@ -168,3 +168,7 @@ LANGUAGES = (
 
 MAKEFILE_DIR = os.path.abspath('../makefile/')
 MAKEFILE_PATH = MAKEFILE_DIR + '/Makefile'
+
+GAME_RULES = MEDIA_ROOT + 'game_rules/'
+GAME_JUDGE_SOURCES = MEDIA_ROOT + 'game_judges_sources/'
+GAME_JUDGE_BINARIES = MEDIA_ROOT + 'game_judges_binaries/'

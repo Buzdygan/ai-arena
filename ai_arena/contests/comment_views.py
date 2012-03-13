@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from ai_arena.contests.models import Game, GameComment, Contest, ContestComment
-from ai_arena.contests.forms import AddCommentForm
+from ai_arena.contests.forms import AddCommentForm, EditCommentForm
 from ai_arena.contests.game_views import game_details
 from ai_arena.contests.contest_views import show_contest
 
@@ -41,30 +41,72 @@ def add_comment(request, comment_type, object_id):
 
 
 @login_required
-def delete_comment(request, game_id, comment_id):
-    error = False
+def del_comment(request, comment_type, object_id, comment_id):
+    if comment_type not in ['game_details', 'contests']:
+        HttpResponseRedirect('/')
+
+    if comment_type == 'game_details':
+        object = Game.objects.get(id=object_id)
+        comment = GameComment.objects.get(id=comment_id)
+    else:
+        object = Contest.objects.get(id=object_id)
+        comment = ContestComment.objects.get(id=comment_id)
+
     user = request.user
-    game = Game.objects.filter(id=game_id)
-    if not len(game) > 0:
-        error = True
-    else:
-        game = game[0]
-    comment = GameComment.objects.filter(id=comment_id)
-    if not len(comment) > 0:
-        error = True
-    else:
-        comment = comment[0]
-    
-    if error:
-        return game_details(request, game_id, 'Error! You cannot delete this post!')
+    moderators = object.moderators.all()
 
-    can_delete = False
-    if user.is_staff or user in game.moderators.all() or user == comment.user:
-        can_delete = True
+    if not user.is_staff and not user in moderators and user != comment.user:
+        if comment_type == 'game_details':
+            return game_details(request, object_id, error_msg='You cannot delete this comment!')
+        else:
+            return show_contest(request, object_id, error_msg='You cannot delete this comment!')
 
-    if not can_delete:
-        return game_details(request, game_id, 'Error! You cannot delete this post!')
+    comment.delete()
+    if comment_type == 'game_details':
+        return HttpResponseRedirect('/game_details/' + object_id)
     else:
-        comment.delete()
-        return game_details(request, game_id)
-    
+        return HttpResponseRedirect('/contests/show_contest/' + object_id)
+
+
+@login_required
+def edit_comment(request, comment_type, object_id, comment_id):
+    if comment_type not in ['game_details', 'contests']:
+        return HttpResponseRedirect('/')
+
+    if comment_type == 'game_details':
+        object = Game.objects.get(id=object_id)
+        comment = GameComment.objects.get(id=comment_id)
+    else:
+        object = Contest.objects.get(id=object_id)
+        comment = ContestComment.objects.get(id=comment_id)
+
+    user = request.user
+    moderators = object.moderators.all()
+
+    if not user.is_staff and not user in moderators and user != comment.user:
+        if comment_type == 'game_details':
+            return game_details(request, object_id, error_msg='You cannot edit this comment!')
+        else:
+            return show_contest(request, object_id, error_msg='You cannot edit this comment!')
+
+    if request.method == 'POST':
+        comment.content = request.POST['comment']
+        comment.save()
+        if comment_type == 'game_details':
+            return HttpResponseRedirect('/game_details/' + object_id + '/')
+        else:
+            return HttpResponseRedirect('/contests/show_contest/' + object_id + '/')
+
+    else:
+        form = EditCommentForm(initial={
+                'comment': comment.content,
+            })
+        return render_to_response('gaming/edit_comment.html',
+                {
+                    'form': form,
+                    'comment_type': comment_type,
+                    'object_id': object_id,
+                    'comment_id': comment_id,
+                },
+                context_instance=RequestContext(request))
+

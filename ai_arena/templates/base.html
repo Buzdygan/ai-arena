@@ -2,8 +2,10 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" href="{{ MEDIA_URL }}bootstrap.css" />
+        <link rel="stylesheet" href="{{ MEDIA_URL }}base.css" />
         {% block css %} {% endblock %}
         <title> {% block title %} AI-Arena - test your AI skill {% endblock %} </title>
+        {% block script %} {% endblock %}
         {% block head %} {% endblock %} 
     </head>
 
@@ -38,7 +40,11 @@
                 </div>
             </div>
         </div>
-    <div class="container" style="padding-top: 50px">
+        <div class="container" style="padding-top: 50px">
+        {% if error_msg %}
+            <div class='error_msg'>{{ error_msg }}</div>
+        {% endif %}
+
         {% block content %}
             this is a base content
         {% endblock %}

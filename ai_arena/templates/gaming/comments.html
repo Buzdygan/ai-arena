@@ -26,13 +26,14 @@
                     </td>
                     <td class='comment_options'>
                         {% if user.is_staff or user.username == comment.user.username or user in moderators %}
-                        Edit | 
-                        {% if is_game_template %}
-                            <a href='/game_details/{{ game.id }}/delete_comment/{{ comment.id }}/'>Delete</a>
-                        {% endif %}
-                        {% if is_contest_template %}
-                            <a href='/contests/show_contest/{{ contest.id }}/delete_comment/{{ comment.id }}'>Delete</a>
-                        {% endif %}
+                            <a href='/{{ template_type }}/edit_comment/{{ object_id }}/{{ comment.id }}'>Edit</a> |
+<script>
+    function show_confirm(){
+        var x = confirm("Are you sure you want to delete this comment?");
+        if(x) location="/{{ template_type }}/del_comment/{{ object_id }}/{{ comment.id }}/";
+    }
+</script>
+                            <a href='javascript:void(0);' onClick="show_confirm()">Delete</a>
                         {% endif %}
                     </td>
                 </tr>
