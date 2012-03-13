@@ -106,10 +106,11 @@ def game_details(request, game_id, error_msg=None):
     return render_to_response('gaming/game_details.html',
             {
                 'game': game,
+                'object_id': game.id,
                 'game_details': parse_game_details(game),
                 'comments': comments,
                 'moderators': game.moderators.all(),
-                'is_game_template': True,
+                'template_type': 'game_details',
                 'error_msg': error_msg,
             },
             context_instance=RequestContext(request))

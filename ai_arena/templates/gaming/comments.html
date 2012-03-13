@@ -26,13 +26,8 @@
                     </td>
                     <td class='comment_options'>
                         {% if user.is_staff or user.username == comment.user.username or user in moderators %}
-                        Edit | 
-                        {% if is_game_template %}
-                            <a href='/game_details/{{ game.id }}/delete_comment/{{ comment.id }}/'>Delete</a>
-                        {% endif %}
-                        {% if is_contest_template %}
-                            <a href='/contests/show_contest/{{ contest.id }}/delete_comment/{{ comment.id }}'>Delete</a>
-                        {% endif %}
+                            <a href='/{{ template_type }}/edit_comment/{{ object_id }}/{{ comment.id }}'>Edit</a> |
+                            <a href='/{{ template_type }}/del_comment/{{ object_id }}/{{ comment.id }}/'>Delete</a>
                         {% endif %}
                     </td>
                 </tr>

@@ -57,6 +57,9 @@ class UpdateUserProfileForm(forms.Form):
 class AddCommentForm(forms.Form):
     comment = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
 
+class EditCommentForm(forms.Form):
+    comment = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
+
 class EditGameForm(forms.Form):
     name = forms.CharField(max_length=50)
     description = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':15}), required=False)

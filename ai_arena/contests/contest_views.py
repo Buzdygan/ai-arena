@@ -27,10 +27,11 @@ def show_contest(request, contest_id, error_msg=None):
     return render_to_response('contests/display_contest.html',
             {
                 'contest': contest,
+                'object_id': contest.id,
                 'ranking_list': ranking_list,
                 'comments': comments,
                 'moderators': moderators,
-                'is_contest_template': True,
+                'template_type': 'contests',
                 'error_msg': error_msg,
             },
             context_instance=RequestContext(request),

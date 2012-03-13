@@ -47,6 +47,7 @@
 .comment, .comment td{
     padding: 2px 2px 2px 2px;
     border: 0px;
+    border-radius: 6px;
     margin: 2px;
 }
 
