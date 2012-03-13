@@ -10,6 +10,7 @@ from ai_arena import settings
 from ai_arena.contests.forms import NewGameForm, EditGameForm
 from ai_arena.contests.models import Game, GameComment
 from ai_arena.contests.compilation import compile
+import shutil
 
 @login_required
 def create_new_game(request):
@@ -24,6 +25,18 @@ def create_new_game(request):
             # Save known fields
             game = Game()
             game.name = request.POST['game_name']
+
+            # Check if there exist another game wuth that name
+            games = Game.objects.filter(name=game.name)
+            if len(games) > 0:
+                error_msg = 'There alreday exists a game with that name!'
+                return render_to_response('gaming/new_game.html',
+                        {
+                            'form': form,
+                            'error_msg': error_msg,
+                        },
+                        context_instance=RequestContext(request))
+
             game.rules_file = request.FILES['game_rules']
             game.judge_source_file = request.FILES['game_judge']
             game.judge_lang = request.POST['judge_language']
@@ -233,23 +246,58 @@ def edit_game(request, game_id):
 
 
     if request.method == 'POST':
+        # If user changes a gamename we have to do several things:
+        # change name in objects, change all paths and make sure that no other 
+        # game with this name exists
+        if 'name' in request.POST and request.POST['name'] != game.name:
+            games = Game.objects.filter(name=request.POST['name'])
+            if len(games) > 0:
+                form = EditGameForm(initial={
+                    'name': game.name,
+                    'description': game.rules_file.read(),
+                    'judge_language': game.judge_lang,
+                })
+                error_msg = 'There exist other game with that name!'
+                return render_to_response('gaming/edit_game.html',
+                    {
+                        'form': form,
+                        'game': game,
+                        'error_msg': error_msg,
+                    },
+                    context_instance=RequestContext(request))
+            
+            # When we made sure that game name is unique we can make necessairy changes
+            oldname = game.name
+            game.name = request.POST['name']
+            game.save()
+
+            def move(source, file):
+                filename = file.name.split('/').pop()
+                file.save(filename, file)
+                system('rm -rf ' + source)
+
+            move(settings.GAME_RULES + oldname + '/', game.rules_file)
+            move(settings.GAME_JUDGE_SOURCES + oldname + '/', game.judge_source_file)
+            move(settings.GAME_JUDGE_BINARIES + oldname + '/', game.judge_bin_file)
+
         # When somebody updated decsription it's easier to create new file
         # instead of diff with previous one.
-        if request.POST['description'] not in [None, ""]:
+        if 'description' in request.POST:
             # create new file
-            filepath = game.rules_file.path
-            filename = filepath.split('/')
-            filename = filename[len(filename)-1]
+            path = settings.GAME_RULES + game.name + '/'
+            filename = game.rules_file.name.split('/').pop()
 
             game.rules_file.delete()
-            f = open(filepath, 'w')
+            f = open(path + 'tempfile', 'w')
             f.write(request.POST['description'])
-            f = open(filepath, 'rw')
+            f = open(path + 'tempfile', 'rw')
 
             # save changes
             file_to_save = File(f)
             game.rules_file.save(filename, file_to_save)
 
+            # remove temp file
+            system('rm ' + path + 'tempfile')
 
         # if user updated just rules file we've got an easy job :P
         if 'game_rules' in request.FILES:
@@ -290,7 +338,7 @@ def edit_game(request, game_id):
 
     else:
         form = EditGameForm(initial={
-                'game_name': game.name,
+                'name': game.name,
                 'description': game.rules_file.read(),
                 'judge_language': game.judge_lang,
             })
