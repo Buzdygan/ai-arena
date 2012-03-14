@@ -1,10 +1,14 @@
-\contentsline {chapter}{\numberline {1}Metodologia Pracy}{5}
-\contentsline {chapter}{\numberline {2}Wprowadzenie}{7}
-\contentsline {chapter}{Wprowadzenie}{7}
+\contentsline {chapter}{\numberline {1}Wprowadzenie}{5}
+\contentsline {chapter}{\numberline {2}Metodologia Pracy}{7}
 \contentsline {chapter}{\numberline {3}Podstawowe poj\k ecia}{9}
 \contentsline {section}{\numberline {3.1}Gra}{9}
-\contentsline {section}{\numberline {3.2}Konkurs}{9}
-\contentsline {section}{\numberline {3.3}Program Walcz\k acy - Bot}{9}
+\contentsline {section}{\numberline {3.2}Program Walcz\k acy - Bot}{9}
+\contentsline {section}{\numberline {3.3}S\k edzia}{9}
+\contentsline {section}{\numberline {3.4}Regu\IeC {\l }y}{10}
+\contentsline {section}{\numberline {3.5}Mecz/Rozgrywka}{10}
+\contentsline {section}{\numberline {3.6}Nadzorca}{10}
+\contentsline {section}{\numberline {3.7}Gearman}{10}
+\contentsline {section}{\numberline {3.8}Konkurs}{10}
 \contentsline {chapter}{\numberline {4}Zastosowania w nauce i biznesie}{11}
 \contentsline {chapter}{\numberline {5}Podobne platformy}{13}
 \contentsline {section}{\numberline {5.1}Top Coder}{13}
@@ -13,18 +17,17 @@
 \contentsline {section}{\numberline {5.4}SPOJ}{13}
 \contentsline {section}{\numberline {5.5}MAIN}{13}
 \contentsline {section}{\numberline {5.6}Tabela por\'ownuj\k aca serwisy}{14}
-\contentsline {chapter}{\numberline {6}Use cases}{15}
-\contentsline {chapter}{\numberline {7}Metodyka Scrum}{19}
-\contentsline {chapter}{\numberline {8}Architektura systemu}{21}
-\contentsline {section}{\numberline {8.1}Nadzorca}{21}
-\contentsline {section}{\numberline {8.2}Scheduler}{22}
-\contentsline {section}{\numberline {8.3}Serwis webowy}{22}
-\contentsline {section}{\numberline {8.4}Baza danych}{23}
-\contentsline {chapter}{\numberline {9}Dokumentacja uzytkowa i opis implementacji}{25}
-\contentsline {chapter}{\numberline {10}Podsumowanie}{27}
-\contentsline {chapter}{\numberline {11}Podzia{\l } prac}{29}
-\contentsline {chapter}{\numberline {12}Spis p{\l }yty}{31}
-\contentsline {chapter}{\numberline {A}Przykladowa gra}{33}
-\contentsline {chapter}{\numberline {B}Przykladowe programy}{35}
-\contentsline {chapter}{\numberline {C}Przebieg przykladowego turnieju}{37}
-\contentsline {chapter}{Bibliografia}{39}
+\contentsline {chapter}{\numberline {6}Przypadki u\.zycia}{15}
+\contentsline {chapter}{\numberline {7}Architektura systemu}{19}
+\contentsline {section}{\numberline {7.1}Nadzorca}{19}
+\contentsline {section}{\numberline {7.2}Scheduler}{20}
+\contentsline {section}{\numberline {7.3}Serwis webowy}{20}
+\contentsline {section}{\numberline {7.4}Baza danych}{21}
+\contentsline {chapter}{\numberline {8}Dokumentacja uzytkowa i opis implementacji}{23}
+\contentsline {chapter}{\numberline {9}Podsumowanie}{25}
+\contentsline {chapter}{\numberline {10}Podzia{\l } prac}{27}
+\contentsline {chapter}{\numberline {11}Spis p{\l }yty}{29}
+\contentsline {chapter}{\numberline {A}Przykladowa gra}{31}
+\contentsline {chapter}{\numberline {B}Przykladowe programy}{33}
+\contentsline {chapter}{\numberline {C}Przebieg przykladowego turnieju}{35}
+\contentsline {chapter}{Bibliografia}{37}

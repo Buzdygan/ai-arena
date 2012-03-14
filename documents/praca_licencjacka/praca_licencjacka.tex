@@ -36,10 +36,14 @@ D.0. General\\}
 
 \begin{abstract}
 W pracy przedstawiono implementacje systemu AI-Arena,
- s{\l}u{\.z}acego do przeprowadzania turniejow programow walczacych.
+System Ai-Arena s³u¿y do przeprowadzania rozgrywek i turniejów ró¿nych gier pomiêdzy programami komputerowymi.
+System ma w zamierzeniu twórców s³u¿yæ osobom zainteresowanym sztuczn± inteligencj± do sprawdzenia swoich umiejêtno¶ci,
+lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
 \end{abstract}
 
 \tableofcontents
+
+\chapter{Wprowadzenie}
 
 \chapter{Metodologia Pracy}
     Podczas pracy nad systemem AI-Arena stosowali¶my pewn± modyfikacjê metodologii Scrum.
@@ -58,6 +62,8 @@ W pracy przedstawiono implementacje systemu AI-Arena,
     zadania. Spotkania odbywa³y siê na wydziale, b±d¼ jako konferencje video z wykorzystaniem Google Hangouts.
     Ich przebieg nadzorowa³ Lider Projektu, który by³ odpowiedzialny równie¿ za realizowanie
     za³o¿eñ przyjêtej metodologii pracy.\\
+    Podzia³ obowi±zków miêdzy cz³onkami zespo³u by³ wynikiem porozumienia miêdzy cz³onkami i by³
+    zatwierdzany przez lidera projektu, a nastêpnie przedstawiany prowadz±cemu zajêæ.\\
     Do bie¿±cej kontroli stanu projektu u¿yty zosta³ system Redmine. Umo¿liwia on tworzenie
     zadañ i przydzielanie ich cz³onkom zespo³u. Ka¿de zadanie ma status, który zawiera siê w zbiorze
     (otwarte, przydzielone, zrealizowane, zamkniête). Stan otwarty oznacza, ¿e zadanie nie jest
@@ -69,11 +75,9 @@ W pracy przedstawiono implementacje systemu AI-Arena,
     Kod projektu, oraz dokumenty takie jak praca licencjacka, zosta³y umieszczone w repozytorium Gita.
     Git to system kontroli wersji dbaj±cy o archiwizacjê kodu oraz koordynacjê równoleg³ych zmian
     wszystkich cz³onków zespo³u. Repozytorium jest publiczne i dostêpne online w serwisie GitHub.
-\chapter{Wprowadzenie}
-\addcontentsline{toc}{chapter}{Wprowadzenie}
-System Ai-Arena s³u¿y do przeprowadzania rozgrywek i turniejów ró¿nych gier pomiêdzy programami komputerowymi. System ma w zamierzeniu twórców s³u¿yæ osobom zainteresowanym sztuczn± inteligencj± do sprawdzenia swoich umiejêtno¶ci, lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
-
-Praca sk³ada siê z piêciu rozdzia³ów. Pierwszy zawiera opis architektury systemu. W drugim rozdziale zawarto dokumentacjê u¿ytkownika systemu i szczegó³y implementacji. Rozdzia³ trzeci zawiera podsumowanie, rozdzia³ czwart podzia³ prac a rozdzia³ pi±ty spis p³yty do³±czonej do pracy.
+    Wszystkie zmiany dokonywane przez cz³onków zespo³u s± archiwizowane, tak by mo¿na je by³o
+    odtworzyæ. Mo¿liwe jest równie¿ jednoczesne rozwijanie projektu w kilku niezale¿nych kierunkach,
+    a nastêpnie po³±czenie efektów pracy.\\
 
 \chapter{Podstawowe pojêcia}
 
@@ -94,14 +98,6 @@ Praca sk³ada siê z piêciu rozdzia³ów. Pierwszy zawiera opis architektury systemu
     \item Rozstrzygaæ czy gra siê zakoñczy³a i przydzielaæ punkty zwyciêstwa graczom.
     \end{itemize}
 
-\section{Konkurs}
-
-    Konkurs mo¿e mieæ okre¶lon± datê zakoñczenia, b±d¼ byæ tzw konkursem sta³ym, w którym nie ma ostatecznego
-    terminu wysy³ania rozwi±zañ. Dla ka¿dego konkursu tworzony jest ranking, b±d¼ drabinka rozgrywek.
-    Okre¶laj± one kolejno¶æ botów, w szczególno¶ci zwyciêzcê, b±d¼ aktualnego lidera konkursu.
-    W przypadku konkursu sta³ego istnieje ranking, który jest posortowany po sumie zdobytych przez bota
-    punktów w meczach, przy czym ka¿dy bot powinien mieæ tê sam± liczbê rozegranych meczy.
-
 \section{Program Walcz±cy - Bot}
 
     Jest to program napisany w jednym z obs³ugiwanych przez jêzyk serwisów.
@@ -110,9 +106,45 @@ Praca sk³ada siê z piêciu rozdzia³ów. Pierwszy zawiera opis architektury systemu
     Ma za zadanie przetwarzaæ informacje o dotychczasowym przebiegu rozgrywki
     i produkowaæ kolejne posuniêcia, zgodne z regu³ami Gry.
 
+\section{Sêdzia}
+
+    Jest to program zwi±zany z dan± Gr±. Ma on za zadanie kontrolowaæ przebieg Meczu,
+    weryfikowaæ zagrywki graczy, informowaæ ich o aktualnym stanie, oraz ustalaæ wynik Meczu,
+    zgodnie z zasadami zwi±zanymi z Gr±, opisanymi w Regu³ach.
+    Kod sêdziego jest publiczny i dostêpny wszystkim graczom.
+
+\section{Regu³y}
+    Dokument udostêpniany publicznie, opisuj±cy zasady gry, oraz protokó³ formatu komunikatów
+    przesy³anych miêdzy Botami a Sêdzi±. Powinien byæ zgodny z implementacj± programu
+    Sêdziego, oraz zapewniaæ mo¿liwo¶æ przeprowadzenia dowolnej rozgrywki w obrêbie
+    zasad Gry.
+
+\section{Mecz/Rozgrywka}
+    Jest rozgrywany miêdzy Botami, w obrêbie konkursu lub poza nim. Jego przebieg jest kontrolowany przez 
+    Sêdziego. Za przesy³anie komunikatów miêdzy Botami, a Sêdzi±, oraz odebranie od Sêdziego rezultatu
+    meczu odpowiedzialny jest Nadzorca.
+
+\section{Nadzorca}
+    Program bêd±cy integraln± czê¶ci± serwisu Ai-Arena. Jego zadaniem jest uruchamianie programów Botów
+    i Sêdziego podczas Meczu, a nastêpnie transportowanie miêdzy nimi komunikatów tekstowych zgodnych z ustalonym
+    protoko³em. Nadzorca odbiera wynik Meczu od Sêdziego i przekazuje go Gearmanowi, w celu zapisania rezultatu w bazie.
+    Dodatkowo Nadzorca kontroluje czas i pamiêæ zu¿ywan± przez Boty, tak by nie przekroczy³y dozwolonych limitów.
+    Informacje o ich zu¿yciu wraz z logiem rozgrywki generowanym przez sêdziego, Nadzorca zwraca do Gearmana.
+
+\section{Gearman}
+    Zewnêtrzne narzêdzie kolejkowania zadañ i transportu danych. W Ai-Arena s³u¿y jako pomost miêdzy Nadzorc±,
+    a Baz± danych. Kolejkuje Mecze do rozegrania, zleca ich rozegranie Nadzorcy, a nastêpnie zapisuje do bazy
+    przekazany przez Nadzorcê rezultat i dodatkowe informacje o przebiegu rozgrywki.
+
+\section{Konkurs}
+
+    Konkurs mo¿e mieæ okre¶lon± datê zakoñczenia, b±d¼ byæ tzw konkursem sta³ym, w którym nie ma ostatecznego
+    terminu wysy³ania rozwi±zañ. Dla ka¿dego konkursu tworzony jest ranking, b±d¼ drabinka rozgrywek.
+    Okre¶laj± one kolejno¶æ botów, w szczególno¶ci zwyciêzcê, b±d¼ aktualnego lidera konkursu.
+    W przypadku konkursu sta³ego istnieje ranking, który jest posortowany po sumie zdobytych przez bota
+    punktów w meczach, przy czym ka¿dy bot powinien mieæ tê sam± liczbê rozegranych meczy.
+
     
-
-
 \chapter{Zastosowania w nauce i biznesie}
 
     Sztuczna inteligencja jest jedn± z szybciej rozwijaj±cych siê obecnie dziedzin.
@@ -192,7 +224,7 @@ Ró¿norodno¶æ & regularne i czêste & konkurs co pó³ roku & du¿a baza zadañ & baza
 \end{tabular}
 
 
-\chapter{Use cases}
+\chapter{Przypadki u¿ycia}
 \textbf{\Large{Scenariusze u¿ycia systemu przez u¿ytkownika niezalogowanego (Go¶cia)}} 
 \\
 \\
@@ -353,8 +385,6 @@ Ró¿norodno¶æ & regularne i czêste & konkurs co pó³ roku & du¿a baza zadañ & baza
 \begin{itemize}
 \item Brak
 \end{itemize}
-
-\chapter{Metodyka Scrum}
 
 \chapter{Architektura systemu}
 
