@@ -42,7 +42,7 @@ D.0. General\\}
 \maketitle
 
 \begin{abstract}
-W pracy przedstawiono implementacje systemu AI-Arena,
+W pracy przedstawiono implementacje systemu Ai-Arena,
 System Ai-Arena s³u¿y do przeprowadzania rozgrywek i turniejów ró¿nych gier pomiêdzy programami komputerowymi.
 System ma w zamierzeniu twórców s³u¿yæ osobom zainteresowanym sztuczn± inteligencj± do sprawdzenia swoich umiejêtno¶ci,
 lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
@@ -51,6 +51,17 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
 \tableofcontents
 
 \chapter{Wprowadzenie}
+
+    Serwis Ai-Arena to uniwersalna platforma do organizowania konkursów algorytmicznych. G³ówn± domen± tych konkursów
+    jest dziedzina sztucznej inteligencji, w szczególno¶ci inteligentnych programów walcz±cych. Od parudziesiêciu
+    lat odbywaj± siê zawody, maj±ce na celu wy³oniæ programy najlepiej graj±ce w popularne gry, takie jak
+    szachy, warcaby itp. Serwis Ai-Arena pozwala organizowaæ takie konkursy dla dowolnej gry wieloosobowej.
+    Dodatkow± zalet± jest istnienie rankingu sta³ego. W ten sposób mo¿na na bie¿±co sprawdzaæ dzia³anie
+    w³asnych programów i mierzyæ siê z najlepszymi dotychczasowymi zawodnikami. Serwis mo¿e mieæ zastosowania
+    zarówno w nauce jak i w biznesie, ze wzglêdu na rosn±ce zapotrzebowanie na inteligentne programy
+    rozwi±zuj±ce problemy w warunkach rywalizacji takich jak np gie³da. Twórcy serwisu licz± na to,
+    ¿e wraz ze wzrostem jego popularno¶ci, Ai-Arena skupi spo³eczno¶æ ludzi zafascynowanych dziedzin±
+    sztucznej inteligencji i przyczyni siê do rozwoju tej ga³êzi nauki.
 
 \chapter{Metodologia Pracy}
     Podczas pracy nad systemem AI-Arena stosowali¶my pewn± modyfikacjê metodologii Scrum.
@@ -219,15 +230,15 @@ Obecnie istniej± serwisy internetowe podobne do Ai-Arena. Oto kilka z nich:
 \section{Tabela porównuj±ca serwisy}
 
 \footnotesize
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|}
 \hline
-       & Top Coder & Ai Challenge & SPOJ & AI-Arena \\ \hline
-Tematyka & algorytmy & programy walcz±ce & algorytmika & programy walcz±ce \\
-& problemy optymalizacyjne & & & \\ \hline
-Typ konkursów & okresowe & okresowe & sta³e/okresowe & sta³e/okresowe \\ \hline
-Ró¿norodno¶æ & regularne i czêste & konkurs co pó³ roku & du¿a baza zadañ & baza gier modyfikowana \\
- & konkursy w ró¿nych & & & przez u¿ytkowników \\
- & kategoriach & & & \\ \hline
+       & tematyka & typ konkursów & baza zadañ \\ \hline
+Top Coder & algorytmy, problemy optymalizacyjne & okresowe & bardzo du¿a baza z przesz³ych zawodów \\ \hline
+Ai Challenge & programy walcz±ce & okresowe & konkurs co pó³ roku \\ \hline
+SPOJ & algorytmika & sta³e/okresowe & du¿a baza zadañ \\ \hline
+Ai-Arena & programy walcz±ce & sta³e/okresowe & baza gier moderowana przez u¿ytkowników \\ \hline
+SIO & algorytmy & okresowe & wiêkszo¶æ zadañ dostêpna tylko podczas zawodów \\ \hline
+MAIN & algorytmy & sta³e & zadania z najwa¿niejszych zawodów informatycznych \\ \hline
 \end{tabular}
 
 \chapter{Architektura systemu}
