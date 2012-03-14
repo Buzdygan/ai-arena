@@ -1,19 +1,16 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/MacPorts 2011_1) (format=pdflatex 2012.1.22)  11 MAR 2012 18:40
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.3.13)  14 MAR 2012 00:51
 entering extended mode
- restricted \write18 enabled.
  %&-line parsing enabled.
 **praca_licencjacka.tex
 (./praca_licencjacka.tex
 LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, cz
-ech, slovak, dutch, ukenglish, usenglishmax, basque, french, german-x-2009-06-1
-9, ngerman-x-2009-06-19, german, ngerman, swissgerman, italian, polish, portugu
-ese, spanish, catalan, galician, loaded.
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, polish, loaded.
 (./pracamgr.cls
 Document Class: pracamgr 2006/05/05 v0.5.0 Praca magisterska
-(/opt/local/share/texmf-texlive-dist/tex/latex/base/report.cls
+(/usr/share/texmf-texlive/tex/latex/base/report.cls
 Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
-(/opt/local/share/texmf-texlive-dist/tex/latex/base/size11.clo
+(/usr/share/texmf-texlive/tex/latex/base/size11.clo
 File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -29,18 +26,18 @@ File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 ))
-(/opt/local/share/texmf-texlive-dist/tex/latex/polski/polski.sty
+(/usr/share/texmf-texlive/tex/latex/polski/polski.sty
 Package: polski 2008/02/24 v1.3.3 Polish language package
 
 Document language package `polski' v1.3.3 <2008/02/24>
    Switching to Polish text encoding and Polish maths fonts.
-(/opt/local/share/texmf-texlive-dist/tex/latex/base/ot4enc.def
+(/usr/share/texmf-texlive/tex/latex/base/ot4enc.def
 File: ot4enc.def 2005/09/27 v1.99g Standard LaTeX file
 )
 LaTeX Font Info:    Try loading font information for OT4+cmr on input line 346.
 
 
-(/opt/local/share/texmf-texlive-dist/tex/latex/polski/ot4cmr.fd
+(/usr/share/texmf-texlive/tex/latex/polski/ot4cmr.fd
 File: ot4cmr.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
@@ -75,41 +72,34 @@ LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/cmsy/b/n --> OMS/plsy/b/n on input line 346.
 )
-(/opt/local/share/texmf-texlive-dist/tex/latex/base/inputenc.sty
+(/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks14
 \inpenc@posthook=\toks15
 
-(/opt/local/share/texmf-texlive-dist/tex/latex/base/latin2.def
+(/usr/share/texmf-texlive/tex/latex/base/latin2.def
 File: latin2.def 2008/03/30 v1.1d Input encoding file
 ))
-(/opt/local/share/texmf-texlive-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/opt/local/share/texmf-texlive-dist/tex/latex/graphics/keyval.sty
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks16
 )
-(/opt/local/share/texmf-texlive-dist/tex/latex/graphics/graphics.sty
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/opt/local/share/texmf-texlive-dist/tex/latex/graphics/trig.sty
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/opt/local/share/texmf-texlive-dist/tex/latex/latexconfig/graphics.cfg
-File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(/opt/local/share/texmf-texlive-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-
-(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
-)
-(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
-)
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2010/03/12 v0.04p Graphics/color for pdfTeX
 \Gread@gobject=\count88
 ))
 \Gin@req@height=\dimen103
@@ -120,22 +110,22 @@ Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
 (./praca_licencjacka.aux)
 \openout1 = `praca_licencjacka.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
 
-(/opt/local/share/texmf-texlive-dist/tex/context/base/supp-pdf.mkii
+(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count90
 \scratchdimen=\dimen105
@@ -146,87 +136,39 @@ LaTeX Font Info:    ... okay on input line 34.
 \MPscratchCnt=\count93
 \MPscratchDim=\dimen106
 \MPnumerator=\count94
-\makeMPintoPDFobject=\count95
 \everyMPtoPDFconversion=\toks18
-) (/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/04/22 v0.16 Utilities of pdfTeX for LuaTeX (HO)
-
-(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
 )
-(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is detected.
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
-(/opt/local/share/texmf-texlive-dist/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
-
-(/opt/local/share/texmf-texlive-dist/tex/latex/oberdiek/grfext.sty
-Package: grfext 2010/08/19 v1.1 Managing graphics extensions (HO)
-
-(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/kvdefinekeys.sty
-Package: kvdefinekeys 2011/04/07 v1.3 Defining keys (HO)
-))
-(/opt/local/share/texmf-texlive-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2010/12/23 v3.10 Keyval support for LaTeX options (HO)
-
-(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2011/04/07 v1.13 Key value parser (HO)
-
-(/opt/local/share/texmf-texlive-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2011/02/16 v1.5 Prefix for e-TeX command names (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
-Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 452.
-
-(/opt/local/share/texmf-texlive-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
-LaTeX Font Info:    Try loading font information for OML+plm on input line 35.
-
-(/opt/local/share/texmf-texlive-dist/tex/latex/polski/omlplm.fd
+LaTeX Font Info:    Try loading font information for OML+plm on input line 42.
+ (/usr/share/texmf-texlive/tex/latex/polski/omlplm.fd
 File: omlplm.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
-LaTeX Font Info:    Try loading font information for OMS+plsy on input line 35.
+LaTeX Font Info:    Try loading font information for OMS+plsy on input line 42.
 
 
-(/opt/local/share/texmf-texlive-dist/tex/latex/polski/omsplsy.fd
+(/usr/share/texmf-texlive/tex/latex/polski/omsplsy.fd
 File: omsplsy.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
-LaTeX Font Info:    Try loading font information for OMX+plex on input line 35.
+LaTeX Font Info:    Try loading font information for OMX+plex on input line 42.
 
 
-(/opt/local/share/texmf-texlive-dist/tex/latex/polski/omxplex.fd
+(/usr/share/texmf-texlive/tex/latex/polski/omxplex.fd
 File: omxplex.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <12> on input line 35.
+(Font)              <12> on input line 42.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <8> on input line 35.
+(Font)              <8> on input line 42.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <6> on input line 35.
+(Font)              <6> on input line 42.
  [1
 
-{/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 40--40
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+Underfull \hbox (badness 10000) in paragraph at lines 47--47
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 40--40
+Underfull \hbox (badness 10000) in paragraph at lines 47--47
 
  []
 
@@ -253,33 +195,33 @@ Rozdzia\PlPrIeC {\l } 2.
 
 ]
 Rozdzia\PlPrIeC {\l } 3.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 90.
-(/opt/local/share/texmf-texlive-dist/tex/latex/base/omscmr.fd
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 97.
+(/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 90.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 97.
  [9] [10
 
 ]
 Rozdzia\PlPrIeC {\l } 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--122
+Underfull \hbox (badness 10000) in paragraph at lines 125--129
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 123--130
+Underfull \hbox (badness 10000) in paragraph at lines 130--137
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 131--134
+Underfull \hbox (badness 10000) in paragraph at lines 138--141
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--139
+Underfull \hbox (badness 10000) in paragraph at lines 142--146
 
  []
 
@@ -288,91 +230,96 @@ Underfull \hbox (badness 10000) in paragraph at lines 135--139
 ]
 Rozdzia\PlPrIeC {\l } 5.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <9> on input line 183.
+(Font)              <9> on input line 190.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <5> on input line 183.
+(Font)              <5> on input line 190.
 
-Overfull \hbox (32.64616pt too wide) in paragraph at lines 183--193
+Overfull \hbox (32.64616pt too wide) in paragraph at lines 190--200
 [] 
  []
 
 [13] [14]
 Rozdzia\PlPrIeC {\l } 6.
-
-Underfull \hbox (badness 10000) in paragraph at lines 196--201
-
- []
-
 [15
 
-] [16] [17] [18
+] [16
 
 ]
 Rozdzia\PlPrIeC {\l } 7.
-[19] [20
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 217.
 
-]
-Rozdzia\PlPrIeC {\l } 8.
-
-Underfull \hbox (badness 10000) in paragraph at lines 377--382
+Underfull \hbox (badness 10000) in paragraph at lines 223--228
 
  []
 
-[21] [22] [23] [24
 
-]
+Overfull \hbox (23.48375pt too wide) in paragraph at lines 246--248
+[]\OT4/cmr/m/n/9 Je±li s¦-dzia wy-±le ko-mu-ni-kat do bo-ta któ-ry od-szedª w p
+o-ko-ju, do-sta-nie ko-mu-ni-kat zwrot-ny '[]DEAD[]<<<newline'.
+ []
+
+[17] [18]
+Rozdzia\PlPrIeC {\l } 8.
+<UseCaseDiagram.jpg, id=73, 1091.07625pt x 712.6625pt>
+File: UseCaseDiagram.jpg Graphic file (type jpg)
+
+<use UseCaseDiagram.jpg>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[19
+
+] [20 <./UseCaseDiagram.jpg>]
 Rozdzia\PlPrIeC {\l } 9.
-[25] [26
+[21
+
+] [22
 
 ]
 Rozdzia\PlPrIeC {\l } 10.
-[27] [28
+[23] [24
 
 ]
 Rozdzia\PlPrIeC {\l } 11.
-[29] [30
-
-]
-Rozdzia\PlPrIeC {\l } 12.
-[31] [32
+[25] [26
 
 ]
 Dodatek A.
-[33] [34
+[27] [28
 
 ]
 Dodatek B.
-[35] [36
+[29] [30
 
 ]
 Dodatek C.
-[37] [38
+[31] [32
 
 ]
 
-LaTeX Warning: Empty `thebibliography' environment on input line 451.
+LaTeX Warning: Empty `thebibliography' environment on input line 313.
 
-[39] (./praca_licencjacka.aux) ) 
+[33] (./praca_licencjacka.aux) ) 
 Here is how much of TeX's memory you used:
- 1795 strings out of 494770
- 25878 string characters out of 3171573
- 81680 words of memory out of 3000000
- 4983 multiletter control sequences out of 15000+200000
- 16845 words of font info for 46 fonts, out of 3000000 for 9000
- 134 hyphenation exceptions out of 8191
- 37i,6n,24p,320b,238s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/opt/local/share/texmf-texlive-dist/fonts/enc/
-dvips/pl/plrm.enc}</opt/local/share/texmf-texlive-dist/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/pl
-bx10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/plbx12.pfb>
-</opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/plr10.pfb></opt/loca
-l/share/texmf-texlive-dist/fonts/type1/public/pl/plr12.pfb></opt/local/share/te
-xmf-texlive-dist/fonts/type1/public/pl/plr17.pfb></opt/local/share/texmf-texliv
-e-dist/fonts/type1/public/pl/plr9.pfb>
-Output written on praca_licencjacka.pdf (41 pages, 103381 bytes).
+ 1256 strings out of 495026
+ 16105 string characters out of 1181802
+ 69332 words of memory out of 3000000
+ 4438 multiletter control sequences out of 15000+50000
+ 16595 words of font info for 46 fonts, out of 3000000 for 9000
+ 48 hyphenation exceptions out of 8191
+ 27i,8n,24p,320b,282s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/pl/pl
+rm.enc}</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
+r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texm
+f-texlive/fonts/type1/public/pl/plbx10.pfb></usr/share/texmf-texlive/fonts/type
+1/public/pl/plbx12.pfb></usr/share/texmf-texlive/fonts/type1/public/pl/plr10.pf
+b></usr/share/texmf-texlive/fonts/type1/public/pl/plr12.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/pl/plr17.pfb></usr/share/texmf-texlive/fonts/type1/pu
+blic/pl/plr9.pfb>
+Output written on praca_licencjacka.pdf (35 pages, 428879 bytes).
 PDF statistics:
- 167 PDF objects out of 1000 (max. 8388607)
- 115 compressed objects within 2 object streams
+ 148 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

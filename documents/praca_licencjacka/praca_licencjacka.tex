@@ -4,8 +4,15 @@
 \usepackage[latin2]{inputenc}
 \usepackage{graphicx}
 
-\author{Nieistniej±cy Nichilista}
-\nralbumu{123456}
+
+\author{Jakub Tla³ka}
+\nralbumu{292665}
+%\author{Micha³ Kawiak}
+%\nralbumu{277558}
+%\author{Szymon Majewski}
+%\nralbumu{277556}
+%\author{Karol ¯ebrowski}
+%\nralbumu{277580}
 
 \title{Implementacja systemu AI-Arena}
 \tytulang{Implementation of AI-Arena system}
@@ -192,167 +199,6 @@ Ró¿norodno¶æ & regularne i czêste & konkurs co pó³ roku & du¿a baza zadañ & baza
 \end{tabular}
 
 
-\chapter{Use cases}
-\textbf{\Large{Scenariusze u¿ycia systemu przez u¿ytkownika niezalogowanego (Go¶cia)}} 
-\\
-\\
-\Large
-\textbf{Dostêp do strony g³ównej}
-
-\large 
-\textbf{Za³o¿enia:}
-\normalsize 
-\begin{itemize}
-\item Brak
-\end{itemize}
-
-\large 
-\textbf{Scenariusz postêpowania:}
-\normalsize
-\begin{enumerate}
-\item Go¶æ wpisuje w pasku adresu adres strony
-\end{enumerate} 
-
-\large
-\textbf{Efekt:}
-\normalsize
-\begin{enumerate}
-\item W oknie przegl±darki wy¶wietla siê strona g³ówna
-\end{enumerate}
-
-\large
-\textbf{Scenariusze alternatywne:}
-\normalsize
-\begin{itemize}
-\item Brak
-\end{itemize}
-\Large
-\textbf{Rejestracja w systemie}
-
-\large
-\textbf{Za³o¿enia:}
-\normalsize
-\begin{enumerate}
-\item Go¶æ znajduje siê na stronie g³ównej serwisu
-\item Go¶æ posiada aktywne konto mailowe
-\end{enumerate}
-
-\large
-\textbf{Scenariusz postêpowania:}
-\normalsize
-\begin{enumerate}
-\item Go¶æ klika na link ?zarejestruj? przekierowuj±cy do strony z rejestracj±
-\item Go¶æ wpisuje swoje dane do formularza. Dane zawieraj± m.in. po¿±dan± nazwê u¿ytkownika, has³o, pole do weryfikacji has³a, adres mailowy.
-\item Go¶æ wchodzi na swoj± skrzynkê mailow± i otwiera list wys³any przez serwis
-\item Go¶æ klika w link aktywacyjny
-\end{enumerate}
-
-\large
-\textbf{Efekt:}
-\normalsize
-\begin{enumerate}
-\item System wysy³a do u¿ytkownika wiadomo¶æ na podany adres mailowy
-\item System zak³ada u¿ytkownikowi nowe konto w serwisie
-\item Po klikniêciu w link aktywacyjny system umo¿liwia zalogowanie na to konto
-\end{enumerate}
-
-\large
-\textbf{Scenariusze alternatywne:}
-\normalsize
-\begin{enumerate}
-\item Go¶æ wybra³ nazwê u¿ytkownika, która jest ju¿ zajêta
-        \begin{description}
-        \item[a)] System wy¶wietla komunikat, ¿e ¿±dana nazwa u¿ytkownika jest niedostêpna
-        \end{description}
-\item Go¶æ wpisa³ niejednakowe ci±gi znaków w polu ,,has³o'' i ,,potwierdzenie has³a''
-        \begin{description}
-        \item[a)] System wy¶wietla komunikat o niezgodno¶ci danych
-		\end{description}
-\item Go¶æ wpisa³ niepoprawny adres mailowy
-\begin{description}        
-        \item[a)] System próbuje wys³aæ maila na podany adres
-        \item[b)] W przypadku braku aktywacji konta w ci±gu 24 godzin konto zostanie automatycznie skasowane
-\end{description}
-\item Go¶æ nie klikn±³ w link aktywacyjny przys³any w mailu
-\begin{description}
-\item[a)] Po up³ywie 24 godzin konto zostanie automatycznie skasowane
-\end{description}
-\end{enumerate}    
-\Large
-\textbf{Logowanie w systemie - wariant 1: Go¶æ posiada konto}
-
-\large
-\textbf{Za³o¿enia:}
-\normalsize
-\begin{enumerate}
-\item Go¶æ znajduje siê na stronie g³ównej serwisu
-\item Go¶æ posiada konto w serwisie
-\end{enumerate}
-
-\large
-\textbf{Scenariusz postêpowania:}
-\normalsize
-\begin{enumerate}
-\item Go¶æ klika w link ?zaloguj? przekierowuj±cy na stronê logowania
-\item Go¶æ w formularzu wpisuje swoj± nazwê u¿ytkownika i has³o
-\end{enumerate}
-
-\large
-\textbf{Efekt:}
-\normalsize
-\begin{enumerate}
-\item System przekierowuje u¿ytkownika na jego stronê startow±
-\end{enumerate}
-
-\large
-\textbf{Scenariusze alternatywne:}
-\normalsize
-\begin{enumerate}
-\item Podana przez Go¶cia nazwa u¿ytkownika jest nieprawid³owa
-\begin{description}
-\item[a)] System wy¶wietla komunikat, ¿e podana nazwa u¿ytkownika lub has³o jest nieprawid³owe
-\end{description}
-\item Podane przez Go¶cia has³o jest nieprawid³owe
-\begin{description}
-\item[a)] System wy¶wietla komunikat, ¿e podana nazwa u¿ytkownika lub has³o jest nieprawid³owe
-\end{description}
-\item Konto nie zosta³o aktywowane
-\begin{description}
-\item[a)] System wy¶wietla komunikat, ¿e konto nie zosta³o jeszcze aktywowane. U¿ytkownik pozostaje niezalogowany  
-\end{description}
-\end{enumerate}
-\Large
-\textbf{Logowanie w systemie - wariant 2: Go¶æ nie posiada konta}
-
-\large
-\textbf{Za³o¿enia:}
-\normalsize
-\begin{enumerate}
-\item Go¶æ znajduje siê na stronie g³ównej serwisu
-\item Go¶æ nie posiada konta w serwisie
-\end{enumerate}
-
-\large
-\textbf{Scenariusz postêpowania:}
-\normalsize
-\begin{enumerate}
-\item Go¶æ klika w link ?zaloguj? przekierowuj±cy na stronê logowania
-\item Go¶æ w formularzu wpisuje nazwê u¿ytkownika i has³o
-\end{enumerate}
-
-\large
-\textbf{Efekt:}
-\normalsize
-\begin{enumerate}
-\item System wy¶wietla komunikat, ¿e podana nazwa u¿ytkownika lub has³o s± nieprawid³owe
-\end{enumerate}
-
-\large
-\textbf{Scenariusze alternatywne:}
-\normalsize
-\begin{itemize}
-\item Brak
-\end{itemize}
 
 \chapter{Metodyka Scrum}
 
@@ -431,6 +277,22 @@ Za obs³ugê bazy danych odpowiedzialny jest framework Django. Domy¶ln± baz±, na k
 jest PostgreSQL, ale nie jest to wymagane.
 
 \chapter{Dokumentacja uzytkowa i opis implementacji}
+
+\section{Scenariusze u¿ycia systemu}
+\begin{figure}[h]
+	\begin{center}
+		\resizebox{!}{22cm}{
+			\includegraphics[angle=90]{UseCaseDiagram.jpg}
+		}
+		\caption{Diagram przypadków u¿ycia}
+	\end{center}
+\end{figure}
+
+\subsection{\Large{Z udzia³em u¿ytkownika niezalogowanego (Go¶cia)}} 
+
+\subsection{\Large{Z udzia³em u¿ytkownika zalogowanego}}
+
+\subsection{\Large{Z udzia³em moderatora konkursu lub gry}}
 
 \chapter{Podsumowanie}
 
