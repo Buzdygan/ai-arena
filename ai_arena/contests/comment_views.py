@@ -110,3 +110,31 @@ def edit_comment(request, comment_type, object_id, comment_id):
                 },
                 context_instance=RequestContext(request))
 
+@login_required
+def quick_comment_edit(request, comment_type, object_id, comment_id, new_content):
+    if not comment_type in ['game_details', 'contests']:
+        return HttpResponseRedirect('/')
+
+    if comment_type == 'game_details':
+        object = Game.objects.get(id=object_id)
+        comment = GameComments.objects.get(id=comment_id)
+    else:
+        object = Contest.objects.get(id=object_id)
+        comment = ContestComment.objects.get(id=comment_id)
+
+    user = request.user
+    moderators = object.moderators.all()
+
+    if not user.is_staff and not user in moderators and user != comment.user:
+        if comment_type == 'game_details':
+            return game_details(request, object_id, error_msg="You cannot edit this comment!")
+        else:
+            return show_contest(request, object_id, error_msg="You cannot edit this comment!")
+
+    comment.content = new_content;
+    comment.save()
+
+    if comment_type == 'game_details':
+        return HttpResponseRedirect('/game_details/' + object_id + '/')
+    else:
+        return HttpResponseRedirect('/contests/show_contest/' + object_id + '/')

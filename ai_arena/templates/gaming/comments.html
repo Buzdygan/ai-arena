@@ -13,7 +13,7 @@
                     </td></tr>
 
                     <tr><td class='comment_username'>
-                        {{ comment.user.username }} 
+                            <a href='/profile/{{ comment.user.username }}/'>{{ comment.user.username }}</a>
                     </td></tr>
                 </table>
             </td>
@@ -26,20 +26,29 @@
                     </td>
                     <td class='comment_options'>
                         {% if user.is_staff or user.username == comment.user.username or user in moderators %}
-                            <a href='/{{ template_type }}/edit_comment/{{ object_id }}/{{ comment.id }}'>Edit</a> |
 <script>
     function show_confirm(){
         var x = confirm("Are you sure you want to delete this comment?");
         if(x) location="/{{ template_type }}/del_comment/{{ object_id }}/{{ comment.id }}/";
     }
+
+    $(function() {
+        $("#dialog").dialog();
+    });
 </script>
+                        <div id='dialog' title='Edit Comment'>
+                            {{ comment.content }}
+                        </div>
+
+
+                            <a href='/{{ template_type }}/edit_comment/{{ object_id }}/{{ comment.id }}'>Edit</a> |
                             <a href='javascript:void(0);' onClick="show_confirm()">Delete</a>
                         {% endif %}
                     </td>
                 </tr>
                 <tr>
                     <td class='comment_content'>
-                        {{ comment }}
+                        {{ comment.content }}
                     </td>
                 </tr>
             </table>

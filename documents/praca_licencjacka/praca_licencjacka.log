@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/MacPorts 2011_1) (format=pdflatex 2012.1.22)  14 MAR 2012 13:33
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011/MacPorts 2011_1) (format=pdflatex 2012.1.22)  14 MAR 2012 13:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -120,20 +120,20 @@ Package: ltxcmds 2011/04/18 v1.20 LaTeX kernel commands for general use (HO)
 (./praca_licencjacka.aux)
 \openout1 = `praca_licencjacka.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT4/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
 
 (/opt/local/share/texmf-texlive-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -195,38 +195,38 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for OML+plm on input line 35.
+LaTeX Font Info:    Try loading font information for OML+plm on input line 42.
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/polski/omlplm.fd
 File: omlplm.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
-LaTeX Font Info:    Try loading font information for OMS+plsy on input line 35.
+LaTeX Font Info:    Try loading font information for OMS+plsy on input line 42.
 
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/polski/omsplsy.fd
 File: omsplsy.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
-LaTeX Font Info:    Try loading font information for OMX+plex on input line 35.
+LaTeX Font Info:    Try loading font information for OMX+plex on input line 42.
 
 
 (/opt/local/share/texmf-texlive-dist/tex/latex/polski/omxplex.fd
 File: omxplex.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
 )
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <12> on input line 35.
+(Font)              <12> on input line 42.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <8> on input line 35.
+(Font)              <8> on input line 42.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <6> on input line 35.
+(Font)              <6> on input line 42.
  [1
 
 {/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 42--42
+Underfull \hbox (badness 10000) in paragraph at lines 49--49
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 42--42
+Underfull \hbox (badness 10000) in paragraph at lines 49--49
 
  []
 
@@ -250,7 +250,7 @@ Rozdzia\PlPrIeC {\l } 1.
 ]
 Rozdzia\PlPrIeC {\l } 2.
 
-Underfull \hbox (badness 10000) in paragraph at lines 49--81
+Underfull \hbox (badness 10000) in paragraph at lines 56--88
 
  []
 
@@ -258,31 +258,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--81
 
 ]
 Rozdzia\PlPrIeC {\l } 3.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 94.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 101.
+
 (/opt/local/share/texmf-texlive-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 94.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 101.
  [9] [10]
 Rozdzia\PlPrIeC {\l } 4.
 
-Underfull \hbox (badness 10000) in paragraph at lines 150--154
+Underfull \hbox (badness 10000) in paragraph at lines 157--161
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 155--162
+Underfull \hbox (badness 10000) in paragraph at lines 162--169
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 163--166
+Underfull \hbox (badness 10000) in paragraph at lines 170--173
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 167--171
+Underfull \hbox (badness 10000) in paragraph at lines 174--178
 
  []
 
@@ -293,87 +294,97 @@ Underfull \hbox (badness 10000) in paragraph at lines 167--171
 ]
 Rozdzia\PlPrIeC {\l } 5.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <9> on input line 215.
+(Font)              <9> on input line 222.
 LaTeX Font Info:    External font `plex10' loaded for size
-(Font)              <5> on input line 215.
+(Font)              <5> on input line 222.
 
-Overfull \hbox (32.64616pt too wide) in paragraph at lines 215--225
+Overfull \hbox (32.64616pt too wide) in paragraph at lines 222--232
 [] 
  []
 
 [13] [14]
 Rozdzia\PlPrIeC {\l } 6.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 245.
 
-Underfull \hbox (badness 10000) in paragraph at lines 228--233
+Underfull \hbox (badness 10000) in paragraph at lines 251--256
 
+ []
+
+
+Overfull \hbox (23.48375pt too wide) in paragraph at lines 274--276
+[]\OT4/cmr/m/n/9 Je±li s¦-dzia wy-±le ko-mu-ni-kat do bo-ta któ-ry od-szedª w p
+o-ko-ju, do-sta-nie ko-mu-ni-kat zwrot-ny '[]DEAD[]<<<newline'.
  []
 
 [15
 
-] [16] [17] [18
-
-]
+] [16]
 Rozdzia\PlPrIeC {\l } 7.
+<UseCaseDiagram.jpg, id=67, 1091.07625pt x 712.6625pt>
+File: UseCaseDiagram.jpg Graphic file (type jpg)
 
-Underfull \hbox (badness 10000) in paragraph at lines 407--412
+<use UseCaseDiagram.jpg>
+Package pdftex.def Info: UseCaseDiagram.jpg used on input line 314.
+(pdftex.def)             Requested size: 1091.0736pt x 712.66077pt.
 
- []
 
-[19] [20] [21] [22
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-]
+[17
+
+] [18 <./UseCaseDiagram.jpg>]
 Rozdzia\PlPrIeC {\l } 8.
-[23] [24
+[19
+
+] [20
 
 ]
 Rozdzia\PlPrIeC {\l } 9.
-[25] [26
+[21] [22
 
 ]
 Rozdzia\PlPrIeC {\l } 10.
-[27] [28
-
-]
-Rozdzia\PlPrIeC {\l } 11.
-[29] [30
+[23] [24
 
 ]
 Dodatek A.
-[31] [32
+[25] [26
 
 ]
 Dodatek B.
-[33] [34
+[27] [28
 
 ]
 Dodatek C.
-[35] [36
+[29] [30
 
 ]
 
-LaTeX Warning: Empty `thebibliography' environment on input line 481.
+LaTeX Warning: Empty `thebibliography' environment on input line 341.
 
-[37] (./praca_licencjacka.aux) ) 
+[31] (./praca_licencjacka.aux) ) 
 Here is how much of TeX's memory you used:
- 1795 strings out of 494770
- 25878 string characters out of 3171573
- 81680 words of memory out of 3000000
- 4983 multiletter control sequences out of 15000+200000
- 16845 words of font info for 46 fonts, out of 3000000 for 9000
+ 1802 strings out of 494770
+ 26004 string characters out of 3171573
+ 81668 words of memory out of 3000000
+ 4988 multiletter control sequences out of 15000+200000
+ 16595 words of font info for 46 fonts, out of 3000000 for 9000
  134 hyphenation exceptions out of 8191
- 37i,6n,24p,243b,238s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,8n,25p,243b,299s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/opt/local/share/texmf-texlive-dist/fonts/enc/
 dvips/pl/plrm.enc}</opt/local/share/texmf-texlive-dist/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/pl
-bx10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/plbx12.pfb>
-</opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/plr10.pfb></opt/loca
-l/share/texmf-texlive-dist/fonts/type1/public/pl/plr12.pfb></opt/local/share/te
-xmf-texlive-dist/fonts/type1/public/pl/plr17.pfb></opt/local/share/texmf-texliv
-e-dist/fonts/type1/public/pl/plr9.pfb>
-Output written on praca_licencjacka.pdf (39 pages, 104627 bytes).
+nts/cm/cmsy10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/amsfo
+nts/cm/cmsy9.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/plb
+x10.pfb></opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/plbx12.pfb><
+/opt/local/share/texmf-texlive-dist/fonts/type1/public/pl/plr10.pfb></opt/local
+/share/texmf-texlive-dist/fonts/type1/public/pl/plr12.pfb></opt/local/share/tex
+mf-texlive-dist/fonts/type1/public/pl/plr17.pfb></opt/local/share/texmf-texlive
+-dist/fonts/type1/public/pl/plr9.pfb>
+Output written on praca_licencjacka.pdf (33 pages, 414133 bytes).
 PDF statistics:
- 161 PDF objects out of 1000 (max. 8388607)
- 111 compressed objects within 2 object streams
+ 144 PDF objects out of 1000 (max. 8388607)
+ 99 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
