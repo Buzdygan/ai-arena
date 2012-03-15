@@ -1,11 +1,4 @@
 #!/usr/bin/env python
-import sys
-import os
-
-project_path = os.path.abspath('..')
-if not project_path in sys.path:
-    sys.path.insert(0, project_path)
-
 from django.core.management import execute_manager
 import imp
 try:

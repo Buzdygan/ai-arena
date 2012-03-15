@@ -3,7 +3,7 @@
 \usepackage{polski}
 \usepackage[latin2]{inputenc}
 \usepackage{graphicx}
-
+\usepackage{wrapfig}
 
 \author{Jakub Tla³ka}
 \nralbumu{292665}
@@ -318,20 +318,109 @@ jest PostgreSQL, ale nie jest to wymagane.
 \chapter{Dokumentacja uzytkowa i opis implementacji}
 
 \section{Scenariusze u¿ycia systemu}
-\begin{figure}[h]
+\begin{figure}[ht!]
 	\begin{center}
 		\resizebox{!}{22cm}{
-			\includegraphics[angle=90]{UseCaseDiagram.jpg}
+			\includegraphics[angle=90]{img/UseCaseDiagram.jpg}
 		}
 		\caption{Diagram przypadków u¿ycia}
 	\end{center}
 \end{figure}
 
 \subsection{\Large{Z udzia³em u¿ytkownika niezalogowanego (Go¶cia)}} 
+U¿ytkownik niezalogowany ma bardzo ograniczone prawa u¿ywania serwisu. Praktycznie jedyn± dozwolon± aktywno¶ci± jest rejestracja
+w serwisie lub próba zalogowania siê do utworzonego wcze¶niej konta.
+
+\subsubsection{Rejestracja w systemie}
+Aby zarejestrowaæ siê w systemie nale¿y wykonaæ kilka kroków. Na pocz±tku nale¿y klikn±æ w napis "Register" zlokalizowany po prawej stronie 
+na górze.
+
+Nastêpnie system przekieruje u¿ytkownika do strony, gdzie bêdzie móg³ wybraæ swój login oraz has³o. Nale¿y zwróciæ uwagê, i¿ login
+musi byæ unikalny, mo¿e zawieraæ wy³±cznie ma³e i du¿e litery, cyfry oraz znak '\_'. W przeciwnym wypadku pojawi siê komunikat o b³êdzie.
+
+Po prawid³owym wykonaniu tego kroku u¼ytkownik zostanie przeniesiony na swoj± stronê profilow±. Mo¿e st±d zarz±dzaæ swoim kontem. 
+Od tej chwili jest równie¿ zalogowany w serwisie, co znaczy, ¿e mo¿e m. in. wysy³aæ swoje boty do gier lub wykonywaæ inne akcje dostêpne
+wy³±cznie dla zalogowanych u¿ytkowników.
+
+\subsubsection{Logowanie}
+Logowanie jest standardow± aktywno¶ci±. któr± siê spotyka na wszystkich forach i wielu serwisach. Przycisk logowania znajduje siê tu¿ obok 
+przycisku rejestracji. Aby siê zalogowaæ nale¿y klikn±æ w ten przycisk a nastêpnie wype³niæ pola formularza, który siê pojawi na ekranie.
+Je¶li dane bêd± zgodne z tymi zapisanymi w bazie danych, system przekieruje u¿ytkownika na jego stronê profilow±.
 
 \subsection{\Large{Z udzia³em u¿ytkownika zalogowanego}}
 
+\subsubsection{Wylogowanie siê z serwisu}
+Wylogowanie jest kolejn± standardow± aktywno¶ci± udostêpnian± przez wiele serwisów. Aby wylogowaæ siê z serwisu nale¿y klikn±æ przycisk "Logout", 
+który znajduje siê w prawym, górnym roku strony. Zastêpuje on przycisk "Login", który widoczny jest dla niezalogowanych u¿ytkowników. Po klikniêciu tego przycisku
+u¿ytkownik jest przekierowywany na stronê g³ówn± serwisu.
+
+\subsubsection{Otwarcie swojej strony profilowej}
+Aby otworzyæ swoj± stronê profilow± u¿ytkownik musi klikn±æ w link znajduj±cy siê pod jego loginem. Loginy u¿ytkownika pojawiaj± siê w ró¿nych miejscach systemu
+i klikniêcie w dowolny z nich powoduje otwarcie strony profilowej danego u¿ytkownika. W szczególno¶ci po klikniêciu na w³asny login pojawi siê w³asna strona u¿ytkownika.
+Isnieje równie¿ tzw. "sta³y link do profilu" znajduj±cy siê na górze strony w prawym rogu. Po klikniêciu w znajduj±cy siê tam login u¿ytkownika (zaznaczonego innym kolorem
+ni¿ reszta napisu) system wy¶wietla stronê profilow± aktualnie zalogowanego u¿ytkownika.
+
+\subsubsection{Edycja profilu u¿ytkownika}
+Gdy u¿ytkownik znajduje siê na swojej stronie profilowej ma dostêp do kilku odno¶ników. Jednym z nich jest odno¶nik do strony konfiguracyjnej profilu. Aby j± otworzyæ nale¿y klikn±æ 
+w link "Edit profile" znajduj±cy siê pod zdjêciem profilowym. W oknie edycji profilu pojawia siê formularz zawieraj±cy kilka pól, m.in. zdjêcie, kraj, szko³a/uniwersytet czy zainteresowania. 
+¯adne z nich nie jest obowi±zkowe. U¿ytkownik zatwierdza zmiany klikaj±c na prycisk "Update" znajduj±cy siê na samym dole fornularza.
+
+\subsubsection{Utworzenie nowej gry lub konkursu}
+Tworzenie gry (konkursu) jest jedn± z centralnych aktywno¶ci w serwisie. Aby utworzyæ grê, u¿ytkownik musi mieæ zawczasu przygotowane nastêpuj±ce pliki:
+\begin{itemize}
+	\item{Plik ¼ród³owy sêdziego} 
+		Sêdzia jest programem, który nadzowuje przebieg gry. Powinien byæ napisany w jednym z jêzyków: C, C++, Java, Python. Otrzymuje on komunikaty od Nadzorcy, który z kolei zczytuje je ze standardowego wej¶cia Botów.
+		Sêdzia musi dokonaæ walidacji komunikatu, tj. upewniæ siê, i¿ format komunikatu jest zgodny z protoko³em opisanym w zasadach gry oraz, ¿e ruch zawarty w komunikacie nie narusza regu³ gry (przyk³adowo, ¿e
+		gracz graj±cy pionami czarnymi nie ruszy³ siê bia³ym pionem). Gdy upewni siê, ¿e otrzymany komunikat jest poprawny wysy³a na swoje standardowe wyj¶cie komunikat zgodnie z formatem opisanym 
+		w regu³ach gry.
+
+		Plik ¼ród³owy sêdziego jest dostêpny dla wszystkich zalogowanych u¿ytkowników serwisu. Ma to zapobiec wysy³aniu "stronniczych" sêdziów oraz ³atwieszemu ujawnieniu pewnych "ukrytych" wad protoko³u.
+		Administratorzy zastrzegaj± sobie prawo do usuniêcia lub poprawienia wadliwych sêdziów.
+	\item{Plik z zasadami rozgrywki}
+		Plik ten musi zawieraæ ogólny opis gry (np. fabu³ê wprowadzaj±c±) oraz szczegó³owy opis i znaczenie komunikatów. W szczególno¶ci musz± byæ zawarte informacje takie jak:
+		\begin{itemize}
+			\item{dok³adny format komunikatu}
+			\item{dozwolone odpowiedzi na ka¼dy rodzaj komunikatu}
+			\item{komunikaty informuj±ce o b³êdzie}
+		\end{itemize}
+		Zosta³o przyjête za³o¿enie, ¿e Bot, który wy¶le komunikat o innej, ni¿ wyspecykowano formie automatycznie przegrywa dan± grê i jest zabijany przez Nadzorcê.
+\end{itemize}
+
+Aby utworzyæ konkurs nie jest potrzebne wcze¶niejsze przygotowywanie plików, jednak musi istnieæ gra, na bazie której chcemy utworzyæ nowy konkurs.
+
+Gdy u¿ytkownik przygotowa³ ju¿ powy¿sze pliki powinien, w celu utworzenia nowej gry, klikn±æ w link "Create New Game" znajduj±cy siê na górnym pasku strony. Otworzy siê formularz zawieraj±cy pola, do których 
+nale¿y wprowadziæ informacje nt. tworzonej gry (miêdzy innymi 2 wymienione wcze¶niej pliki czy nazwa gry). Warto zwróciæ uwagê, i¿ nazwa gry musi byæ unikalna, gdy¿ 
+definiuje ona ¶cie¿kê do poszczególnych plików na dysku.
+
+Gdy u¿ytkownik wype³ni formularz i zatwierdzi przyciskiem "Submit" na dole formularza zostanie przeniesiony na stronê zawieraj±c± detale w³a¶nie utworzonej gry.
+Autor staje siê automatycznie moderatorem gry i ma prawo m. in. do edycji czy usuniêcia gry lub edycji i usuwania komentarzy u¿ytkowników.
+
+\subsubsection{Wys³anie bota do gry lub kunkursu}
+Aby wys³aæ bota do gry (konkursu) nale¿y w pierwszej kolejno¶ci przej¶æ na stronê zawieraj±c± szczegó³owy opis gry. Mo¿na to zrobiæ klikaj±c na przycisk "Games list" ("Contests") znajduj±cy siê na górze strony, a nastêpnie 
+wybraæ grê (konkurs) z wy¶wietlonej listy.
+
+Gdy znajdujemy siê ju¿ na stronie z detalami nale¿y, w celu zg³oszenia bota, klikn±æ na link "Send bot for this game" (lub "Add contestant" w przypadku konkursu) i wype³niæ formularz wy¶wietlony przez system.
+Podobnie, jak w przypadku tworzenia gry nale¿y mieæ uprzednio przygotowany plik zawieraj±cy kod ¼ród³owy bota. Bot komunikuje siê z sêdzi± za pomoc± komunikatów opisanych w zasadach gry wypisywanych i zczytywanych ze standatdowego 
+wej¶cia i wyj¶cia. W przypadku, gdy bot wy¶le ¼le sformatowany lub b³êdny komunikat - automatycznie przegrywa rozgrywkê dostaj±c za ni± mo¿liwe minimum punktów.
+
+\subsubsection{Dodanie komentarza pod gr± lub konkursem}
+Aby dodaæ komentarz do gry (konkursu) nale¿y znaldowaæ siê na stronie ze szczegó³owym opisem danej gry (konkursu). Nastêpnie klikn±æ w link "Add comment" i wype³niæ formularz wy¶wietlony przez system.
+Komunikat ten pojawi siê w kolejno¶ci odwrotnie chronologicznej pod opisem zasad gry.
+
+Nale¿y zwróciæ uwagê, i¿ w przypadku naruszania zasad publicznego wypowiadania siê (tre¶ci wulgarne, obra¼liwe, naruszaj±ce prywatno¶æ itp.) moderator konkursu ma prawo do edycji lub usuniêcia komentarza. 
+Takie samo prawa ma równie¿ autor komentarza.
+
+\subsubsection{Wy¶wietlenie kodu ¼ród³owego sêdziego}
+W celu wy¶wietlenia kodu ¼ród³owego sêdziego nale¿y znajdowaæ siê na stronie gry zawiejaj±cej szczegó³owy jej opis. Potem, po klikniêciu w link "Show source of the judge" system przekieruje nas na stronê. gdzie wy¶wietlony zostanie 
+kod ¼ród³owy sêdziego.
+
 \subsection{\Large{Z udzia³em moderatora konkursu lub gry}}
+
+\subsubsection{Usuniêcie komentarza do gry lub konkursu}
+
+\subsubsection{Edycja komentarza do gry lub konkursu}
+
+\subsubsection{Usuniêcie gry lub konkursu}
 
 \chapter{Podsumowanie}
 
