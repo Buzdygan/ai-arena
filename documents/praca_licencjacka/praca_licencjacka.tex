@@ -332,6 +332,12 @@ U¿ytkownik niezalogowany ma bardzo ograniczone prawa u¿ywania serwisu. Praktyczn
 w serwisie lub próba zalogowania siê do utworzonego wcze¶niej konta.
 
 \subsubsection{Rejestracja w systemie}
+\begin{wrapfigure}{r}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/register.png}
+	\end{center}
+	\caption{Pasek logowania i rejestracji do serwisu}
+\end{wrapfigure}
 Aby zarejestrowaæ siê w systemie nale¿y wykonaæ kilka kroków. Na pocz±tku nale¿y klikn±æ w napis "Register" zlokalizowany po prawej stronie 
 na górze.
 
@@ -350,6 +356,12 @@ Je¶li dane bêd± zgodne z tymi zapisanymi w bazie danych, system przekieruje u¿yt
 \Large{\subsection{Z udzia³em u¿ytkownika zalogowanego}}
 
 \subsubsection{Wylogowanie siê z serwisu}
+\begin{wrapfigure}{l}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/logout.png}
+	\end{center}
+	\caption{Pasek wylogowania z serwisu}
+\end{wrapfigure}
 Wylogowanie jest kolejn± standardow± aktywno¶ci± udostêpnian± przez wiele serwisów. Aby wylogowaæ siê z serwisu nale¿y klikn±æ przycisk "Logout", 
 który znajduje siê w prawym, górnym roku strony. Zastêpuje on przycisk "Login", który widoczny jest dla niezalogowanych u¿ytkowników. Po klikniêciu tego przycisku
 u¿ytkownik jest przekierowywany na stronê g³ówn± serwisu.
@@ -366,36 +378,53 @@ w link "Edit profile" znajduj±cy siê pod zdjêciem profilowym. W oknie edycji pro
 ¯adne z nich nie jest obowi±zkowe. U¿ytkownik zatwierdza zmiany klikaj±c na prycisk "Update" znajduj±cy siê na samym dole fornularza.
 
 \subsubsection{Utworzenie nowej gry lub konkursu}
+\begin{wrapfigure}{l}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/create_game.png}
+	\end{center}
+	\caption{Formularz do tworzenia nowej gry}
+\end{wrapfigure}
 Tworzenie gry (konkursu) jest jedn± z centralnych aktywno¶ci w serwisie. Aby utworzyæ grê, u¿ytkownik musi mieæ zawczasu przygotowane nastêpuj±ce pliki:
 \begin{itemize}
-	\item{Plik ¼ród³owy sêdziego} 
-		Sêdzia jest programem, który nadzowuje przebieg gry. Powinien byæ napisany w jednym z jêzyków: C, C++, Java, Python. Otrzymuje on komunikaty od Nadzorcy, który z kolei zczytuje je ze standardowego wej¶cia Botów.
-		Sêdzia musi dokonaæ walidacji komunikatu, tj. upewniæ siê, i¿ format komunikatu jest zgodny z protoko³em opisanym w zasadach gry oraz, ¿e ruch zawarty w komunikacie nie narusza regu³ gry (przyk³adowo, ¿e
-		gracz graj±cy pionami czarnymi nie ruszy³ siê bia³ym pionem). Gdy upewni siê, ¿e otrzymany komunikat jest poprawny wysy³a na swoje standardowe wyj¶cie komunikat zgodnie z formatem opisanym 
-		w regu³ach gry.
-
-		Plik ¼ród³owy sêdziego jest dostêpny dla wszystkich zalogowanych u¿ytkowników serwisu. Ma to zapobiec wysy³aniu "stronniczych" sêdziów oraz ³atwieszemu ujawnieniu pewnych "ukrytych" wad protoko³u.
-		Administratorzy zastrzegaj± sobie prawo do usuniêcia lub poprawienia wadliwych sêdziów.
-	\item{Plik z zasadami rozgrywki}
-		Plik ten musi zawieraæ ogólny opis gry (np. fabu³ê wprowadzaj±c±) oraz szczegó³owy opis i znaczenie komunikatów. W szczególno¶ci musz± byæ zawarte informacje takie jak:
-		\begin{itemize}
-			\item{dok³adny format komunikatu}
-			\item{dozwolone odpowiedzi na ka¼dy rodzaj komunikatu}
-			\item{komunikaty informuj±ce o b³êdzie}
-		\end{itemize}
-		Zosta³o przyjête za³o¿enie, ¿e Bot, który wy¶le komunikat o innej, ni¿ wyspecykowano formie automatycznie przegrywa dan± grê i jest zabijany przez Nadzorcê.
+	\item{Plik ¼ród³owy sêdziego.} 
+	\item{Plik z zasadami rozgrywki} 
 \end{itemize}
 
-Aby utworzyæ konkurs nie jest potrzebne wcze¶niejsze przygotowywanie plików, jednak musi istnieæ gra, na bazie której chcemy utworzyæ nowy konkurs.
+Sêdzia jest programem, który nadzowuje przebieg gry. Powinien byæ napisany w jednym z jêzyków: C, C++, Java, Python. Otrzymuje on komunikaty od Nadzorcy, który z kolei zczytuje je ze standardowego wej¶cia Botów. 
+Sêdzia musi dokonaæ walidacji komunikatu, tj. upewniæ siê, i¿ format komunikatu jest zgodny z protoko³em opisanym w zasadach gry oraz, ¿e ruch zawarty w komunikacie nie narusza regu³ gry (przyk³adowo, ¿e
+gracz graj±cy pionami czarnymi nie ruszy³ siê bia³ym pionem). Gdy upewni siê, ¿e otrzymany komunikat jest poprawny wysy³a na swoje standardowe wyj¶cie komunikat zgodnie z formatem opisanym w regu³ach gry.
 
+Plik ¼ród³owy sêdziego jest dostêpny dla wszystkich zalogowanych u¿ytkowników serwisu. Ma to zapobiec wysy³aniu "stronniczych" sêdziów oraz ³atwieszemu ujawnieniu pewnych "ukrytych" wad protoko³u.
+Administratorzy zastrzegaj± sobie prawo do usuniêcia lub poprawienia wadliwych sêdziów.
+
+Plik z zasadami rozgrywki musi zawieraæ ogólny opis gry (np. fabu³ê wprowadzaj±c±) oraz szczegó³owy opis i znaczenie komunikatów. W szczególno¶ci musz± byæ zawarte informacje takie jak:
+\begin{itemize}
+	\item{dok³adny format komunikatu}
+	\item{dozwolone odpowiedzi na ka¼dy rodzaj komunikatu}
+	\item{komunikaty informuj±ce o b³êdzie}
+\end{itemize}
+Zosta³o przyjête za³o¿enie, ¿e Bot, który wy¶le komunikat o innej, ni¿ wyspecykowano formie automatycznie przegrywa dan± grê i jest zabijany przez Nadzorcê.
+
+Aby utworzyæ konkurs nie jest potrzebne wcze¶niejsze przygotowywanie plików, jednak musi istnieæ gra, na bazie której chcemy utworzyæ nowy konkurs.
+\begin{wrapfigure}{r}{0.7\textwidth}
+	\begin{center}
+		\includegraphics[width=0.68\textwidth]{img/game_details.png}
+	\end{center}
+	\caption{Szczegó³y gry}
+\end{wrapfigure}
 Gdy u¿ytkownik przygotowa³ ju¿ powy¿sze pliki powinien, w celu utworzenia nowej gry, klikn±æ w link "Create New Game" znajduj±cy siê na górnym pasku strony. Otworzy siê formularz zawieraj±cy pola, do których 
 nale¿y wprowadziæ informacje nt. tworzonej gry (miêdzy innymi 2 wymienione wcze¶niej pliki czy nazwa gry). Warto zwróciæ uwagê, i¿ nazwa gry musi byæ unikalna, gdy¿ 
 definiuje ona ¶cie¿kê do poszczególnych plików na dysku.
-
 Gdy u¿ytkownik wype³ni formularz i zatwierdzi przyciskiem "Submit" na dole formularza zostanie przeniesiony na stronê zawieraj±c± detale w³a¶nie utworzonej gry.
 Autor staje siê automatycznie moderatorem gry i ma prawo m. in. do edycji czy usuniêcia gry lub edycji i usuwania komentarzy u¿ytkowników.
 
 \subsubsection{Wys³anie bota do gry lub kunkursu}
+\begin{wrapfigure}{l}{0.6\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/send_bot.png}
+	\end{center}
+	\caption{Formularz do wysy³ania bota}
+\end{wrapfigure}
 Aby wys³aæ bota do gry (konkursu) nale¿y w pierwszej kolejno¶ci przej¶æ na stronê zawieraj±c± szczegó³owy opis gry. Mo¿na to zrobiæ klikaj±c na przycisk "Games list" ("Contests") znajduj±cy siê na górze strony, a nastêpnie 
 wybraæ grê (konkurs) z wy¶wietlonej listy.
 
@@ -406,11 +435,24 @@ wej¶cia i wyj¶cia. W przypadku, gdy bot wy¶le ¼le sformatowany lub b³êdny komuni
 \subsubsection{Dodanie komentarza pod gr± lub konkursem}
 Aby dodaæ komentarz do gry (konkursu) nale¿y znaldowaæ siê na stronie ze szczegó³owym opisem danej gry (konkursu). Nastêpnie klikn±æ w link "Add comment" i wype³niæ formularz wy¶wietlony przez system.
 Komunikat ten pojawi siê w kolejno¶ci odwrotnie chronologicznej pod opisem zasad gry.
+\begin{wrapfigure}{l}{0.7\textwidth}
+	\begin{center}
+		\includegraphics[width=0.68\textwidth]{img/comment.png}
+	\end{center}
+	\caption{Komentarz umieszczony pod gr±}
+\end{wrapfigure}
+
 
 Nale¿y zwróciæ uwagê, i¿ w przypadku naruszania zasad publicznego wypowiadania siê (tre¶ci wulgarne, obra¼liwe, naruszaj±ce prywatno¶æ itp.) moderator konkursu ma prawo do edycji lub usuniêcia komentarza. 
 Takie samo prawa ma równie¿ autor komentarza.
 
 \subsubsection{Wy¶wietlenie kodu ¼ród³owego sêdziego}
+\begin{wrapfigure}{l}{0.7\textwidth}
+	\begin{center}
+		\includegraphics[width=0.68\textwidth]{img/source_code.png}
+	\end{center}
+	\caption{Sposób wy¶wietlania kodu ¼ród³owego}
+\end{wrapfigure}
 W celu wy¶wietlenia kodu ¼ród³owego sêdziego nale¿y znajdowaæ siê na stronie gry zawiejaj±cej szczegó³owy jej opis. Potem, po klikniêciu w link "Show source of the judge" system przekieruje nas na stronê. gdzie wy¶wietlony zostanie 
 kod ¼ród³owy sêdziego.
 
@@ -433,6 +475,12 @@ formularz analogiczny do tego, który siê pojawia przy dodawaniu komentarza. Po z
 Zauwa¿my, ¿e edytowany komentarz jest ju¿ wy¶wietlany w zmienionej formie.
 
 \subsubsection{Usuniêcie gry lub konkursu}
+\begin{wrapfigure}{l}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/delete_confirm.png}
+	\end{center}
+	\caption{Monit o potwierdzenie usuniêcia gry}
+\end{wrapfigure}
 Aby móc usun±æ grê (konkurs) trzeba spe³niaæ jeden z warunków:
 \begin{enumerate}
 	\item{Byæ moderatorem gry}
@@ -441,6 +489,16 @@ Aby móc usun±æ grê (konkurs) trzeba spe³niaæ jeden z warunków:
 
 W celu usuniêcia gry nale¿y znajdowaæ siê na stronie zawieraj±cej szczegó³owy opis gry. Nastêpnie klikn±æ w znajduj±cy siê po lewej stronie link "Delete this game". Spowoduje to wyskoczenie okienka z pro¶b± o potwierdzenie swojej 
 decyzji. Pamiêtajmy, i¿ jest to decyzja nieodwracalna! Potwierdzenie wykonania operacji sposoduje usuniêcie gry z listy dostêpnych i przeniesienie na stronê g³ówn± serwisu.
+
+\subsubsection{Edycja gry lub konkursu}
+\begin{wrapfigure}{l}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/game_options.png}
+	\end{center}
+	\caption{Sposób wy¶wietlania kodu ¼ród³owego}
+\end{wrapfigure}
+Mo¿liwa jest edycja konkursu. Aby tego dokonaæ trzeba byæ adnimistratorem lub moderatorem gry. Nale¿y klikn±æ w link "Edit game". 
+System przeniesie nas do okna, w którym wy¶wietli siê formularz do edycji gry. Po wprowadzeniu zmian nale¿y zatwierdziæ przyciskiem "Save".
 
 \chapter{Podsumowanie}
 
