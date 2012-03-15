@@ -8,6 +8,43 @@ import threading
 import Queue
 import time
 import select
+import threading
+
+def read_logs(judge, bots, log_map):
+    processes = [judge]
+    processes.extend(bots)
+    pipes = [judge.stderr]
+    stderr_to_proc_num = {}
+    stderr_to_proc_num[judge.stderr] = 'judge'
+    logs = {}
+    logs[judge.stderr] = []
+    for i in range(len(bots)):
+        pipes.append(bots[i].stderr)
+        stderr_to_proc_num[bots[i].stderr] = i
+        logs[bots[i].stderr] = []
+    # Below line menas "While judge or any bot is alive"
+    while (reduce (lambda x, y: x or y, (map(lambda x : x.poll() == None, processes)), False)):
+        (rlist, wlist, xlist) = select.select(pipes, [], [], 1000)
+        for pipe in rlist:
+            readp = read_whole_pipe(pipe)
+            log(logs[pipe], readp)
+    for pipe in logs.keys():
+       log_map[stderr_to_proc_num[pipe]] = logs[pipe]
+    
+
+def read_whole_pipe(pipe):
+    res = ''
+    while True:
+        (rl, wl, xl) = select.select([pipe],[],[], 0)
+        if rl != []:
+            read_letter = pipe.read(1)
+            if read_letter != '':
+                res += read_letter
+            else:
+                break
+        else:
+            break
+    return res
 
 class TimeoutException(Exception):
     pass
@@ -69,7 +106,7 @@ def play(judge_file, players, memory_limit, time_limit):
             to_execute,
             stdout=subprocess.PIPE,
             stdin=subprocess.PIPE,
-#            stderr=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             close_fds = True,
             )
     log(supervisor_log, "Started judge succesfully\n")
@@ -81,18 +118,22 @@ def play(judge_file, players, memory_limit, time_limit):
                 arg_to_execute,
                 stdin = subprocess.PIPE,
                 stdout = subprocess.PIPE,
-#                stderr = subprocess.PIPE,
+                stderr = subprocess.PIPE,
                 close_fds = True,
                 )
         bots_process_list.append(bot_process)
     log(supervisor_log, "Started all bots succesfully\n")
+    
+    log_map = {}
+    log_thread = threading.Thread(None, read_logs, None, (jp, bots_process_list, log_map), {})
+    log_thread.start()
 
     times = []
     memory = []
     for i in range(players_num):
         times.append(time_limit)
         memory.append(memory_limit)
-    
+
     bots = []
     message = ''
     
@@ -180,6 +221,8 @@ def play(judge_file, players, memory_limit, time_limit):
                     game_in_progress = False
                     break
     jp.kill()
+    log_thread.join()
 
+    results['logs'] = log_map
     results['supervisor_log'] = supervisor_log
     return results
