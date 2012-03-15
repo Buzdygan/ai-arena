@@ -327,7 +327,7 @@ jest PostgreSQL, ale nie jest to wymagane.
 	\end{center}
 \end{figure}
 
-\subsection{\Large{Z udzia³em u¿ytkownika niezalogowanego (Go¶cia)}} 
+\Large{\subsection{Z udzia³em u¿ytkownika niezalogowanego (Go¶cia)}} 
 U¿ytkownik niezalogowany ma bardzo ograniczone prawa u¿ywania serwisu. Praktycznie jedyn± dozwolon± aktywno¶ci± jest rejestracja
 w serwisie lub próba zalogowania siê do utworzonego wcze¶niej konta.
 
@@ -347,7 +347,7 @@ Logowanie jest standardow± aktywno¶ci±. któr± siê spotyka na wszystkich forach i
 przycisku rejestracji. Aby siê zalogowaæ nale¿y klikn±æ w ten przycisk a nastêpnie wype³niæ pola formularza, który siê pojawi na ekranie.
 Je¶li dane bêd± zgodne z tymi zapisanymi w bazie danych, system przekieruje u¿ytkownika na jego stronê profilow±.
 
-\subsection{\Large{Z udzia³em u¿ytkownika zalogowanego}}
+\Large{\subsection{Z udzia³em u¿ytkownika zalogowanego}}
 
 \subsubsection{Wylogowanie siê z serwisu}
 Wylogowanie jest kolejn± standardow± aktywno¶ci± udostêpnian± przez wiele serwisów. Aby wylogowaæ siê z serwisu nale¿y klikn±æ przycisk "Logout", 
@@ -414,13 +414,33 @@ Takie samo prawa ma równie¿ autor komentarza.
 W celu wy¶wietlenia kodu ¼ród³owego sêdziego nale¿y znajdowaæ siê na stronie gry zawiejaj±cej szczegó³owy jej opis. Potem, po klikniêciu w link "Show source of the judge" system przekieruje nas na stronê. gdzie wy¶wietlony zostanie 
 kod ¼ród³owy sêdziego.
 
-\subsection{\Large{Z udzia³em moderatora konkursu lub gry}}
+\Large{\subsection{Z udzia³em moderatora konkursu lub gry}}
 
 \subsubsection{Usuniêcie komentarza do gry lub konkursu}
+¯eby móc usun±æ komentarz u¿ytkownik musi spe³niaæ (minimum) jeden z poni¿szych warunków:
+\begin{enumerate}
+	\item{Byæ autorem komentarza}
+	\item{Byæ moderatorem gry (konkursu), pod którym zosta³ ten komentarz dodany}
+	\item{Byæ administratorem strony}
+\end{enumerate}
+
+Je¶li wymaganie wstêpne jest spe³nione, wystarczy klikn±æ w przycisk "Delete" znajduj±cy siê w prawym górnym rogu komentarza. Pojawi siê wtedy okienko z pro¶b± o potwierdzenie swojej decyzji.
+Nale¿y pamiêtaæ, ¿e usuniêtego komentarza nie mo¿na przywróciæ! Wci¶niêcie przycisku "OK" na pojawiaj±cym siê okienku spowoduje usuniêcie komentarza i powrót do strony z detalami gry (konkursu)
 
 \subsubsection{Edycja komentarza do gry lub konkursu}
+Edycja komentarza jest podobna do dodawania nowego komentarza. Aby edytowaæ istniej±cy komentarz nale¿y klikn±æ w link "Edit" znajduj±cy siê w górnej czê¶ci komentarza. Pojawi siê wtedy 
+formularz analogiczny do tego, który siê pojawia przy dodawaniu komentarza. Po zatwierdzeniu dokonywanych zmian poprzez naci¶niêcie przycisku "Save" zostaniemy przekierowani do strony ze szczegó³owymi informacjami o grze.
+Zauwa¿my, ¿e edytowany komentarz jest ju¿ wy¶wietlany w zmienionej formie.
 
 \subsubsection{Usuniêcie gry lub konkursu}
+Aby móc usun±æ grê (konkurs) trzeba spe³niaæ jeden z warunków:
+\begin{enumerate}
+	\item{Byæ moderatorem gry}
+	\item{Byæ administratorem strony}
+\end{enumerate}
+
+W celu usuniêcia gry nale¿y znajdowaæ siê na stronie zawieraj±cej szczegó³owy opis gry. Nastêpnie klikn±æ w znajduj±cy siê po lewej stronie link "Delete this game". Spowoduje to wyskoczenie okienka z pro¶b± o potwierdzenie swojej 
+decyzji. Pamiêtajmy, i¿ jest to decyzja nieodwracalna! Potwierdzenie wykonania operacji sposoduje usuniêcie gry z listy dostêpnych i przeniesienie na stronê g³ówn± serwisu.
 
 \chapter{Podsumowanie}
 
