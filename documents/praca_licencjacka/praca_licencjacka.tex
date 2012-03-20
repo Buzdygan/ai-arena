@@ -42,8 +42,8 @@ D.0. General\\}
 \maketitle
 
 \begin{abstract}
-W pracy przedstawiono implementacje systemu Ai-Arena,
-System Ai-Arena s³u¿y do przeprowadzania rozgrywek i turniejów ró¿nych gier pomiêdzy programami komputerowymi.
+W pracy przedstawiono implementacje systemu AI-Arena,
+System AI-Arena s³u¿y do przeprowadzania rozgrywek i turniejów ró¿nych gier pomiêdzy programami komputerowymi.
 System ma w zamierzeniu twórców s³u¿yæ osobom zainteresowanym sztuczn± inteligencj± do sprawdzenia swoich umiejêtno¶ci,
 lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
 \end{abstract}
@@ -52,15 +52,17 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
 
 \chapter{Wprowadzenie}
 
-    Serwis Ai-Arena to uniwersalna platforma do organizowania konkursów algorytmicznych. G³ówn± domen± tych konkursów
-    jest dziedzina sztucznej inteligencji, w szczególno¶ci inteligentnych programów walcz±cych. Od parudziesiêciu
-    lat odbywaj± siê zawody, maj±ce na celu wy³oniæ programy najlepiej graj±ce w popularne gry, takie jak
-    szachy, warcaby itp. Serwis Ai-Arena pozwala organizowaæ takie konkursy dla dowolnej gry wieloosobowej.
+    Serwis AI-Arena to uniwersalna platforma do organizowania konkursów algorytmicznych. G³ówn± domen± tych konkursów
+    jest dziedzina sztucznej inteligencji, w szczególno¶ci inteligentnych programów walcz±cych, ale pozwala równie¿
+    na organizacjê konkursów algorytmicznych, w³±cznie z zadaniami interaktywnymi, co sprawia, ¿e istnieje
+    pe³na dowolno¶æ wyboru rodzaju konkursu.
+    Od parudziesiêciu lat odbywaj± siê zawody, maj±ce na celu wy³oniæ programy najlepiej graj±ce w popularne gry,
+    takie jak szachy, warcaby itp. Serwis AI-Arena pozwala organizowaæ takie konkursy dla dowolnej gry wieloosobowej.
     Dodatkow± zalet± jest istnienie rankingu sta³ego. W ten sposób mo¿na na bie¿±co sprawdzaæ dzia³anie
     w³asnych programów i mierzyæ siê z najlepszymi dotychczasowymi zawodnikami. Serwis mo¿e mieæ zastosowania
     zarówno w nauce jak i w biznesie, ze wzglêdu na rosn±ce zapotrzebowanie na inteligentne programy
     rozwi±zuj±ce problemy w warunkach rywalizacji takich jak np gie³da. Twórcy serwisu licz± na to,
-    ¿e wraz ze wzrostem jego popularno¶ci, Ai-Arena skupi spo³eczno¶æ ludzi zafascynowanych dziedzin±
+    ¿e wraz ze wzrostem jego popularno¶ci, AI-Arena skupi spo³eczno¶æ ludzi zafascynowanych dziedzin±
     sztucznej inteligencji i przyczyni siê do rozwoju tej ga³êzi nauki.
 
 \chapter{Metodologia Pracy}
@@ -143,14 +145,14 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
     meczu odpowiedzialny jest Nadzorca.
 
 \section{Nadzorca}
-    Program bêd±cy integraln± czê¶ci± serwisu Ai-Arena. Jego zadaniem jest uruchamianie programów Botów
+    Program bêd±cy integraln± czê¶ci± serwisu AI-Arena. Jego zadaniem jest uruchamianie programów Botów
     i Sêdziego podczas Meczu, a nastêpnie transportowanie miêdzy nimi komunikatów tekstowych zgodnych z ustalonym
     protoko³em. Nadzorca odbiera wynik Meczu od Sêdziego i przekazuje go Gearmanowi, w celu zapisania rezultatu w bazie.
     Dodatkowo Nadzorca kontroluje czas i pamiêæ zu¿ywan± przez Boty, tak by nie przekroczy³y dozwolonych limitów.
     Informacje o ich zu¿yciu wraz z logiem rozgrywki generowanym przez sêdziego, Nadzorca zwraca do Gearmana.
 
 \section{Gearman}
-    Zewnêtrzne narzêdzie kolejkowania zadañ i transportu danych. W Ai-Arena s³u¿y jako pomost miêdzy Nadzorc±,
+    Zewnêtrzne narzêdzie kolejkowania zadañ i transportu danych. W AI-Arena s³u¿y jako pomost miêdzy Nadzorc±,
     a Baz± danych. Kolejkuje Mecze do rozegrania, zleca ich rozegranie Nadzorcy, a nastêpnie zapisuje do bazy
     przekazany przez Nadzorcê rezultat i dodatkowe informacje o przebiegu rozgrywki.
 
@@ -193,7 +195,7 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
 
 \chapter{Podobne platformy}
 
-Obecnie istniej± serwisy internetowe podobne do Ai-Arena. Oto kilka z nich:
+Obecnie istniej± serwisy internetowe podobne do AI-Arena. Oto kilka z nich:
 
 \section{Top Coder}
 
@@ -236,7 +238,7 @@ Obecnie istniej± serwisy internetowe podobne do Ai-Arena. Oto kilka z nich:
 Top Coder & algorytmy, problemy optymalizacyjne & okresowe & bardzo du¿a baza z przesz³ych zawodów \\ \hline
 Ai Challenge & programy walcz±ce & okresowe & konkurs co pó³ roku \\ \hline
 SPOJ & algorytmika & sta³e/okresowe & du¿a baza zadañ \\ \hline
-Ai-Arena & programy walcz±ce & sta³e/okresowe & baza gier moderowana przez u¿ytkowników \\ \hline
+AI-Arena & programy walcz±ce & sta³e/okresowe & baza gier moderowana przez u¿ytkowników \\ \hline
 SIO & algorytmy & okresowe & wiêkszo¶æ zadañ dostêpna tylko podczas zawodów \\ \hline
 MAIN & algorytmy & sta³e & zadania z najwa¿niejszych zawodów informatycznych \\ \hline
 \end{tabular}
@@ -315,7 +317,7 @@ Interfejs udostêpnie nastêpuj±ce akcje:
 Za obs³ugê bazy danych odpowiedzialny jest framework Django. Domy¶ln± baz±, na której dzia³a serwis
 jest PostgreSQL, ale nie jest to wymagane.
 
-\chapter{Dokumentacja uzytkowa i opis implementacji}
+\chapter{Dokumentacja u¿ytkowa i opis implementacji}
 
 \section{Scenariusze u¿ycia systemu}
 \begin{figure}[ht!]
@@ -508,7 +510,27 @@ System przeniesie nas do okna, w którym wy¶wietli siê formularz do edycji gry. P
 
 \appendix
 
-\chapter{Przykladowa gra}
+\chapter{Przykladowe gry}
+
+\section{Szachy}
+    Znana na ca³ym ¶wiecie gra dwuosobowa, rozgrywana na kwadratowej planszy o 64 polach. Gracze wykonuj±
+    naprzemienne posuniêcia figurami, a gra koñczy siê remisem, b±d¼ zwyciêstwem którego¶ z graczy.
+    Gra jest ca³kowicie deterministyczna, ale jej z³o¿ono¶æ nie pozwoli³a dotychczas na znalezienie
+    uniwersalnej strategii wygrywaj±cej, b±d¼ nieprzegrywaj±cej. Jednak obecne programy s± ju¿ od wielu
+    lat w stanie wygraæ z najlepszymi graczami ludzkimi.
+
+\section{Poker}
+    Gra wieloosobowa, zawieraj±ca elementy hazardu. Rozgrywka zaczyna siê od losowego
+    przydzia³u kart graczom, dlatego nie istnieje jedyna optymalna strategia grania.
+    Celem gry jest zdobycie wszystkich punktów posiadanych przez innych graczy, które s± potrzebne,
+    by uczestniczyæ w kolejnych rozdaniach. Istnieje wiele wariantów Pokera, najbardziej znanym
+    jest tzw Texas Hold'em.
+
+\section{Gra gie³dowa}
+    Ka¿dy gracz ma pocz±tkowo okre¶lone fundusze. Nastêpnie inwestuje on w akcje dostêpne na gie³dzie.
+    W zale¿no¶ci od inwestycji innych graczy, zmienia siê warto¶æ akcji, a co za tym idzie, dorobek
+    ka¿dego z graczy. Celem jest oczywi¶cie powiêkszenie swojego kapita³u o jak najwiêksz± sumê,
+    w kolejnych rundach.
 
 \chapter{Przykladowe programy}
 
