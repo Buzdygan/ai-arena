@@ -295,11 +295,35 @@ byæ zgodny z poni¿szym protoko³em:\\
 
 
 \section{Scheduler}
-Warstwa schedulera ³±czy czê¶æ webow± serwisu z nadzorc±. W ten sposób obie czê¶ci funkcjonuj± niezale¿nie
-i mog± byæ u¿ywane jako osobne produkty. Scheduler jest kolejk± zadañ, w której trzymane s± zlecenia
-rozegrania meczy. Zlecenia te s± przekazywane nadzorcy, a nastêpnie wyniki rozgrywek zwracane przez
-nadzorcê s± zapisywane w bazie.
-Do realizacji warstwy nadzorcy u¿ywany jest program Gearmand0.26.
+\begin{wrapfigure}{r}{0.4\textwidth}
+	\begin{center}
+		\includegraphics[width=0.38\textwidth]{img/gearman_stack.png}
+	\end{center}
+    \vspace{-25pt}
+	\caption{Aplikacja Gearmana}
+    \vspace{-10pt}
+%\end{wrapfigure}
+%\begin{wrapfigure}{l}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.38\textwidth]{img/gearman_cluster.png}
+	\end{center}
+    \vspace{-25pt}
+	\caption{Klaster Gearmana}
+    \vspace{-10pt}
+\end{wrapfigure}
+Do realizacji warstwy Schedulera u¿ywany jest program Gearmand0.26. Gearman jest lekkim frameworkiem s³u¿±cym do
+przydzielania zadañ do wykonania okre¶lonym maszynom lub procesom. Posiada prosty interfejs i jest ³atwy w u¿yciu.
+Ka¿da aplikacja korzystaj±ca z tego frameworku sk³ada siê z trzech czê¶ci: klienta, workera oraz serwera. Rolê
+klienta pe³ni czê¶æ webowa serwisu, która zleca rozegranie odpowiedniej Rozgrywki, podaj±c jako argumenty grê,
+boty i sêdziego Rozgrywki. To zadanie jest zg³aszane do serwera, który je kolejkuje oraz przydziela workerowi.
+Zadanie workera ogranicza siê do uruchomienia nadzorcy z odpowiednimi parametrami, a po zakoñczeniu Rozgrywki
+zapisaniu wyników do bazy danych.
+
+Warstwa Schedulera umo¿liwia zakolejkowanie kilku Meczy do rozegrania np. w razie
+du¿ego ruchu w serwisie lub gdy wymaga tego organizacja Turnieju, oraz wykonanie tych zadañ w sposób asynchroniczny.
+Gearman ³±czy czê¶æ webow± serwisu z nadzorc±, przez co obie czê¶ci funkcjonuj± i mog± byæ rozwijane niezale¿nie.
+Umo¿liwia tak¿e u¿ycie wielu klientów, serwerów i workerów tworz±cych klaster. U¿ycie zapasowego serwera
+pomog³oby ustabilizowaæ pracê serwisu, a uruchomienie kilku workerów na wielordzeniowej maszynie znacznie j± przyspieszyæ.
 
 \section{Serwis webowy}
 U¿ytkownik komunikuje siê z systemem poprzez interfejs webowy, zaimplementowany w Django.
