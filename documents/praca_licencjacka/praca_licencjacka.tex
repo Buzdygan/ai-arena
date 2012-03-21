@@ -302,8 +302,6 @@ byæ zgodny z poni¿szym protoko³em:\\
     \vspace{-25pt}
 	\caption{Aplikacja Gearmana}
     \vspace{-10pt}
-%\end{wrapfigure}
-%\begin{wrapfigure}{l}{0.5\textwidth}
 	\begin{center}
 		\includegraphics[width=0.38\textwidth]{img/gearman_cluster.png}
 	\end{center}
@@ -343,8 +341,65 @@ Interfejs udostêpnie nastêpuj±ce akcje:
 \end{itemize}
 
 \section{Baza danych}
-Za obs³ugê bazy danych odpowiedzialny jest framework Django. Domy¶ln± baz±, na której dzia³a serwis
-jest PostgreSQL, ale nie jest to wymagane.
+Za obs³ugê bazy danych odpowiedzialny jest framework Django. Wspó³pracuje z bazami:
+PostgreSQL, MySQL, SQLite, Microsoft SQL Server oraz Oracle. Domy¶ln± baz±, na której dzia³a serwis
+jest PostgreSQL, ale nie jest to wymagane. Tabele w bazie danych s± tworzone przez Django w sposób automatyczny
+na podstawie modeli w pliku models.py, ka¿demu modelowi odpowiada jedna tabela w bazie.
+Oprócz tego istnieje plik fixture, do którego mo¿na zapisaæ lub wczytaæ z niego dane znajduj±ce siê w bazie.
+S³u¿y on do tworzenia testowej bazy danych.
+
+W serwisie s± u¿yte nastêpuj±ce modele(wraz z najwa¿niejszymi polami):
+\vspace{20pt}\\*
+{\large Game}
+\begin{itemize}
+    \item nazwa
+    \item ¶cie¿ka do programu sêdziego
+    \item plik z zasadami
+\end{itemize}
+{\large Bot}
+\begin{itemize}
+    \item nazwa
+    \item w³a¶ciciel
+    \item plik ¼ród³owy
+\end{itemize}
+{\large Ranking}
+\begin{itemize}
+    \item typ rankingu - od niego zale¿y w jaki spposób bêdzie rozgrywany konkurs
+\end{itemize}
+{\large BotRanking - przechowuje opis pozycji Bota w danym Rankingu}\\*
+{\large Contest}
+\begin{itemize}
+    \item nazwa
+    \item Gra
+    \item Ranking
+    \item zawodnicy - Boty, które bior± udzia³ w konkursie
+\end{itemize}
+{\large Match}
+\begin{itemize}
+    \item Bot
+    \item wynik
+    \item wykorzystany czas
+    \item zu¿yta pamiêæ
+\end{itemize}
+{\large MatchBotResult - zawiera rezultat Bota w pojedynczym Meczu}
+\begin{itemize}
+    \item Game
+    \item Contest
+    \item wyniki uczestnicz±cych Botów
+\end{itemize}
+{\large UserProfile}
+\begin{itemize}
+    \item User
+    \item podstawowe dane: zdjêcie, pañstwo itp.
+\end{itemize}
+{\large UserNews}\\*
+{\large GameComment - komentarz do Gry}\\*
+{\large ContestComment - komentarz do Konkursu}\\*
+%\begin{tabular}{|c|c|}
+%\hline
+%Game & nazwa, scie¿ka do programu sêdziego, plik z zasadami \\ \hline
+%Bot & w³a¶ciciel, Gra \\ \hline
+%\end{tabular}
 
 \chapter{Dokumentacja u¿ytkowa i opis implementacji}
 
