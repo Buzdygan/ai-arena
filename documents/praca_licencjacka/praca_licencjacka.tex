@@ -250,7 +250,11 @@ MAIN & algorytmy & sta³e & zadania z najwa¿niejszych zawodów informatycznych \\ 
 
 \chapter{Architektura systemu}
 
-Na serwis AI-Arena sk³adaj± siê trzy wartwy: nadzorcy, schedulera i serwisu webowego.
+Na serwis AI-Arena sk³adaj± siê cztery wartwy: nadzorcy, schedulera, bazy danych i interfejsu webowego.
+
+\section{Schemat Architektury}
+\includegraphics[width=1.00\textwidth]{img/architecture.png}
+
 
 \section{Nadzorca}
 Nadzorca jest j±drem serwisu AI-Arena.
@@ -404,15 +408,6 @@ W serwisie s± u¿yte nastêpuj±ce modele(wraz z najwa¿niejszymi polami):
 \chapter{Dokumentacja u¿ytkowa i opis implementacji}
 
 \section{Scenariusze u¿ycia systemu}
-\begin{figure}[ht!]
-	\begin{center}
-		\resizebox{!}{22cm}{
-			\includegraphics[angle=90]{img/UseCaseDiagram.jpg}
-		}
-		\caption{Diagram przypadków u¿ycia}
-	\end{center}
-\end{figure}
-
 \Large{\subsection{Z udzia³em u¿ytkownika niezalogowanego (Go¶cia)}} 
 U¿ytkownik niezalogowany ma bardzo ograniczone prawa u¿ywania serwisu. Praktycznie jedyn± dozwolon± aktywno¶ci± jest rejestracja
 w serwisie lub próba zalogowania siê do utworzonego wcze¶niej konta.
@@ -470,13 +465,11 @@ w link "Edit profile" znajduj±cy siê pod zdjêciem profilowym. W oknie edycji pro
 	\end{center}
 	\caption{Formularz do tworzenia nowej gry}
 \end{wrapfigure}
-Tworzenie gry (konkursu) jest jedn± z centralnych aktywno¶ci w serwisie. Aby utworzyæ grê, u¿ytkownik musi mieæ zawczasu przygotowane nastêpuj±ce pliki:
-\begin{itemize}
-	\item{Plik ¼ród³owy sêdziego.} 
-	\item{Plik z zasadami rozgrywki} 
-\end{itemize}
+Tworzenie gry (konkursu) jest jedn± z centralnych aktywno¶ci w serwisie. Aby utworzyæ grê, u¿ytkownik musi mieæ zawczasu przygotowany plik ¼ród³owy
+sêdziego oraz plik z zasadami rozgrywki.\newline\newline
 
-Sêdzia jest programem, który nadzowuje przebieg gry. Powinien byæ napisany w jednym z jêzyków: C, C++, Java, Python. Otrzymuje on komunikaty od Nadzorcy, który z kolei zczytuje je ze standardowego wej¶cia Botów. 
+\subsubsection{}
+Sêdzia jest programem, który nadzoruje przebieg gry. Powinien byæ napisany w jednym z jêzyków: C, C++, Java, Python. Otrzymuje on komunikaty od Nadzorcy, który z kolei zczytuje je ze standardowego wej¶cia Botów. 
 Sêdzia musi dokonaæ walidacji komunikatu, tj. upewniæ siê, i¿ format komunikatu jest zgodny z protoko³em opisanym w zasadach gry oraz, ¿e ruch zawarty w komunikacie nie narusza regu³ gry (przyk³adowo, ¿e
 gracz graj±cy pionami czarnymi nie ruszy³ siê bia³ym pionem). Gdy upewni siê, ¿e otrzymany komunikat jest poprawny wysy³a na swoje standardowe wyj¶cie komunikat zgodnie z formatem opisanym w regu³ach gry.
 
@@ -561,12 +554,6 @@ formularz analogiczny do tego, który siê pojawia przy dodawaniu komentarza. Po z
 Zauwa¿my, ¿e edytowany komentarz jest ju¿ wy¶wietlany w zmienionej formie.
 
 \subsubsection{Usuniêcie gry lub konkursu}
-\begin{wrapfigure}{l}{0.5\textwidth}
-	\begin{center}
-		\includegraphics[width=0.48\textwidth]{img/delete_confirm.png}
-	\end{center}
-	\caption{Monit o potwierdzenie usuniêcia gry}
-\end{wrapfigure}
 Aby móc usun±æ grê (konkurs) trzeba spe³niaæ jeden z warunków:
 \begin{enumerate}
 	\item{Byæ moderatorem gry}
@@ -576,12 +563,19 @@ Aby móc usun±æ grê (konkurs) trzeba spe³niaæ jeden z warunków:
 W celu usuniêcia gry nale¿y znajdowaæ siê na stronie zawieraj±cej szczegó³owy opis gry. Nastêpnie klikn±æ w znajduj±cy siê po lewej stronie link "Delete this game". Spowoduje to wyskoczenie okienka z pro¶b± o potwierdzenie swojej 
 decyzji. Pamiêtajmy, i¿ jest to decyzja nieodwracalna! Potwierdzenie wykonania operacji sposoduje usuniêcie gry z listy dostêpnych i przeniesienie na stronê g³ówn± serwisu.
 
+\begin{wrapfigure}{l}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/delete_confirm.png}
+	\end{center}
+	\caption{Monit o potwierdzenie usuniêcia gry}
+\end{wrapfigure}
+
 \subsubsection{Edycja gry lub konkursu}
 \begin{wrapfigure}{l}{0.5\textwidth}
 	\begin{center}
 		\includegraphics[width=0.48\textwidth]{img/game_options.png}
 	\end{center}
-	\caption{Sposób wy¶wietlania kodu ¼ród³owego}
+	\caption{Edycja gry lub konkursu}
 \end{wrapfigure}
 Mo¿liwa jest edycja konkursu. Aby tego dokonaæ trzeba byæ adnimistratorem lub moderatorem gry. Nale¿y klikn±æ w link "Edit game". 
 System przeniesie nas do okna, w którym wy¶wietli siê formularz do edycji gry. Po wprowadzeniu zmian nale¿y zatwierdziæ przyciskiem "Save".
