@@ -90,14 +90,17 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
     Dyskutowane by³y równie¿ dokumenty powstaj±ce przy okazji pracy nad projektem, przede wszystkim
     poni¿sza praca licencjacka. Zapis przebiegu zajêæ, wraz z celami na przysz³y tydzieñ, nazywany
     by³ minutkami i trzymany w Google Documents, tak by ka¿dy z cz³onków zespo³u oraz prowadz±cy
-    zajêcia mia³ do niego dostêp.\\
+    zajêcia mia³ do niego dostêp.
+
     Dodatkowo organizowane by³y spotkania samego zespo³u. Odbywa³y siê one równie¿ raz w tygodniu
     i mia³y na celu kontrolowanie przebieg prac i zadbanie o to by zosta³y wykonane zaplanowane
     zadania. Spotkania odbywa³y siê w budynku Wydzia³u Matematyki Informatyki i Mechaniki UW, b±d¼ jako konferencje video z wykorzystaniem Google Hangouts.
     Ich przebieg nadzorowa³ Lider Projektu, który by³ odpowiedzialny równie¿ za realizowanie
-    za³o¿eñ przyjêtej metodologii pracy.\\
+    za³o¿eñ przyjêtej metodologii pracy.
+
     Podzia³ obowi±zków miêdzy cz³onków zespo³u by³ wynikiem porozumienia miêdzy cz³onkami i by³
-    zatwierdzany przez lidera projektu, a nastêpnie przedstawiany prowadz±cemu zajêæ.\\
+    zatwierdzany przez lidera projektu, a nastêpnie przedstawiany prowadz±cemu zajêæ.
+
     Do bie¿±cej kontroli stanu projektu u¿yty zosta³ system Redmine. Umo¿liwia on tworzenie
     zadañ i przydzielanie ich cz³onkom zespo³u. Ka¿de zadanie ma status, który zawiera siê w zbiorze
     (otwarte, przydzielone, zrealizowane, zamkniête). Stan otwarty oznacza, ¿e zadanie nie jest
@@ -105,13 +108,47 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
     a osoba odpowiedzialna za jego wykonanie jest w trakcie jego realizacji. Stan zrealizowane
     oznacza, ¿e zadanie zosta³o wykonane przez osobê odpowiedzialn±, ale nie zosta³o jeszcze
     zweryfikowane pod k±tem poprawno¶ci. Stan zamkniête oznacza, ¿e zadanie zosta³o zrealizowane
-    i zweryfikowane.\\
+    i zweryfikowane.
+
     Kod projektu, oraz dokumenty takie jak praca licencjacka, zosta³y umieszczone w repozytorium Gita.
     Git to system kontroli wersji dbaj±cy o archiwizacjê kodu oraz koordynacjê równoleg³ych zmian
     wszystkich cz³onków zespo³u. Repozytorium jest publiczne i dostêpne online w serwisie GitHub.
     Wszystkie zmiany dokonywane przez cz³onków zespo³u s± archiwizowane, tak by mo¿na je by³o
     odtworzyæ. Mo¿liwe jest równie¿ jednoczesne rozwijanie projektu w kilku niezale¿nych kierunkach,
-    a nastêpnie po³±czenie efektów pracy.\\
+    a nastêpnie po³±czenie efektów pracy.
+
+    Z uwagi na ma³± liczno¶æ zespo³u zdecydowali¶my siê nie u¿ywac narzêdzi wspomagaj±cych ¶ledzenie zmian. Do obowi±zków
+    ka¿dego cz³onka zespo³u nale¿a³o upewnienie siê, ¿e po zmianach przez niego wprowadzonych projekt uruchamia siê i nie
+    pojawi³y siê nowe problemy (regresje). W przypadku, gdyby jednak regresje wyst±pi³y, mechanizmy kontroli wersji udostêpniane
+    przez Gita pozwoli³yby na odtworzenie starszej wersji projektu.
+
+    Czêste spotkania projektowe umo¿liwi³y nam pozostanie na bie¿±co z aktualnymi zmianami. W czasie takich sotkañ ka¿dy z cz³onków 
+    zespo³u relacjonowa³ postêp prac, który nastêpnie by³ weryfikowany przez lidera projektu, b±d¼ te¿ przez innego cz³onka zespo³u. 
+
+\chapter{Wymagania projektowe}
+
+\section{Rozpoznanie problemu}
+
+    Sztuczna inteligencja jest ostatnio bardzo modn± dziedzin± informatyki. Znajduje zastosowania w kolejnych ga³êziach 
+    informatyki i nie tylko. Nic wiêc dziwnego, ¿e coraz wiêcej ludzi wyra¿a zainteresowanie t± dziedzin± informatyki jednocze¶nie
+    pragn±c siê nauczyæ czego¶ wiêcej. W tym momencie napotykamy problem. W internecie istnieje wiele platform pomagaj±cych nauczyæ
+    siê algorytmiki (przede wszystkim popularne platformy przygotowuj±ce do konkursów ACM), jednak nie ma ¿adnego odpowiednika platformy 
+    umo¿liwiaj±cej nauki sztucznej inteligencji.
+
+    W odpowiedzi na tê potrzebê zdecydowali¶my siê stworzyæ serwis AI-Arena. Jest to serwis umo¿liwiaj±cy porównanie 
+    programów walcz±cych. Program walcz±cy mo¿na opisaæ jako program graj±cy w pewn± grê, tj. pod±¿aj±cy wed³ug pewnych, ¶ci¶le
+    okre¶lonych zasad. Zauwa¿my, i¿ wiêkszo¶æ algorytmów sztucznej inteligencji mo¿na z powodzeniem zastosowaæ w programach walcz±cych.
+
+\section{Grupa docelowa}
+
+    Jak wynika z dotychczasowego okre¶lenia problemu grupê docelow± stanowi± prorami¶ci, którzy s± zafascynowani tematem sztucznej inteligencji.
+    Definiuje to w pewnym sensie sposób wykonania projektu. Mo¿na siê spodziewaæ, ¿e czê¶æ grupy, zafasynowana równie¿ bezpieczeñstwem
+    systemów komputerowych, bêdzie chcia³a sprawdziæ zabezpieczenia systemu. Nale¿y wiêc ze zdwojonym wysi³kiem zapewniæ szeroko rozumiane
+    bezpieczeñstwo.
+
+    Z drugiej za¶ strony, poniewa¿ docelow± grupê u¿ytkowników stanowi± programi¶ci, mo¿emy nie przywi±zywaæ a¿ tak du¿ej wagi do graficznego
+    interfejsu u¿ytkownika. Naturalnie interfejs powinien byæ wygodny, jednak programi¶ci s± raczej przyzwyczajeni do "nieprzyjaznego" wygl±du
+    aplikacji, wobec  czego "surowy" wygl±d strony nie bêdzie na nich dzia³a³ odpychaj±co.
 
 \chapter{Podstawowe pojêcia}
 
@@ -341,7 +378,7 @@ byæ zgodny z poni¿szym protoko³em:\\
     \vspace{-25pt}
 	\caption{Klaster Gearmana}
     \vspace{-10pt}
-\end{wrapfigure}
+\end{wrapfigure} 
 Do realizacji warstwy Schedulera u¿ywany jest program Gearmand0.26. Gearman jest lekkim frameworkiem s³u¿±cym do
 przydzielania zadañ do wykonania okre¶lonym maszynom lub procesom. Posiada prosty interfejs i jest ³atwy w u¿yciu.
 Ka¿da aplikacja korzystaj±ca z tego frameworku sk³ada siê z trzech czê¶ci: klienta, workera oraz serwera. Rolê
@@ -357,22 +394,45 @@ Umo¿liwia tak¿e u¿ycie wielu klientów, serwerów i workerów tworz±cych klaster. U
 pomog³oby ustabilizowaæ pracê serwisu, a uruchomienie kilku workerów na wielordzeniowej maszynie znacznie j± przyspieszyæ.
 
 \section{Serwis webowy}
-U¿ytkownik komunikuje siê z systemem poprzez interfejs webowy, zaimplementowany w Django.
-Interfejs udostêpnie nastêpuj±ce akcje:
-\begin{itemize}
-    \item Za³o¿enie konta
-    \item Dodanie nowej gry do serwisu
-    \item Wys³anie w³asnego programu walcz±cego w wybran± grê dostêpn± w serwisie
-    \item Uruchomienie testowego meczu, miêdzy w³asnym programem, a innym wybranym programem,
-          zg³oszonym do tej samej gry.
-    \item Zg³oszenie programu walcz±cego do konkursu, gdzie bêdzie on rywalizowa³ z pozosta³ymi
-          zg³oszonymi programami.
-    \item Przegl±danie zapisów rozgrywek.
-    \item Przegl±danie aktualnego rankingu konkursu.
-    \item Zapoznanie siê z zasadami wybranego konkursu/gry
-    \item Obejrzenie kodu ¼ród³owego programu sêdziego, dla danej gry.
-\end{itemize}
+    
+    Serwis AI-Arena jest platform± internetow±. U¿ytkownik ma zatem, po zalogowaniu sie, ca³odobowy dostêp do zasobów zgromadzonych w serwisie.
+    Podstawowe funkcjonalno¶ci serwisu mo¿na podzieliæ na nastêpuj±ce kategorie:
 
+    \begin{enumerate}
+        \item{Tworzenie gry lub konkursu} - U¿ytkownik, który ma pomys³ na ciekaw± grê ma mo¿liwo¶æ dodania jej bez konieczno¶ci
+        uzyskania akceptacji administratora strony. Staje siê on automatycznie moderatorem dodanej przez siebie gry. Warunkiem 
+        dodania gry jest napisanie kodu ¼ród³owego sêdziego oraz szczegó³owych zasad gry. Kod ¿ród³owy sêdziego jest dostêpny dla
+        wszystkich zalogowanych u¿ytkowników serwisu. Ma to pozwoliæ unikn±æ stronniczych sêdziów, bowiem wszelkie nieprawid³owo¶ci
+        mog± byæ zg³aszane do administracji strony, która ma mo¿liwo¶æ usuniêcia gry.
+        
+        \item{Wys³anie bota do gry lub konkursu} - U¿ytkownik ma mo¿liwo¶æ napisania w³asnego programu graj±cego w grê zdefiniowan±
+        przez innego u¿ytkownika. Program ten (Bot) musi ¶ci¶le spe³niaæ warunki narzucone przez regu³y gry. W szczególno¶ci musi równie¿
+        spe³niaæ limity czasu i pamiêci wyznaczone w specyfikacji gry.
+
+        W przypadku, gdy bot przekroczy limit czasu lub pamiêci, b±d¼ te¿ naruszy regu³y gry w dowolny inny sposób (np. poprzez wys³anie 
+        komunikatu sformatowanego w niepoprawny sposób lub wykona niedozwolon± akcjê - przyk³adowo utworzy dodatkowy w±tek potomny) bêdzie 
+        natychmiast przerywany i bêdzie to traktowane jako automatyczna przegrana z minimaln± ilo¶ci± punktów.
+
+        Nale¿y zaznaczyæ, i¿ sêdzia ma mo¿liwo¶æ przerwania wykonania dowolnego bota, je¶li stwierdzi, i¿ narusza on warunki gry.
+    \end{enumerate}
+
+    Serwis webowy jest zaimplementowany w Django. Ponadto czê¶ci lu¼no zwi±zane z serwisem, jak np. sêdziowie gier mog± byæ napisane równie¿ w C, C++ czy w Javie. W celu zwiêkszenia
+    komfortu u¿ytkowania serwisu, pewne funkcjonalno¶ci zosta³y równie¿ napisane w JavaScripcie z wykorzystaniem biblitek JQuery i JQuery-UI.
+    Naturalnie wykorzystane zosta³u równie¿ arkusze stylów CSS. Dodatkowo zosta³y wykorzystane pewne standardowe mechanizmy linuxowe, jak
+    np. Makefile.
+
+    Oprócz podstawowych funkcjonalno¶ci, ¶ci¶le zwi±zanych z charakterem serwisu, udostêpniane s± ponadto nastêpuj±ce operacje:
+    \begin{itemize}
+        \item{Wy¶wietlenie i edycja strony profilowej}
+        \item{Wy¶wietlenie kodu ¼ród³owego sêdziego}
+        \item{Udostêpnienie kodu ¼ród³owego wysy³anego bota}
+        \item{Wy¶wietlenie udostêpnionego kodu ¼ród³owego}
+        \item{Wy¶wietlenie rankingu konkursu}
+        \item{Uruchomienie i przeprowadzenie meczu, czyli pojedyñczej rozgrywki z wybranym przez siebie botem}
+        \item{Wy¶wietlenie szczegó³ów poszczególnych rozgrywek}
+        \item{Dodanie, usuniêcie i edycjê komentarza do gry i do konkursu}
+    \end{itemize}
+    
 \section{Baza danych}
 Za obs³ugê bazy danych odpowiedzialny jest framework Django. Wspó³pracuje z bazami:
 PostgreSQL, MySQL, SQLite, Microsoft SQL Server oraz Oracle. Domy¶ln± baz±, na której dzia³a serwis
@@ -613,6 +673,73 @@ System przeniesie nas do okna, w którym wy¶wietli siê formularz do edycji gry. P
 
 \chapter{Podzia³ prac}
 
+\section{Jakub Tla³ka}
+\begin{itemize}
+    \item{Rola w zespole} - Lider projektu
+    \item{Kod ¼ród³owy}
+    \item{Praca licencjacka}
+    \item{Dokumentacja}
+    \item{Inne}
+\end{itemize}
+\section{Micha³ Kawiak}
+\begin{itemize}
+    \item{Rola w zespole} - Zastêpca lidera projektu
+    \item{Kod ¼ród³owy}
+        \begin{itemize}
+            \item{Modu³ logowania i rejestracji}
+            \item{Profil u¿ytkownika}
+            \item{Tworzenie nowej gry}
+            \item{Wy¶wietlanie szczegó³ów gry}
+            \item{Dodawanie komentarzy do gier}
+            \item{Dodawanie komentarzy do konkursów}
+            \item{Usuwanie i edycja gier}
+            \item{Usuwanie i edycja konkursów}
+            \item{Wy¶wietlanie kodu ¼ród³owego sêdziego}
+            \item{Wysy³anie bota do gry z menu gry}
+            \item{Edycja profilu u¿ytkownika}
+            \item{Dodanie podstawowej funkcjonalno¶ci JS do serwisu}
+            \item{Zapewnienie czê¶ci obs³ugi b³êdów}
+            \item{Dodanie ról u¿ytkowników: Moderator gry i konkursu}
+            \item{Kompilacja przes³anych programów z u¿yciem skryptów napisanych przez Szymona Majewskiego}
+        \end{itemize}
+    \item{Praca licencjacka}
+        \begin{itemize}
+            \item{Rozdzia³ 8: Dokumentacja u¿ytkowa i opis implementacji}
+            \item{Rozdzia³ 3: Wymagania projektowe}
+            \item{Rozdzia³ 7.4: Serwis webowy}
+            \item{Czê¶æ rozdzia³u 2: Metodologia pracy} - dotycz±ca opisu procesu ¶ledzenia zmian
+            \item{Mniejsze poprawki w pracy}
+        \end{itemize}
+    \item{Dokumentacja}
+        \begin{itemize}
+            \item{Dokumentacja przypadków u¿ycia}
+            \item{Diagram przypadków u¿ycia}
+            \item{Sowtware Development Plan}
+            \item{Pierwsza wersja wizji serwisu}
+        \end{itemize}
+    \item{Inne}
+        \begin{itemize}
+            \item{Pomoc Jakubowi Tla³ce w koordynacji projektu - g³ównie w zakresie GUI}
+            \item{Usuwanie powstaj±cych na bie¿±co b³êdów w kodzie}
+            \item{Kontrola przes³anego kodu}
+        \end{itemize}
+\end{itemize}
+\section{Szymon Majewski}
+\begin{itemize}
+    \item{Rola w zespole}
+    \item{Kod ¼ród³owy}
+    \item{Praca licencjacka}
+    \item{Dokumentacja}
+    \item{Inne}
+\end{itemize}
+\section{Karol ¯ebrowski}
+\begin{itemize}
+    \item{Rola w zespole}
+    \item{Kod ¼ród³owy}
+    \item{Praca licencjacka}
+    \item{Dokumentacja}
+    \item{Inne}
+\end{itemize}
 \chapter{Spis p{\l}yty}
 
 \appendix
