@@ -363,7 +363,7 @@ byæ zgodny z poni¿szym protoko³em:\\
     \item Komunikaty od nadzorcy do botów i do sêdziego równie¿ koñcz± siê ci±giem znaków '<<<newline'.
           Dziêki temu mo¿na przesy³aæ komunikaty wielowierszowe.
     \item Je¶li Sêdzia chce wys³aæ komunikat do wszystkich mo¿e zacz±æ ALBO od wylistowania wszystkich graczy,
-          ALBO u¿yæ skrótu notacyjnego: '[0]' - to jeszcze nie dzia³a, kewstia dopisania jednego if'a
+          ALBO u¿yæ skrótu notacyjnego: '[0]'.
     \item Ponadto, je¶li Sêdzia stwierdzi³, ¿e gra siê zakoñczy³a i chce poinformowaæ wszystkich o tym,
           ¿e nast±pi³ koniec gry wysy³a do Nadzorcy komunikat o tre¶ci "[0]END<<<newline".
           Nastêpnie powinien wys³aæ komunikat zawieraj±cy punktacjê dla wszystkich graczy w postaci: '[score1, score2, ... ]<<<newline'.
@@ -373,6 +373,17 @@ byæ zgodny z poni¿szym protoko³em:\\
           Boty powinny unikaæ wysy³ania tego komunikatu, gdy¿ mog± zostaæ uznane za martwe.
 \end{itemize}
 
+Innym z zadañ nadzorcy jest odczytywanie informacji z stderr botów i sêdziego, a nastêpnie przekazanie ich warstwie schedulera. Pozwala to na umo¿liwienie u¿ytkownikowi na dostêp do informacji które jego program wypisywa³ na stderr. Nadzorca realizuje tê funkcjonalno¶æ, tworz±c dodatkowy w±tek odpowiedzialny za czytanie infromacji pojawiaj±cych siê na stderr sêdziego i botów. W±tek ten przy u¿yciu polecenia select czeka na mo¿liwo¶æ nieblokuj±cego odczytu na odpowiednich deskryptorach, a gdy taka mo¿liwo¶æ siê pojawia odczytuje informacje a¿ do opró¿nienia potoku zwi±zanego z danym deskryptorem.
+
+Powa¿nym problemem jest wybór mechanizmu odpowiedzialnego za ograniczanie i zbieranie informacji o zu¿ywanych przez sêdziego i boty zasobach systemowych. Dostêpnych metod jest wiele, jednak nie wszystkie s± mo¿liwe do zastosowania w przypadku systemu ai-arena.
+
+Ograniczenie zu¿ycia zasobów przez boty i sêdziego jest mo¿liwe do zrealizowania przez u¿ycie polecenia setrlimit. Polecenie to pozwala na ustawienie miêkkiego i twardego limitu na dostêpne procesowi zasoby systemowe, miêdzy innymi pamiêæ wirtualn± i czas zu¿ywany przez proces w trybie u¿ytkownika lub systemowym. 
+W przypadku przekroczenia miêkkiego limitu czasowego do procesu wysy³any jest SIGINT, po przekroczeniu limitu twardego do procesu wysy³any jest SIGKILL. Jasne jest wiêc ¿e limit który chcemy na¿uciæ procesowi musi byæ limitem twardym, gdy¿ SIGINT mo¿e zostaæ obs³u¿ony. Mo¿liwe s± równie¿ sytuacje w których kernel nie mo¿e dostarczyæ SIGKILL do procesu: gdy proces jest zombie lub gdy czeka w nieprzerywalnym u¶pieniu. Jednak w obu przypadkach proces ten nie zu¿ywa ju¿ wiêcej procesora, wiêc nie stanowi to zagro¿enia dla systemu.
+
+Problem pomiaru zu¿ycia zasobów jest jednak nietrywialny. Dostêpne narzêdzia takie jak polecenie time lub skrypt timeout (projekt zapocz±tkowany na Institute for System Programming of
+Russian Academy of Sciences, obecnie dostêpny jako open-source na github), nie mog± zostaæ u¿yte z tego samego powodu. Tworz± one dodatkowy proces, który uruchamia proces kontrolowany i mierzy jego zu¿ycie pamiêci. Oznacza to jednak ¿e tracimy mo¿liwo¶æ wysy³ania sygna³ów do botów i sêdziego, co jest potrzebne do zatrzymania lub zabicia ich procesów (np. gdy sêdzia za¿yczy sobie zabicie którego¶ z botów, lub gdy który¶ z programów pope³ni b³±d w komunikacji).
+
+Rozwi±zaniem problemu jest samodzielne zaimplementowanie idei ze wspomnianego powy¿ej skryptu timeout. Polega ona na zrezygnowaniu z ustawienia limitów poleceniem setrlimit, sprawdzaniu co okre¶lony interwa³ czasu zasobów u¿ywanych przez kontrolowane procesy i zabiciu procesów gdy przekrocz± ustalone limity. Informacje o zasobach u¿ywanych przez proces o danym pid mo¿na uzyskaæ z katalogu /proc/[pid]/stats.
 
 \section{Scheduler}
 \begin{wrapfigure}{r}{0.4\textwidth}
