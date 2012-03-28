@@ -3,8 +3,14 @@
 \usepackage{polski}
 \usepackage[latin2]{inputenc}
 \usepackage{graphicx}
+%\usepackage{float}
 \usepackage{wrapfig}
 \usepackage{hyperref}
+\usepackage{placeins}
+
+%\floatstyle{boxed}
+%\restylefloat{figure}
+%\floatplacement{figure}{H}
 
 \author{Jakub Tla³ka}
 \nralbumu{292665}
@@ -372,24 +378,26 @@ byæ zgodny z poni¿szym protoko³em:\\
 \begin{wrapfigure}{r}{0.4\textwidth}
 	\begin{center}
 		\includegraphics[width=0.38\textwidth]{img/gearman_stack.png}
-	\end{center}
-    \vspace{-25pt}
+	%\end{center}
+    %\vspace{-25pt}
 	\caption{Aplikacja Gearmana}
-    \vspace{-10pt}
-	\begin{center}
+    %\vspace{-10pt}
+	%\begin{center}
 		\includegraphics[width=0.38\textwidth]{img/gearman_cluster.png}
-	\end{center}
-    \vspace{-25pt}
+	
+    %\vspace{-25pt}
 	\caption{Klaster Gearmana}
-    \vspace{-10pt}
-\end{wrapfigure} 
+    \end{center}
+    %\vspace{-10pt}
+\end{wrapfigure}
+%\FloatBarrier
 Do realizacji warstwy Schedulera u¿ywany jest program Gearmand0.26. Gearman jest lekkim frameworkiem s³u¿±cym do
 przydzielania zadañ do wykonania okre¶lonym maszynom lub procesom. Posiada prosty interfejs i jest ³atwy w u¿yciu.
 Ka¿da aplikacja korzystaj±ca z tego frameworku sk³ada siê z trzech czê¶ci: klienta, workera oraz serwera. Rolê
 klienta pe³ni czê¶æ webowa serwisu, która zleca rozegranie odpowiedniej Rozgrywki, podaj±c jako argumenty grê,
 boty i sêdziego Rozgrywki. To zadanie jest zg³aszane do serwera, który je kolejkuje oraz przydziela workerowi.
 Zadanie workera ogranicza siê do uruchomienia nadzorcy z odpowiednimi parametrami, a po zakoñczeniu Rozgrywki
-zapisaniu wyników do bazy danych.
+zapisaniu wyników do bazy danych.\\
 
 Warstwa Schedulera umo¿liwia zakolejkowanie kilku Meczy do rozegrania np. w razie
 du¿ego ruchu w serwisie lub gdy wymaga tego organizacja Turnieju, oraz wykonanie tych zadañ w sposób asynchroniczny.
@@ -444,59 +452,23 @@ jest PostgreSQL, ale nie jest to wymagane. Tabele w bazie danych s± tworzone prz
 na podstawie modeli w pliku models.py, ka¿demu modelowi odpowiada jedna tabela w bazie.
 Oprócz tego istnieje plik fixture, do którego mo¿na zapisaæ lub wczytaæ z niego dane znajduj±ce siê w bazie.
 S³u¿y on do tworzenia testowej bazy danych.
-
-W serwisie s± u¿yte nastêpuj±ce modele(wraz z najwa¿niejszymi polami):
-\vspace{20pt}\\*
-{\large Game}
+\begin{figure}[!h]
+    \makebox[\textwidth]{
+        \includegraphics[width=1.3\textwidth]{img/contests_uml.png}
+    }
+    \caption{Diagram UML bazy danych}
+\end{figure}
+\FloatBarrier
+Najwa¿niejsze modele w serwisie to:
 \begin{itemize}
-    \item nazwa
-    \item ¶cie¿ka do programu sêdziego
-    \item plik z zasadami
+    \item {\large Game} - zawiera plik z zasadami Gry oraz ¶cie¿kê do programu Sêdziego
+    \item {\large Bot} - reprezentuje bota graj±cego w konkretn± Grê, zawiera m.in. plik ¼ród³owy
+    \item {\large Contest} - zawiera informacje o Konkursie, a wiêc Grê, Ranking i listê Botów bior±cych w nim udzia³
+    \item {\large Ranking} - od jego typu zale¿y w jaki sposób bêdzie rozgrywany Konkurs, np. "ka¿dy z ka¿dym"
+    \item {\large BotRanking} - opisuje pozycjê Bota w danym Rankingu
+    \item {\large Match} i {\large MatchBotResult} - przechowuj± informacjê o rozegranym Meczu tzn. które Boty bra³y w nim udzia³ oraz ich wyniki, wykorzystany czas i zu¿yt± pamiêæ
+    \item {\large UserProfile} - najwa¿niejsze dane o u¿ytkowniku tj, zdjêcie, pañstwo pochodzenia
 \end{itemize}
-{\large Bot}
-\begin{itemize}
-    \item nazwa
-    \item w³a¶ciciel
-    \item plik ¼ród³owy
-\end{itemize}
-{\large Ranking}
-\begin{itemize}
-    \item typ rankingu - od niego zale¿y w jaki spposób bêdzie rozgrywany konkurs
-\end{itemize}
-{\large BotRanking - przechowuje opis pozycji Bota w danym Rankingu}\\*
-{\large Contest}
-\begin{itemize}
-    \item nazwa
-    \item Gra
-    \item Ranking
-    \item zawodnicy - Boty, które bior± udzia³ w konkursie
-\end{itemize}
-{\large Match}
-\begin{itemize}
-    \item Bot
-    \item wynik
-    \item wykorzystany czas
-    \item zu¿yta pamiêæ
-\end{itemize}
-{\large MatchBotResult - zawiera rezultat Bota w pojedynczym Meczu}
-\begin{itemize}
-    \item Game
-    \item Contest
-    \item wyniki uczestnicz±cych Botów
-\end{itemize}
-{\large UserProfile}
-\begin{itemize}
-    \item User
-    \item podstawowe dane: zdjêcie, pañstwo itp.
-\end{itemize}
-{\large UserNews}\\*
-{\large GameComment - komentarz do Gry}\\*
-{\large ContestComment - komentarz do Konkursu}\\*
-%\begin{tabular}{|c|c|}
-%\hline
-%Game & nazwa, scie¿ka do programu sêdziego, plik z zasadami \\ \hline
-%Bot & w³a¶ciciel, Gra \\ \hline
-%\end{tabular}
 
 \chapter{Dokumentacja u¿ytkowa}
 
