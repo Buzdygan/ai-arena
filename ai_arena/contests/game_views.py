@@ -29,7 +29,7 @@ def create_new_game(request):
             # Check if there exist another game wuth that name
             games = Game.objects.filter(name=game.name)
             if len(games) > 0:
-                error_msg = 'There alreday exists a game with that name!'
+                error_msg = 'There already exists a game with that name!'
                 return render_to_response('gaming/new_game.html',
                         {
                             'form': form,
