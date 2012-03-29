@@ -461,14 +461,37 @@ S³u¿y on do tworzenia testowej bazy danych.
 \FloatBarrier
 Najwa¿niejsze modele w serwisie to:
 \begin{itemize}
-    \item {\large Game} - zawiera plik z zasadami Gry oraz ¶cie¿kê do programu Sêdziego
-    \item {\large Bot} - reprezentuje bota graj±cego w konkretn± Grê, zawiera m.in. plik ¼ród³owy
-    \item {\large Contest} - zawiera informacje o Konkursie, a wiêc Grê, Ranking i listê Botów bior±cych w nim udzia³
-    \item {\large Ranking} - od jego typu zale¿y w jaki sposób bêdzie rozgrywany Konkurs, np. "ka¿dy z ka¿dym"
-    \item {\large BotRanking} - opisuje pozycjê Bota w danym Rankingu
-    \item {\large Match} i {\large MatchBotResult} - przechowuj± informacjê o rozegranym Meczu tzn. które Boty bra³y w nim udzia³ oraz ich wyniki, wykorzystany czas i zu¿yt± pamiêæ
-    \item {\large UserProfile} - najwa¿niejsze dane o u¿ytkowniku tj, zdjêcie, pañstwo pochodzenia
+    \item {\bf Game} - zawiera plik z zasadami Gry oraz ¶cie¿kê do programu Sêdziego
+    \item {\bf Bot} - reprezentuje bota graj±cego w konkretn± Grê, zawiera m.in. plik ¼ród³owy
+    \item {\bf Contest} - zawiera informacje o Konkursie, a wiêc Grê, Ranking i listê Botów bior±cych w nim udzia³
+    \item {\bf Ranking} - od jego typu zale¿y w jaki sposób bêdzie rozgrywany Konkurs, np. "ka¿dy z ka¿dym"
+    \item {\bf BotRanking} - opisuje pozycjê Bota w danym Rankingu
+    \item {\bf Match} i {\bf MatchBotResult} - przechowuj± informacjê o rozegranym Meczu tzn. które Boty bra³y w nim udzia³ oraz ich wyniki, wykorzystany czas i zu¿yt± pamiêæ
+    \item {\bf UserProfile} - najwa¿niejsze dane o u¿ytkowniku tj, zdjêcie, pañstwo pochodzenia
 \end{itemize}
+
+\section{Testowanie}
+
+Poprawne dzia³anie serwisu jest testowane przy pomocy standardowych Unit Testów w Django.
+Framework umo¿liwia automatyczne testowanie wszystkich warstw aplikacji: obs³ugi ¿±dañ HTTP,
+walidacji i przetwarzania formularzy, renderowania szablonów. Bardzo proste jest symulowanie
+¿±dañ, u¿ywanie testowych danych oraz weryfikowanie konkretnych widoków i metod.\\
+
+Aby dodaæ test jednostkowy wystarczy w pliku tests.py umieszczonym w folderze testowanej aplikacji
+zdefiniowaæ klasê dziedzicz±c± po django.test.TestCase. Ka¿da z jej metod bêdzie uruchomiona oddzielnie
+podczas uruchomienia automatycznych testów. W przypadku gdy korzysta z bazy danych, nie u¿ywa tej "produkcyjnej",
+na potrzebê testów tworzona jest nowa, pusta baza. Mo¿na jednak wskazaæ plik zawieraj±cy fixtures,
+w którym jest zapisana testowa baza w formacie json.\\
+
+Django udostêpnia klasê testowego klienta, wykorzystywanego do zaprogramowania interakcji z aplikacj±.
+Przy jego u¿yciu mo¿na symulowaæ ¿±dania GET i POST na konkretny URL i weryfikowaæ odpowied¼(status, zawarto¶æ itp.),
+sprawdziæ czy dla danego URL wywo³ywany jest odpowiedni widok oraz
+czy odpowied¼ jest renderowana przy u¿yciu w³a¶ciwego szablonu w odpowiednim ¶rodowisku.
+Jest to mo¿liwe dziêki ró¿nego rodzaju asercjom.\\
+
+Uruchomienie automatycznych testów jest bardzo proste. Domy¶lnie u¿ywane s± wszystkie przypadki testowe
+z wszystkich aplikacji, ale wolno wyspecyfikowaæ konkretn± aplikacjê lub przypadek testowy.
+W razie niepowodzenia którego¶ z testów wy¶wietlane s± szczegó³y b³êdu.
 
 \chapter{Dokumentacja u¿ytkowa}
 

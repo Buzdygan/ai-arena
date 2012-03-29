@@ -11,7 +11,7 @@ class SimpleTest(TestCase):
 
 class WebPageTest(TestCase):
 
-    fixtures = ['test_fixture.json']
+    fixtures = ['basic_fixture.json']
 
     def test_main(self):
         """
@@ -30,7 +30,16 @@ class WebPageTest(TestCase):
         client = Client()
         client.login(username='test_user', password='test')
         response = client.get('/')
-        self.assertContains(response, 'Logged as test_user', status_code=200)
+        self.assertContains(response, 'Logged as <a href="/profile/">test_user</a>.', status_code=200)
+
+    def test_register(self):
+        """
+            Tests registering.
+        """
+
+        response = self.client.post('/accounts/register/', {'username': 'fred', 'password1': 'secret', 'password2': 'secret'}, follow=True)
+        self.assertContains(response, 'My profile', status_code=200)
+        self.assertRedirects(response, '/profile/')
 
     def test_launch_match(self):
         """
