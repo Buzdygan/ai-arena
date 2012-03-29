@@ -82,8 +82,8 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
 	Aby usprawniæ proces tworzenia systemu AI-Arena, postanowili¶my na pocz±tku prac nad systemem wybraæ odpowiedni± do naszych potrzeb metodologiê pracy. Pocz±tkowo rozwa¿ali¶my nastêpuj±ce metodologie: Agile Uniformed Process, Extreme Programming, Scrum. Przy dokonywaniu wyboru kierowali¶my siê nastêpuj±cymi kryteriami:
 	\begin{itemize}
 	\item Poniewa¿ pracowali¶my w zespole czteroosobowym, wybrana metodyka powinna byæ metodyk± lekk±.
-	\item Poniewa¿ spotykali¶my siê co tydzieñ na proseminarium, chciel¶my aby podstawow± jednostk± pracy by³y tygodniowe iteracje.
-	\item Poniewa¿ w trakcie tworzenia projektu wszyscy cz³onkowie zespo³u kontynuowali studia i musieli wype³niaæ zwi±zane z tym obowi±zki, chcieli¶my aby ka¿dy z cz³onków móg³ samodzielnie podj±æ decyzjê o ilo¶ci pracy jak± wykona w najbli¿szym tygodniu.
+	\item Ze wzglêdu na cotygodniowe spotkania na proseminarium, chciel¶my aby podstawow± jednostk± pracy by³y tygodniowe iteracje.
+	\item W trakcie tworzenia projektu wszyscy cz³onkowie zespo³u kontynuowali studia i musieli wype³niaæ zwi±zane z tym obowi±zki, chcieli¶my wiêc aby ka¿dy z cz³onków móg³ samodzielnie podj±æ decyzjê o ilo¶ci pracy jak± wykona w najbli¿szym tygodniu.
 	\item Praca nad projektem mia³a przebiegaæ w sposób rozproszony. Chcieli¶my mieæ mo¿liwo¶æ pracy w dogodnych dla siebie godzinach, niezale¿nie od pozosta³ych cz³onków zespo³u.
 	\item Wybrana przez nas metodyka powinna równie¿ pozwala¼ na ³atwe ¶ledzenie zmian w projekcie, oraz u³atwiaæ zapewnianie kontroli jako¶ci.
 	\end{itemize}
@@ -472,14 +472,37 @@ S³u¿y on do tworzenia testowej bazy danych.
 \FloatBarrier
 Najwa¿niejsze modele w serwisie to:
 \begin{itemize}
-    \item {\large Game} - zawiera plik z zasadami Gry oraz ¶cie¿kê do programu Sêdziego
-    \item {\large Bot} - reprezentuje bota graj±cego w konkretn± Grê, zawiera m.in. plik ¼ród³owy
-    \item {\large Contest} - zawiera informacje o Konkursie, a wiêc Grê, Ranking i listê Botów bior±cych w nim udzia³
-    \item {\large Ranking} - od jego typu zale¿y w jaki sposób bêdzie rozgrywany Konkurs, np. "ka¿dy z ka¿dym"
-    \item {\large BotRanking} - opisuje pozycjê Bota w danym Rankingu
-    \item {\large Match} i {\large MatchBotResult} - przechowuj± informacjê o rozegranym Meczu tzn. które Boty bra³y w nim udzia³ oraz ich wyniki, wykorzystany czas i zu¿yt± pamiêæ
-    \item {\large UserProfile} - najwa¿niejsze dane o u¿ytkowniku tj, zdjêcie, pañstwo pochodzenia
+    \item {\bf Game} - zawiera plik z zasadami Gry oraz ¶cie¿kê do programu Sêdziego
+    \item {\bf Bot} - reprezentuje bota graj±cego w konkretn± Grê, zawiera m.in. plik ¼ród³owy
+    \item {\bf Contest} - zawiera informacje o Konkursie, a wiêc Grê, Ranking i listê Botów bior±cych w nim udzia³
+    \item {\bf Ranking} - od jego typu zale¿y w jaki sposób bêdzie rozgrywany Konkurs, np. "ka¿dy z ka¿dym"
+    \item {\bf BotRanking} - opisuje pozycjê Bota w danym Rankingu
+    \item {\bf Match} i {\bf MatchBotResult} - przechowuj± informacjê o rozegranym Meczu tzn. które Boty bra³y w nim udzia³ oraz ich wyniki, wykorzystany czas i zu¿yt± pamiêæ
+    \item {\bf UserProfile} - najwa¿niejsze dane o u¿ytkowniku tj, zdjêcie, pañstwo pochodzenia
 \end{itemize}
+
+\section{Testowanie}
+
+Poprawne dzia³anie serwisu jest testowane przy pomocy standardowych Unit Testów w Django.
+Framework umo¿liwia automatyczne testowanie wszystkich warstw aplikacji: obs³ugi ¿±dañ HTTP,
+walidacji i przetwarzania formularzy, renderowania szablonów. Bardzo proste jest symulowanie
+¿±dañ, u¿ywanie testowych danych oraz weryfikowanie konkretnych widoków i metod.\\
+
+Aby dodaæ test jednostkowy wystarczy w pliku tests.py umieszczonym w folderze testowanej aplikacji
+zdefiniowaæ klasê dziedzicz±c± po django.test.TestCase. Ka¿da z jej metod bêdzie uruchomiona oddzielnie
+podczas uruchomienia automatycznych testów. W przypadku gdy korzysta z bazy danych, nie u¿ywa tej "produkcyjnej",
+na potrzebê testów tworzona jest nowa, pusta baza. Mo¿na jednak wskazaæ plik zawieraj±cy fixtures,
+w którym jest zapisana testowa baza w formacie json.\\
+
+Django udostêpnia klasê testowego klienta, wykorzystywanego do zaprogramowania interakcji z aplikacj±.
+Przy jego u¿yciu mo¿na symulowaæ ¿±dania GET i POST na konkretny URL i weryfikowaæ odpowied¼(status, zawarto¶æ itp.),
+sprawdziæ czy dla danego URL wywo³ywany jest odpowiedni widok oraz
+czy odpowied¼ jest renderowana przy u¿yciu w³a¶ciwego szablonu w odpowiednim ¶rodowisku.
+Jest to mo¿liwe dziêki ró¿nego rodzaju asercjom.\\
+
+Uruchomienie automatycznych testów jest bardzo proste. Domy¶lnie u¿ywane s± wszystkie przypadki testowe
+z wszystkich aplikacji, ale wolno wyspecyfikowaæ konkretn± aplikacjê lub przypadek testowy.
+W razie niepowodzenia którego¶ z testów wy¶wietlane s± szczegó³y b³êdu.
 
 \chapter{Dokumentacja u¿ytkowa}
 
