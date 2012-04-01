@@ -9,53 +9,9 @@ import Queue
 import time
 import select
 import threading
-import signal
+import resource
 
-# Global variables for watching over judges and bots time and memory usage.
-# They have to be global, because it's impossible to pass arguments to signal handler
-
-# A dictionary {pid : CPU + sys time used so far by process}
-time_usage = {}
-# A dictionary {pid : memory used by process}
-memory_usage = {}
-# A dictionary {pid : limits to be enforced on process in form (time_limit (seconds) , memory limit (Kb))}
-process_limits = {}
-
-stopped_pids = set()
-log_map = {}
-judge_process = None
-bots_process_list = []
-
-def enforce_limits(signum, frame):
-    global stopped_pids
-    global time_usage
-    global memory_usage
-    global processes_limits
-    global judge_process
-    global bots_process_list
-    watched_processes = set(bots_process_list)
-    watched_processes.add(judge_process)
-    for proc in watched_processes:
-        try:
-            pid = proc.pid
-            stat_file = open('/proc/' + str(pid) + '/stat')
-            line = (stat_file.readline()).split()
-            time_usage[pid] = (float(line[13]) + float(line[14]))/(os.sysconf(2))
-            memory_usage[pid] = (int(line[22]) + 1023)/1024
-            if (memory_usage[pid]  > (process_limits[pid][1])) or (time_usage[pid] > process_limits[pid][0]):
-                proc.kill()
-                stopped_pids.add(pid)
-                if (memory_usage[pid] > process_limits[pid][1]):
-                    memory_usage[pid] = 'LIMIT EXCEEDED'
-                if (time_usage[pid] > process_limits[pid][0]):
-                    time_usage[pid] = 'LIMIT EXCEEDED'
-        except:
-            pass
-
-def read_logs():
-    global judge_process
-    global bots_process_list
-    global stopped_pids
+def read_logs(judge_process, bots_process_list, log_map, run_thread):
     pipes = [judge_process.stderr]
     stderr_to_proc_num = {}
     stderr_to_proc_num[judge_process.stderr] = 'judge'
@@ -65,36 +21,14 @@ def read_logs():
         pipes.append(bots_process_list[i].stderr)
         stderr_to_proc_num[bots_process_list[i].stderr] = i
         logs[bots_process_list[i].stderr] = []
-    # Below line menas "While judge or any bot is alive"
-    #while (reduce (lambda x, y: x or y, (map(lambda x : x.poll() == None, bots_process_list)), (judge_process.poll() == None))):
-    while (len(stopped_pids) < len(bots_process_list) + 1):
+    while (run_thread['val']):
         (rlist, wlist, xlist) = select.select(pipes, [], [], 10)
         for pipe in rlist:
             readp = read_whole_pipe(pipe)
-            log(logs[pipe], readp)
+            if readp != '':
+                log(logs[pipe], readp)
     for pipe in logs.keys():
        log_map[stderr_to_proc_num[pipe]] = logs[pipe]
-
-def get_logs_once():
-    global judge_process
-    global bots_process_list
-    pipes = [judge_process.stderr]
-    stderr_to_proc_num = {}
-    stderr_to_proc_num[judge_process.stderr] = 'judge'
-    logs = {}
-    logs[judge_process.stderr] = []
-    for i in range(len(bots_process_list)):
-        pipes.append(bots_process_list[i].stderr)
-        stderr_to_proc_num[bots_process_list[i].stderr] = i
-        logs[bots_process_list[i].stderr] = []
-    (rlist, wlist, xlist) = select.select(pipes, [], [], 0.1)
-    for pipe in rlist:
-        readp = read_whole_pipe(pipe)
-        log(logs[pipe], readp)
-    for pipe in logs.keys():
-       log_map[stderr_to_proc_num[pipe]].extend(logs[pipe])
-
-   
 
 def read_whole_pipe(pipe):
     res = ''
@@ -131,53 +65,46 @@ def parse_message(to_send):
         mes = mes + k + ']'
     return (players,mes[:-1])
 
-def readout(proc, timeout):
+def readout(pipe, timeout):
     """
         This function reads communicates.
         The assumption is that every communicate ends with chars '<<<\n' not case-sensitive
         In addition every '<<<\n' frase is considered to be end of a communicate
     """
-    pipe = proc.stdout
     mes = ''
     while mes[len(mes)-4:] != '<<<\n':
-        if proc.pid in stopped_pids:
-            raise TimeoutException()
-        try:
-            (rl, wl, xl)  = select.select([pipe], [], [], timeout)
-            if (rl != []):
-                letter = pipe.read(1)
-                if (letter == ''):
-                    raise EOFException()
-                else:
-                    mes = mes + letter
+        (rl, wl, xl)  = select.select([pipe], [], [], timeout)
+        if (rl != []):
+            letter = pipe.read(1)
+            if (letter == ''):
+                raise EOFException()
             else:
-                raise TimeoutException()
-        except EOFException:
-            raise EOFException()
-        except TimeoutException():
+                mes = mes + letter
+        else:
             raise TimeoutException()
-        except:
-            pass
     return mes[:-4]
 
 # A convenience function for readability purposes
 def log(log_list, log_message):
     log_list.append(log_message)
 
-def play(judge_file, players, memory_limit, time_limit):
+def set_limits(time_limit, memory_limit):
+    mem_limit = memory_limit * 1024
+    resource.setrlimit(resource.RLIMIT_CPU, (time_limit, time_limit))
+    resource.setrlimit(resource.RLIMIT_AS, (mem_limit, mem_limit))
+
+def get_stats(pid):
+    proc_stats = open('/proc/{0}/stat'.format(str(pid)))
+    line = proc_stats.readline().split()
+    return (float(line[13]) + float(line[14]), int(line[22]))
+
+def play(judge_file, players, time_limit, memory_limit):
     """
         judge_file - file containing judge program
         players - list of bots binaries
         memory_limit (in MB) - maximum memory for one bot
         time_limit (in sec) - maximum time limit for one bot
     """
-    global time_usage
-    global memory_usage
-    global process_limits
-    global judge_process
-    global bots_process_list
-    global log_map
-    global stopped_pids
 
     players_num = len(players)
     supervisor_log = []
@@ -189,10 +116,8 @@ def play(judge_file, players, memory_limit, time_limit):
             stdin=subprocess.PIPE,
             stderr=subprocess.PIPE,
             close_fds = True,
+            preexec_fn = lambda : set_limits(10*time_limit, 10*memory_limit),
             )
-    time_usage[judge_process.pid] = 0.0
-    memory_usage[judge_process.pid] = 0
-    process_limits[judge_process.pid] = (10 * float(time_limit) , 10 * int(memory_limit))
     log(supervisor_log, "Started judge succesfully\n")
 
     bots_process_list = []
@@ -204,18 +129,14 @@ def play(judge_file, players, memory_limit, time_limit):
                 stdout = subprocess.PIPE,
                 stderr = subprocess.PIPE,
                 close_fds = True,
+                preexec_fn = lambda : set_limits(time_limit, memory_limit),
                 )
         bots_process_list.append(bot_process)
-        time_usage[bot_process.pid] = 0.0
-        memory_usage[bot_process.pid] = 0
-        process_limits[bot_process.pid] = (float(time_limit), int(memory_limit))
     log(supervisor_log, "Started all bots succesfully\n")
 
-    signal.signal(signal.SIGALRM, enforce_limits)
-    signal.setitimer(signal.ITIMER_REAL, 0.0001, 0.1)
-
     log_map = {}
-    log_thread = threading.Thread(None, read_logs, None)
+    run_thread = dict([('val', True)])
+    log_thread = threading.Thread(None, read_logs, None, (judge_process, bots_process_list, log_map, run_thread), {})
     log_thread.start()
 
     bots = []
@@ -228,21 +149,16 @@ def play(judge_file, players, memory_limit, time_limit):
 
     while (game_in_progress):
         try:
-            judge_mes = readout(judge_process, time_limit*10)
+            judge_mes = readout(judge_process.stdout, time_limit*10)
         except TimeoutException:
             results['exit_status'] = 14
-            try:
-                stopped_pids.add(judge_process.pid)
-                judge_process.send_singal(signal.SIGSTOP)
-            except:
-                pass
+            judge_process.kill()
             log(supervisor_log, "Timeout reached while waiting for judge message.")
             break
         except EOFException:
             results['exit_status'] = 15
             try:
-                stopped_pids.add(judge_process.pid)
-                judge_process.send_signal(signal.SIGSTOP)
+                judge_process.kill()
             except:
                 pass
             log(supervisor_log, "EOF reached while reading message from judge.")
@@ -259,24 +175,14 @@ def play(judge_file, players, memory_limit, time_limit):
             bots = b
         if message == 'END':
             try:
-                res = readout(judge_process, time_limit * 10)
+                res = readout(judge_process.stdout, time_limit * 10)
             except TimeoutException:
                 results['exit_status'] = 16
                 log(supervisor_log, "Timeout reached while waiting for scores from judge.")
-                try:
-                    stopped_pids.add(judge_process.pid)
-                    judge_process.send_signal(signal.SIGSTOP)
-                except:
-                    pass
                 break
             except EOFException:
                 results['exit_status'] = 17
                 log(supervisor_log, "EOF reached while waiting for scores from judge.")
-                try:
-                    stopped_pids.add(judge_process.pid)
-                    judge_process.send_signal(signal.SIGSTOP)
-                except:
-                    pass
                 break
             try:
                 (scores, empty_mes) = parse_message(res)
@@ -284,26 +190,12 @@ def play(judge_file, players, memory_limit, time_limit):
             except:
                 results['exit_status'] = 12
                 log(supervisor_log, "Wrong scores message from judge.")
-            # Pause judge and bots and get their times and memory usage one last time
-            for bot_process in bots_process_list:
-                try:
-                    stopped_pids.add(bot_process.pid)
-                    bot_process.send_signal(signal.SIGSTOP)
-                except:
-                    pass
-            try:
-                stopped_pids.add(judge_process.pid)
-                judge_process.send_signal(signal.SIGSTOP)
-            except:
-                pass
-            game_in_progress = False
             break
         elif message == 'KILL':
             for bnum in players:
                 if bnum > 0 and bnum <= players_num:
                     try:
-                        stopped_pids.add(bots_process_list[bnum-1].pid)
-                        bots_process_list[bnum-1].send_signal(signal.SIGSTOP)
+                        bots_process_list[bnum-1].kill()
                     except:
                         pass
                 else:
@@ -315,59 +207,68 @@ def play(judge_file, players, memory_limit, time_limit):
             for bnum in bots:
                 if bnum > 0 and bnum <= players_num:
                     bot_process = bots_process_list[bnum-1]
-                    if bot_process.poll() == None and (bot_process.pid not in stopped_pids):
-                        message = message + '<<<\n'
+                    message = message + '<<<\n'
+                    try:
                         bot_process.stdin.write(message)
-                        try :
-                            response = readout(bot_process, time_limit) + '<<<\n'
-                        except TimeoutException:
-                            response = '_DEAD_<<<\n'
-                            stopped_pids.add(bot_process.pid)
-                            try:
-                                bot_process.send_signal(signal.SIGSTOP)
-                            except:
-                                pass
-                        except EOFException:
-                            response = '_DEAD_<<<\n'
-                            stopped_pids.add(bot_process.pid)
-                            try:
-                                bot_process.send_signal(signal.SIGSTOP)
-                            except:
-                                pass
-                        judge_process.stdin.write(response)
-                    else:
+                        response = readout(bot_process.stdout, time_limit) + '<<<\n'
+                    except TimeoutException:
                         response = '_DEAD_<<<\n'
-                        judge_process.stdin.write(response)
+                        try:
+                            bot_process.kill()
+                        except:
+                            pass
+                    except EOFException:
+                        response = '_DEAD_<<<\n'
+                        try:
+                            bot_process.kill()
+                        except:
+                            pass
+                    except:
+                        response = '_DEAD_<<<\n'
+                    finally:
+                        try:
+                            judge_process.stdin.write(response)
+                        except:
+                            result['exit_status'] = 104
+                            log(supervisor_log, "Failed to send message to judge")
+                            break
                 else:
                     results['exit_status'] = 13
                     log(supervisor_log, "Tried to send a message to an unexsiting bot.")
                     game_in_progress = False
                     break
-
-    signal.setitimer(signal.ITIMER_REAL, 0)
-    enforce_limits(None, None)
+    
+    run_thread['val'] = False
     try:
-        stopped_pids.add(judge_process.pid)
         judge_process.kill()
     except:
         pass
     for bot in bots_process_list:
         try:
-            stopped_pids.add(bot.pid)
             bot.kill()
         except:
             pass
     log_thread.join()
-    get_logs_once()
 
     final_times = {}
     final_memory = {}
-    final_times['judge'] = time_usage[judge_process.pid]
-    final_memory['judge'] = memory_usage[judge_process.pid]
     for i in range(len(bots_process_list)):
         bot_process = bots_process_list[i]
-        final_times[i] = time_usage[bot_process.pid]
-        final_memory[i] = memory_usage[bot_process.pid]
+        stats = get_stats(bot_process.pid)
+        final_times[i] = stats[0]
+        final_memory[i] = stats[1]
+    
+    judge_stats = get_stats(judge_process.pid)
+    final_times['judge'] = judge_stats[0]
+    final_memory['judge'] = judge_stats[1]
+    
+    for i in range(len(bots_process_list)):
+        bot_process = bots_process_list[i]
+        wait_info = os.wait4(bot_process.pid, 0)
+        final_times[i] = wait_info[2].ru_utime + wait_info[2].ru_stime
+
+    judge_wait_info = os.wait4(judge_process.pid, 0)
+    final_times['judge'] = judge_wait_info[2].ru_utime + judge_wait_info[2].ru_stime
     
     results['time'] = final_times
     results['memory'] = final_memory
