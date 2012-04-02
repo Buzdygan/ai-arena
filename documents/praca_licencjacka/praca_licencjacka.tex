@@ -49,10 +49,11 @@ D.0. General\\}
 \maketitle
 
 \begin{abstract}
-W pracy przedstawiono implementacje systemu AI-Arena,
-System AI-Arena s³u¿y do przeprowadzania rozgrywek i turniejów ró¿nych gier pomiêdzy programami komputerowymi.
+W pracy przedstawiono implementacjê systemu AI-Arena,
+System AI-Arena s³u¿y do przeprowadzania rozgrywek i turniejów pomiêdzy programami komputerowymi. Programy rywalizuj±
+ze sob± w wybranych grach, przeliczaj±c i wykonuj±c zagrania zgodnie z algorytmami sztucznej inteligencji.
 System ma w zamierzeniu twórców s³u¿yæ osobom zainteresowanym sztuczn± inteligencj± do sprawdzenia swoich umiejêtno¶ci,
-lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
+lub jako pomoc przy badaniach nad t± dziedzin± wiedzy.
 \end{abstract}
 
 \tableofcontents
@@ -69,7 +70,7 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
     Dodatkow± zalet± jest istnienie rankingu sta³ego. W ten sposób mo¿na na bie¿±co sprawdzaæ dzia³anie
     w³asnych programów i mierzyæ siê z najlepszymi dotychczasowymi zawodnikami. Serwis mo¿e mieæ zastosowania
     zarówno w nauce jak i w biznesie, ze wzglêdu na rosn±ce zapotrzebowanie na inteligentne programy
-    rozwi±zuj±ce problemy w warunkach rywalizacji takich jak np gie³da. Twórcy serwisu licz± na to,
+    rozwi±zuj±ce problemy w warunkach rywalizacji, takich jak np gie³da. Twórcy serwisu licz± na to,
     ¿e wraz ze wzrostem jego popularno¶ci, AI-Arena skupi spo³eczno¶æ ludzi zafascynowanych dziedzin±
     sztucznej inteligencji i przyczyni siê do rozwoju tej ga³êzi nauki.\\
 
@@ -79,41 +80,46 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
 
 
 \chapter{Metodologia Pracy}
-	Aby usprawniæ proces tworzenia systemu AI-Arena, postanowili¶my na pocz±tku prac nad systemem wybraæ odpowiedni± do naszych potrzeb metodologiê pracy. Pocz±tkowo rozwa¿ali¶my nastêpuj±ce metodologie: Agile Uniformed Process, Extreme Programming, Scrum. Przy dokonywaniu wyboru kierowali¶my siê nastêpuj±cymi kryteriami:
+	Aby usprawniæ proces tworzenia systemu AI-Arena, autorzy postanowili na pocz±tku prac nad systemem
+    wybraæ odpowiedni± do potrzeb metodologiê pracy. Pocz±tkowo rozwa¿ane by³y nastêpuj±ce metodologie: Agile Uniformed Process, Extreme Programming, Scrum.
+    Przy dokonywaniu wyboru kierowano siê nastêpuj±cymi kryteriami:
 	\begin{itemize}
-	\item Poniewa¿ pracowali¶my w zespole czteroosobowym, wybrana metodyka powinna byæ metodyk± lekk±.
-	\item Ze wzglêdu na cotygodniowe spotkania na proseminarium, chciel¶my aby podstawow± jednostk± pracy by³y tygodniowe iteracje.
-	\item W trakcie tworzenia projektu wszyscy cz³onkowie zespo³u kontynuowali studia i musieli wype³niaæ zwi±zane z tym obowi±zki, chcieli¶my wiêc aby ka¿dy z cz³onków móg³ samodzielnie podj±æ decyzjê o ilo¶ci pracy jak± wykona w najbli¿szym tygodniu.
-	\item Praca nad projektem mia³a przebiegaæ w sposób rozproszony. Chcieli¶my mieæ mo¿liwo¶æ pracy w dogodnych dla siebie godzinach, niezale¿nie od pozosta³ych cz³onków zespo³u.
-	\item Wybrana przez nas metodyka powinna równie¿ pozwala¼ na ³atwe ¶ledzenie zmian w projekcie, oraz u³atwiaæ zapewnianie kontroli jako¶ci.
+	\item Poniewa¿ praca przebiega³a w zespole czteroosobowym, wybrana metodyka powinna byæ metodyk± lekk±.
+	\item Ze wzglêdu na cotygodniowe spotkania na proseminarium, jako podstawow± jednostkê pracy przyjêto tygodniowe iteracje.
+	\item W trakcie tworzenia projektu wszyscy cz³onkowie zespo³u kontynuowali studia i musieli wype³niaæ zwi±zane z tym obowi±zki,
+          dlatego po¿±danym by³o aby ka¿dy z cz³onków móg³ samodzielnie podj±æ decyzjê o ilo¶ci pracy jak± wykona w najbli¿szym tygodniu.
+	\item Praca nad projektem mia³a przebiegaæ w sposób rozproszony. Istotna by³a mo¿liwo¶æ pracy w dogodnych dla siebie godzinach,
+          niezale¿nie od pozosta³ych cz³onków zespo³u.
+	\item Wybrana metodyka powinna pozwalaæ na ³atwe ¶ledzenie zmian w projekcie, oraz u³atwiaæ zapewnianie kontroli jako¶ci.
 	\end{itemize}
 	
-    ¯adna z pocz±tkowo rozwa¿anych metodologii nie spe³nia³a wszystkich naszych wymagañ. Zdecydowali¶my siê wiêc na   modyfikacjê metodologii Scrum.
+    ¯adna z pocz±tkowo rozwa¿anych metodologii nie spe³nia³a wszystkich powy¿szych wymagañ. Zdecydowano siê wiêc na modyfikacjê metodologii Scrum.
     Jest to metodologia typu lekkiego. Dzieli okres pracy na krótsze podokresy nazywane sprintami.
     Podczas ka¿dego takiego sprintu, realizowana jest skoñczona czê¶æ funkcjonalno¶ci.
-    Sprinty nie powinny trwaæ d³u¿ej ni¿ dwa, trzy tygodnie. W naszym przypadku by³ to tydzieñ
+    Sprinty trwaj± zazwyczaj kilka tygodni. W tym przypadku by³ to tydzieñ
     miêdzy kolejnymi spotkaniami na zajêciach z prowadz±cym.\\
     
     Podczas takich zajêæ, ustalany by³ zakres pracy przydzielony poszczególnym osobom na przysz³y tydzieñ, oraz weryfikowana
     by³a praca wykonana w tygodniu poprzednim. Prowadz±cy zg³asza³ uwagi do niektórych funkcjonalno¶ci.
     Dyskutowane by³y równie¿ dokumenty powstaj±ce przy okazji pracy nad projektem, przede wszystkim
     poni¿sza praca licencjacka. Zapis przebiegu zajêæ, wraz z celami na przysz³y tydzieñ, nazywany
-    by³ minutkami i trzymany w Google Documents, tak by ka¿dy z cz³onków zespo³u oraz prowadz±cy
+    by³ minutkami i trzymany w systemie Google Documents, tak by ka¿dy z cz³onków zespo³u oraz prowadz±cy
     zajêcia mia³ do niego dostêp.\\
 
     Dodatkowo organizowane by³y spotkania samego zespo³u. Odbywa³y siê one równie¿ raz w tygodniu
-    i mia³y na celu kontrolowanie przebieg prac i zadbanie o to by zosta³y wykonane zaplanowane
-    zadania. Spotkania odbywa³y siê w budynku Wydzia³u Matematyki Informatyki i Mechaniki UW, b±d¼ jako konferencje video z wykorzystaniem Google Hangouts.
+    i mia³y na celu kontrolowanie przebiegu prac i zadbanie o to by zosta³y wykonane zaplanowane
+    zadania. Spotkania odbywa³y siê w budynku Wydzia³u Matematyki Informatyki i Mechaniki UW,
+    b±d¼ jako konferencje video z wykorzystaniem technologii Google Hangouts.
     Ich przebieg nadzorowa³ Lider Projektu, który by³ odpowiedzialny równie¿ za realizowanie
     za³o¿eñ przyjêtej metodologii pracy.\\
 
     Podzia³ obowi±zków miêdzy cz³onków zespo³u by³ wynikiem porozumienia miêdzy cz³onkami i by³
-    zatwierdzany przez lidera projektu, a nastêpnie przedstawiany prowadz±cemu zajêæ.\\
+    zatwierdzany przez Lidera Projektu, a nastêpnie przedstawiany prowadz±cemu zajêæ.\\
 
     Do bie¿±cej kontroli stanu projektu u¿yty zosta³ system Redmine. Umo¿liwia on tworzenie
     zadañ i przydzielanie ich cz³onkom zespo³u. Ka¿de zadanie ma status, który zawiera siê w zbiorze
     (otwarte, przydzielone, zrealizowane, zamkniête). Stan otwarty oznacza, ¿e zadanie nie jest
-    jeszcze przydzielone konkretnej osobie. Stan przydzielone oznacza, ¿e zadanie jest przydzielona,
+    jeszcze przydzielone konkretnej osobie. Stan przydzielone oznacza, ¿e zadanie jest przydzielone,
     a osoba odpowiedzialna za jego wykonanie jest w trakcie jego realizacji. Stan zrealizowane
     oznacza, ¿e zadanie zosta³o wykonane przez osobê odpowiedzialn±, ale nie zosta³o jeszcze
     zweryfikowane pod k±tem poprawno¶ci. Stan zamkniête oznacza, ¿e zadanie zosta³o zrealizowane
@@ -126,38 +132,38 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
     odtworzyæ. Mo¿liwe jest równie¿ jednoczesne rozwijanie projektu w kilku niezale¿nych kierunkach,
     a nastêpnie po³±czenie efektów pracy.\\
 
-    Z uwagi na ma³± liczno¶æ zespo³u zdecydowali¶my siê nie u¿ywac narzêdzi wspomagaj±cych ¶ledzenie zmian. Do obowi±zków
+    Z uwagi na ma³± liczno¶æ zespo³u zdecydowano siê nie u¿ywac narzêdzi wspomagaj±cych ¶ledzenie zmian. Do obowi±zków
     ka¿dego cz³onka zespo³u nale¿a³o upewnienie siê, ¿e po zmianach przez niego wprowadzonych projekt uruchamia siê i nie
     pojawi³y siê nowe problemy (regresje). W przypadku, gdyby jednak regresje wyst±pi³y, mechanizmy kontroli wersji udostêpniane
     przez Gita pozwoli³yby na odtworzenie starszej wersji projektu.\\
 
-    Czêste spotkania projektowe umo¿liwi³y nam pozostanie na bie¿±co z aktualnymi zmianami. W czasie takich sotkañ ka¿dy z cz³onków 
-    zespo³u relacjonowa³ postêp prac, który nastêpnie by³ weryfikowany przez lidera projektu, b±d¼ te¿ przez innego cz³onka zespo³u. \\
+    Czêste spotkania projektowe umo¿liwi³y cz³onkom zespo³u pozostanie na bie¿±co z aktualnymi zmianami. W czasie takich spotkañ,
+    ka¿dy z cz³onków relacjonowa³ postêp prac, który nastêpnie by³ weryfikowany przez Lidera Projektu, b±d¼ te¿ przez innego cz³onka zespo³u. \\
 
 \chapter{Wymagania projektowe}
 
 \section{Rozpoznanie problemu}
 
-    Sztuczna inteligencja jest ostatnio bardzo modn± dziedzin± informatyki. Znajduje zastosowania w kolejnych ga³êziach 
-    informatyki i nie tylko. Nic wiêc dziwnego, ¿e coraz wiêcej ludzi wyra¿a zainteresowanie t± dziedzin± informatyki jednocze¶nie
-    pragn±c siê nauczyæ czego¶ wiêcej. W tym momencie napotykamy problem. W internecie istnieje wiele platform pomagaj±cych nauczyæ
-    siê algorytmiki (przede wszystkim popularne platformy przygotowuj±ce do konkursów ACM), jednak nie ma ¿adnego odpowiednika platformy 
-    umo¿liwiaj±cej nauki sztucznej inteligencji.\\
+    Sztuczna inteligencja jest wspó³cze¶nie bardzo modn± dziedzin± informatyki. Znajduje zastosowania w kolejnych ga³êziach 
+    informatyki i nie tylko. Nic wiêc dziwnego, ¿e coraz wiêcej osób wyra¿a zainteresowanie t± dziedzin± informatyki, jednocze¶nie
+    pragn±c pog³êbiaæ swoj± wiedzê w tym zakresie. Potrzeba ta nie jest jednak w pe³ni zaspokojona. W internecie istnieje wiele platform wspieraj±cych
+    naukê algorytmiki (przede wszystkim popularne platformy przygotowuj±ce do konkursów ACM), jednak nie ma ¿adnego odpowiednika platformy 
+    umo¿liwiaj±cej naukê sztucznej inteligencji.\\
 
-    W odpowiedzi na tê potrzebê zdecydowali¶my siê stworzyæ serwis AI-Arena. Jest to serwis umo¿liwiaj±cy porównanie 
+    W odpowiedzi na tê potrzebê, autorzy zdecydowali siê stworzyæ serwis AI-Arena. Jest to serwis umo¿liwiaj±cy porównanie 
     programów walcz±cych. Program walcz±cy mo¿na opisaæ jako program graj±cy w pewn± grê, tj. pod±¿aj±cy wed³ug pewnych, ¶ci¶le
     okre¶lonych zasad. Zauwa¿my, i¿ wiêkszo¶æ algorytmów sztucznej inteligencji mo¿na z powodzeniem zastosowaæ w programach walcz±cych.\\
 
 \section{Grupa docelowa}
 
-    Jak wynika z dotychczasowego okre¶lenia problemu grupê docelow± stanowi± programi¶ci, którzy s± zafascynowani tematem sztucznej inteligencji.
-    Definiuje to w pewnym sensie sposób wykonania projektu. Mo¿na siê spodziewaæ, ¿e czê¶æ grupy, zafasynowana równie¿ bezpieczeñstwem
+    Jak wynika z dotychczasowego okre¶lenia problemu, grupê docelow± stanowi± programi¶ci, którzy s± zafascynowani tematem sztucznej inteligencji.
+    Definiuje to w pewnym sensie sposób wykonania projektu. Mo¿na siê spodziewaæ, ¿e czê¶æ tej grupy, zafasynowana równie¿ bezpieczeñstwem
     systemów komputerowych, bêdzie chcia³a sprawdziæ zabezpieczenia systemu. Nale¿y wiêc ze zdwojonym wysi³kiem zapewniæ szeroko rozumiane
     bezpieczeñstwo.\\
 
     Poniewa¿ grup± docelow± s± programi¶ci, autorzy zdecydowali siê przygotowaæ wygl±d serwisu, który bêdzie przede wszystkim schludny
     i czytelny. Nie by³o potrzeby umieszczania efektownych animacji, b±d¼ wystylizowanych obrazków, które spowolni³yby dzia³anie strony
-    i wprowadza³y zbêdny chaos.
+    i wprowadza³y dezorientacjê u¿ytkownika.
 
 
 \chapter{Podstawowe pojêcia}
@@ -165,23 +171,16 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
 \section{Gra}
     
     Gra sk³ada siê z Regu³ i Sêdziego. \\
-    Regu³y okre¶laj± stan pocz±tkowy, dostêpne graczom ruchy oraz warunki zwyciêstwa, przegranej, b±d¼ remisu. \\
-    Powinny ¶ci¶le okre¶laæ Protokó³ Komunikacji miêdzy Programami Walcz±cymi, a Sêdzi±.
-    Gra powinna byæ co najmniej dwuosobowa. \\
-    W warunkach serwisu AI-Arena graczami bêd± najczê¶ciej programy komputerowe,
+    Gra mo¿e byæ jedno, b±d¼ wieloosobowa. W przypadku jednoosobowym mamy do czynienia z rozwi±zywaniem
+    zagadnieñ algorytmicznych bez wprowadzania elementu rywalizacji z przeciwnikiem.
+    W warunkach serwisu AI-Arena graczami s± programy komputerowe,
     nazywane Botami b±d¼ Programami Walcz±cymi. \\
-    Sêdzia to program kontroluj±cy przebieg rozgrywki. Ma za zadanie:
-    \begin{itemize}
-    \item wyznaczyæ stan pocz±tkowy ka¿dej rozgrywki 
-    \item Odbieraæ komunikaty od programów graj±cych, sygnalizujace ich zagrania
-    \item Kontrolowaæ poprawno¶æ zagrañ graczy, oraz uaktualniaæ stan rozgrywki
-    \item Informowaæ Graczy o obecnym stanie rozgrywki
-    \item Rozstrzygaæ czy gra siê zakoñczy³a i przydzielaæ punkty zwyciêstwa graczom.
-    \end{itemize}
+    Nie ma ograniczeñ dotycz±cych tematyki Gry. Jedynym warunkiem jest to, by jej zasady da³y siê
+    zapisaæ w postaci programu weryfikuj±cego, zwanego Sêdzi±.
 
 \section{Program Walcz±cy - Bot}
 
-    Jest to program napisany w jednym z obs³ugiwanych przez serwis jêzyków.
+    Jest to program napisany w jednym z obs³ugiwanych przez serwis jêzyków programowania.
     Musi byæ przypisany do konkretnej Gry dostêpnej w serwisie.
     Uczestniczy w rozgrywkach (Meczach) z innymi botami przypisanymi do tej Gry.
     Ma za zadanie przetwarzaæ informacje o dotychczasowym przebiegu rozgrywki
@@ -202,13 +201,13 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
 
 \section{Mecz/Rozgrywka}
     Jest rozgrywany miêdzy Botami, w obrêbie konkursu lub poza nim. Jego przebieg jest kontrolowany przez 
-    Sêdziego. Za przesy³anie komunikatów miêdzy Botami, a Sêdzi±, oraz odebranie od Sêdziego rezultatu
-    meczu odpowiedzialny jest Nadzorca.
+    Sêdziego. Za przesy³anie komunikatów miêdzy Botami a Sêdzi± oraz odebranie od Sêdziego rezultatu
+    meczu, odpowiedzialny jest Nadzorca.
 
 \section{Nadzorca}
     Program bêd±cy integraln± czê¶ci± serwisu AI-Arena. Jego zadaniem jest uruchamianie programów Botów
     i Sêdziego podczas Meczu, a nastêpnie transportowanie miêdzy nimi komunikatów tekstowych zgodnych z ustalonym
-    protoko³em. Nadzorca odbiera wynik Meczu od Sêdziego i przekazuje go Gearmanowi, w celu zapisania rezultatu w bazie.
+    protoko³em. Nadzorca odbiera wynik Meczu od Sêdziego i przekazuje go do narzêdzia zwanego Gearman, w celu zapisania rezultatu w bazie.
     Dodatkowo Nadzorca kontroluje czas i pamiêæ zu¿ywan± przez Boty, tak by nie przekroczy³y dozwolonych limitów.
     Informacje o ich zu¿yciu wraz z logiem rozgrywki generowanym przez sêdziego, Nadzorca zwraca do Gearmana.
 
@@ -222,15 +221,15 @@ lub jako pomoc przy badaniach nad sztuczn± inteligencj±.
     Konkurs mo¿e mieæ okre¶lon± datê zakoñczenia, b±d¼ byæ tzw konkursem sta³ym, w którym nie ma ostatecznego
     terminu wysy³ania rozwi±zañ. Dla ka¿dego konkursu tworzony jest ranking, b±d¼ drabinka rozgrywek.
     Okre¶laj± one kolejno¶æ botów, w szczególno¶ci zwyciêzcê, b±d¼ aktualnego lidera konkursu.
-    W przypadku konkursu sta³ego istnieje ranking, który jest posortowany po sumie zdobytych przez bota
-    punktów w meczach, przy czym ka¿dy bot powinien mieæ tê sam± liczbê rozegranych meczy.
+    W przypadku konkursu sta³ego istnieje ranking, który jest posortowany po sumie zdobytych przez Bota
+    punktów w meczach, przy czym ka¿dy Bot powinien mieæ tê sam± liczbê rozegranych meczy.
 
     
 \chapter{Zastosowania w nauce i biznesie}
 
     Sztuczna inteligencja jest jedn± z szybciej rozwijaj±cych siê obecnie dziedzin.
     Zastosowania algorytmów SI siêgaj± prawie wszystkich obszarów nie tylko
-    internetu, ale i codziennego ¿ycia. Serwis AI-Arena pomaga rozwijaæ ga³±¼ tej nauki
+    Internetu ale i codziennego ¿ycia. Serwis AI-Arena pomaga rozwijaæ ga³±¼ tej nauki
     zwi±zan± z rywalizacj±.\\
 
     Najprostsze przyk³ady rywalizacji to oczywi¶cie wszelkiego
@@ -275,7 +274,8 @@ Obecnie istniej± serwisy internetowe podobne do AI-Arena. Oto kilka z nich:
     Bardzo popularny serwis organizuj±cy ró¿nego rodzaju konkursy programistyczne.
     Jednym z nich s± tzw Marathon Matche, podczas których uczestnicy wysy³aj±
     programy, które staraj± siê najbardziej optymalnie rozwi±zaæ dany problem, przy czym
-    nie istnieje rozwi±zanie ca³kowicie optymalne.
+    nie istnieje rozwi±zanie ca³kowicie optymalne. W terminach serwisu AI-Arena, taki typ
+    zadania mo¿na zapisaæ jako grê jednoosobow±.
 
 \section{AI Challenge}
 
@@ -327,7 +327,7 @@ Obecnie istniej± serwisy internetowe podobne do AI-Arena. Oto kilka z nich:
 
 
 \chapter{Architektura systemu}
-Na serwis AI-Arena sk³adaj± siê cztery wartwy: nadzorcy, schedulera, bazy danych i interfejsu webowego.
+Na serwis AI-Arena sk³adaj± siê cztery wartwy: Nadzorcy, Schedulera, Bazy Danych i Interfejsu Webowego.
 
 \section{Schemat Architektury}
 \includegraphics[width=1.00\textwidth]{img/architecture.png}
@@ -732,7 +732,7 @@ okaza³y siê Google Documents. Dodatkowo, u¿ywany by³ równie¿ system Redmine, nie
 
 \chapter{Harmonogram prac}
 
-Pracê nad projektem podzielili¶my na cztery kluczowe okresy:
+Praca nad projektem zosta³a podzielona na cztery kluczowe okresy:
 
 \begin{itemize}
     \item{Stworzenie dzia³aj±cego prototypu} - termin wykonania: \textbf{do 30 listopada 2011r.}
@@ -742,15 +742,15 @@ Pracê nad projektem podzielili¶my na cztery kluczowe okresy:
 \end{itemize}
 
 Zauwa¿my, ¿e taki plan prac umo¿liwia³, w wypadku nieporzewidzianych okoliczno¶ci, mo¿liwo¶æ zrealizowania 
-ograniczonej funkcjonalno¶ci. Okaza³o siê jednak szczê¶liwie, i¿ opcja ta nie by³a potrzebna, gdy¿ postêpowali¶my zgodnie z harmonogramem.\\
+ograniczonej funkcjonalno¶ci. Okaza³o siê jednak, ¿e opcja ta nie by³a potrzebna, gdy¿ praca postêpowa³a zgodnie z harmonogramem.\\
 
 \vspace{1cm}
-W pierwszej fazie projektu skupili¶my siê na kluczowych zagadnieniach maj±cych wp³yw na ostateczny wygl±d serwisu. Powsta³y wtedy m.in. takie
+W pierwszej fazie projektu skupiono siê na kluczowych zagadnieniach maj±cych wp³yw na ostateczny wygl±d serwisu. Powsta³y wtedy m.in. takie
 dokumenty jak Software Development Plan czy przypadki u¿ycia. Zosta³a uzgodniona wspólna wizja i opracowane zosta³y szczegó³y techniczne.
 Zaprojektowany zosta³ ponadto model interakcji z u¿ytkownikiem koñcowym. Ujrza³a ¶wiat³o dzienne pierwsza wersja nadzorcy oraz powsta³
 szkielet projektu utworzony w Django.\\
 
-W efekcie tych prac, przed koñcem listopada mogli¶my zaprezentowaæ dzia³aj±cy przyk³ad gry dwuosobowej nadzorowanej przed Nadzorcê. Gra ta
+W efekcie tych prac, przed koñcem listopada mo¿na by³o zaprezentowaæ dzia³aj±cy przyk³ad gry dwuosobowej nadzorowanej przed Nadzorcê. Gra ta
 jednak by³a uruchamiana z linii poleceñ. Warto jednak wspomnieæ, i¿ model komunikacji miêdzy uczestnikami (botami i sêdzi±) by³ bliski koñcowego, 
 tj. programy porozumiewa³y siê korzystaj±c ze standarowego wej¶cia i wyj¶cia.\\
 
