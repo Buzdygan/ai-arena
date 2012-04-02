@@ -19,6 +19,7 @@ def create_new_game(request):
         Later it checks results, and if everything is OK it saves
         new Game object to database
     """
+
     if request.method == 'POST':
         form = NewGameForm(request.POST, request.FILES)
         if form.is_valid():
@@ -72,6 +73,7 @@ def game_list(request):
     """
         Displays list of available games
     """
+
     games = Game.objects.all()
     return render_to_response('gaming/game_list.html',
             {
@@ -94,6 +96,7 @@ def game_details(request, game_id, error_msg=None):
         If game_id is not given or there is no Game object with id equal to game_id
         then Exception is thrown
     """
+
     if not game_id:
         raise Exception("In game_details: No game_id given")
 
@@ -102,7 +105,6 @@ def game_details(request, game_id, error_msg=None):
         raise Exception("In game_details: Wrong game_id given")
 
     comments = GameComment.objects.filter(game=game)
-    print(comments)
     return render_to_response('gaming/game_details.html',
             {
                 'game': game,

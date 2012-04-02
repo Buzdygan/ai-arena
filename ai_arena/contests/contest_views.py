@@ -5,6 +5,9 @@ from ai_arena.contests.forms import BotsSelectForm
 
 
 def contests_list(request):
+    """
+        Displays list of all available contests.
+    """
 
     contests = Contest.objects.all()
     return render_to_response('contests/contests_list.html',
@@ -15,15 +18,22 @@ def contests_list(request):
         )
 
 def show_contest(request, contest_id, error_msg=None):
+    """
+        Displays info about the contest, with it's current rank list,
+        and comments underneath.
+    """
+
     contest = Contest.objects.get(id=contest_id)
     if not contest.ranking:
         contest.generate_group_ranking()
         contest.save()
+
     ranking_list = BotRanking.objects.filter(ranking=contest.ranking)
     ranking_list = sorted(ranking_list, key=lambda x: x.position)
 
     comments = ContestComment.objects.filter(contest=contest)
     moderators = contest.moderators.all()
+
     return render_to_response('contests/display_contest.html',
             {
                 'contest': contest,
@@ -38,11 +48,15 @@ def show_contest(request, contest_id, error_msg=None):
         )
 
 def add_contestant(request, contest_id): 
+    """
+        Adds selected Bot to the contest.
+    """
 
     contest = Contest.objects.get(id=contest_id)
     contestants = contest.contestants.all().values_list('id', flat=True) 
     game = contest.game
     bot_form = None
+
     if request.method == 'POST':
         if 'bot_form' in request.POST:
             number_of_bots = 1
@@ -54,6 +68,7 @@ def add_contestant(request, contest_id):
                         contest.contestants.add(bot)
                         contestants.append(bot.id)
                 return redirect('/')
+
     if not bot_form:
         bot_form = BotsSelectForm(game=game, number_of_bots=1, prefix='bot')
 

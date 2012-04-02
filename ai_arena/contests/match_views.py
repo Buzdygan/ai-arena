@@ -6,6 +6,9 @@ from ai_arena.contests.game_launcher import launch_single_match
 
 
 def match_results_list(request):
+    """
+        Displays list of recent matches
+    """
 
     matches = Match.objects.all()
 
@@ -17,6 +20,10 @@ def match_results_list(request):
         )
 
 def show_match_result(request, match_id):
+    """
+        Displays page with results of the given match.
+        Shows logs from the match.
+    """
 
     if not match_id:
         raise Exception("In show_match_result: Noe match_id given")
@@ -37,6 +44,9 @@ def show_match_result(request, match_id):
         )
 
 def launch_match(request, game_id=None, number_of_bots=None):
+    """
+        Launches match for the selected game, with selected bots.
+    """
 
     if not game_id:
         game = None
@@ -51,6 +61,7 @@ def launch_match(request, game_id=None, number_of_bots=None):
 
     if request.method == 'POST':
 
+        # handle game selection form
         if 'game_form' in request.POST:
             game_form = GameSelectForm(request.POST, prefix='game')
             if game_form.is_valid():
@@ -58,6 +69,7 @@ def launch_match(request, game_id=None, number_of_bots=None):
                 number_of_bots=int(game_form.cleaned_data['number_of_bots'])
                 bot_form = BotsSelectForm(game=game, number_of_bots=number_of_bots, prefix='bot')
 
+        # handle bot selection form
         if 'bot_form' in request.POST:
             bot_form = BotsSelectForm(request.POST, game=game, number_of_bots=number_of_bots, prefix='bot')
             if bot_form.is_valid():

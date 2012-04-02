@@ -5,6 +5,7 @@ from ai_arena import settings
 from django.contrib.admin.widgets import AdminDateWidget
 
 class vModelChoiceField(forms.ModelChoiceField):
+
     def label_from_instance(self, obj):
         return "%s" % obj.name
 
@@ -27,17 +28,20 @@ class BotsSelectForm(forms.Form):
             self.fields['bot_field%d' % (i+1)] = vModelChoiceField(queryset=bots)
         
 class NewGameForm(forms.Form):
+
     game_name = forms.CharField(max_length=50)
     game_rules = forms.FileField()
     game_judge = forms.FileField()
     judge_language = forms.ChoiceField(choices= settings.LANGUAGES)
 
 class SendBotForm(forms.Form):
+
     bot_name = forms.CharField(max_length=50)
     bot_source = forms.FileField()
     bot_language = forms.ChoiceField(choices = settings.LANGUAGES)
 
 class SendBotWithGameForm(forms.Form):
+
     games = Game.objects
     game = vModelChoiceField(queryset=games)
     bot_name = forms.CharField(max_length=50)
@@ -46,6 +50,7 @@ class SendBotWithGameForm(forms.Form):
 
 
 class UpdateUserProfileForm(forms.Form):
+
     photo = forms.ImageField()
     about = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
     interests = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
@@ -55,12 +60,15 @@ class UpdateUserProfileForm(forms.Form):
     birthsday = forms.DateField(widget=AdminDateWidget())
 
 class AddCommentForm(forms.Form):
+
     comment = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
 
 class EditCommentForm(forms.Form):
+
     comment = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
 
 class EditGameForm(forms.Form):
+
     name = forms.CharField(max_length=50)
     description = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':15}), required=False)
     game_rules = forms.FileField(required=False)

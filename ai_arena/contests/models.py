@@ -108,13 +108,20 @@ class Contest(models.Model):
             null=True, blank=True)
 
     def generate_group_ranking(self):
+        """
+            Method that generates rank list for the contest.
+            It checks whether all matches have been played. If not, it launches
+            the missing ones by gearman.
+        """
 
         from contests.game_launcher import launch_contest_match
 
+        # if ranking does not exist yet
         if not self.ranking:
             self.ranking = Ranking(type=Ranking.TYPE_GROUP)
             self.ranking.save()
 
+        # how many players required for the match
         match_size = self.game.min_players
         played_matches = Match.objects.filter(ranked_match=True, contest=self, game=self.game)
         matches_results = [match.players_results.all() for match in played_matches]
@@ -154,6 +161,7 @@ class MatchBotResult(models.Model):
         Appart from point score, it keeps info about
         time and memory usage or some errors during the execution.
     """
+
     def __unicode__(self):
         return self.bot.name + ' results'
 
@@ -164,26 +172,12 @@ class MatchBotResult(models.Model):
     memory_used = models.IntegerField(null=True, blank=True)
     bot = models.ForeignKey(Bot)
 
-    # everything went ok
-#    STATUS_OK = 1
-    # bot timed out
-#    STATUS_TIMEOUT = 2
-    # some other failure
-#    STATUS_FAILURE = 3
-    
-    # possible statuses of the match result
-    # the list will change in time
-#    EXECUTION_STATUSES = (
-#        (STATUS_OK, _('Ok')),
-#        (STATUS_TIMEOUT, _('Timeout')),
-#        (STATUS_FAILURE, _('Failure')),
-#    )
-#    execution_status = models.IntegerField(choice=EXECUTION_STATUSES)
 
 class Match(models.Model):
     """
         Contains info about single Match. 
     """
+
     def __unicode__(self):
         return self.game.name
 
@@ -204,23 +198,6 @@ class Match(models.Model):
     # Max memory (in MB) for one player
     memory_limit = models.IntegerField(null=True, blank=True)
 
-    # not yet executed
-#    STATUS_NOT_PLAYED = 0
-    # everything went ok
-#    STATUS_OK = 1
-    # bot timed out
-#    STATUS_TIMEOUT = 2
-    # some other failure
-#    STATUS_FAILURE = 3
-    
-    # possible statuses of the match result
-    #o the list will change in time
-#    EXECUTION_STATUSES = (
-#        (STATUS_NOT_PLAYED, _('Not Played')),
-#        (STATUS_OK, _('Ok')),
-#        (STATUS_TIMEOUT, _('Timeout')),
-#        (STATUS_FAILURE, _('Failure')),
-#    )
 
 class UserProfile(models.Model):
     
@@ -244,6 +221,7 @@ class UserProfile(models.Model):
     
 
 class UserNews(models.Model):
+
     user = models.ForeignKey(User)
     date_set = models.DateField(auto_now_add=True)
     content = models.TextField()
@@ -252,6 +230,7 @@ class UserNews(models.Model):
         return self.content
 
 class GameComment(models.Model):
+
     user = models.ForeignKey(User)
     game = models.ForeignKey(Game)
     date_set = models.DateTimeField(auto_now_add=True)
@@ -261,6 +240,7 @@ class GameComment(models.Model):
         return self.content
 
 class ContestComment(models.Model):
+
     user = models.ForeignKey(User)
     contest = models.ForeignKey(Contest)
     date_set = models.DateTimeField(auto_now_add=True)
