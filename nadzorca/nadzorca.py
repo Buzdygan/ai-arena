@@ -11,6 +11,10 @@ import select
 import threading
 import resource
 
+# Function that runs in a separate thread
+# It polls stderrs of judge and bots, reads them and remembers the outputs
+# in a map that is shared with the main thread (log_map argument)
+# Later stderrs are returned as a form of logs
 def read_logs(judge_process, bots_process_list, log_map, run_thread):
     pipes = [judge_process.stderr]
     stderr_to_proc_num = {}
@@ -30,6 +34,8 @@ def read_logs(judge_process, bots_process_list, log_map, run_thread):
     for pipe in logs.keys():
        log_map[stderr_to_proc_num[pipe]] = logs[pipe]
 
+# Reads the pipe untill it's empty
+# Used for reading stderrs
 def read_whole_pipe(pipe):
     res = ''
     while True:
@@ -44,9 +50,11 @@ def read_whole_pipe(pipe):
             break
     return res
 
+# Exception thrown when timeout while waiting for output is reached
 class TimeoutException(Exception):
     pass
 
+# Exception thrown when EOF is found before proper end of message ('<<<\n')
 class EOFException(Exception):
     pass
 
@@ -88,11 +96,17 @@ def readout(pipe, timeout):
 def log(log_list, log_message):
     log_list.append(log_message)
 
+# A function that is run in forked processes before exec
+# (see subprocess.Popen constructor preexec_fn argument)
+# Used for setting limits of time and memory consumption for the process
 def set_limits(time_limit, memory_limit):
     mem_limit = memory_limit * 1024
     resource.setrlimit(resource.RLIMIT_CPU, (time_limit, time_limit))
     resource.setrlimit(resource.RLIMIT_AS, (mem_limit, mem_limit))
 
+# Reads informaton about time and memory consumption of the process 
+# with given pid from the proc folder.
+# Currently not in use
 def get_stats(pid):
     proc_stats = open('/proc/{0}/stat'.format(str(pid)))
     line = proc_stats.readline().split()
@@ -238,7 +252,9 @@ def play(judge_file, players, time_limit, memory_limit):
                     game_in_progress = False
                     break
     
+    # Stop the log thred
     run_thread['val'] = False
+    # Kill all the processes
     try:
         judge_process.kill()
     except:
@@ -252,16 +268,9 @@ def play(judge_file, players, time_limit, memory_limit):
 
     final_times = {}
     final_memory = {}
-    for i in range(len(bots_process_list)):
-        bot_process = bots_process_list[i]
-        stats = get_stats(bot_process.pid)
-        final_times[i] = stats[0]
-        final_memory[i] = stats[1]
     
-    judge_stats = get_stats(judge_process.pid)
-    final_times['judge'] = judge_stats[0]
-    final_memory['judge'] = judge_stats[1]
-    
+    # Wait for dead bots and judge useing wait4
+    # Save information about their time usage in final_times
     for i in range(len(bots_process_list)):
         bot_process = bots_process_list[i]
         wait_info = os.wait4(bot_process.pid, 0)
