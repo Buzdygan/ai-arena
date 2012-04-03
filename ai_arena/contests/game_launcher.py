@@ -1,5 +1,5 @@
 from decimal import Decimal
-from contests.models import Match, MatchBotResult
+from ai_arena.contests.models import Match, MatchBotResult
 import gearman
 import pickle
 

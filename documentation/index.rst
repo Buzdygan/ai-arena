@@ -20,7 +20,12 @@ Modules
     modules/nadzorca.rst
     modules/model.rst
     modules/game_views.rst
+    modules/game_launcher.rst
     modules/bot_views.rst
+    modules/contest_views.rst
+    modules/match_views.rst
+    modules/user_views.rst
+    modules/comment_views.rst
     modules/compilation.rst
 
 Indices and tables
