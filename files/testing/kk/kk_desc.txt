@@ -1,4 +1,4 @@
-To jest tupowa gra w kolko i krzyzyk.
+To jest typowa gra w kolko i krzyzyk.
 
 ----- KOMUNIKACJA Z SEDZIA ------
 W czasie gry bot moze dostac nastepujace komunikaty:

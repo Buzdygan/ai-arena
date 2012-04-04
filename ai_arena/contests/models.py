@@ -75,7 +75,7 @@ class BotRanking(models.Model):
 
     ranking = models.ForeignKey(Ranking)
     bot = models.ForeignKey(Bot)
-    overall_score = models.DecimalField(max_digits=9, decimal_places=2)
+    overall_score = models.DecimalField(max_digits=9, decimal_places=4)
     position = models.IntegerField(null=True, blank=True)
     matches_played = models.IntegerField(null=True, blank=True)
 
