@@ -387,22 +387,12 @@ Russian Academy of Sciences, obecnie dostêpny jako open-source na github), nie m
 Rozwi±zaniem problemu jest samodzielne zaimplementowanie idei ze wspomnianego powy¿ej skryptu timeout. Polega ona na zrezygnowaniu z ustawienia limitów poleceniem setrlimit, sprawdzaniu co okre¶lony interwa³ czasu zasobów u¿ywanych przez kontrolowane procesy i zabiciu procesów gdy przekrocz± ustalone limity. Informacje o zasobach u¿ywanych przez proces o danym pid mo¿na uzyskaæ z katalogu /proc/[pid]/stats.
 
 \section{Scheduler}
-\begin{wrapfigure}{r}{0.4\textwidth}
+\begin{wrapfigure}{r}{0.65\textwidth}
 	\begin{center}
-		\includegraphics[width=0.38\textwidth]{img/gearman_stack.png}
-	%\end{center}
-    %\vspace{-25pt}
+		\includegraphics[width=0.63\textwidth]{img/gearman_stack.png}
+	\end{center}
 	\caption{Aplikacja Gearmana}
-    %\vspace{-10pt}
-	%\begin{center}
-		\includegraphics[width=0.38\textwidth]{img/gearman_cluster.png}
-	
-    %\vspace{-25pt}
-	\caption{Klaster Gearmana}
-    \end{center}
-    %\vspace{-10pt}
 \end{wrapfigure}
-%\FloatBarrier
 Do realizacji warstwy Schedulera u¿ywany jest program Gearmand0.26. Gearman jest lekkim frameworkiem s³u¿±cym do
 przydzielania zadañ do wykonania okre¶lonym maszynom lub procesom. Posiada prosty interfejs i jest ³atwy w u¿yciu.
 Ka¿da aplikacja korzystaj±ca z tego frameworku sk³ada siê z trzech czê¶ci: klienta, workera oraz serwera. Rolê
@@ -411,6 +401,12 @@ boty i sêdziego Rozgrywki. To zadanie jest zg³aszane do serwera, który je kolejk
 Zadanie workera ogranicza siê do uruchomienia nadzorcy z odpowiednimi parametrami, a po zakoñczeniu Rozgrywki
 zapisaniu wyników do bazy danych.\\
 
+\begin{wrapfigure}{l}{0.51\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/gearman_cluster.png}
+	\caption{Klaster Gearmana}
+    \end{center}
+\end{wrapfigure}
 Warstwa Schedulera umo¿liwia zakolejkowanie kilku Meczy do rozegrania np. w razie
 du¿ego ruchu w serwisie lub gdy wymaga tego organizacja Turnieju, oraz wykonanie tych zadañ w sposób asynchroniczny.
 Gearman ³±czy czê¶æ webow± serwisu z nadzorc±, przez co obie czê¶ci funkcjonuj± i mog± byæ rozwijane niezale¿nie.
@@ -464,13 +460,14 @@ jest PostgreSQL, ale nie jest to wymagane. Tabele w bazie danych s± tworzone prz
 na podstawie modeli w pliku models.py, ka¿demu modelowi odpowiada jedna tabela w bazie.
 Oprócz tego istnieje plik fixture, do którego mo¿na zapisaæ lub wczytaæ z niego dane znajduj±ce siê w bazie.
 S³u¿y on do tworzenia testowej bazy danych.
-\begin{figure}[!h]
+\begin{figure}[!ht]
+    \begin{center}
     \makebox[\textwidth]{
-        \includegraphics[width=1.3\textwidth]{img/contests_uml.png}
+        \includegraphics[width=1.25\textwidth]{img/contests_uml.png}
     }
+    \end{center}
     \caption{Diagram UML bazy danych}
 \end{figure}
-\FloatBarrier
 Najwa¿niejsze modele w serwisie to:
 \begin{itemize}
     \item {\bf Game} - zawiera plik z zasadami Gry oraz ¶cie¿kê do programu Sêdziego
@@ -481,7 +478,7 @@ Najwa¿niejsze modele w serwisie to:
     \item {\bf Match} i {\bf MatchBotResult} - przechowuj± informacjê o rozegranym Meczu tzn. które Boty bra³y w nim udzia³ oraz ich wyniki, wykorzystany czas i zu¿yt± pamiêæ
     \item {\bf UserProfile} - najwa¿niejsze dane o u¿ytkowniku tj, zdjêcie, pañstwo pochodzenia
 \end{itemize}
-
+\FloatBarrier
 \section{Testowanie}
 
 Poprawne dzia³anie serwisu jest testowane przy pomocy standardowych Unit Testów w Django.
@@ -509,7 +506,7 @@ W razie niepowodzenia którego¶ z testów wy¶wietlane s± szczegó³y b³êdu.\\
 
 \subsection{Z udzia³em u¿ytkownika niezalogowanego (Go¶cia)}
 U¿ytkownik niezalogowany ma bardzo ograniczone prawa u¿ywania serwisu. Praktycznie jedyn± dozwolon± aktywno¶ci± jest rejestracja
-w serwisie lub próba zalogowania siê do utworzonego wcze¶niej konta.
+w serwisie lub próba zalogowania siê do utworzonego wcze¶niej konta.\\
 
 \begin{figure}[h]
     \begin{center}
@@ -572,15 +569,14 @@ w link "Edit profile" znajduj±cy siê pod zdjêciem profilowym. W oknie edycji pro
 	\caption{Formularz do tworzenia nowej gry}
 \end{wrapfigure}
 Tworzenie gry (konkursu) jest jedn± z centralnych aktywno¶ci w serwisie. Aby utworzyæ grê, u¿ytkownik musi mieæ zawczasu przygotowany plik ¼ród³owy
-sêdziego oraz plik z zasadami rozgrywki.\newline\newline
+sêdziego oraz plik z zasadami rozgrywki.\\
 
-\subsubsection{}
 Sêdzia jest programem, który nadzoruje przebieg gry. Powinien byæ napisany w jednym z jêzyków: C, C++, Java, Python. Otrzymuje on komunikaty od Nadzorcy, który z kolei zczytuje je ze standardowego wej¶cia Botów. 
 Sêdzia musi dokonaæ walidacji komunikatu, tj. upewniæ siê, i¿ format komunikatu jest zgodny z protoko³em opisanym w zasadach gry oraz, ¿e ruch zawarty w komunikacie nie narusza regu³ gry (przyk³adowo, ¿e
-gracz graj±cy pionami czarnymi nie ruszy³ siê bia³ym pionem). Gdy upewni siê, ¿e otrzymany komunikat jest poprawny wysy³a na swoje standardowe wyj¶cie komunikat zgodnie z formatem opisanym w regu³ach gry.
+gracz graj±cy pionami czarnymi nie ruszy³ siê bia³ym pionem). Gdy upewni siê, ¿e otrzymany komunikat jest poprawny wysy³a na swoje standardowe wyj¶cie komunikat zgodnie z formatem opisanym w regu³ach gry.\\
 
 Plik ¼ród³owy sêdziego jest dostêpny dla wszystkich zalogowanych u¿ytkowników serwisu. Ma to zapobiec wysy³aniu "stronniczych" sêdziów oraz ³atwieszemu ujawnieniu pewnych "ukrytych" wad protoko³u.
-Administratorzy zastrzegaj± sobie prawo do usuniêcia lub poprawienia wadliwych sêdziów.
+Administratorzy zastrzegaj± sobie prawo do usuniêcia lub poprawienia wadliwych sêdziów.\\
 
 Plik z zasadami rozgrywki musi zawieraæ ogólny opis gry (np. fabu³ê wprowadzaj±c±) oraz szczegó³owy opis i znaczenie komunikatów. W szczególno¶ci musz± byæ zawarte informacje takie jak:
 \begin{itemize}
@@ -588,9 +584,9 @@ Plik z zasadami rozgrywki musi zawieraæ ogólny opis gry (np. fabu³ê wprowadzaj±c
 	\item{dozwolone odpowiedzi na ka¼dy rodzaj komunikatu}
 	\item{komunikaty informuj±ce o b³êdzie}
 \end{itemize}
-Zosta³o przyjête za³o¿enie, ¿e Bot, który wy¶le komunikat o innej, ni¿ wyspecykowano formie automatycznie przegrywa dan± grê i jest zabijany przez Nadzorcê.
+Zosta³o przyjête za³o¿enie, ¿e Bot, który wy¶le komunikat o innej, ni¿ wyspecykowano formie automatycznie przegrywa dan± grê i jest zabijany przez Nadzorcê.\\
 
-Aby utworzyæ konkurs nie jest potrzebne wcze¶niejsze przygotowywanie plików, jednak musi istnieæ gra, na bazie której chcemy utworzyæ nowy konkurs.
+Aby utworzyæ konkurs nie jest potrzebne wcze¶niejsze przygotowywanie plików, jednak musi istnieæ gra, na bazie której chcemy utworzyæ nowy konkurs.\\
 \begin{wrapfigure}{r}{0.7\textwidth}
 	\begin{center}
 		\includegraphics[width=0.68\textwidth]{img/game_details.png}
@@ -599,7 +595,8 @@ Aby utworzyæ konkurs nie jest potrzebne wcze¶niejsze przygotowywanie plików, jed
 \end{wrapfigure}
 Gdy u¿ytkownik przygotowa³ ju¿ powy¿sze pliki powinien, w celu utworzenia nowej gry, klikn±æ w link "Create New Game" znajduj±cy siê na górnym pasku strony. Otworzy siê formularz zawieraj±cy pola, do których 
 nale¿y wprowadziæ informacje nt. tworzonej gry (miêdzy innymi 2 wymienione wcze¶niej pliki czy nazwa gry). Warto zwróciæ uwagê, i¿ nazwa gry musi byæ unikalna, gdy¿ 
-definiuje ona ¶cie¿kê do poszczególnych plików na dysku.
+definiuje ona ¶cie¿kê do poszczególnych plików na dysku.\\
+
 Gdy u¿ytkownik wype³ni formularz i zatwierdzi przyciskiem "Submit" na dole formularza zostanie przeniesiony na stronê zawieraj±c± detale w³a¶nie utworzonej gry.
 Autor staje siê automatycznie moderatorem gry i ma prawo m. in. do edycji czy usuniêcia gry lub edycji i usuwania komentarzy u¿ytkowników.
 
@@ -611,7 +608,7 @@ Autor staje siê automatycznie moderatorem gry i ma prawo m. in. do edycji czy us
 	\caption{Formularz do wysy³ania bota}
 \end{wrapfigure}
 Aby wys³aæ bota do gry (konkursu) nale¿y w pierwszej kolejno¶ci przej¶æ na stronê zawieraj±c± szczegó³owy opis gry. Mo¿na to zrobiæ klikaj±c na przycisk "Games list" ("Contests") znajduj±cy siê na górze strony, a nastêpnie 
-wybraæ grê (konkurs) z wy¶wietlonej listy.
+wybraæ grê (konkurs) z wy¶wietlonej listy.\\
 
 Gdy znajdujemy siê ju¿ na stronie z detalami nale¿y, w celu zg³oszenia bota, klikn±æ na link "Send bot for this game" (lub "Add contestant" w przypadku konkursu) i wype³niæ formularz wy¶wietlony przez system.
 Podobnie, jak w przypadku tworzenia gry nale¿y mieæ uprzednio przygotowany plik zawieraj±cy kod ¼ród³owy bota. Bot komunikuje siê z sêdzi± za pomoc± komunikatów opisanych w zasadach gry wypisywanych i zczytywanych ze standatdowego 
@@ -619,7 +616,7 @@ wej¶cia i wyj¶cia. W przypadku, gdy bot wy¶le ¼le sformatowany lub b³êdny komuni
 
 \subsubsection{Dodanie komentarza pod gr± lub konkursem}
 Aby dodaæ komentarz do gry (konkursu) nale¿y znaldowaæ siê na stronie ze szczegó³owym opisem danej gry (konkursu). Nastêpnie klikn±æ w link "Add comment" i wype³niæ formularz wy¶wietlony przez system.
-Komunikat ten pojawi siê w kolejno¶ci odwrotnie chronologicznej pod opisem zasad gry.
+Komunikat ten pojawi siê w kolejno¶ci odwrotnie chronologicznej pod opisem zasad gry.\\
 \begin{wrapfigure}{l}{0.7\textwidth}
 	\begin{center}
 		\includegraphics[width=0.68\textwidth]{img/comment.png}
@@ -638,8 +635,12 @@ Takie samo prawa ma równie¿ autor komentarza.
 	\end{center}
 	\caption{Sposób wy¶wietlania kodu ¼ród³owego}
 \end{wrapfigure}
-W celu wy¶wietlenia kodu ¼ród³owego sêdziego nale¿y znajdowaæ siê na stronie gry zawiejaj±cej szczegó³owy jej opis. Potem, po klikniêciu w link "Show source of the judge" system przekieruje nas na stronê. gdzie wy¶wietlony zostanie 
-kod ¼ród³owy sêdziego.
+W celu wy¶wietlenia kodu ¼ród³owego sêdziego nale¿y przej¶æ na stronê gry zawiejaj±cej szczegó³owy jej opis. Potem, po klikniêciu w link "Show source of the judge" system przekieruje nas na stronê. gdzie wy¶wietlony zostanie 
+kod ¼ród³owy sêdziego.\\
+
+Mo¿liwe jest równie¿ wy¶wietlenie kodu w postaci surowej, tj. bez numerów linii i dodatkowego formatowania tekstu. Aby wy¶wietliæ surowy kod nale¿y klikn±æ w przycisk "Raw" znajduj±cy siê 
+w prawym górnym rogu wy¶wietlanego kodu. Dostêpna jest ponadto opcja pobrania kodu ¼ród³owego sêdziego w postaci pliku tekstowego. Aby pobraæ kod ¼ród³owy
+u¿ywtkownik powinien klikn±æ w przycisk "Download" znajduj±dy siê na prawo od przycisku "Raw".
 
 \subsection{Z udzia³em moderatora konkursu lub gry}
 
@@ -672,7 +673,7 @@ Aby móc usun±æ grê (konkurs) trzeba spe³niaæ jeden z warunków:
 	\end{center}
 %	\caption{Monit o potwierdzenie usuniêcia gry}
 \end{wrapfigure}
-
+\\
 W celu usuniêcia gry nale¿y znajdowaæ siê na stronie zawieraj±cej szczegó³owy opis gry. Nastêpnie klikn±æ w znajduj±cy siê po lewej stronie link "Delete this game". Spowoduje to wyskoczenie okienka z pro¶b± o potwierdzenie swojej 
 decyzji. Pamiêtajmy, i¿ jest to decyzja nieodwracalna! Potwierdzenie wykonania operacji sposoduje usuniêcie gry z listy dostêpnych i przeniesienie na stronê g³ówn± serwisu.
 
@@ -684,7 +685,11 @@ decyzji. Pamiêtajmy, i¿ jest to decyzja nieodwracalna! Potwierdzenie wykonania o
 %	\caption{Edycja gry lub konkursu}
 \end{wrapfigure}
 Mo¿liwa jest edycja konkursu. Aby tego dokonaæ trzeba byæ adnimistratorem lub moderatorem gry. Nale¿y klikn±æ w link "Edit game". 
-System przeniesie nas do okna, w którym wy¶wietli siê formularz do edycji gry. Po wprowadzeniu zmian nale¿y zatwierdziæ przyciskiem "Save".
+System przeniesie nas do okna, w którym wy¶wietli siê formularz do edycji gry. Po wprowadzeniu zmian nale¿y zatwierdziæ przyciskiem "Save".\\
+
+Nale¿y pamiêtaæ, i¿ nazwa gry okre¶la fizyczn± ¶cie¿kê dostepu. Oznacza to, ¿e je¶li u¿ytkownik bêdzie chcia³ zmieniæ nazwê gry, system przeniesie
+wszystkie pliki zwi±zane z gr± do nowych lokalizacji. U¿ytkownik musi jednak zadbaæ, aby nowa nazwa gry by³a unikalna. W przeciwnym razie próba edycji
+zakoñczy siê pora¿k±.
 \vspace{1cm}
 
 \chapter{Przysz³o¶æ projektu}
