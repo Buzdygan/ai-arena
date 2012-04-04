@@ -517,6 +517,30 @@ w pliku models.py ma swój odpowiednik w testach.
 
 \chapter{Wybrane i rozwa¿ane rozwi±zania technologiczne}
 
+\section{Django}
+
+Django jest wysokopoziomowym frameworkiem przeznaczonym do tworzenia aplikacji internetowych.
+Opiera siê na wzorcu projektowym podobnym do MVC nazywanym MVT. Z tego wzglêdu aplikacjê mo¿na podzieliæ na kilka warstw:
+\begin{itemize}
+    \item {\bf Model} - reprezentuje logikê aplikacji. Ka¿dej klasie zdefiniowanej w pliku models.py dziedzicz±cej po Models.model odpowiada tabela w bazie danych
+    \item {\bf View} - okre¶la jakie dane bêd± zaprezentowane u¿ytkownikowi. W pliku views.py znajduj± siê funkcje obliczaj±ce odpowied¼ na dane ¿±danie.
+    \item {\bf Template} - obejmuje szablony html. S± one renderowane na podstawie kontekstu obliczonego w warswie widoku.
+\end{itemize}
+Oprócz tego framework zapewnia opart± na wyra¿eniach regularnych obs³ugê URL, co pozwala na prost±, przejrzyst± adresacjê.
+Django posiada w³asny, lekki serwer umo¿liwiaj±cy rozwijanie i testowanie aplikacji. Ponadto zajmuje siê obs³ug± bazy danych
+i systemem cache'owania danych. Do zalet tego frameworku nale¿± te¿ du¿a skalowalno¶æ i wydajno¶æ oraz wbudowany panel administracyjny.\\
+
+Na rynku dostêpnych jest wiele frameworków przeznaczonych do tworzenia aplikacji internetowych. Django jest jednym z bardziej popularnych.
+Autorzy projektu zdecydowali siê w³a¶nie na ten framework z kilku wzglêdów.
+\begin{itemize}
+    \item Rozwi±zuje wszystkie podstawowe kwestie zwi±zane z projektem, tj. obs³uga bazy danych, adresacja.
+    \item Serwis od strony webowej jest standardow± aplikacj±.
+    \item Django jest proste w u¿yciu.
+    \item Nie bez znaczenia by³o to, ¿e cz³onkowie zespo³u znali tê technologiê ju¿ wcze¶niej z przedmiotu Aplikacje WWW.
+\end{itemize}
+Django powsta³o w celu ³atwego, szybkiego tworzenia standardowych aplikacji internetowych i po do¶wiadczeniach zwi±zanych z projektem
+autorzy w pe³ni potwierdzaj± skuteczno¶æ tego frameworku.
+
 \section{Nadzorca}
 
 W pocz±tkowej fazie projektu autorzy planowali udostêpniæ u¿ytkownikom mo¿liwo¶æ wysy³ania programów wieloprocesowych. Okaza³o siê jednak, ¿e implementacja takiej funkcjonalno¶ci stwarza wiele trudnych do rozwi±zania problemów w warstwie nadzorcy. G³ównymi problemami okaza³y siê ograniczenie zu¿ycia czasu i pamiêci przez grupê procesów, pomiar zu¿ycia tych zasobów po zakoñczeniu dzia³ania grup procesów, i zabijanie odpowiednich grup procesów na ¿±danie sêdziego.
