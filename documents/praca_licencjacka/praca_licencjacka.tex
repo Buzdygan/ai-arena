@@ -376,7 +376,7 @@ byæ zgodny z poni¿szym protoko³em:\\
 
 Innym z zadañ nadzorcy jest odczytywanie informacji z stderr botów i sêdziego, a nastêpnie przekazanie ich warstwie schedulera. Pozwala to na umo¿liwienie u¿ytkownikowi dostêp do informacji które jego program wypisywa³ na stderr. Nadzorca realizuje tê funkcjonalno¶æ, tworz±c dodatkowy w±tek odpowiedzialny za czytanie infromacji pojawiaj±cych siê na stderr sêdziego i botów. W±tek ten przy u¿yciu polecenia select czeka na mo¿liwo¶æ nieblokuj±cego odczytu na odpowiednich deskryptorach, a gdy taka mo¿liwo¶æ siê pojawia odczytuje informacje a¿ do opró¿nienia potoku zwi±zanego z danym deskryptorem.
 
-Powa¿nym problemem jest wybór mechanizmu odpowiedzialnego za ograniczanie i zbieranie informacji o zu¿ywanych przez sêdziego i boty zasobach systemowych. Dostêpnych metod jest wiele, jednak nie wszystkie s± mo¿liwe do zastosowania w przypadku systemu AI-Arena. Mechanizm ten, jak równie¿ motywacje do jego wyboru zosta³y przedstawione w rozdziale 8.1.
+Nietrywialnym problemem jest wybór mechanizmu odpowiedzialnego za ograniczanie i zbieranie informacji o zu¿ywanych przez sêdziego i boty zasobach systemowych. Dostêpnych metod jest wiele, jednak nie wszystkie s± mo¿liwe do zastosowania w przypadku systemu AI-Arena. Mechanizm ten, jak równie¿ motywacje do jego wyboru zosta³y przedstawione w rozdziale 8.1.
 
 \section{Scheduler}
 \begin{wrapfigure}{r}{0.65\textwidth}
@@ -494,9 +494,6 @@ Uruchomienie automatycznych testów jest bardzo proste. Domy¶lnie u¿ywane s± wszy
 z wszystkich aplikacji, ale wolno wyspecyfikowaæ konkretn± aplikacjê lub przypadek testowy.
 W razie niepowodzenia którego¶ z testów wy¶wietlane s± szczegó³y b³êdu.\\
 
-<<<<<<< HEAD
-\chapter{Decyzje technologiczne}
-=======
 Testy zawarte w projekcie zosta³y podzielone na dwie kategorie. Pierwsza, zawarta w klasie \emph{WebPageTest},
 to testy symuluj±ce wysy³anie okre¶lonych ¿±dañ na konkretne adresy url. Wszystkie korzystaj± z tej samej bazy testowej
 zapisanej w pliku test\_fixture.json. Poprawno¶æ odpowiedzi jest sprawdzana przy pomocy asercji pod k±tem tre¶ci,
@@ -532,6 +529,8 @@ Ta decyzja znacznie znacznie zredukowa³a rozwa¿ane powy¿ej trudno¶ci, jednocze¶n
 
 Ograniczenie zu¿ycia czasu i pamiêci zosta³o zrealizowane przy pomocy funkcji setrlimit. Polecenie to pozwala na ustawienie miêkkiego i twardego limitu na dostêpne procesowi zasoby systemowe, miêdzy innymi pamiêæ wirtualn± i czas zu¿ywany przez proces w trybie u¿ytkownika lub systemowym. 
 W przypadku przekroczenia miêkkiego limitu czasowego do procesu wysy³any jest SIGINT, po przekroczeniu limitu twardego do procesu wysy³any jest SIGKILL. Jasne jest wiêc ¿e limit który chcemy na¿uciæ procesowi musi byæ limitem twardym, gdy¿ SIGINT mo¿e zostaæ obs³u¿ony. Mo¿liwe s± równie¿ sytuacje w których kernel nie mo¿e dostarczyæ SIGKILL do procesu: gdy proces jest zombie lub gdy czeka w nieprzerywalnym u¶pieniu. Jednak w obu przypadkach proces ten nie zu¿ywa ju¿ wiêcej procesora, wiêc nie stanowi to zagro¿enia dla systemu.
+
+Pomiar czasu zu¿ytego przez proces realizowany jest przy u¿yciu funkcji systemowej wait4. Potrafi ona czekaæ na zakoñczonego potomka o danym pid, jednocze¶nie zwracaj±c pewne informacje dotycz±ce zu¿ytych przez niego zasobów w trakcie jego dzia³ania. W¶ród tych informacji znajduj± siê ilo¶æ czasu jak± proces spêdzi³ w trybie u¿ytkownika lub w trybie systemowym, mierzone z dok³adno¶ci± co do milisekundy.
 
 \chapter{Dokumentacja u¿ytkowa}
 
@@ -943,8 +942,8 @@ u¿ycia. Kluczowym testem okaza³ siê konkurs zorganizowany na pro¶bê Codility. Ok
         \end{itemize}
     \item{Praca licencjacka}
         \begin{itemize}
-            \item{Rozdzia³ 8: Dokumentacja u¿ytkowa i opis implementacji}
-            \item{Rozdzia³ 10: Harmonogram prac}
+            \item{Rozdzia³ 9: Dokumentacja u¿ytkowa i opis implementacji}
+            \item{Rozdzia³ 11: Harmonogram prac}
             \item{Rozdzia³ 3: Wymagania projektowe}
             \item{Rozdzia³ 7.4: Serwis webowy}
             \item{Czê¶æ rozdzia³u 2: Metodologia pracy} - dotycz±ca opisu procesu ¶ledzenia zmian
@@ -977,6 +976,11 @@ u¿ycia. Kluczowym testem okaza³ siê konkurs zorganizowany na pro¶bê Codility. Ok
     		\item Automayczny makefile
     	\end{itemize}
     \item{Praca licencjacka}
+    	\begin{itemize}
+    		\item Pocz±tkowy szkielet pracy
+    		\item Rozdzia³y dotycz±ce nadzorcy 7.2 i 8.1
+    		\item Fragmenty rozdzia³ów 1 i 2
+    	\end{itemize}
     \item{Dokumentacja}
     \item{Inne}
 \end{itemize}
