@@ -503,7 +503,7 @@ Jest to mo¿liwe dziêki ró¿nego rodzaju asercjom.\\
 
 Uruchomienie automatycznych testów jest bardzo proste. Domy¶lnie u¿ywane s± wszystkie przypadki testowe
 z wszystkich aplikacji, ale wolno wyspecyfikowaæ konkretn± aplikacjê lub przypadek testowy.
-W razie niepowodzenia którego¶ z testów wy¶wietlane s± szczegó³y b³êdu.
+W razie niepowodzenia którego¶ z testów wy¶wietlane s± szczegó³y b³êdu.\\
 
 \chapter{Dokumentacja u¿ytkowa}
 
@@ -511,31 +511,34 @@ W razie niepowodzenia którego¶ z testów wy¶wietlane s± szczegó³y b³êdu.
 U¿ytkownik niezalogowany ma bardzo ograniczone prawa u¿ywania serwisu. Praktycznie jedyn± dozwolon± aktywno¶ci± jest rejestracja
 w serwisie lub próba zalogowania siê do utworzonego wcze¶niej konta.
 
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=1.0\textwidth]{img/UseCaseDiagram.jpg}
+    \end{center}
+    \caption{Diagram przypadków u¿ycia}
+\end{figure}
+
 \subsubsection{Rejestracja w systemie}
+Aby zarejestrowaæ siê w systemie nale¿y wykonaæ kilka kroków. Na pocz±tku nale¿y klikn±æ w napis "Register" zlokalizowany po prawej stronie 
+na górze.\\
+
+Nastêpnie system przekieruje u¿ytkownika do strony, gdzie bêdzie móg³ wybraæ swój login oraz has³o. Nale¿y zwróciæ uwagê, i¿ login
+musi byæ unikalny, mo¿e zawieraæ wy³±cznie ma³e i du¿e litery, cyfry oraz znak '\_'. W przeciwnym wypadku pojawi siê komunikat o b³êdzie.\\
 \begin{wrapfigure}{r}{0.5\textwidth}
 	\begin{center}
 		\includegraphics[width=0.48\textwidth]{img/register.png}
 	\end{center}
 	\caption{Pasek logowania i rejestracji do serwisu}
 \end{wrapfigure}
-Aby zarejestrowaæ siê w systemie nale¿y wykonaæ kilka kroków. Na pocz±tku nale¿y klikn±æ w napis "Register" zlokalizowany po prawej stronie 
-na górze.
-
-Nastêpnie system przekieruje u¿ytkownika do strony, gdzie bêdzie móg³ wybraæ swój login oraz has³o. Nale¿y zwróciæ uwagê, i¿ login
-musi byæ unikalny, mo¿e zawieraæ wy³±cznie ma³e i du¿e litery, cyfry oraz znak '\_'. W przeciwnym wypadku pojawi siê komunikat o b³êdzie.
 
 Po prawid³owym wykonaniu tego kroku u¼ytkownik zostanie przeniesiony na swoj± stronê profilow±. Mo¿e st±d zarz±dzaæ swoim kontem. 
 Od tej chwili jest równie¿ zalogowany w serwisie, co znaczy, ¿e mo¿e m. in. wysy³aæ swoje boty do gier lub wykonywaæ inne akcje dostêpne
-wy³±cznie dla zalogowanych u¿ytkowników.
+wy³±cznie dla zalogowanych u¿ytkowników.\\
 
 \subsubsection{Logowanie}
 Logowanie jest standardow± aktywno¶ci±. któr± siê spotyka na wszystkich forach i wielu serwisach. Przycisk logowania znajduje siê tu¿ obok 
 przycisku rejestracji. Aby siê zalogowaæ nale¿y klikn±æ w ten przycisk a nastêpnie wype³niæ pola formularza, który siê pojawi na ekranie.
 Je¶li dane bêd± zgodne z tymi zapisanymi w bazie danych, system przekieruje u¿ytkownika na jego stronê profilow±.
-
-\begin{center}
-\includegraphics[angle=90, width=1.0\textwidth]{img/UseCaseDiagram.jpg}
-\end{center}
 
 \subsection{Z udzia³em u¿ytkownika zalogowanego}
 
