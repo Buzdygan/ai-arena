@@ -744,11 +744,41 @@ Praca nad projektem zosta³a podzielona na cztery kluczowe okresy:
 Zauwa¿my, ¿e taki plan prac umo¿liwia³, w wypadku nieporzewidzianych okoliczno¶ci, mo¿liwo¶æ zrealizowania 
 ograniczonej funkcjonalno¶ci. Okaza³o siê jednak, ¿e opcja ta nie by³a potrzebna, gdy¿ praca postêpowa³a zgodnie z harmonogramem.\\
 
+\begin{figure}[h]
+\begin{center}
+    \includegraphics{img/suma_czasow.png}
+\end{center}
+\caption{Podzia³ pracy w kolejnych fazach rozwoju projektu}
+\end{figure}
+
+W dalszej czê¶ci rozdzia³u zobaczymy wykresy obrazuj±ce podzia³ prac miêdzy poszczególne zagadnienia zwi±zane z rozwojem projektu takie jak
+spotkania projektowe, administracja projektem, tworzenie dokumentacji i automatycznej dokumentacji, rozwój kodu czy testowanie. Nale¿y pamiêtaæ, 
+i¿ wielko¶ci prezentowane na wykresach s± jedynie orientacyjne, jednak dobrze oddaj± ilo¶æ pracy, jaka zosta³a przez nas w³o¿ona w projekt.\\
+
+Spotkania projektowe oznaczaj± tutaj spotkania zespo³u, w czasie których omawiana by³a wizja projektu czy bie¿±cy podzia³ prac. Administracja 
+uwzglêdnia takie zagadnienia jak obs³uga systemu Redmine, obs³uga repozytorium czy wdro¿enie projektu na serwer. Obejmuje równie¿ obs³ugê 
+majowego konkursu przeprowadzonego pod patronatem Codility. Tworzenie dokumentacji i automatycznej dokumentacji opisuje czas potrzebny na 
+stworzenie wszystkich dokumentów, w³±cznie z prac± licencjack±, oraz dodaniem docstringów s³u¿±cym do generowania automatycznej dokumentacji.
+Testowanie za¶ oznacza czas przeznaczony na napisanie unit testów oraz przeprowadzenie test-case'ów. Obejmuje ponatdo zagadnienie kontroli kodu
+przez innych cz³onków zespo³u.
+
 \vspace{1cm}
+\begin{wrapfigure}{l}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/faza1.png}
+	\end{center}
+\end{wrapfigure}
+
 W pierwszej fazie projektu skupiono siê na kluczowych zagadnieniach maj±cych wp³yw na ostateczny wygl±d serwisu. Powsta³y wtedy m.in. takie
 dokumenty jak Software Development Plan czy przypadki u¿ycia. Zosta³a uzgodniona wspólna wizja i opracowane zosta³y szczegó³y techniczne.
 Zaprojektowany zosta³ ponadto model interakcji z u¿ytkownikiem koñcowym. Ujrza³a ¶wiat³o dzienne pierwsza wersja nadzorcy oraz powsta³
 szkielet projektu utworzony w Django.\\
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/faza2.png}
+	\end{center}
+\end{wrapfigure}
 
 W efekcie tych prac, przed koñcem listopada mo¿na by³o zaprezentowaæ dzia³aj±cy przyk³ad gry dwuosobowej nadzorowanej przed Nadzorcê. Gra ta
 jednak by³a uruchamiana z linii poleceñ. Warto jednak wspomnieæ, i¿ model komunikacji miêdzy uczestnikami (botami i sêdzi±) by³ bliski koñcowego, 
@@ -767,6 +797,11 @@ Dodatkowym rezultatem tej czê¶ci projektu by³o wprowadzenie do projektu AI-Arena
 za kolejkowanie zleconych zadañ. W czasie tej fazy zosta³a dodana równiez funkcjonalno¶æ automatycznej generacji dokumentacji.\\
 
 \vspace{1cm}
+\begin{wrapfigure}{l}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/faza3.png}
+	\end{center}
+\end{wrapfigure}
 Podczas trzeciej fazy projektu zosta³ znacznie rozwiniêty frontend. Zosta³y dodane funkcjonalno¶ci dodatkowe, zbêdne z punktu widzenia
 funkcjonowania serwisu, jednak u³atwiaj±ce jego u¿ycie. Powsta³y modu³y odpowiedzialne za wy¶wietlanie kodu ¼ród³owego, dodawanie konkursów, 
 profile u¿ytkownika i preferencje, ranking czy komentarze. Strona internetowa zyska³a tak¿e nowy wygl±d dziêki arkuszom stylów. 
@@ -787,6 +822,11 @@ Istotnym rezultatem tej czê¶ci projektu by³o równie¿ napisanie znacz±cej czê¶ci 
 do poprawienia literówek b±d¼ layoutu dokumentu.
 
 \vspace{1cm}
+\begin{wrapfigure}{r}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/faza4.png}
+	\end{center}
+\end{wrapfigure}
 Finalna, czwarta faza projektu obfitowa³a w wiele poprawek kodu, maj±cych na celu usprawnienie i poprawê interakcji z u¿ytkownikiem. Nie zosta³y
 dodane do frontendu ¿adne znacz±ce funkcjonalno¶ci. Udoskonalona zosta³a natomiast obs³uga b³êdów. Du¿y nacisk po³o¿ono równie¿ na bezpieczeñstwo 
 ¶rodowiska, w którym sêdzia i boty s± uruchamiane. Do zapewnienia bezpieczeñstwa wykorzystano tzw. Sandboxa - mechanizm pozwalaj±cy na 
