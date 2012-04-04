@@ -376,15 +376,7 @@ byæ zgodny z poni¿szym protoko³em:\\
 
 Innym z zadañ nadzorcy jest odczytywanie informacji z stderr botów i sêdziego, a nastêpnie przekazanie ich warstwie schedulera. Pozwala to na umo¿liwienie u¿ytkownikowi dostêp do informacji które jego program wypisywa³ na stderr. Nadzorca realizuje tê funkcjonalno¶æ, tworz±c dodatkowy w±tek odpowiedzialny za czytanie infromacji pojawiaj±cych siê na stderr sêdziego i botów. W±tek ten przy u¿yciu polecenia select czeka na mo¿liwo¶æ nieblokuj±cego odczytu na odpowiednich deskryptorach, a gdy taka mo¿liwo¶æ siê pojawia odczytuje informacje a¿ do opró¿nienia potoku zwi±zanego z danym deskryptorem.
 
-Powa¿nym problemem jest wybór mechanizmu odpowiedzialnego za ograniczanie i zbieranie informacji o zu¿ywanych przez sêdziego i boty zasobach systemowych. Dostêpnych metod jest wiele, jednak nie wszystkie s± mo¿liwe do zastosowania w przypadku systemu ai-arena.
-
-Ograniczenie zu¿ycia zasobów przez boty i sêdziego jest mo¿liwe do zrealizowania przez u¿ycie polecenia setrlimit. Polecenie to pozwala na ustawienie miêkkiego i twardego limitu na dostêpne procesowi zasoby systemowe, miêdzy innymi pamiêæ wirtualn± i czas zu¿ywany przez proces w trybie u¿ytkownika lub systemowym. 
-W przypadku przekroczenia miêkkiego limitu czasowego do procesu wysy³any jest SIGINT, po przekroczeniu limitu twardego do procesu wysy³any jest SIGKILL. Jasne jest wiêc ¿e limit który chcemy na¿uciæ procesowi musi byæ limitem twardym, gdy¿ SIGINT mo¿e zostaæ obs³u¿ony. Mo¿liwe s± równie¿ sytuacje w których kernel nie mo¿e dostarczyæ SIGKILL do procesu: gdy proces jest zombie lub gdy czeka w nieprzerywalnym u¶pieniu. Jednak w obu przypadkach proces ten nie zu¿ywa ju¿ wiêcej procesora, wiêc nie stanowi to zagro¿enia dla systemu.
-
-Problem pomiaru zu¿ycia zasobów jest jednak nietrywialny. Dostêpne narzêdzia takie jak polecenie time lub skrypt timeout (projekt zapocz±tkowany na Institute for System Programming of
-Russian Academy of Sciences, obecnie dostêpny jako open-source na github), nie mog± zostaæ u¿yte z tego samego powodu. Tworz± one dodatkowy proces, który uruchamia proces kontrolowany i mierzy jego zu¿ycie pamiêci. Oznacza to jednak ¿e tracimy mo¿liwo¶æ wysy³ania sygna³ów do botów i sêdziego, co jest potrzebne do zatrzymania lub zabicia ich procesów (np. gdy sêdzia za¿yczy sobie zabicie którego¶ z botów, lub gdy który¶ z programów pope³ni b³±d w komunikacji).
-
-Rozwi±zaniem problemu jest samodzielne zaimplementowanie idei ze wspomnianego powy¿ej skryptu timeout. Polega ona na zrezygnowaniu z ustawienia limitów poleceniem setrlimit, sprawdzaniu co okre¶lony interwa³ czasu zasobów u¿ywanych przez kontrolowane procesy i zabiciu procesów gdy przekrocz± ustalone limity. Informacje o zasobach u¿ywanych przez proces o danym pid mo¿na uzyskaæ z katalogu /proc/[pid]/stats.
+Powa¿nym problemem jest wybór mechanizmu odpowiedzialnego za ograniczanie i zbieranie informacji o zu¿ywanych przez sêdziego i boty zasobach systemowych. Dostêpnych metod jest wiele, jednak nie wszystkie s± mo¿liwe do zastosowania w przypadku systemu AI-Arena. Mechanizm ten, jak równie¿ motywacje do jego wyboru zosta³y przedstawione w rozdziale 8.1.
 
 \section{Scheduler}
 \begin{wrapfigure}{r}{0.65\textwidth}
@@ -502,7 +494,7 @@ Uruchomienie automatycznych testów jest bardzo proste. Domy¶lnie u¿ywane s± wszy
 z wszystkich aplikacji, ale wolno wyspecyfikowaæ konkretn± aplikacjê lub przypadek testowy.
 W razie niepowodzenia którego¶ z testów wy¶wietlane s± szczegó³y b³êdu.\\
 
-\chapter{Wybrane i rozwa¿ane rozwi±zania technologiczne}
+\chapter{Decyzje technologiczne}
 
 \section{Nadzorca}
 
@@ -512,7 +504,18 @@ Standardowe metody ograniczania zu¿ycia pamiêci i czasu przez procesy : ulimit i
 
 Metody pomiaru udostêpniane przez system operacyjny takie jak wait3 lub wait4 równie¿ nie znajduj± zastosowania w tym przypadku. Co prawda wait3 i wait4 potrafi± zebraæ informacje o procesie i jego zakoñczonych dzieciach, jednak informacje o wnukach procesu mog± zostaæ utracone, je¶li tylko u¿ytkownik serwisu nie bêdzie sam u¿ywa³ wait3 lub wait4 (czego oczywi¶cie nie mo¿emy za³o¿yæ ani kontrolowaæ). Nale¿y równie¿ pamiêtaæ ¿e informacje udostêpniane prze te dwie funkcje s± dostêpne jedynie po zakoñczeniu procesu, ich u¿ycie jest wiêc mo¿liwe jedynie gdy przy pomocy innych mechanizmów zapewnione zostanie, ¿e proces który zu¿y³ zbyt du¿o zasobów zostanie zakoñczony.
 
+Inny mechanizm systemowy który by³ rozwa¿any jako rozwi±zanie tych problemów, to grupy procesów. Mechanizm ten pozwal³by miêdzy innymi na wys³anie sygna³u do procesu i wszystkich jego potomków, jak równie¿ prostsze monitorowanie zu¿ycia zasobów systmowych przez grupê procesów. Niestety, pewne luki w tym mechani¼mie pozwala³yby z³o¶liwemu u¿ytkownikowi tworzyæ procesy które nie podlega³yby kontroli.
 
+Na licencji open source dostêpne jest rozwi±zanie podobnego problemu. Jest to napisany w jêzyku Perl skrypt timeout, stworzony w Institute for System Programming of Russian Academy of Sciences, dostêpny przez github. Zosta³ on stworzony do mierzenia i ograniczania zu¿ycia zasobów przez eksperymentalne wieloprocesowe programy, których zachowanie by³o trudne do przewidzenia. Dzia³anie tego skryptu oparte jest na prostej idei. Skrypt kilkukrotnie w ciagu sekundy sprawdza infromacje dotycz±ce zu¿ycia zasobów przez monitorowany proces i wszystkich jego potomków, i gdy warto¶æ ta przekroczy dozwolony limit zatrzymuje obserwowane procesy. Jednak poniewa¿ skrypt nie by³ tworzony do u¿ytu w sposób jaki jest potrzebny w systemie AI-Arena, brak mu pewnych funkcjonalno¶ci. Szczególnie wa¿n± jest mo¿liwo¶æ zatrzymania danego procesu i wszystkich jego potomków na rz±danie sêdziego. Mniej powa¿n± wad± tego rozwi±zania jest to, ¿e dokonywane pomiary mog± nie byæ dok³adne, w szczególno¶ci niektóre programy mog³yby dzia³aæ i komunikowaæ siê przez u³amek sekundy po przekroczeniu limitu.
+
+Najlepszym rozwi±zaniem wydaje siê wiêc zaimplementowanie w³asnego mechanizmu, opartego na podobnej idei jak wspomniany skrpyt timeout. Mechanizm ten móg³by byæ oddzielnym procesem, który na pocz±tku swojego dzia³ania otrzymuje numery pid obserwowanych procesów i przyznane im limity. Nastêpnie kilkukrotnie w ciagu sekundy na podstawie informacji zawartych w katalogu proc móg³by mierzyæ sumaryczne zu¿ycie zasobów przez kontrolowane procesy i ich potomków, oraz na ¿yczenie sêdziego przekazane przez nadzorcê zatrzymaæ okre¶lone grupy procesów. Pomiar zu¿ycia zasobów w tym przypadku jest obci±¿ony tym samym b³êdem co skrpyt timeout, jest to jednak b³±d akceptowalny. 
+
+Z powodu wymienionych problemów z kontorolowaniem zu¿ycia zasobów systemowych, jak równie¿ potencjalnych problemów z bezpieczeñstwem systemu, autorzy zdecydowali, ¿e programy u¿ytkowników i sêdziowie nie bêd± mog³y tworzyæ nowych procesów.
+
+Ta decyzja znacznie znacznie zredukowa³a rozwa¿ane powy¿ej trudno¶ci, jednocze¶nie nie ograniczaj±c prawie w ogóle funkcjonalno¶ci dostêpnej u¿ytkownikowi, gdy¿ ci±gle mo¿e on tworzyæ w±tki w obrêbie dostêpnego procesu.
+
+Ograniczenie zu¿ycia czasu i pamiêci zosta³o zrealizowane przy pomocy funkcji setrlimit. Polecenie to pozwala na ustawienie miêkkiego i twardego limitu na dostêpne procesowi zasoby systemowe, miêdzy innymi pamiêæ wirtualn± i czas zu¿ywany przez proces w trybie u¿ytkownika lub systemowym. 
+W przypadku przekroczenia miêkkiego limitu czasowego do procesu wysy³any jest SIGINT, po przekroczeniu limitu twardego do procesu wysy³any jest SIGKILL. Jasne jest wiêc ¿e limit który chcemy na¿uciæ procesowi musi byæ limitem twardym, gdy¿ SIGINT mo¿e zostaæ obs³u¿ony. Mo¿liwe s± równie¿ sytuacje w których kernel nie mo¿e dostarczyæ SIGKILL do procesu: gdy proces jest zombie lub gdy czeka w nieprzerywalnym u¶pieniu. Jednak w obu przypadkach proces ten nie zu¿ywa ju¿ wiêcej procesora, wiêc nie stanowi to zagro¿enia dla systemu.
 
 \chapter{Dokumentacja u¿ytkowa}
 
