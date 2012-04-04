@@ -115,8 +115,6 @@ class WebPageTest(TestCase):
 
         photo_file.close()
 
-        print response.content
-        print response.redirect_chain
         self.assertContains(response, 'Country:', status_code=200)
         self.assertContains(response, 'Africa', status_code=200)
         self.assertContains(response, 'News:', status_code=200)

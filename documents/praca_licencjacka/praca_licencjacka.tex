@@ -455,7 +455,7 @@ S³u¿y on do tworzenia testowej bazy danych.
 \begin{figure}[!ht]
     \begin{center}
     \makebox[\textwidth]{
-        \includegraphics[width=1.25\textwidth]{img/contests_uml.png}
+        \includegraphics[width=1.15\textwidth]{img/contests_uml.png}
     }
     \end{center}
     \caption{Diagram UML bazy danych}
@@ -493,6 +493,22 @@ Jest to mo¿liwe dziêki ró¿nego rodzaju asercjom.\\
 Uruchomienie automatycznych testów jest bardzo proste. Domy¶lnie u¿ywane s± wszystkie przypadki testowe
 z wszystkich aplikacji, ale wolno wyspecyfikowaæ konkretn± aplikacjê lub przypadek testowy.
 W razie niepowodzenia którego¶ z testów wy¶wietlane s± szczegó³y b³êdu.\\
+
+<<<<<<< HEAD
+\chapter{Decyzje technologiczne}
+=======
+Testy zawarte w projekcie zosta³y podzielone na dwie kategorie. Pierwsza, zawarta w klasie \emph{WebPageTest},
+to testy symuluj±ce wysy³anie okre¶lonych ¿±dañ na konkretne adresy url. Wszystkie korzystaj± z tej samej bazy testowej
+zapisanej w pliku test\_fixture.json. Poprawno¶æ odpowiedzi jest sprawdzana przy pomocy asercji pod k±tem tre¶ci,
+a wiêc czy zawiera spodziewany tekst. Analizowane s± tak¿e przekierowania, je¿eli np. edycja danych wymaga zalogowania,
+to u¿ytkownik powinien byæ przekierowany na panel logowania, a nastêpnie na odpowiedni± stronê.\\
+
+Na drug± kategoriê sk³adaj± siê testy zawarte w klasie \emph{ModelTest}, które sprawdzaj± poprawno¶æ metod modeli
+wykorzystywanych w serwisie. W tym przypadku nie jest potrzebna baza testowa.\\
+
+Testy jednostkowe pokrywaj± kod w ca³o¶ci. Dla ka¿dego prawid³owego adresu url zamieszczonego w pliku urls.py
+istnieje przynajmniej jeden przypadek testowy wysy³aj±cy ¿±danie na ten adres. Podobnie, ka¿da metoda zawarta
+w pliku models.py ma swój odpowiednik w testach.
 
 \chapter{Decyzje technologiczne}
 
