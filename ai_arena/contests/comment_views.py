@@ -9,6 +9,16 @@ from ai_arena.contests.contest_views import show_contest
 
 @login_required
 def add_comment(request, comment_type, object_id):
+    """
+        This view allows adding comments under game description or contest details.
+        It takes following arguments: 
+        comment_type is either 'game_details' or 'contests' and it defines type of comment
+        object_id is number of the object to be commented (either game or contest).
+
+        The view redirects user to a form, where one can fill comment details. After confirming
+        new comment is created and saved in a database. Note that game comments and contest comments are
+        enumerated independently.
+    """
     if comment_type not in ['game_details', 'contests']:
         return HttpResponseRedirect('/')
 
@@ -42,6 +52,17 @@ def add_comment(request, comment_type, object_id):
 
 @login_required
 def del_comment(request, comment_type, object_id, comment_id):
+    """
+        This view is to delete a comment. It takes 3 arguments apart from request:
+        comment_type - equal either 'game_details' or 'contests' indicates type of comment and object,
+        object_id - describes internal object's (in meaning either game or contest) identification number,
+        and comment_id - points out which comment is to be deleted.
+
+        The view performs check for the integrity - it assures that:
+        user calling this view has proper previlleges (it particulary checks if user is an author of a comment, staff member or admin),
+        there exists a comment of particular type with given comment_id,
+        the given comment is linked with object (game or contest) with provided object_id.
+    """
     if comment_type not in ['game_details', 'contests']:
         HttpResponseRedirect('/')
 
@@ -70,6 +91,17 @@ def del_comment(request, comment_type, object_id, comment_id):
 
 @login_required
 def edit_comment(request, comment_type, object_id, comment_id):
+    """
+        This view is to edit existing comment. It takes 3 arguments apart from request:
+        comment_type - equal either 'game_details' or 'contests' indicates type of comment and object,
+        object_id - describes internal object's (in meaning either game or contest) identification number,
+        and comment_id - points out which comment is to be deleted.
+
+        The view performs check for the integrity - it assures that:
+        user calling this view has proper previlleges (it particulary checks if user is an author of a comment, staff member or admin),
+        there exists a comment of particular type with given comment_id,
+        the given comment is linked with object (game or contest) with provided object_id.
+    """
     if comment_type not in ['game_details', 'contests']:
         return HttpResponseRedirect('/')
 
@@ -112,6 +144,19 @@ def edit_comment(request, comment_type, object_id, comment_id):
 
 @login_required
 def quick_comment_edit(request, comment_type, object_id, comment_id, new_content):
+    """
+        This view is to edit existing comment. Comparing to comment edit view it hides most of options 
+        returning other template. User can edit the text of comment, but he is unable to modify e.g. font weight, 
+        font collor or other text properties. It takes 3 arguments apart from request:
+        comment_type - equal either 'game_details' or 'contests' indicates type of comment and object,
+        object_id - describes internal object's (in meaning either game or contest) identification number,
+        and comment_id - points out which comment is to be deleted.
+
+        The view performs check for the integrity - it assures that:
+        user calling this view has proper previlleges (it particulary checks if user is an author of a comment, staff member or admin),
+        there exists a comment of particular type with given comment_id,
+        the given comment is linked with object (game or contest) with provided object_id.
+    """
     if not comment_type in ['game_details', 'contests']:
         return HttpResponseRedirect('/')
 

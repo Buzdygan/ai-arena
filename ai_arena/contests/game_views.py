@@ -82,6 +82,9 @@ def game_list(request):
             context_instance=RequestContext(request))
 
 def parse_game_details(game):
+    """
+        Helper function preparing subobjects of game object to display.
+    """
     rules = game.rules_file
     line = rules.readline()
     game_details = []
@@ -242,6 +245,13 @@ def show_source(request, game_id):
 
 @login_required
 def edit_game(request, game_id):
+    """
+        Allows user to edit game description and other details.
+        Takes one extra argument - game_id - describing id of a game to edit.
+
+        The view takes care of safety issues - it checks if a user calling this view has 
+        apprioprate privillages (is a moderator of the game or staff member)
+    """
     game = Game.objects.get(id=game_id)
     user = request.user
     if not user.is_staff and user not in game.moderators.all():
@@ -354,6 +364,12 @@ def edit_game(request, game_id):
 
 @login_required
 def delete_game(request, game_id):
+    """
+        Deletes game which id is equal to game_id.
+
+        The view performs a safety check - it makes sure that user has apprioprate previllages
+        (is either a moderator of this game or admin).
+    """
     user = request.user
     game = Game.objects.get(id=game_id)
 

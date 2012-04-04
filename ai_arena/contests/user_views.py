@@ -7,7 +7,10 @@ from ai_arena.contests.forms import UpdateUserProfileForm
 
 @login_required
 def show_profile(request, login=None):
-    
+    """
+        Displays user's profile. If user calls this function for the first time (or user profile doesn't exist
+        of any reason) it also creates new profile with default settings (which can be customized later).
+    """
     user_profile = None
     error_message = None
     news = None
@@ -45,6 +48,9 @@ def show_profile(request, login=None):
 
 @login_required
 def show_contests(request, login):
+    """
+        displays list of contests in which user is participating.
+    """
     user_profile_list = []
     for up in UserProfile.objects.all():
         if up.user.username == login:
@@ -70,6 +76,11 @@ def show_contests(request, login):
 
 @login_required
 def show_news(request, login):
+    """
+        Displays a list of news linked with the user.
+        News are created in variety of situations: when creating a new game, sending a bot for a game, 
+        editing a profile and so on.
+    """
     user_profile_list = []
     for up in UserProfile.objects.all():
         if up.user.username == login:
@@ -93,6 +104,10 @@ def show_news(request, login):
 
 @login_required
 def edit_profile(request):
+    """
+        Called when user wants to edit his profile page.
+        Note that none of the fields in returned form is required.
+    """
     user_profiles = UserProfile.objects.filter(user=request.user)
 
     if len(user_profiles) > 0:
@@ -138,6 +153,10 @@ def edit_profile(request):
 
 
 def getDefaultUserProfile(user):
+    """
+        Helper function that creates and saves default user profile.
+        Used when user doesn't have his profile yet.
+    """
     user_profile = UserProfile(user=user)
     user_profile.save()
     return user_profile

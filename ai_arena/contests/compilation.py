@@ -3,7 +3,13 @@ from ai_arena import settings
 
 def compile(src, target, lang):
     """
-        Executes makefile with params LANG, SRC and TARGET
+        Executes makefile with params LANG, SRC and TARGET.
+
+        It takes 3 arguments: 
+        lang is one of the following: 'C', 'CPP', 'JAVA', 'PYTHON' - and indicates 
+        language of a source code to compile.
+        src points a location of source code on a hard drive.
+        target is a location where compiled program should be placed to.
     """
     system('make -f ' + settings.MAKEFILE_PATH + ' LANG=' + lang +
             ' SRC=' + src + ' TARGET=' + target)

@@ -36,11 +36,7 @@
         $("#dialog").dialog();
     });
 </script>
-                        <div id='dialog' title='Edit Comment'>
-                            {{ comment.content }}
-                        </div>
-
-
+                            <a href='/{{ template_type }}/quick_edit_commtent/{{ object_id }}/{{ comment.id }}'>Quick Edit </a>|
                             <a href='/{{ template_type }}/edit_comment/{{ object_id }}/{{ comment.id }}'>Edit</a> |
                             <a href='javascript:void(0);' onClick="show_confirm()">Delete</a>
                         {% endif %}

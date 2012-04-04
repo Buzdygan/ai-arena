@@ -68,6 +68,11 @@ def send_bot(request, game_id):
 
 @login_required
 def send_bot_with_game(request):
+    """
+        This view is used when user wants to send bot from game details view.
+        It is different from simple send bot view, because game is known, so there is
+        no need to pick it form list.
+    """
     if request.method == 'POST':
         form = SendBotWithGameForm(request.POST, request.FILES)
         if form.is_valid():
