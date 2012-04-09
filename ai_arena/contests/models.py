@@ -16,17 +16,16 @@ class Game(models.Model):
     path = lambda dirname: lambda instance, filename: \
             '/'.join([dirname, instance.name, filename])
 
-    name = models.CharField(max_length=255)
-    min_players = models.IntegerField(default=2)
-    max_players = models.IntegerField(default=2)
+    name = models.CharField(max_length=settings.NAME_LENGTH)
+    min_players = models.IntegerField(default=settings.GAME_MIN_PLAYERS_DEFAULT)
+    max_players = models.IntegerField()
     # File with rules of the Game
-    rules_file = models.FileField(upload_to=path('game_rules'))
+    rules_file = models.FileField(upload_to=path(settings.RULES_DIR))
     # Executable with judge
-    judge_bin_file = models.FileField(upload_to=path('game_judges_binaries'))
-    judge_source_file = models.FileField(upload_to=path('game_judges_sources'))
-    judge_lang = models.CharField(max_length=10, choices=settings.LANGUAGES)
-    moderators = models.ManyToManyField(User, related_name='mod_games',
-            null=True, blank=True)
+    judge_bin_file = models.FileField(upload_to=path(settings.JUDGES_BINARIES_DIR))
+    judge_source_file = models.FileField(upload_to=path(settings.JUDGES_SOURCES_DIR))
+    judge_lang = models.CharField(max_length=settings.LANG_LENGTH, choices=settings.LANGUAGES)
+    moderators = models.ManyToManyField(User, related_name='game_moderators', null=True, blank=True)
 
 
 class Bot(models.Model):
@@ -44,13 +43,13 @@ class Bot(models.Model):
             '/'.join([dirname, instance.game.name,
                 instance.owner.username, instance.name, filename])
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=settings.NAME_LENGTH)
     owner = models.ForeignKey(User)
     game = models.ForeignKey(Game)
     # Executable with Bot program 
-    bot_bin_file = models.FileField(upload_to=path('game_bots_binaries'))
-    bot_source_file = models.FileField(upload_to=path('game_bots_sources'))
-    bot_lang = models.CharField(max_length=10, choices=settings.LANGUAGES)
+    bot_bin_file = models.FileField(upload_to=path(settings.BOTS_BINARIES_DIR))
+    bot_source_file = models.FileField(upload_to=path(settings.BOTS_SOURCES_DIR))
+    bot_lang = models.CharField(max_length=settings.LANG_LENGTH, choices=settings.LANGUAGES)
 
 class Ranking(models.Model):
     """
@@ -75,7 +74,7 @@ class BotRanking(models.Model):
 
     ranking = models.ForeignKey(Ranking)
     bot = models.ForeignKey(Bot)
-    overall_score = models.DecimalField(max_digits=9, decimal_places=4)
+    overall_score = models.DecimalField(max_digits=settings.SCORE_DIGITS, decimal_places=settings.SCORE_DECIMAL_PLACES)
     position = models.IntegerField(null=True, blank=True)
     matches_played = models.IntegerField(null=True, blank=True)
 
@@ -89,14 +88,14 @@ class Contest(models.Model):
     path = lambda dirname: lambda instance, filename: \
             '/'.join([dirname, instance.name, filename])
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=settings.NAME_LENGTH)
     # Game related to the Contest
     game = models.ForeignKey(Game)
     # List of Bots participating in the Contest
     contestants = models.ManyToManyField(Bot, related_name="contestants",
             null=True, blank=True)
     # Contest regulations
-    regulations_file = models.FileField(upload_to=path('contests_regulations'))
+    regulations_file = models.FileField(upload_to=path(settings.CONTEST_REGULATIONS_DIR))
 
     # Begin and End dates of the contest. Can be null, when
     # the contest has no deadlines.
@@ -104,7 +103,7 @@ class Contest(models.Model):
     end_date = models.DateTimeField(null=True, blank=True)
 
     ranking = models.ForeignKey(Ranking, null=True, blank=True, on_delete=models.SET_NULL)
-    moderators = models.ManyToManyField(User, related_name='mod_contests',
+    moderators = models.ManyToManyField(User, related_name='contest_moderators',
             null=True, blank=True)
 
     def generate_group_ranking(self):
@@ -135,7 +134,6 @@ class Contest(models.Model):
         matches_to_play = combinations(contestants, match_size)
         for match in matches_to_play:
             if list(match) not in played_matches:
-                print('launch_contest_match')
                 bots = [Bot.objects.get(id=bot_id) for bot_id in match]
                 launch_contest_match(self.game, bots, self)
 
@@ -165,7 +163,7 @@ class MatchBotResult(models.Model):
     def __unicode__(self):
         return self.bot.name + ' results'
 
-    score = models.DecimalField(max_digits=4, decimal_places=2)
+    score = models.DecimalField(max_digits=settings.SCORE_DIGITS, decimal_places=settings.SCORE_DECIMAL_PLACES)
     # in miliseconds
     time_used = models.IntegerField(null=True, blank=True)
     # in MB
@@ -206,12 +204,12 @@ class UserProfile(models.Model):
             '/'.join([dirname, instance.user.username, filename])
 
     user = models.ForeignKey(User, unique=True)
-    photo = models.ImageField(upload_to=path('profiles/photos'))
+    photo = models.ImageField(upload_to=path(settings.PHOTOS_DIR))
     
     about = models.TextField(null=True)
-    country = models.CharField(max_length  = 50, null=True)
-    city = models.CharField(max_length = 50, null=True)
-    university = models.CharField(max_length = 100, null=True)
+    country = models.CharField(max_length = settings.NAME_LENGTH, null=True)
+    city = models.CharField(max_length = settings.NAME_LENGTH, null=True)
+    university = models.CharField(max_length = settings.NAME_LENGTH, null=True)
     birthsday = models.DateField(null=True)
     last_login = models.DateField(auto_now=True)
     interests = models.TextField(null=True)

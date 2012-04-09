@@ -13,7 +13,7 @@ class GameSelectForm(forms.Form):
 
     games = Game.objects
     game_field = vModelChoiceField(queryset=games)
-    number_of_bots = forms.IntegerField(min_value=2, max_value=4)
+    number_of_bots = forms.IntegerField(min_value=1, max_value=6)
 
 class BotsSelectForm(forms.Form):
 
@@ -29,14 +29,14 @@ class BotsSelectForm(forms.Form):
         
 class NewGameForm(forms.Form):
 
-    game_name = forms.CharField(max_length=50)
+    game_name = forms.CharField(max_length=settings.NAME_LENGTH)
     game_rules = forms.FileField()
     game_judge = forms.FileField()
     judge_language = forms.ChoiceField(choices= settings.LANGUAGES)
 
 class SendBotForm(forms.Form):
 
-    bot_name = forms.CharField(max_length=50)
+    bot_name = forms.CharField(max_length=settings.NAME_LENGTH)
     bot_source = forms.FileField()
     bot_language = forms.ChoiceField(choices = settings.LANGUAGES)
 
@@ -44,7 +44,7 @@ class SendBotWithGameForm(forms.Form):
 
     games = Game.objects
     game = vModelChoiceField(queryset=games)
-    bot_name = forms.CharField(max_length=50)
+    bot_name = forms.CharField(max_length=settings.NAME_LENGTH)
     bot_source = forms.FileField()
     bot_language = forms.ChoiceField(choices = settings.LANGUAGES)
 
@@ -54,9 +54,9 @@ class UpdateUserProfileForm(forms.Form):
     photo = forms.ImageField()
     about = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
     interests = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
-    country = forms.CharField(max_length=50)
-    city = forms.CharField(max_length=50)
-    university = forms.CharField(max_length=100)
+    country = forms.CharField(max_length=settings.NAME_LENGTH)
+    city = forms.CharField(max_lengths=settings.NAME_LENGTH)
+    university = forms.CharField(max_length=settings.NAME_LENGTH)
     birthsday = forms.DateField(widget=AdminDateWidget())
 
 class AddCommentForm(forms.Form):
@@ -69,7 +69,7 @@ class EditCommentForm(forms.Form):
 
 class EditGameForm(forms.Form):
 
-    name = forms.CharField(max_length=50)
+    name = forms.CharField(max_length=settings.NAME_LENGTH)
     description = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':15}), required=False)
     game_rules = forms.FileField(required=False)
     game_judge = forms.FileField(required=False)

@@ -120,41 +120,6 @@ def game_details(request, game_id, error_msg=None):
             },
             context_instance=RequestContext(request))
 
-BOOL_VALUES = ['false', 'true', 'False', 'True']
-
-C_KEYWORDS = ['auto', 'break', 'case', 'const', 'continue', 'default', 'do', 'else', 'enum', 
-        'extern', 'for', 'goto', 'if', 'register', 'return', 'signed', 'sizeof', 
-        'static', 'struct', 'switch', 'typedef', 'union', 'unsigned', 'volatile', 'while']
-
-C_TYPES = ['char', 'double', 'float', 'int', 'long', 'short', 'void']
-
-CPP_KEYWORDS = ['and', 'and_eq', 'alignas', 'alignof', 'asm', 'auto', 'bitand', 'bitor', 
-        'break', 'case', 'catch', 'class', 'compl', 'const', 'constexpr', 'const_cast', 'continue', 'decltype', 
-        'default', 'delete', 'do', 'dynamic_cast', 'else', 'enum', 'explicit', 
-        'export', 'extern', 'false', 'for', 'friend', 'goto', 'if', 
-        'inline', 'long', 'mutuable', 'namespace', 'new', 'noexcept',
-        'not', 'not_eq', 'nullptr', 'operator', 'or', 'or_eq', 'private', 'protected',
-        'public', 'register', 'reinterpret_cast', 'return', 'signed', 'sizeof', 'static',
-        'static_assert', 'static_cast', 'struct', 'switch', 'template', 'this', 'thread_local', 
-        'throw', 'true', 'try', 'typedef', 'typeid', 'typename', 'union', 'unsigned', 'using',
-        'virtual', 'volatile', 'wchar_t', 'while', 'xor', 'xor_eq', 'override', 'final']
-
-CPP_TYPES = ['bool', 'char', 'char16_t', 'char32_t', 'double', 'float', 'int', 'long', 'short', 'void']
-
-JAVA_KEYWORDS = ['abstract', 'assert', 'break', 'case', 'catch', 'class', 'const', 
-        'continue', 'default', 'do', 'else', 'enum', 'extends', 'final', 'finally', 'for', 'goto',
-        'if', 'implements', 'import', 'instanceof', 'interface', 'native', 'new', 'package', 'private',
-        'protected', 'public', 'return', 'static', 'staticfp', 'super', 'switch', 'synchronized', 'this', 
-        'throw', 'throws', 'transient', 'try', 'volatile', 'while']
-
-JAVA_TYPES = ['boolean', 'byte', 'char', 'double', 'float', 'int', 'long', 'short', 'void']
-
-PYTHON_KEYWORDS = ['and', 'as', 'assert', 'break', 'class', 'contiune', 'def', 'del', 'elif', 'else', 
-        'except', 'exec', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'not', 
-        'or', 'pass', 'print', 'raise', 'return', 'try', 'while', 'with', 'yield']
-
-PYTHON_TYPES = []
-
 def parse_line(line, lang):
     """
         Parses line of source code returning list of pairs (class, value), 
@@ -171,18 +136,18 @@ def parse_line(line, lang):
         line = line[1:]
 
     #then follow the rest of the line
-    if lang == 'C':
-        keywords = C_KEYWORDS
-        types = C_TYPES
-    elif lang == 'CPP':
-        keywords = CPP_KEYWORDS
-        types = CPP_TYPES
-    elif lang == 'JAVA':
-        keywords = JAVA_KEYWORDS
-        types = JAVA_TYPES
-    elif lang == 'PYTHON':
-        keywords = PYTHON_KEYWORDS
-        types = PYTHON_TYPES
+    if lang == settings.C_LANGUAGE:
+        keywords = settings.C_KEYWORDS
+        types = settings.C_TYPES
+    elif lang == settings.CPP_LANGUAGE:
+        keywords = settings.CPP_KEYWORDS
+        types = settings.CPP_TYPES
+    elif lang == settings.JAVA_LANGUAGE:
+        keywords = settings.JAVA_KEYWORDS
+        types = settings.JAVA_TYPES
+    elif lang == settings.PYTHON_LANGUAGE:
+        keywords = settings.PYTHON_KEYWORDS
+        types = settings.PYTHON_TYPES
 
     splited = line.split()
     for s in splited:
@@ -289,15 +254,15 @@ def edit_game(request, game_id):
                 file.save(filename, file)
                 system('rm -rf ' + source)
 
-            move(settings.GAME_RULES + oldname + '/', game.rules_file)
-            move(settings.GAME_JUDGE_SOURCES + oldname + '/', game.judge_source_file)
-            move(settings.GAME_JUDGE_BINARIES + oldname + '/', game.judge_bin_file)
+            move(settings.GAME_RULES_PATH + oldname + '/', game.rules_file)
+            move(settings.GAME_JUDGE_SOURCES_PATH + oldname + '/', game.judge_source_file)
+            move(settings.GAME_JUDGE_BINARIES_PATH + oldname + '/', game.judge_bin_file)
 
         # When somebody updated decsription it's easier to create new file
         # instead of diff with previous one.
         if 'description' in request.POST:
             # create new file
-            path = settings.GAME_RULES + game.name + '/'
+            path = settings.GAME_RULES_PATH + game.name + '/'
             filename = game.rules_file.name.split('/').pop()
 
             game.rules_file.delete()
@@ -381,8 +346,8 @@ def delete_game(request, game_id):
     path = settings.MEDIA_ROOT
     game.delete()
     
-    system('rm -rf ' + path + 'game_judge_sources/' + gamename + '/')
-    system('rm -rf ' + path + 'game_judge_binaries/' + gamename + '/')
-    system('rm -rf ' + path + 'game_rules/' + gamename + '/')
+    system('rm -rf ' + path + settings.JUDGES_SOURCES_DIR + '/' + gamename + '/')
+    system('rm -rf ' + path + settings.JUDGES_BINARIES_DIR + '/' + gamename + '/')
+    system('rm -rf ' + path + settings.RULES_DIR + '/' + gamename + '/')
 
     return HttpResponseRedirect('/')

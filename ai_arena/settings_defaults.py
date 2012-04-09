@@ -152,6 +152,8 @@ LOGGING = {
     }
 }
 
+"Constants section"
+
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_OPEN = True
 DEFAULT_FROM_EMAIL = 'aiarena@aiarena.com'
@@ -169,6 +171,62 @@ LANGUAGES = (
 MAKEFILE_DIR = os.path.abspath('../makefile/')
 MAKEFILE_PATH = MAKEFILE_DIR + '/Makefile'
 
-GAME_RULES = MEDIA_ROOT + 'game_rules/'
-GAME_JUDGE_SOURCES = MEDIA_ROOT + 'game_judges_sources/'
-GAME_JUDGE_BINARIES = MEDIA_ROOT + 'game_judges_binaries/'
+# contests/models.py
+
+NAME_LENGTH = 255
+LANG_LENGTH = 10
+GAME_MIN_PLAYERS_DEFAULT = 1
+GAME_MAX_PLAYERS_DEFAULT = 2
+RULES_DIR = 'game_rules'
+JUDGES_BINARIES_DIR = 'game_judges_binaries'
+JUDGES_SOURCES_DIR = 'game_judges_sources'
+BOTS_BINARIES_DIR = 'game_bots_binaries'
+BOTS_SOURCES_DIR = 'game_bots_sources'
+CONTEST_REGULATIONS_DIR = 'contests_regulations'
+PHOTOS_DIR = 'profiles/photos'
+
+SCORE_DIGITS = 15 
+SCORE_DECIMAL_PLACES = 6
+
+# /contests/game_views.py
+
+GAME_RULES_PATH = MEDIA_ROOT + RULES_DIR + '/'
+GAME_JUDGE_SOURCES_PATH = MEDIA_ROOT + JUDGES_SOURCES_DIR + '/'
+GAME_JUDGE_BINARIES_PATH = MEDIA_ROOT + JUDGES_BINARIES_DIR + '/'
+
+C_LANGUAGE = 'C'
+C_KEYWORDS = ['auto', 'break', 'case', 'const', 'continue', 'default', 'do', 'else', 'enum', 
+        'extern', 'for', 'goto', 'if', 'register', 'return', 'signed', 'sizeof', 
+        'static', 'struct', 'switch', 'typedef', 'union', 'unsigned', 'volatile', 'while']
+C_TYPES = ['char', 'double', 'float', 'int', 'long', 'short', 'void']
+
+CPP_LANGUAGE = 'CPP'
+CPP_KEYWORDS = ['and', 'and_eq', 'alignas', 'alignof', 'asm', 'auto', 'bitand', 'bitor', 
+        'break', 'case', 'catch', 'class', 'compl', 'const', 'constexpr', 'const_cast', 'continue', 'decltype', 
+        'default', 'delete', 'do', 'dynamic_cast', 'else', 'enum', 'explicit', 
+        'export', 'extern', 'false', 'for', 'friend', 'goto', 'if', 
+        'inline', 'long', 'mutuable', 'namespace', 'new', 'noexcept',
+        'not', 'not_eq', 'nullptr', 'operator', 'or', 'or_eq', 'private', 'protected',
+        'public', 'register', 'reinterpret_cast', 'return', 'signed', 'sizeof', 'static',
+        'static_assert', 'static_cast', 'struct', 'switch', 'template', 'this', 'thread_local', 
+        'throw', 'true', 'try', 'typedef', 'typeid', 'typename', 'union', 'unsigned', 'using',
+        'virtual', 'volatile', 'wchar_t', 'while', 'xor', 'xor_eq', 'override', 'final']
+CPP_TYPES = ['bool', 'char', 'char16_t', 'char32_t', 'double', 'float', 'int', 'long', 'short', 'void']
+
+JAVA_LANGUAGE = 'JAVA'
+JAVA_KEYWORDS = ['abstract', 'assert', 'break', 'case', 'catch', 'class', 'const', 
+        'continue', 'default', 'do', 'else', 'enum', 'extends', 'final', 'finally', 'for', 'goto',
+        'if', 'implements', 'import', 'instanceof', 'interface', 'native', 'new', 'package', 'private',
+        'protected', 'public', 'return', 'static', 'staticfp', 'super', 'switch', 'synchronized', 'this', 
+        'throw', 'throws', 'transient', 'try', 'volatile', 'while']
+JAVA_TYPES = ['boolean', 'byte', 'char', 'double', 'float', 'int', 'long', 'short', 'void']
+
+PYTHON_LANGUAGE = 'PYTHON'
+PYTHON_KEYWORDS = ['and', 'as', 'assert', 'break', 'class', 'contiune', 'def', 'del', 'elif', 'else', 
+        'except', 'exec', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'not', 
+        'or', 'pass', 'print', 'raise', 'return', 'try', 'while', 'with', 'yield']
+PYTHON_TYPES = []
+
+# contests/game_launcher.py
+
+GEARMAN_HOST = 'localhost:4730'

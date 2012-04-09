@@ -1,5 +1,6 @@
 from decimal import Decimal
 from ai_arena.contests.models import Match, MatchBotResult
+from ai_arena import settings
 import gearman
 import pickle
 
@@ -23,7 +24,7 @@ def launch_single_match(game, bots):
 
     arguments = {'game': game, 'bots': bots}
 
-    gearman_client = PickleClient(['localhost:4730'])
+    gearman_client = PickleClient([settings.GEARMAN_HOST])
     gearman_client.submit_job('single_match', arguments, background=True)
 
 def launch_contest_match(game, bots, contest):
@@ -34,5 +35,5 @@ def launch_contest_match(game, bots, contest):
 
     arguments = {'game': game, 'bots': bots, 'contest':contest}
 
-    gearman_client = PickleClient(['localhost:4730'])
+    gearman_client = PickleClient([settings.GEARMAN_HOST])
     gearman_client.submit_job('contest_match', arguments, background=True)
