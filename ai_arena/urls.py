@@ -18,6 +18,14 @@ urlpatterns = patterns('',
     url(r'^admin/jsi18n', 'django.views.i18n.javascript_catalog'),
 
     url(r'^$', 'contests.views.index'),
+    url(r'^error/$', 'contests.views.error'),
+
+    url(r'^ladder/$', 'contests.may_contest_views.show_ladder'),
+    url(r'^my_results/$', 'contests.may_contest_views.my_results'),
+    url(r'^downloads/$', 'contests.may_contest_views.downloads'),
+    url(r'^testing/$', 'contests.may_contest_views.testing'),
+    url(r'^testing/uploaded/$', 'contests.may_contest_views.uploaded_for_tests'),
+    url(r'^contact_us/$', 'contests.may_contest_views.contact'),
 
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),

@@ -8,3 +8,10 @@ def index(request):
     return render_to_response('index.html',
             context_instance=RequestContext(request))
 
+def error(request):
+    """
+        Shows standard error page when an error occurs 
+        (e.g. during compilation)
+    """
+    return render_to_response('error.html',
+            context_instance=RequestContext(request))

@@ -66,6 +66,16 @@ def send_bot(request, game_id):
             },
             context_instance=RequestContext(request))
 
+
+def parse_logs(logs):
+    """
+        Helper funstion to prepare logs to display.
+
+        If we would pass logs simply without parsing they would be unreadable, 
+        e.g. new line chars would be ignored
+    """
+    return logs.split('\n')
+
 @login_required
 def send_bot_with_game(request):
     """
@@ -78,7 +88,7 @@ def send_bot_with_game(request):
         if form.is_valid():
             # Save known fields
             bot = Bot()
-            bot.name = request.POST['bot_name']
+            bot.name = request.POST['bot_name'] 
             bot.bot_source_file = request.FILES['bot_source']
             bot.bot_lang = request.POST['bot_language']
             game = Game.objects.get(id = request.POST['game'])
@@ -94,19 +104,32 @@ def send_bot_with_game(request):
             src = settings.MEDIA_ROOT + bot.bot_source_file.name
             target = settings.MEDIA_ROOT + bot.bot_source_file.name + '.bin' 
             lang = bot.bot_lang
-            compile(src, target, lang)
+            exit_status = compile(src, target, lang)
 
-            # Use compiled file in object bot
-            f = File(open(target))
-            bot.bot_bin_file.save(bot.name, f)
+            if exit_status != 0:
+                # There were an error on compilation!
+                # Capture logs
+                log_file = open(src + '.log', 'r')
+                logs = parse_logs(log_file.read())
+                
+                return  render_to_response('error.html',
+                            {
+                                'error_details': logs,
+                            },
+                            context_instance=RequestContext(request))
 
-            # Save changes made to bot object
-            bot.save()
+            else:
+                # Use compiled file in object bot
+                f = File(open(target))
+                bot.bot_bin_file.save(bot.name, f)
 
-            # Remove compiled file from directory with source
-            system('rm ' + target)
+                # Save changes made to bot object
+                bot.save()
+
+                # Remove compiled file from directory with source
+                system('rm ' + target)
             
-            return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/')
     else:
         form = SendBotWithGameForm()
     

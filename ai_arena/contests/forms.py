@@ -48,6 +48,13 @@ class SendBotWithGameForm(forms.Form):
     bot_source = forms.FileField()
     bot_language = forms.ChoiceField(choices = settings.LANGUAGES)
 
+class MayContestSendBotForTest(forms.Form):
+
+    test_name = forms.CharField(required=False, max_length=settings.NAME_LENGTH)
+    bot_source = forms.FileField()
+    bot_language = forms.ChoiceField(choices = settings.LANGUAGES)
+    opponent_source = forms.FileField(required=False)
+    opponent_language = forms.ChoiceField(required=False, choices = settings.LANGUAGES)
 
 class UpdateUserProfileForm(forms.Form):
 
@@ -55,7 +62,7 @@ class UpdateUserProfileForm(forms.Form):
     about = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
     interests = forms.CharField(widget=forms.widgets.Textarea(attrs={'cols':100, 'rows':6}))
     country = forms.CharField(max_length=settings.NAME_LENGTH)
-    city = forms.CharField(max_lengths=settings.NAME_LENGTH)
+    city = forms.CharField(max_length=settings.NAME_LENGTH)
     university = forms.CharField(max_length=settings.NAME_LENGTH)
     birthsday = forms.DateField(widget=AdminDateWidget())
 

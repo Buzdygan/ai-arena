@@ -1,9 +1,28 @@
 {% extends "base.html" %}
 
-{% block title %}
-    this is index block title
+{% block css %}
+<link rel='stylesheet' href="{{ MEDIA_URL }}index.css" />
 {% endblock %}
 
 {% block content %}
-    this is index content block
+
+<div id='welcome_news'>
+<h1> Welcome to AI-Arena! </h1>
+
+<p class='p_news'>
+We are pleased to announce the very first contest on AI-Arena!
+In cooperation with Codility we present you and encourage to participate in a contest of fighting programs, where you can test
+your skills!
+</p>
+
+<p class='p_news'>
+In a future AI-arena will be a place where you can learn and try all tricks from artificial intelligence in practise.
+In the meanwhile you can help us to improve the service by taking part in current contest and by sharing your suggestions with us :).
+</p>
+
+<h2>
+Good Luck!
+</h2>
+
+</div>
 {% endblock %}

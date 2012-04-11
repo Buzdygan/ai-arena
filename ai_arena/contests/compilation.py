@@ -10,7 +10,10 @@ def compile(src, target, lang):
         language of a source code to compile.
         src points a location of source code on a hard drive.
         target is a location where compiled program should be placed to.
+
+        The command also creates a log file capturing all logs output'd to command line
+        and stores it to file named <target>.log in the same directory as source file.
     """
-    system('make -f ' + settings.MAKEFILE_PATH + ' LANG=' + lang +
-            ' SRC=' + src + ' TARGET=' + target)
+    return system('make -f ' + settings.MAKEFILE_PATH + ' LANG=' + lang +
+            ' SRC=' + src + ' TARGET=' + target + ' 2> ' + src + '.log')
 
