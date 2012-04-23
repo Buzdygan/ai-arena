@@ -22,6 +22,7 @@ urlpatterns = patterns('',
 
     url(r'^ladder/$', 'contests.may_contest_views.show_ladder'),
     url(r'^my_results/$', 'contests.may_contest_views.my_results'),
+    url(r'^my_results/details/(?P<match_id>\d+)/$', 'contests.may_contest_views.match_details'),
     url(r'^downloads/$', 'contests.may_contest_views.downloads'),
     url(r'^testing/$', 'contests.may_contest_views.testing'),
     url(r'^testing/uploaded/$', 'contests.may_contest_views.uploaded_for_tests'),

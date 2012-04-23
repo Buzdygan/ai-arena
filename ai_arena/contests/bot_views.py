@@ -41,6 +41,9 @@ def create_bot_from_request(request, game, bot_field='bot_source'):
         else:
             bot.name = 'test_from_' + datetime.now().isoformat().replace(':', '-').replace('.', '-')
 
+    if bot_field=='opponent_source':
+        bot.name = 'opponent_from_' + datetime.now().isoformat().replace(':', '-').replace('.', '-')
+
     bot.bot_source_file = request.FILES[bot_field]
     bot.bot_lang = request.POST['bot_language']
     bot.game = game

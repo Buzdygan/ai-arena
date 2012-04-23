@@ -11,6 +11,17 @@
     Here you can view details of your matches against other bots.
     </p>
 
+    {% for match in matches %}
+    <div> 
+        <a href='/my_results/details/{{ match.id }}/' >
+            {% for result in match.players_results.all %}
+            {{ result.bot.name }}
+            {% if forloop.counter == 1 %} vs. {% endif %}
+            {% endfor %}
+        </a>
+    </div>
+    {% endfor %}
+
 </div>
 
 {% endblock %}

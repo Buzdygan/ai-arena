@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel='stylesheet' href='{{ MEDIA_URL }}/testing.css' />
+{% endblock %}
+
+{% block content %}
+<div class='content_container'>
+    {% for bot in ladder %}
+    <div>{{ forloop.counter }}: {{ bot.bot.name }}</div>
+    {% endfor %}
+</div>
+{% endblock %}
