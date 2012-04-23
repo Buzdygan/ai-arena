@@ -17,7 +17,7 @@ for item in results['logs']['judge']:
 
 if judge_info != '112233445':
     passed = False
-    print "bot1 info: " + judge_info + " instead of 112233445"
+    print "judge info: " + judge_info + " instead of 112233445"
 
 if results['exit_status'] != 0:
     passed = False
