@@ -11,11 +11,14 @@ import select
 import threading
 import resource
 
-# Function that runs in a separate thread
-# It polls stderrs of judge and bots, reads them and remembers the outputs
-# in a map that is shared with the main thread (log_map argument)
-# Later stderrs are returned as a form of logs
+
 def read_logs(judge_process, bots_process_list, log_map, run_thread):
+    """
+        Function that runs in a separate thread
+        It polls stderrs of judge and bots, reads them and remembers the outputs
+        in a map that is shared with the main thread (log_map argument)
+        Later stderrs are returned as a form of logs
+    """
     pipes = [judge_process.stderr]
     stderr_to_proc_num = {}
     stderr_to_proc_num[judge_process.stderr] = 'judge'
@@ -26,17 +29,25 @@ def read_logs(judge_process, bots_process_list, log_map, run_thread):
         stderr_to_proc_num[bots_process_list[i].stderr] = i
         logs[bots_process_list[i].stderr] = []
     while (run_thread['val']):
-        (rlist, wlist, xlist) = select.select(pipes, [], [], 10)
+        (rlist, wlist, xlist) = select.select(pipes, [], [], 1)
         for pipe in rlist:
             readp = read_whole_pipe(pipe)
             if readp != '':
                 log(logs[pipe], readp)
+    (rlist, wlist, xlist) = select.select(pipes, [], [], 1)
+    for pipe in rlist:
+        readp = read_whole_pipe(pipe)
+        if readp != '':
+            log(logs[pipe], readp)
     for pipe in logs.keys():
        log_map[stderr_to_proc_num[pipe]] = logs[pipe]
 
-# Reads the pipe untill it's empty
-# Used for reading stderrs
+
 def read_whole_pipe(pipe):
+    """
+        Reads the pipe untill it's empty
+        Used for reading stderrs
+    """
     res = ''
     while True:
         (rl, wl, xl) = select.select([pipe],[],[], 0)
@@ -76,11 +87,11 @@ def parse_message(to_send):
 def readout(pipe, timeout):
     """
         This function reads communicates.
-        The assumption is that every communicate ends with chars '<<<\n' not case-sensitive
-        In addition every '<<<\n' frase is considered to be end of a communicate
+        The assumption is that every communicate ends with char '\n'
+        In addition every '\n' is considered to be end of a communicate
     """
     mes = ''
-    while mes[len(mes)-4:] != '<<<\n':
+    while mes[len(mes)-1:] != '\n':
         (rl, wl, xl)  = select.select([pipe], [], [], timeout)
         if (rl != []):
             letter = pipe.read(1)
@@ -90,24 +101,30 @@ def readout(pipe, timeout):
                 mes = mes + letter
         else:
             raise TimeoutException()
-    return mes[:-4]
+    return mes[:-1]
 
-# A convenience function for readability purposes
 def log(log_list, log_message):
+    """
+        A convenience function for readability purposes
+    """
     log_list.append(log_message)
 
-# A function that is run in forked processes before exec
-# (see subprocess.Popen constructor preexec_fn argument)
-# Used for setting limits of time and memory consumption for the process
 def set_limits(time_limit, memory_limit):
+    """
+        A function that is run in forked processes before exec
+        (see subprocess.Popen constructor preexec_fn argument)
+        Used for setting limits of time and memory consumption for the process
+    """
     mem_limit = memory_limit * 1024
     resource.setrlimit(resource.RLIMIT_CPU, (time_limit, time_limit))
     resource.setrlimit(resource.RLIMIT_AS, (mem_limit, mem_limit))
 
-# Reads informaton about time and memory consumption of the process 
-# with given pid from the proc folder.
-# Currently not in use
 def get_stats(pid):
+    """
+        Reads informaton about time and memory consumption of the process 
+        with given pid from the proc folder.
+        Currently not in use
+    """
     proc_stats = open('/proc/{0}/stat'.format(str(pid)))
     line = proc_stats.readline().split()
     return (float(line[13]) + float(line[14]), int(line[22]))
@@ -221,24 +238,24 @@ def play(judge_file, players, time_limit, memory_limit):
             for bnum in bots:
                 if bnum > 0 and bnum <= players_num:
                     bot_process = bots_process_list[bnum-1]
-                    message = message + '<<<\n'
+                    message = message + '\n'
                     try:
                         bot_process.stdin.write(message)
-                        response = readout(bot_process.stdout, time_limit) + '<<<\n'
+                        response = readout(bot_process.stdout, time_limit) + '\n'
                     except TimeoutException:
-                        response = '_DEAD_<<<\n'
+                        response = '_DEAD_\n'
                         try:
                             bot_process.kill()
                         except:
                             pass
                     except EOFException:
-                        response = '_DEAD_<<<\n'
+                        response = '_DEAD_\n'
                         try:
                             bot_process.kill()
                         except:
                             pass
                     except:
-                        response = '_DEAD_<<<\n'
+                        response = '_DEAD_\n'
                     finally:
                         try:
                             judge_process.stdin.write(response)
@@ -269,7 +286,7 @@ def play(judge_file, players, time_limit, memory_limit):
     final_times = {}
     final_memory = {}
     
-    # Wait for dead bots and judge useing wait4
+    # Wait for dead bots and judge using wait4
     # Save information about their time usage in final_times
     for i in range(len(bots_process_list)):
         bot_process = bots_process_list[i]
