@@ -588,15 +588,28 @@ Pomiar czasu zu¿ytego przez proces realizowany jest przy u¿yciu funkcji systemow
 
 \chapter{Dokumentacja u¿ytkowa}
 
+Najwa¿niejszym dokumentem okre¶laj±cym po¿±dany kszta³t serwisu jest dokumentacja przypadków u¿ycia. Opisuje on sposób interakcji koñcowego u¿ytkownika z ca³ym systemem.
+W przypadku platformy AI-Arena interakcja ta odbywa siê za pomoc± przegl±darki internetowej.\\
+
+Z punktu widzenia u¿ytkownika AI-Arena jest zwyk³± stron± internetow±. Najwiêkszy wp³yw na jego koñcowy wygl±d maj± wiêc arkusze stylów, oraz w pewnym stopniu
+skrypty JavaScript. Arkusze stulów pochodz± z dwóch ¼róde³: wykorzystany zosta³ open source'owy projekt nale¿±cy do twittera o nazwie bootstrap (\url{http://twitter.github.com/bootstrap/}).
+Projekt ten (opublikowany na licencji Apache v.2.0) stanowi dobr± podstawê wygl±du strony. Drugim ¼ród³em arkuszy stylów s± autorzy serwisu, którzy nadali stronie ostateczny wygl±d.\\
+
+U¿ytkownicy serwisu maj± zró¿nicowane prawa. Najbardziej ograniczone mo¿liwo¶ci ma uzytkownik niezalogowany, najszersze za¶ - naturalnie Administrator strony.
+Ponadto w zale¿no¶ci od sytuacji U¿ytkownik (który siê poprawnie zalogowa³) mo¿e mieæ prawa Moderatora gry lub konkursu, co daje mu mo¿liwo¶æ edycji m.in. zasad, terminów czy
+komentarzy wypowiadanych przez innch U¿ytkowników. Nale¿y jednak zauwa¿yæ, i¿ w przypadku naduzyæ Administrator strony mo¿e odebraæ Moderatorowi jego specjalne uprawnienia.
+
+\section{Przypadki u¿ycia systemu}
+
 \subsection{Z udzia³em u¿ytkownika niezalogowanego (Go¶cia)}
 U¿ytkownik niezalogowany ma bardzo ograniczone prawa u¿ywania serwisu. Praktycznie jedyn± dozwolon± aktywno¶ci± jest rejestracja
 w serwisie lub próba zalogowania siê do utworzonego wcze¶niej konta.\\
 
 \begin{figure}[h]
     \begin{center}
-        \includegraphics[width=1.0\textwidth]{img/UseCaseDiagram.jpg}
+        \includegraphics[width=0.65\textwidth]{img/UseCasesUser.jpg}
     \end{center}
-    \caption{Diagram przypadków u¿ycia}
+    \caption{Podstawowe u¿ycie systemu}
 \end{figure}
 
 \subsubsection{Rejestracja w systemie}
@@ -605,9 +618,9 @@ na górze.\\
 
 Nastêpnie system przekieruje u¿ytkownika do strony, gdzie bêdzie móg³ wybraæ swój login oraz has³o. Nale¿y zwróciæ uwagê, i¿ login
 musi byæ unikalny, mo¿e zawieraæ wy³±cznie ma³e i du¿e litery, cyfry oraz znak '\_'. W przeciwnym wypadku pojawi siê komunikat o b³êdzie.\\
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{wrapfigure}{r}{0.45\textwidth}
 	\begin{center}
-		\includegraphics[width=0.48\textwidth]{img/register.png}
+		\includegraphics[width=0.43\textwidth]{img/register.png}
 	\end{center}
 	\caption{Pasek logowania i rejestracji do serwisu}
 \end{wrapfigure}
@@ -624,12 +637,12 @@ Je¶li dane bêd± zgodne z tymi zapisanymi w bazie danych, system przekieruje u¿yt
 \subsection{Z udzia³em u¿ytkownika zalogowanego}
 
 \subsubsection{Wylogowanie siê z serwisu}
-\begin{wrapfigure}{l}{0.5\textwidth}
-	\begin{center}
-		\includegraphics[width=0.48\textwidth]{img/logout.png}
-	\end{center}
-	\caption{Pasek wylogowania z serwisu}
-\end{wrapfigure}
+%\begin{wrapfigure}{l}{0.5\textwidth}
+%	\begin{center}
+%		\includegraphics[width=0.48\textwidth]{img/logout.png}
+%	\end{center}
+%	\caption{Pasek wylogowania z serwisu}
+%\end{wrapfigure}
 Wylogowanie jest kolejn± standardow± aktywno¶ci± udostêpnian± przez wiele serwisów. Aby wylogowaæ siê z serwisu nale¿y klikn±æ przycisk "Logout", 
 który znajduje siê w prawym, górnym roku strony. Zastêpuje on przycisk "Login", który widoczny jest dla niezalogowanych u¿ytkowników. Po klikniêciu tego przycisku
 u¿ytkownik jest przekierowywany na stronê g³ówn± serwisu.
@@ -644,6 +657,13 @@ ni¿ reszta napisu) system wy¶wietla stronê profilow± aktualnie zalogowanego u¿yt
 Gdy u¿ytkownik znajduje siê na swojej stronie profilowej ma dostêp do kilku odno¶ników. Jednym z nich jest odno¶nik do strony konfiguracyjnej profilu. Aby j± otworzyæ nale¿y klikn±æ 
 w link "Edit profile" znajduj±cy siê pod zdjêciem profilowym. W oknie edycji profilu pojawia siê formularz zawieraj±cy kilka pól, m.in. zdjêcie, kraj, szko³a/uniwersytet czy zainteresowania. 
 ¯adne z nich nie jest obowi±zkowe. U¿ytkownik zatwierdza zmiany klikaj±c na prycisk "Update" znajduj±cy siê na samym dole fornularza.
+
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=0.85\textwidth]{img/UseCasesContestant.jpg}
+    \end{center}
+    \caption{Przypadki u¿ycia zwi±zane z konkursami}
+\end{figure}
 
 \subsubsection{Utworzenie nowej gry lub konkursu}
 \begin{wrapfigure}{l}{0.5\textwidth}
@@ -662,21 +682,18 @@ gracz graj±cy pionami czarnymi nie ruszy³ siê bia³ym pionem). Gdy upewni siê, ¿e
 Plik ¼ród³owy sêdziego jest dostêpny dla wszystkich zalogowanych u¿ytkowników serwisu. Ma to zapobiec wysy³aniu "stronniczych" sêdziów oraz ³atwieszemu ujawnieniu pewnych "ukrytych" wad protoko³u.
 Administratorzy zastrzegaj± sobie prawo do usuniêcia lub poprawienia wadliwych sêdziów.\\
 
-Plik z zasadami rozgrywki musi zawieraæ ogólny opis gry (np. fabu³ê wprowadzaj±c±) oraz szczegó³owy opis i znaczenie komunikatów. W szczególno¶ci musz± byæ zawarte informacje takie jak:
-\begin{itemize}
-	\item{dok³adny format komunikatu}
-	\item{dozwolone odpowiedzi na ka¼dy rodzaj komunikatu}
-	\item{komunikaty informuj±ce o b³êdzie}
-\end{itemize}
-Zosta³o przyjête za³o¿enie, ¿e Bot, który wy¶le komunikat o innej, ni¿ wyspecykowano formie automatycznie przegrywa dan± grê i jest zabijany przez Nadzorcê.\\
-
-Aby utworzyæ konkurs nie jest potrzebne wcze¶niejsze przygotowywanie plików, jednak musi istnieæ gra, na bazie której chcemy utworzyæ nowy konkurs.\\
+Plik z zasadami rozgrywki musi zawieraæ ogólny opis gry (np. historiê wprowadzaj±c±) oraz szczegó³owy opis i znaczenie komunikatów. W szczególno¶ci musz± byæ zawarte informacje takie jak
+dok³adny format komunikatu, dozwolone odpowiedzi na ka¼dy rodzaj komunikatu czy komunikaty informuj±ce o b³êdzie.
+Zosta³o przyjête za³o¿enie, ¿e Bot, który wy¶le komunikat o innej, ni¿ zdefiniowanej formie automatycznie przegrywa dan± grê i jest przerywany przez Nadzorcê.\\
 \begin{wrapfigure}{r}{0.7\textwidth}
 	\begin{center}
 		\includegraphics[width=0.68\textwidth]{img/game_details.png}
 	\end{center}
 	\caption{Szczegó³y gry}
 \end{wrapfigure}
+
+Aby utworzyæ konkurs nie jest potrzebne wcze¶niejsze przygotowywanie plików, jednak musi istnieæ gra, na bazie której chcemy utworzyæ nowy konkurs.\\
+
 Gdy u¿ytkownik przygotowa³ ju¿ powy¿sze pliki powinien, w celu utworzenia nowej gry, klikn±æ w link "Create New Game" znajduj±cy siê na górnym pasku strony. Otworzy siê formularz zawieraj±cy pola, do których 
 nale¿y wprowadziæ informacje nt. tworzonej gry (miêdzy innymi 2 wymienione wcze¶niej pliki czy nazwa gry). Warto zwróciæ uwagê, i¿ nazwa gry musi byæ unikalna, gdy¿ 
 definiuje ona ¶cie¿kê do poszczególnych plików na dysku.\\
@@ -684,7 +701,7 @@ definiuje ona ¶cie¿kê do poszczególnych plików na dysku.\\
 Gdy u¿ytkownik wype³ni formularz i zatwierdzi przyciskiem "Submit" na dole formularza zostanie przeniesiony na stronê zawieraj±c± detale w³a¶nie utworzonej gry.
 Autor staje siê automatycznie moderatorem gry i ma prawo m. in. do edycji czy usuniêcia gry lub edycji i usuwania komentarzy u¿ytkowników.
 
-\subsubsection{Wys³anie bota do gry lub kunkursu}
+\subsubsection{Wys³anie bota do gry lub konkursu}
 \begin{wrapfigure}{l}{0.6\textwidth}
 	\begin{center}
 		\includegraphics[width=0.48\textwidth]{img/send_bot.png}
@@ -697,20 +714,6 @@ wybraæ grê (konkurs) z wy¶wietlonej listy.\\
 Gdy znajdujemy siê ju¿ na stronie z detalami nale¿y, w celu zg³oszenia bota, klikn±æ na link "Send bot for this game" (lub "Add contestant" w przypadku konkursu) i wype³niæ formularz wy¶wietlony przez system.
 Podobnie, jak w przypadku tworzenia gry nale¿y mieæ uprzednio przygotowany plik zawieraj±cy kod ¼ród³owy bota. Bot komunikuje siê z sêdzi± za pomoc± komunikatów opisanych w zasadach gry wypisywanych i zczytywanych ze standatdowego 
 wej¶cia i wyj¶cia. W przypadku, gdy bot wy¶le ¼le sformatowany lub b³êdny komunikat - automatycznie przegrywa rozgrywkê dostaj±c za ni± mo¿liwe minimum punktów.
-
-\subsubsection{Dodanie komentarza pod gr± lub konkursem}
-Aby dodaæ komentarz do gry (konkursu) nale¿y znaldowaæ siê na stronie ze szczegó³owym opisem danej gry (konkursu). Nastêpnie klikn±æ w link "Add comment" i wype³niæ formularz wy¶wietlony przez system.
-Komunikat ten pojawi siê w kolejno¶ci odwrotnie chronologicznej pod opisem zasad gry.\\
-\begin{wrapfigure}{l}{0.7\textwidth}
-	\begin{center}
-		\includegraphics[width=0.68\textwidth]{img/comment.png}
-	\end{center}
-	\caption{Komentarz umieszczony pod gr±}
-\end{wrapfigure}
-
-
-Nale¿y zwróciæ uwagê, i¿ w przypadku naruszania zasad publicznego wypowiadania siê (tre¶ci wulgarne, obra¼liwe, naruszaj±ce prywatno¶æ itp.) moderator konkursu ma prawo do edycji lub usuniêcia komentarza. 
-Takie samo prawa ma równie¿ autor komentarza.
 
 \subsubsection{Wy¶wietlenie kodu ¼ród³owego sêdziego}
 \begin{wrapfigure}{l}{0.7\textwidth}
@@ -726,30 +729,50 @@ Mo¿liwe jest równie¿ wy¶wietlenie kodu w postaci surowej, tj. bez numerów linii 
 w prawym górnym rogu wy¶wietlanego kodu. Dostêpna jest ponadto opcja pobrania kodu ¼ród³owego sêdziego w postaci pliku tekstowego. Aby pobraæ kod ¼ród³owy
 u¿ywtkownik powinien klikn±æ w przycisk "Download" znajduj±dy siê na prawo od przycisku "Raw".
 
+\subsubsection{Dodanie komentarza pod gr± lub konkursem}
+Aby dodaæ komentarz do gry (konkursu) nale¿y znajdowaæ siê na stronie ze szczegó³owym opisem danej gry (konkursu). Nastêpnie klikn±æ w link "Add comment" i wype³niæ formularz wy¶wietlony przez system.
+Komunikat ten pojawi siê pod opisem zasad gry (bez konieczno¶ci zatwierdzania go przez Moderatora). Moderator ma jednak prawo edytowaæ lub nawet usun±æ ten komentarz 
+w pó¼niejszym terminie.\\
+
+Zwróæmy uwagê na fakt, i¿ na pó¼niejszym etapie ¿ycia serwisu liczba umieszczanych komentarzy mo¿e byæ znacz±ca. Jakakolwiek forma automatycznej notyfikacji mog³aby byæ
+uci±¿liwa dla Moderatorów. Z tego powodu autorzy serwisu zdecydowali siê nie umieszczaæ mechanizmu automatycznego powiadamiania w serwisie.\\
+
+\begin{wrapfigure}{l}{0.7\textwidth}
+	\begin{center}
+		\includegraphics[width=0.68\textwidth]{img/comment.png}
+	\end{center}
+	\caption{Komentarz umieszczony pod gr±}
+\end{wrapfigure}
+
+
+Nale¿y zwróciæ uwagê, i¿ w przypadku naruszania zasad publicznego wypowiadania siê (tre¶ci wulgarne, obra¼liwe, naruszaj±ce prywatno¶æ itp.) moderator konkursu ma prawo do edycji lub usuniêcia komentarza. 
+Takie samo prawa ma równie¿ autor komentarza.
+
 \subsection{Z udzia³em moderatora konkursu lub gry}
+
+Moderator pe³ni specjaln± funkcjê. Czuwa on nad prawid³owym i kulturalnym przebiegiem konkursu. W serwisie AI-Arena
+moderatorzy delegowani s± do poszczególnych gier i konkursów. Naturalnie dany u¿ytkownik mo¿e byæ moderatorem wielu
+gier jednocze¶nie.\\
+
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{img/UseCasesModerator.jpg}
+    \end{center}
+    \caption{U¿ycie systemu przez Moderatora}
+\end{figure}
 
 \subsubsection{Usuniêcie komentarza do gry lub konkursu}
 ¯eby móc usun±æ komentarz u¿ytkownik musi spe³niaæ (minimum) jeden z poni¿szych warunków:
 \begin{enumerate}
 	\item{Byæ autorem komentarza}
-	\item{Byæ moderatorem gry (konkursu), pod którym zosta³ ten komentarz dodany}
-	\item{Byæ administratorem strony}
+	\item{Byæ Administratorem strony lub Moderatorem gry (konkursu), pod którym zosta³ ten komentarz dodany}
 \end{enumerate}
 
 Je¶li wymaganie wstêpne jest spe³nione, wystarczy klikn±æ w przycisk "Delete" znajduj±cy siê w prawym górnym rogu komentarza. Pojawi siê wtedy okienko z pro¶b± o potwierdzenie swojej decyzji.
 Nale¿y pamiêtaæ, ¿e usuniêtego komentarza nie mo¿na przywróciæ! Wci¶niêcie przycisku "OK" na pojawiaj±cym siê okienku spowoduje usuniêcie komentarza i powrót do strony z detalami gry (konkursu)
 
-\subsubsection{Edycja komentarza do gry lub konkursu}
-Edycja komentarza jest podobna do dodawania nowego komentarza. Aby edytowaæ istniej±cy komentarz nale¿y klikn±æ w link "Edit" znajduj±cy siê w górnej czê¶ci komentarza. Pojawi siê wtedy 
-formularz analogiczny do tego, który siê pojawia przy dodawaniu komentarza. Po zatwierdzeniu dokonywanych zmian poprzez naci¶niêcie przycisku "Save" zostaniemy przekierowani do strony ze szczegó³owymi informacjami o grze.
-Zauwa¿my, ¿e edytowany komentarz jest ju¿ wy¶wietlany w zmienionej formie.
-
 \subsubsection{Usuniêcie gry lub konkursu}
-Aby móc usun±æ grê (konkurs) trzeba spe³niaæ jeden z warunków:
-\begin{enumerate}
-	\item{Byæ moderatorem gry}
-	\item{Byæ administratorem strony}
-\end{enumerate}
+Aby móc usun±æ grê (konkurs) trzeba byæ Administratorem strony lub Moderatorem danej gry (konkursu):
 
 \begin{wrapfigure}{r}{0.45\textwidth}
 	\begin{center}
@@ -760,6 +783,7 @@ Aby móc usun±æ grê (konkurs) trzeba spe³niaæ jeden z warunków:
 \\
 W celu usuniêcia gry nale¿y znajdowaæ siê na stronie zawieraj±cej szczegó³owy opis gry. Nastêpnie klikn±æ w znajduj±cy siê po lewej stronie link "Delete this game". Spowoduje to wyskoczenie okienka z pro¶b± o potwierdzenie swojej 
 decyzji. Pamiêtajmy, i¿ jest to decyzja nieodwracalna! Potwierdzenie wykonania operacji sposoduje usuniêcie gry z listy dostêpnych i przeniesienie na stronê g³ówn± serwisu.
+System usunie wszelkie dane zwi±zane z dan± gr±.
 
 \subsubsection{Edycja gry lub konkursu}
 \begin{wrapfigure}{l}{0.4\textwidth}
@@ -772,9 +796,14 @@ Mo¿liwa jest edycja konkursu. Aby tego dokonaæ trzeba byæ adnimistratorem lub mo
 System przeniesie nas do okna, w którym wy¶wietli siê formularz do edycji gry. Po wprowadzeniu zmian nale¿y zatwierdziæ przyciskiem "Save".\\
 
 Nale¿y pamiêtaæ, i¿ nazwa gry okre¶la fizyczn± ¶cie¿kê dostepu. Oznacza to, ¿e je¶li u¿ytkownik bêdzie chcia³ zmieniæ nazwê gry, system przeniesie
-wszystkie pliki zwi±zane z gr± do nowych lokalizacji. U¿ytkownik musi jednak zadbaæ, aby nowa nazwa gry by³a unikalna. W przeciwnym razie próba edycji
-zakoñczy siê pora¿k±.
+wszystkie pliki zwi±zane z gr± do nowych lokalizacji. U¿ytkownik musi jednak pamiêtaæ, aby nowa nazwa gry by³a unikalna. W przeciwnym razie system odmówi
+zmiany nazwy i próba edycji zakoñczy siê pora¿k±.
 \vspace{1cm}
+
+\subsubsection{Edycja komentarza do gry lub konkursu}
+Edycja komentarza jest podobna do dodawania nowego komentarza. Aby edytowaæ istniej±cy komentarz nale¿y klikn±æ w link "Edit" znajduj±cy siê w górnej czê¶ci komentarza. Pojawi siê wtedy 
+formularz analogiczny do tego, który siê pojawia przy dodawaniu komentarza. Po zatwierdzeniu dokonywanych zmian poprzez naci¶niêcie przycisku "Save" zostaniemy przekierowani do strony ze szczegó³owymi informacjami o grze.
+Zauwa¿my, ¿e edytowany komentarz jest ju¿ wy¶wietlany w zmienionej formie.
 
 \chapter{Przysz³o¶æ projektu}
 
