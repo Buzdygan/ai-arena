@@ -90,18 +90,20 @@ lub jako pomoc przy badaniach nad t± dziedzin± wiedzy.
 	\item Wybrana metodyka powinna pozwalaæ na ³atwe ¶ledzenie zmian w projekcie, oraz u³atwiaæ zapewnianie kontroli jako¶ci.
 	\end{itemize}
 	
-    ¯adna z pocz±tkowo rozwa¿anych metodologii nie spe³nia³a wszystkich powy¿szych wymagañ. Zdecydowano siê wiêc na modyfikacjê metodologii Scrum.
-    Jest to metodologia typu lekkiego. Dzieli okres pracy na krótsze podokresy nazywane sprintami.
+    ¯adna z pocz±tkowo rozwa¿anych metodologii nie spe³nia³a wszystkich powy¿szych wymagañ.
+    Zdecydowano siê wiêc na w³asne rozwi±zanie, inspirowane metodologi± Scrum.
+    Scrum to metodologia typu lekkiego. Dzieli okres pracy na krótsze podokresy nazywane sprintami.
     Podczas ka¿dego takiego sprintu, realizowana jest skoñczona czê¶æ funkcjonalno¶ci.
-    Sprinty trwaj± zazwyczaj kilka tygodni. W tym przypadku by³ to tydzieñ
-    miêdzy kolejnymi spotkaniami na zajêciach z prowadz±cym.\\
-    
+    Sprinty trwaj± zazwyczaj kilka tygodni.
+
+    Poniewa¿ zajêcia z przedmiotu ZPP odbywa³y siê cotygodniowo, zdecydowano siê przyj±æ tydzieñ miêdzy
+    zajêciami jako odpowiednik sprintu.
     Podczas takich zajêæ, ustalany by³ zakres pracy przydzielony poszczególnym osobom na przysz³y tydzieñ, oraz weryfikowana
     by³a praca wykonana w tygodniu poprzednim. Prowadz±cy zg³asza³ uwagi do niektórych funkcjonalno¶ci.
     Dyskutowane by³y równie¿ dokumenty powstaj±ce przy okazji pracy nad projektem, przede wszystkim
-    poni¿sza praca licencjacka. Zapis przebiegu zajêæ, wraz z celami na przysz³y tydzieñ, nazywany
-    by³ minutkami i trzymany w systemie Google Documents, tak by ka¿dy z cz³onków zespo³u oraz prowadz±cy
-    zajêcia mia³ do niego dostêp.\\
+    poni¿sza praca licencjacka. Zapis przebiegu zajêæ wraz z celami na przysz³y tydzieñ, nazywany
+    minutkami, by³ przechowywany w systemie Google Documents, tak by ka¿dy z cz³onków zespo³u oraz prowadz±cy
+    zajêcia posiada³ do niego dostêp.\\
 
     Dodatkowo organizowane by³y spotkania samego zespo³u. Odbywa³y siê one równie¿ raz w tygodniu
     i mia³y na celu kontrolowanie przebiegu prac i zadbanie o to by zosta³y wykonane zaplanowane
@@ -111,7 +113,7 @@ lub jako pomoc przy badaniach nad t± dziedzin± wiedzy.
     za³o¿eñ przyjêtej metodologii pracy.\\
 
     Podzia³ obowi±zków miêdzy cz³onków zespo³u by³ wynikiem porozumienia miêdzy cz³onkami i by³
-    zatwierdzany przez Lidera Projektu, a nastêpnie przedstawiany prowadz±cemu zajêæ.\\
+    zatwierdzany przez Lidera Projektu, a nastêpnie przedstawiany prowadz±cemu zajêcia.\\
 
     Do bie¿±cej kontroli stanu projektu u¿yty zosta³ system Redmine. Umo¿liwia on tworzenie
     zadañ i przydzielanie ich cz³onkom zespo³u. Ka¿de zadanie ma status, który zawiera siê w zbiorze
@@ -120,7 +122,10 @@ lub jako pomoc przy badaniach nad t± dziedzin± wiedzy.
     a osoba odpowiedzialna za jego wykonanie jest w trakcie jego realizacji. Stan zrealizowane
     oznacza, ¿e zadanie zosta³o wykonane przez osobê odpowiedzialn±, ale nie zosta³o jeszcze
     zweryfikowane pod k±tem poprawno¶ci. Stan zamkniête oznacza, ¿e zadanie zosta³o zrealizowane
-    i zweryfikowane.\\
+    i zweryfikowane. Odpowiedzialno¶æ za tworzenie i przydzielanie zadañ by³a podzielona miêdzy
+    cz³onków zespo³ów, jednak g³ównym koordynatorem procesu by³ Lider Projektu. Cz³onek zespo³u,
+    który wykona³ zadanie oznacza³ jego stan jako zrealizowany, natomiast za zamkniêcie odpowiedzialny
+    by³ Lider Projektu, po uprzedniej weryfikacji wykonanej pracy.
 
     Kod projektu, oraz dokumenty takie jak praca licencjacka, zosta³y umieszczone w repozytorium Gita.
     Git to system kontroli wersji dbaj±cy o archiwizacjê kodu oraz koordynacjê równoleg³ych zmian
@@ -129,36 +134,38 @@ lub jako pomoc przy badaniach nad t± dziedzin± wiedzy.
     odtworzyæ. Mo¿liwe jest równie¿ jednoczesne rozwijanie projektu w kilku niezale¿nych kierunkach,
     a nastêpnie po³±czenie efektów pracy.\\
 
-    Z uwagi na ma³± liczno¶æ zespo³u zdecydowano siê nie u¿ywac narzêdzi wspomagaj±cych ¶ledzenie zmian. Do obowi±zków
+    Z uwagi na niewielk± liczebno¶æ zespo³u zdecydowano siê nie u¿ywaæ narzêdzi wspomagaj±cych ¶ledzenie zmian. Do obowi±zków
     ka¿dego cz³onka zespo³u nale¿a³o upewnienie siê, ¿e po zmianach przez niego wprowadzonych projekt uruchamia siê i nie
-    pojawi³y siê nowe problemy (regresje). W przypadku, gdyby jednak regresje wyst±pi³y, mechanizmy kontroli wersji udostêpniane
-    przez Gita pozwoli³yby na odtworzenie starszej wersji projektu.\\
+    pojawi³y siê nowe problemy (regresje). W przypadku gdyby regresje wyst±pi³y, mechanizmy kontroli wersji udostêpniane
+    przez system Git pozwoli³yby na odtworzenie starszej wersji projektu.\\
 
-    Czêste spotkania projektowe umo¿liwi³y cz³onkom zespo³u pozostanie na bie¿±co z aktualnymi zmianami. W czasie takich spotkañ,
+    Czêste spotkania projektowe umo¿liwia³y cz³onkom zespo³u bie¿±ce ¶ledzenie aktualnych zmian. W czasie takich spotkañ,
     ka¿dy z cz³onków relacjonowa³ postêp prac, który nastêpnie by³ weryfikowany przez Lidera Projektu, b±d¼ te¿ przez innego cz³onka zespo³u. \\
 
 \chapter{Wymagania projektowe}
 
 \section{Rozpoznanie problemu}
 
-    Sztuczna inteligencja jest wspó³cze¶nie bardzo modn± dziedzin± informatyki. Znajduje zastosowania w kolejnych ga³êziach 
-    informatyki i nie tylko. Nic wiêc dziwnego, ¿e coraz wiêcej osób wyra¿a zainteresowanie t± dziedzin± informatyki, jednocze¶nie
-    pragn±c pog³êbiaæ swoj± wiedzê w tym zakresie. Potrzeba ta nie jest jednak w pe³ni zaspokojona. W internecie istnieje wiele platform wspieraj±cych
+    Sztuczna inteligencja jest wspó³cze¶nie bardzo popularn± dziedzin± informatyki. Znajduje zastosowania w kolejnych ga³êziach 
+    tej nauki. Nic wiêc dziwnego, ¿e coraz wiêcej programistów pragnie pog³êbiaæ swoj± wiedzê w tym zakresie.
+    Potrzeba ta nie jest jednak w pe³ni zaspokojona. W Internecie istnieje wiele platform wspieraj±cych
     naukê algorytmiki (przede wszystkim popularne platformy przygotowuj±ce do konkursów ACM), jednak nie ma ¿adnego odpowiednika platformy 
     umo¿liwiaj±cej naukê sztucznej inteligencji.\\
 
     W odpowiedzi na tê potrzebê, autorzy zdecydowali siê stworzyæ serwis AI-Arena. Jest to serwis umo¿liwiaj±cy porównanie 
-    programów walcz±cych. Program walcz±cy mo¿na opisaæ jako program graj±cy w pewn± grê, tj. pod±¿aj±cy wed³ug pewnych, ¶ci¶le
-    okre¶lonych zasad. Zauwa¿my, i¿ wiêkszo¶æ algorytmów sztucznej inteligencji mo¿na z powodzeniem zastosowaæ w programach walcz±cych.\\
+    programów walcz±cych. Program walcz±cy mo¿na opisaæ jako program podejmuj±cy decyzje w zmieniaj±cych siê warunkach, rywalizuj±cy
+    przy tym z innymi programami wg pewnych ¶ci¶le okre¶lonych zasad. Tworzenie efektywnych programów walcz±cych jest czê¶ci±
+    pracy nad rozwojem sztucznej inteligencji. Serwis AI-Arena u³atwia nie tylko rywalizacjê programistów, ale tak¿e wymianê
+    ich do¶wiadczeñ z dotychczasowej pracy nad programami walcz±cymi.
 
 \section{Grupa docelowa}
 
-    Jak wynika z dotychczasowego okre¶lenia problemu, grupê docelow± stanowi± programi¶ci, którzy s± zafascynowani tematem sztucznej inteligencji.
-    Definiuje to w pewnym sensie sposób wykonania projektu. Mo¿na siê spodziewaæ, ¿e czê¶æ tej grupy, zafasynowana równie¿ bezpieczeñstwem
-    systemów komputerowych, bêdzie chcia³a sprawdziæ zabezpieczenia systemu. Nale¿y wiêc ze zdwojonym wysi³kiem zapewniæ szeroko rozumiane
+    Jak wynika z dotychczasowego okre¶lenia problemu, grupê docelow± stanowi± programi¶ci, którzy s± zainteresowani tematem sztucznej inteligencji.
+    Nale¿a³o uwzglêdniæ to podczas tworzenia serwisu. Mo¿na siê spodziewaæ, ¿e czê¶æ tej grupy, zafasynowana równie¿ bezpieczeñstwem
+    systemów komputerowych, bêdzie chcia³a sprawdziæ zabezpieczenia systemu. Nale¿a³o wiêc ze zdwojonym wysi³kiem zapewniæ szeroko rozumiane
     bezpieczeñstwo.\\
 
-    Poniewa¿ grup± docelow± s± programi¶ci, autorzy zdecydowali siê przygotowaæ wygl±d serwisu, który bêdzie przede wszystkim schludny
+    Równie¿ wygl±d serwisu by³ zdeterminowany przez charakter grupy docelowej. Autorzy zdecydowali, ¿e powinien byæ przede wszystkim schludny
     i czytelny. Nie by³o potrzeby umieszczania efektownych animacji, b±d¼ wystylizowanych obrazków, które spowolni³yby dzia³anie strony
     i wprowadza³y dezorientacjê u¿ytkownika.
 
@@ -167,7 +174,9 @@ lub jako pomoc przy badaniach nad t± dziedzin± wiedzy.
 
 \section{Gra}
     
-    Gra sk³ada siê z Regu³ i Sêdziego. \\
+    Gra oznacza pojedynczy obszar rywalizacji programów walcz±cych na ¶ci¶le okre¶lonych zasadach.
+    Zasady s± opisane w dokumencie tekstowym zwanym Regu³ami, który powinien byæ publicznie dostêpny.
+    Na Grê sk³ada siê równie¿ program Sêdziego, który jest implementacj± tych Regu³.
     Gra mo¿e byæ jedno, b±d¼ wieloosobowa. W przypadku jednoosobowym mamy do czynienia z rozwi±zywaniem
     zagadnieñ algorytmicznych bez wprowadzania elementu rywalizacji z przeciwnikiem.
     W warunkach serwisu AI-Arena graczami s± programy komputerowe,
@@ -188,7 +197,7 @@ lub jako pomoc przy badaniach nad t± dziedzin± wiedzy.
     Jest to program zwi±zany z dan± Gr±. Ma on za zadanie kontrolowaæ przebieg Meczu,
     weryfikowaæ zagrywki graczy, informowaæ ich o aktualnym stanie, oraz ustalaæ wynik Meczu,
     zgodnie z zasadami zwi±zanymi z Gr±, opisanymi w Regu³ach.
-    Kod sêdziego jest publiczny i dostêpny wszystkim graczom.
+    Kod Sêdziego jest publiczny i dostêpny wszystkim graczom.
 
 \section{Regu³y}
     Dokument udostêpniany publicznie, opisuj±cy zasady gry, oraz protokó³ formatu komunikatów
@@ -204,14 +213,17 @@ lub jako pomoc przy badaniach nad t± dziedzin± wiedzy.
 \section{Nadzorca}
     Program bêd±cy integraln± czê¶ci± serwisu AI-Arena. Jego zadaniem jest uruchamianie programów Botów
     i Sêdziego podczas Meczu, a nastêpnie transportowanie miêdzy nimi komunikatów tekstowych zgodnych z ustalonym
-    protoko³em. Nadzorca odbiera wynik Meczu od Sêdziego i przekazuje go do narzêdzia zwanego Gearman, w celu zapisania rezultatu w bazie.
+    protoko³em. Nadzorca odbiera wynik Meczu od Sêdziego i przekazuje go do Gearmana (narzêdzie u¿ywane do kolejkowania zadañ)
+    w celu zapisania rezultatu w bazie.
     Dodatkowo Nadzorca kontroluje czas i pamiêæ zu¿ywan± przez Boty, tak by nie przekroczy³y dozwolonych limitów.
-    Informacje o ich zu¿yciu wraz z logiem rozgrywki generowanym przez sêdziego, Nadzorca zwraca do Gearmana.
+    Informacje o ich zu¿yciu wraz z logiem rozgrywki generowanym przez Sêdziego, Nadzorca zwraca do Gearmana.
 
 \section{Gearman}
     Zewnêtrzne narzêdzie kolejkowania zadañ i transportu danych. W AI-Arena s³u¿y jako pomost miêdzy Nadzorc±,
     a Baz± danych. Kolejkuje Mecze do rozegrania, zleca ich rozegranie Nadzorcy, a nastêpnie zapisuje do bazy
-    przekazany przez Nadzorcê rezultat i dodatkowe informacje o przebiegu rozgrywki.
+    przekazany przez Nadzorcê rezultat i dodatkowe informacje o przebiegu rozgrywki.\\
+    Strona projektu Gearman:\\
+    \url{http://gearman.org}
 
 \section{Konkurs}
 
@@ -224,8 +236,7 @@ lub jako pomoc przy badaniach nad t± dziedzin± wiedzy.
     
 \chapter{Zastosowania w nauce i biznesie}
 
-    Sztuczna inteligencja jest jedn± z szybciej rozwijaj±cych siê obecnie dziedzin.
-    Zastosowania algorytmów SI siêgaj± prawie wszystkich obszarów nie tylko
+    Zastosowania algorytmów Sztucznej Inteligencji siêgaj± prawie wszystkich obszarów nie tylko
     Internetu ale i codziennego ¿ycia. Serwis AI-Arena pomaga rozwijaæ ga³±¼ tej nauki
     zwi±zan± z rywalizacj±.\\
 
@@ -234,12 +245,12 @@ lub jako pomoc przy badaniach nad t± dziedzin± wiedzy.
     wiêkszo¶ci gier takich jak szachy, warcaby itp. Warto wspomnieæ mecz szachowy mistrza ¶wiata
     Garriego Kasparowa z komputerem Deep Blue czy teleturniej Va Banque z udzia³em komputera Watson
     - w obu przypadkach zwyciê¿y³a sztuczna inteligencja
-    (\url{http://www.benchmark.pl/aktualnosci/Superkomputer_IBM_wystapil_w_teleturnieju-32781.html}).
+    (\url{http://www.benchmark.pl/aktualnosci/Superkomputer_IBM_wystapil_w_teleturnieju-32781.html} - dane z 04/2012).
     Coraz bardziej zaawansowani staj± siê przeciwnicy kierowani przez
     komputer w grach video. Równie¿ w sporcie zaczêto doceniaæ znaczenie metod naukowych
     do opracowywania optymalnych strategii. Z powodzeniem wykorzystuje siê komputer do badania
     statystyk w amerykañskiej lidze baseballowej
-    (\url{http://research.sabr.org/journals/online/38-brj-1976/165-computers-in-baseball-analysis}).
+    (\url{http://research.sabr.org/journals/online/38-brj-1976/165-computers-in-baseball-analysis} - dane z 04/2012).
     Prawdopodobnie kwesti± czasu jest analizowanie
     gry wirtualnych zespo³ów kierowanych sztuczn± inteligencj±, a nastêpnie wykorzystywanie
     obserwacji do poprawy gry prawdziwej dru¿yny.\\
@@ -254,7 +265,7 @@ lub jako pomoc przy badaniach nad t± dziedzin± wiedzy.
     wykorzystuj±cej je firmy. Mo¿na tak¿e symulowaæ inwestowanie funduszy np. na gie³dzie.
     Banki wykorzystuj± sztuczn± inteligencjê do organizacji operacji finansowych i zarz±dzania ¶rodkami.
     Sztuczna inteligencja odnosi ju¿ sukcesy w rywalizacji z lud¼mi w symulacji obrotów finansowych
-    (\url{http://news.bbc.co.uk/2/hi/business/1481339.stm}).\\
+    (\url{http://news.bbc.co.uk/2/hi/business/1481339.stm} - dane z 04/2012).\\
 
     Innym przyk³adem zastosowania AI-Arena s± dzia³ania wojenne. Serwis mo¿e pomóæ w szukaniu
     algorytmów, które bêd± potrafi³y adaptowaæ siê do ró¿nych warunków i w zale¿no¶ci od nich
@@ -365,7 +376,7 @@ Nadzorca jest j±drem serwisu AI-Arena.
 Warstwa nadzorcy jest odpowiedzialna za uruchamianie rozgrywek pomiêdzy wybranymi graczami,
 zbieranie informacji o ich wynikach i przekazywnie ich do warstwy schedulera.
 Nadzorca jest skryptem napisanym w pythonie, którego najwa¿niejsz± czê¶ci± jest metoda play.
-Metoda ta przyjmuje jako argumenty uruchamialne pliki sêdziego i programów graj±cych, oraz limity czasowy i pamiêciowy dla ka¿dego programu graj±cego.
+Metoda ta przyjmuje jako argumenty uruchamialne pliki Sêdziego i programów graj±cych, oraz limity czasowy i pamiêciowy dla ka¿dego programu graj±cego.
 Nastêpnie metoda play przeprowadza odpowiedni± rozgrywkê, zwracaj±c jako wynik s³ownik zawieraj±cy:
 \begin{itemize}
     \item Ci±g liczb oznaczaj±cy przydzielone przez sedziego punkty za rozgrywkê
@@ -374,21 +385,21 @@ Nastêpnie metoda play przeprowadza odpowiedni± rozgrywkê, zwracaj±c jako wynik s
     \item Pamiêæ RAM jak± wykorzystywa³y programy walcz±ce
 \end{itemize}
 
-Rozgrywka zaczyna siê przez uruchomienie programów walcz±cych, oraz sêdziego, kontroluj±cego przebieg rozgrywki.
+Rozgrywka zaczyna siê przez uruchomienie programów walcz±cych, oraz Sêdziego, kontroluj±cego przebieg rozgrywki.
 Komunikacja miêdzy sêdzi± a poszczególnymi programami odbywa siê za po¶rednictwem nadzorcy, który odczytuje
 komunikaty ze standardowego wyj¶cia programów i wypisuje informacje zwrotne na ich standardowe wej¶cie.
-Format komunikatów od sêdziego i botów powinien byæ wyspecyfikowany dla ka¿dej gry, przy czym powinien on
+Format komunikatów od Sêdziego i botów powinien byæ wyspecyfikowany dla ka¿dej gry, przy czym powinien on
 byæ zgodny z poni¿szym protoko³em:\\
 \begin{itemize}
-    \item Bot wysy³a komunikaty TYLKO do sêdziego (za po¶rednictwem Nadzorcy)
+    \item Bot wysy³a komunikaty TYLKO do Sêdziego (za po¶rednictwem Nadzorcy)
     \item Ka¿dy komunikat od Sêdziego musi byæ potwierdzony komunikatem zwrotnym od Bota.
-    \item Komunikaty wysy³ane przez sêdziego maj± nastêpuj±cy format: zaczynaj± siê od nawiasów kwadratowych,
+    \item Komunikaty wysy³ane przez Sêdziego maj± nastêpuj±cy format: zaczynaj± siê od nawiasów kwadratowych,
           w ktorych znajduje siê lista garczy oddzielona przecinkami. Nastêpnie znajduje siê wiadomo¶æ,
           która zostanie przekazana odpowiednim botom. Komunikat musi koñczy siê ci±giem '<<<' i znakiem
           nowej linii, n.p: '[1,2,3,4,5]INIT<<<newline'.
     \item Sêdzia otrzymuje komunikaty zwrotne od botów w takiej kolejno¶ci w jakiej zostali wylistowani.
     \item Zak³ada siê ¿e ci±g '<<<newline' koñczy komunikat. Wys³anie komunikatu o nieprawid³owym formacie skutkuje zakoñczeniem rozgrywki.
-    \item Komunikaty od nadzorcy do botów i do sêdziego równie¿ koñcz± siê ci±giem znaków '<<<newline'.
+    \item Komunikaty od nadzorcy do botów i do Sêdziego równie¿ koñcz± siê ci±giem znaków '<<<newline'.
           Dziêki temu mo¿na przesy³aæ komunikaty wielowierszowe.
     \item Je¶li Sêdzia chce wys³aæ komunikat do wszystkich mo¿e zacz±æ ALBO od wylistowania wszystkich graczy,
           ALBO u¿yæ skrótu notacyjnego: '[0]'.
@@ -401,9 +412,9 @@ byæ zgodny z poni¿szym protoko³em:\\
           Boty powinny unikaæ wysy³ania tego komunikatu, gdy¿ mog± zostaæ uznane za martwe.
 \end{itemize}
 
-Innym z zadañ nadzorcy jest odczytywanie informacji z stderr botów i sêdziego, a nastêpnie przekazanie ich warstwie schedulera. Pozwala to na umo¿liwienie u¿ytkownikowi dostêp do informacji które jego program wypisywa³ na stderr. Nadzorca realizuje tê funkcjonalno¶æ, tworz±c dodatkowy w±tek odpowiedzialny za czytanie infromacji pojawiaj±cych siê na stderr sêdziego i botów. W±tek ten przy u¿yciu polecenia select czeka na mo¿liwo¶æ nieblokuj±cego odczytu na odpowiednich deskryptorach, a gdy taka mo¿liwo¶æ siê pojawia odczytuje informacje a¿ do opró¿nienia potoku zwi±zanego z danym deskryptorem.
+Innym z zadañ nadzorcy jest odczytywanie informacji z stderr botów i Sêdziego, a nastêpnie przekazanie ich warstwie schedulera. Pozwala to na umo¿liwienie u¿ytkownikowi dostêp do informacji które jego program wypisywa³ na stderr. Nadzorca realizuje tê funkcjonalno¶æ, tworz±c dodatkowy w±tek odpowiedzialny za czytanie infromacji pojawiaj±cych siê na stderr Sêdziego i botów. W±tek ten przy u¿yciu polecenia select czeka na mo¿liwo¶æ nieblokuj±cego odczytu na odpowiednich deskryptorach, a gdy taka mo¿liwo¶æ siê pojawia odczytuje informacje a¿ do opró¿nienia potoku zwi±zanego z danym deskryptorem.
 
-Nietrywialnym problemem jest wybór mechanizmu odpowiedzialnego za ograniczanie i zbieranie informacji o zu¿ywanych przez sêdziego i boty zasobach systemowych. Dostêpnych metod jest wiele, jednak nie wszystkie s± mo¿liwe do zastosowania w przypadku systemu AI-Arena. Mechanizm ten, jak równie¿ motywacje do jego wyboru zosta³y przedstawione w rozdziale 8.1.
+Nietrywialnym problemem jest wybór mechanizmu odpowiedzialnego za ograniczanie i zbieranie informacji o zu¿ywanych przez Sêdziego i boty zasobach systemowych. Dostêpnych metod jest wiele, jednak nie wszystkie s± mo¿liwe do zastosowania w przypadku systemu AI-Arena. Mechanizm ten, jak równie¿ motywacje do jego wyboru zosta³y przedstawione w rozdziale 8.1.
 
 \section{Scheduler}
 \begin{wrapfigure}{r}{0.65\textwidth}
@@ -416,7 +427,7 @@ Do realizacji warstwy Schedulera u¿ywany jest program Gearmand0.26. Gearman jest
 przydzielania zadañ do wykonania okre¶lonym maszynom lub procesom. Posiada prosty interfejs i jest ³atwy w u¿yciu.
 Ka¿da aplikacja korzystaj±ca z tego frameworku sk³ada siê z trzech czê¶ci: klienta, workera oraz serwera. Rolê
 klienta pe³ni czê¶æ webowa serwisu, która zleca rozegranie odpowiedniej Rozgrywki, podaj±c jako argumenty grê,
-boty i sêdziego Rozgrywki. To zadanie jest zg³aszane do serwera, który je kolejkuje oraz przydziela workerowi.
+boty i Sêdziego Rozgrywki. To zadanie jest zg³aszane do serwera, który je kolejkuje oraz przydziela workerowi.
 Zadanie workera ogranicza siê do uruchomienia nadzorcy z odpowiednimi parametrami, a po zakoñczeniu Rozgrywki
 zapisaniu wyników do bazy danych.\\
 
@@ -440,7 +451,7 @@ pomog³oby ustabilizowaæ pracê serwisu, a uruchomienie kilku workerów na wielordz
     \begin{enumerate}
         \item{Tworzenie gry lub konkursu} - U¿ytkownik, który ma pomys³ na ciekaw± grê ma mo¿liwo¶æ dodania jej bez konieczno¶ci
         uzyskania akceptacji administratora strony. Staje siê on automatycznie moderatorem dodanej przez siebie gry. Warunkiem 
-        dodania gry jest napisanie kodu ¼ród³owego sêdziego oraz szczegó³owych zasad gry. Kod ¿ród³owy sêdziego jest dostêpny dla
+        dodania gry jest napisanie kodu ¼ród³owego Sêdziego oraz szczegó³owych zasad gry. Kod ¿ród³owy Sêdziego jest dostêpny dla
         wszystkich zalogowanych u¿ytkowników serwisu. Ma to pozwoliæ unikn±æ stronniczych sêdziów, bowiem wszelkie nieprawid³owo¶ci
         mog± byæ zg³aszane do administracji strony, która ma mo¿liwo¶æ usuniêcia gry.
         
@@ -463,7 +474,7 @@ pomog³oby ustabilizowaæ pracê serwisu, a uruchomienie kilku workerów na wielordz
     Oprócz podstawowych funkcjonalno¶ci, ¶ci¶le zwi±zanych z charakterem serwisu, udostêpniane s± ponadto nastêpuj±ce operacje:
     \begin{itemize}
         \item{Wy¶wietlenie i edycja strony profilowej}
-        \item{Wy¶wietlenie kodu ¼ród³owego sêdziego}
+        \item{Wy¶wietlenie kodu ¼ród³owego Sêdziego}
         \item{Udostêpnienie kodu ¼ród³owego wysy³anego bota}
         \item{Wy¶wietlenie udostêpnionego kodu ¼ród³owego}
         \item{Wy¶wietlenie rankingu konkursu}
@@ -562,7 +573,7 @@ autorzy w pe³ni potwierdzaj± skuteczno¶æ tego frameworku.
 
 \section{Nadzorca}
 
-W pocz±tkowej fazie projektu autorzy planowali udostêpniæ u¿ytkownikom mo¿liwo¶æ wysy³ania programów wieloprocesowych. Okaza³o siê jednak, ¿e implementacja takiej funkcjonalno¶ci stwarza wiele trudnych do rozwi±zania problemów w warstwie nadzorcy. G³ównymi problemami okaza³y siê ograniczenie zu¿ycia czasu i pamiêci przez grupê procesów, pomiar zu¿ycia tych zasobów po zakoñczeniu dzia³ania grup procesów, i zabijanie odpowiednich grup procesów na ¿±danie sêdziego.\\
+W pocz±tkowej fazie projektu autorzy planowali udostêpniæ u¿ytkownikom mo¿liwo¶æ wysy³ania programów wieloprocesowych. Okaza³o siê jednak, ¿e implementacja takiej funkcjonalno¶ci stwarza wiele trudnych do rozwi±zania problemów w warstwie nadzorcy. G³ównymi problemami okaza³y siê ograniczenie zu¿ycia czasu i pamiêci przez grupê procesów, pomiar zu¿ycia tych zasobów po zakoñczeniu dzia³ania grup procesów, i zabijanie odpowiednich grup procesów na ¿±danie Sêdziego.\\
 
 Standardowe metody ograniczania zu¿ycia pamiêci i czasu przez procesy : ulimit i setrlimit niestety zawodz±. Setrlimit ogranicza jedynie zu¿ycie zasobów przez dany proces, nie ograniczaj±c w ¿aden sposób jego dzieci. Ulimit ogranicza co prawda wszystkie procesy danego u¿ytkownika, jednak na³o¿enie osobnych limitów na wszystkie procesy nie jest poprawnym rozwi±zaniem, nale¿y bowiem ograniczyæ sumaryczne zu¿ycie zasobów przez dany proces i wszystkich jego potomków.\\
 
@@ -570,9 +581,9 @@ Metody pomiaru udostêpniane przez system operacyjny takie jak wait3 lub wait4 ró
 
 Inny mechanizm systemowy który by³ rozwa¿any jako rozwi±zanie tych problemów, to grupy procesów. Mechanizm ten pozwal³by miêdzy innymi na wys³anie sygna³u do procesu i wszystkich jego potomków, jak równie¿ prostsze monitorowanie zu¿ycia zasobów systmowych przez grupê procesów. Niestety, pewne luki w tym mechani¼mie pozwala³yby z³o¶liwemu u¿ytkownikowi tworzyæ procesy które nie podlega³yby kontroli.\\
 
-Na licencji open source dostêpne jest rozwi±zanie podobnego problemu. Jest to napisany w jêzyku Perl skrypt timeout, stworzony w Institute for System Programming of Russian Academy of Sciences, dostêpny przez github. Zosta³ on stworzony do mierzenia i ograniczania zu¿ycia zasobów przez eksperymentalne wieloprocesowe programy, których zachowanie by³o trudne do przewidzenia. Dzia³anie tego skryptu oparte jest na prostej idei. Skrypt kilkukrotnie w ciagu sekundy sprawdza infromacje dotycz±ce zu¿ycia zasobów przez monitorowany proces i wszystkich jego potomków, i gdy warto¶æ ta przekroczy dozwolony limit zatrzymuje obserwowane procesy. Jednak poniewa¿ skrypt nie by³ tworzony do u¿ytu w sposób jaki jest potrzebny w systemie AI-Arena, brak mu pewnych funkcjonalno¶ci. Szczególnie wa¿n± jest mo¿liwo¶æ zatrzymania danego procesu i wszystkich jego potomków na rz±danie sêdziego. Mniej powa¿n± wad± tego rozwi±zania jest to, ¿e dokonywane pomiary mog± nie byæ dok³adne, w szczególno¶ci niektóre programy mog³yby dzia³aæ i komunikowaæ siê przez u³amek sekundy po przekroczeniu limitu.\\
+Na licencji open source dostêpne jest rozwi±zanie podobnego problemu. Jest to napisany w jêzyku Perl skrypt timeout, stworzony w Institute for System Programming of Russian Academy of Sciences, dostêpny przez github. Zosta³ on stworzony do mierzenia i ograniczania zu¿ycia zasobów przez eksperymentalne wieloprocesowe programy, których zachowanie by³o trudne do przewidzenia. Dzia³anie tego skryptu oparte jest na prostej idei. Skrypt kilkukrotnie w ciagu sekundy sprawdza infromacje dotycz±ce zu¿ycia zasobów przez monitorowany proces i wszystkich jego potomków, i gdy warto¶æ ta przekroczy dozwolony limit zatrzymuje obserwowane procesy. Jednak poniewa¿ skrypt nie by³ tworzony do u¿ytu w sposób jaki jest potrzebny w systemie AI-Arena, brak mu pewnych funkcjonalno¶ci. Szczególnie wa¿n± jest mo¿liwo¶æ zatrzymania danego procesu i wszystkich jego potomków na rz±danie Sêdziego. Mniej powa¿n± wad± tego rozwi±zania jest to, ¿e dokonywane pomiary mog± nie byæ dok³adne, w szczególno¶ci niektóre programy mog³yby dzia³aæ i komunikowaæ siê przez u³amek sekundy po przekroczeniu limitu.\\
 
-Najlepszym rozwi±zaniem wydaje siê wiêc zaimplementowanie w³asnego mechanizmu, opartego na podobnej idei jak wspomniany skrpyt timeout. Mechanizm ten móg³by byæ oddzielnym procesem, który na pocz±tku swojego dzia³ania otrzymuje numery pid obserwowanych procesów i przyznane im limity. Nastêpnie kilkukrotnie w ciagu sekundy na podstawie informacji zawartych w katalogu proc móg³by mierzyæ sumaryczne zu¿ycie zasobów przez kontrolowane procesy i ich potomków, oraz na ¿yczenie sêdziego przekazane przez nadzorcê zatrzymaæ okre¶lone grupy procesów. Pomiar zu¿ycia zasobów w tym przypadku jest obci±¿ony tym samym b³êdem co skrpyt timeout, jest to jednak b³±d akceptowalny. \\
+Najlepszym rozwi±zaniem wydaje siê wiêc zaimplementowanie w³asnego mechanizmu, opartego na podobnej idei jak wspomniany skrpyt timeout. Mechanizm ten móg³by byæ oddzielnym procesem, który na pocz±tku swojego dzia³ania otrzymuje numery pid obserwowanych procesów i przyznane im limity. Nastêpnie kilkukrotnie w ciagu sekundy na podstawie informacji zawartych w katalogu proc móg³by mierzyæ sumaryczne zu¿ycie zasobów przez kontrolowane procesy i ich potomków, oraz na ¿yczenie Sêdziego przekazane przez nadzorcê zatrzymaæ okre¶lone grupy procesów. Pomiar zu¿ycia zasobów w tym przypadku jest obci±¿ony tym samym b³êdem co skrpyt timeout, jest to jednak b³±d akceptowalny. \\
 
 Z powodu wymienionych problemów z kontorolowaniem zu¿ycia zasobów systemowych, jak równie¿ potencjalnych problemów z bezpieczeñstwem systemu, autorzy zdecydowali, ¿e programy u¿ytkowników i sêdziowie nie bêd± mog³y tworzyæ nowych procesów.\\
 
@@ -670,13 +681,13 @@ w link "Edit profile" znajduj±cy siê pod zdjêciem profilowym. W oknie edycji pro
 	\caption{Formularz do tworzenia nowej gry}
 \end{wrapfigure}
 Tworzenie gry (konkursu) jest jedn± z centralnych aktywno¶ci w serwisie. Aby utworzyæ grê, u¿ytkownik musi mieæ zawczasu przygotowany plik ¼ród³owy
-sêdziego oraz plik z zasadami rozgrywki.\\
+Sêdziego oraz plik z zasadami rozgrywki.\\
 
 Sêdzia jest programem, który nadzoruje przebieg gry. Powinien byæ napisany w jednym z jêzyków: C, C++, Java, Python. Otrzymuje on komunikaty od Nadzorcy, który z kolei zczytuje je ze standardowego wej¶cia Botów. 
 Sêdzia musi dokonaæ walidacji komunikatu, tj. upewniæ siê, i¿ format komunikatu jest zgodny z protoko³em opisanym w zasadach gry oraz, ¿e ruch zawarty w komunikacie nie narusza regu³ gry (przyk³adowo, ¿e
 gracz graj±cy pionami czarnymi nie ruszy³ siê bia³ym pionem). Gdy upewni siê, ¿e otrzymany komunikat jest poprawny wysy³a na swoje standardowe wyj¶cie komunikat zgodnie z formatem opisanym w regu³ach gry.\\
 
-Plik ¼ród³owy sêdziego jest dostêpny dla wszystkich zalogowanych u¿ytkowników serwisu. Ma to zapobiec wysy³aniu "stronniczych" sêdziów oraz ³atwieszemu ujawnieniu pewnych "ukrytych" wad protoko³u.
+Plik ¼ród³owy Sêdziego jest dostêpny dla wszystkich zalogowanych u¿ytkowników serwisu. Ma to zapobiec wysy³aniu "stronniczych" sêdziów oraz ³atwieszemu ujawnieniu pewnych "ukrytych" wad protoko³u.
 Administratorzy zastrzegaj± sobie prawo do usuniêcia lub poprawienia wadliwych sêdziów.\\
 
 Plik z zasadami rozgrywki musi zawieraæ ogólny opis gry (np. historiê wprowadzaj±c±) oraz szczegó³owy opis i znaczenie komunikatów. W szczególno¶ci musz± byæ zawarte informacje takie jak
@@ -712,18 +723,18 @@ Gdy znajdujemy siê ju¿ na stronie z detalami nale¿y, w celu zg³oszenia bota, kli
 Podobnie, jak w przypadku tworzenia gry nale¿y mieæ uprzednio przygotowany plik zawieraj±cy kod ¼ród³owy bota. Bot komunikuje siê z sêdzi± za pomoc± komunikatów opisanych w zasadach gry wypisywanych i zczytywanych ze standatdowego 
 wej¶cia i wyj¶cia. W przypadku, gdy bot wy¶le ¼le sformatowany lub b³êdny komunikat - automatycznie przegrywa rozgrywkê dostaj±c za ni± mo¿liwe minimum punktów.
 
-\subsubsection{Wy¶wietlenie kodu ¼ród³owego sêdziego}
+\subsubsection{Wy¶wietlenie kodu ¼ród³owego Sêdziego}
 \begin{wrapfigure}{l}{0.7\textwidth}
 	\begin{center}
 		\includegraphics[width=0.68\textwidth]{img/source_code.png}
 	\end{center}
 	\caption{Sposób wy¶wietlania kodu ¼ród³owego}
 \end{wrapfigure}
-W celu wy¶wietlenia kodu ¼ród³owego sêdziego nale¿y przej¶æ na stronê gry zawiejaj±cej szczegó³owy jej opis. Potem, po klikniêciu w link "Show source of the judge" system przekieruje nas na stronê. gdzie wy¶wietlony zostanie 
-kod ¼ród³owy sêdziego.\\
+W celu wy¶wietlenia kodu ¼ród³owego Sêdziego nale¿y przej¶æ na stronê gry zawiejaj±cej szczegó³owy jej opis. Potem, po klikniêciu w link "Show source of the judge" system przekieruje nas na stronê. gdzie wy¶wietlony zostanie 
+kod ¼ród³owy Sêdziego.\\
 
 Mo¿liwe jest równie¿ wy¶wietlenie kodu w postaci surowej, tj. bez numerów linii i dodatkowego formatowania tekstu. Aby wy¶wietliæ surowy kod nale¿y klikn±æ w przycisk "Raw" znajduj±cy siê 
-w prawym górnym rogu wy¶wietlanego kodu. Dostêpna jest ponadto opcja pobrania kodu ¼ród³owego sêdziego w postaci pliku tekstowego. Aby pobraæ kod ¼ród³owy
+w prawym górnym rogu wy¶wietlanego kodu. Dostêpna jest ponadto opcja pobrania kodu ¼ród³owego Sêdziego w postaci pliku tekstowego. Aby pobraæ kod ¼ród³owy
 u¿ywtkownik powinien klikn±æ w przycisk "Download" znajduj±dy siê na prawo od przycisku "Raw".
 
 \subsubsection{Dodanie komentarza pod gr± lub konkursem}
@@ -956,7 +967,7 @@ meczy i opracowanie rankingu bêdzie odpowiedzialne AI-Arena.
         \begin{itemize}
             \item{Ustalanie terminów dodatkowych spotkañ}
             \item{Koordynowanie zadañ w platformie Redmine}
-            \item{Prezentacja postêpów prac i planów na najbli¿szy okres, na spotkaniach z prowadz±cym zajêæ}
+            \item{Prezentacja postêpów prac i planów na najbli¿szy okres, na spotkaniach z prowadz±cym zajêcia}
         \end{itemize}
     \item{Kod ¼ród³owy}
         \begin{itemize}
@@ -1003,7 +1014,7 @@ meczy i opracowanie rankingu bêdzie odpowiedzialne AI-Arena.
             \item{Dodawanie komentarzy do konkursów}
             \item{Usuwanie i edycja gier}
             \item{Usuwanie i edycja konkursów}
-            \item{Wy¶wietlanie kodu ¼ród³owego sêdziego}
+            \item{Wy¶wietlanie kodu ¼ród³owego Sêdziego}
             \item{Wysy³anie bota do gry z menu gry}
             \item{Edycja profilu u¿ytkownika}
             \item{Dodanie podstawowej funkcjonalno¶ci JS do serwisu}
