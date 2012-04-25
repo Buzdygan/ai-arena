@@ -1,4 +1,20 @@
-from nadzorca import nadzorca
+from decimal import Decimal
+from ai_arena.contests.models import Match, MatchBotResult
+from ai_arena import settings
+import gearman
+import pickle
+
+class PickleDataEncoder(gearman.DataEncoder):
+    @classmethod
+    def encode(cls, encodable_object):
+        return pickle.dumps(encodable_object)
+
+    @classmethod
+    def decode(cls, decodable_string):
+        return pickle.loads(decodable_string)
+
+class PickleClient(gearman.GearmanClient):
+    data_encoder = PickleDataEncoder
 
 def launch_single_match(game, bots):
     """
@@ -6,10 +22,18 @@ def launch_single_match(game, bots):
         with given list of bots
     """
 
-    judge_program = game.judge_bin_file.path
-    time_limit = 2
-    memory_limit = 32
-    bots_programs = [bot.bot_bin_file.path for bot in bots]
+    arguments = {'game': game, 'bots': bots}
 
-    nadzorca.play(judge_file=judge_program, players=bots_programs,
-                    memory_limit=memory_limit, time_limit=time_limit)
+    gearman_client = PickleClient([settings.GEARMAN_HOST])
+    gearman_client.submit_job('single_match', arguments, background=True)
+
+def launch_contest_match(game, bots, contest):
+    """
+        Launches contest match of given game
+        with given list of bots and contest
+    """
+
+    arguments = {'game': game, 'bots': bots, 'contest':contest}
+
+    gearman_client = PickleClient([settings.GEARMAN_HOST])
+    gearman_client.submit_job('contest_match', arguments, background=True)

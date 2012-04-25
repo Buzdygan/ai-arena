@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel='stylesheet' href='{{ MEDIA_URL }}testing.css' />
+{% endblock %}
+
+{% block content %}
+<div class='content_container'>
+<p class='small_p'>
+You've created a bot for a contest? You want to test it somehow? 
+You're in a perfect place! Here you can test it in various manners!
+</p>
+
+<div id='off_line'>
+    <h2>Off line</h2>
+    <p class='small_p'>
+    Here you can download a source code of a judge and sanple bot which can be your opponent.
+    Note that it's rather weak player, so you should expect much stronger opponents during real game :D.
+    </p>
+
+    <div><a href='{{ MEDIA_URL }}may_contest/judge.cpp'>Download judge source code</a></div>
+    <div><a href='{{ MEDIA_URL }}may_contest/bot.cpp'>Download bot source code</a></div>
+    <div><a href='{{ MEDIA_URL }}may_contest/README.txt'>Download judge manual</a></div>
+</div>
+
+<div id='on_line'>
+    <h2>On line</h2>
+    <p class='small_p'>
+    If you prefer not to download and compile judge, you can upload your bot instead. You can also upload the opponent against which
+    you wish to test your bot. If you leave opponent blank, we will run your bot against our sample bot.
+    </p>
+
+    <form action='/testing/' method='POST' enctype='multipart/form-data'>
+    {% csrf_token %}
+
+    {{ form.as_p }}
+    <p>
+    <label for='submit'></label>
+    <input type="submit" id='submit' value="Begin test!"></p>
+    </form>
+</div>
+</div>
+{% endblock %}

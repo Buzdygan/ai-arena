@@ -1,25 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="style.css" />
-        <title> {% block title %} This is a base title {% endblock %} </title>
+        <link rel="stylesheet" href="{{ MEDIA_URL }}bootstrap.css" />
+        <link rel="stylesheet" href="{{ MEDIA_URL }}base.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.5/mootools-yui-compressed.js" type="text/javascript"></script>
+        {% block css %} {% endblock %}
+        <title> {% block title %} AI-Arena - test your AI skill {% endblock %} </title>
+        {% block script %} {% endblock %}
+        {% block head %} {% endblock %} 
     </head>
 
     <body>
-        <div id="sidebar">
-            {% block sidebar %}
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/send/">Send</a></li>
-                <li><a href="/launch_match/">Launch Match</a></li>
-            </ul>
-            {% endblock %}
+        <div class="topbar">
+            <div class="topbar-inner">
+                <div class="container">
+                    {% block topbar %}
+                        <div class="row">
+                            <div class="span11">
+                                <ul class="nav">
+<!--                                    <li><a href="/">Home</a></li>
+                                    <li><a href="{% url launch_match %}">Launch Match</a></li>
+                                    <li><a href="{% url match_results_list %}"> Results List </a></li>
+                                    <li><a href="{% url contests_list %}"> Contests </a></li>
+                                    <li><a href="{% url create_new_game %}">Create new game</a></li>
+                                    <li><a href="{% url game_list %}">Games List</a></li>
+                                    <li><a href="{% url send_bot_with_game %}">Send Bot</a></li>
+-->
+                                    <li><a href="/">Home</a></li>
+                                    <li><a href="/ladder/">Show Ladder</a></li>
+                                    <li><a href="/send_bot/">Send Bot</a></li>
+                                    <li><a href="/my_results/">My Results</a></li>
+                                    <li><a href="/testing/">Testing</a></li>
+                                    <li><a href="/contact_us/">Contact us</a></li>
+                                </ul>
+                            </div>
+                            <div class="span6">
+                                {% if user.is_authenticated %}
+                                <font color="green"> Logged as <a href="/profile/">{{ user.username }}</a>.</font>
+                                    <a href="{% url django.contrib.auth.views.logout %}">Logout</a>
+                                {% else %}
+                                    <font color="green"> Hello guest. Please log in. </font>
+                                    <a href="{% url django.contrib.auth.views.login %}">Login</a> | <a href="/accounts/register/">Register</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
         </div>
-        
-        <div id="content">
-            {% block content %}
-                this is a base content
-            {% endblock %}
-        </div>
+        <div class="container" style="padding-top: 50px">
+        {% if error_msg %}
+            <div class='error_msg'>{{ error_msg }}</div>
+        {% endif %}
+
+        {% block content %}
+            this is a base content
+        {% endblock %}
+    </div>
     </body>
 </html>

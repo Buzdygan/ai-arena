@@ -2,16 +2,31 @@
 
 \usepackage{polski}
 \usepackage[latin2]{inputenc}
+\usepackage{graphicx}
+%\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{placeins}
 
-\author{Szymon Majewski}
-\nralbumu{277556}
+%\floatstyle{boxed}
+%\restylefloat{figure}
+%\floatplacement{figure}{H}
+
+\author{Jakub Tla³ka}
+\nralbumu{292665}
+%\author{Micha³ Kawiak}
+%\nralbumu{277558}
+%\author{Szymon Majewski}
+%\nralbumu{277556}
+%\author{Karol ¯ebrowski}
+%\nralbumu{277580}
 
 \title{Implementacja systemu AI-Arena}
 \tytulang{Implementation of AI-Arena system}
 
 \kierunek{Informatyka}
 
-\opiekun{dra. Roberta Dabrowskiego\\
+\opiekun{dra. Janusza Jab³onowskiego\\
   Wydzia{\l} Matematyki Informatyki i Mechaniki\\
   }
   
@@ -26,7 +41,7 @@
 D.0. General\\}
 
 
-\keywords{programy walczace, arena}
+\keywords{programy walczace, arena, sztuczna inteligencja}
  
 \newtheorem{defi}{Definicja}[section]
 
@@ -34,37 +49,1107 @@ D.0. General\\}
 \maketitle
 
 \begin{abstract}
-W pracy przedstawiono implementacje systemu AI-Arena,
- s{\l}u{\.z}acego do przeprowadzania turniejow programow walczacych.
+W pracy przedstawiono implementacjê systemu AI-Arena,
+System AI-Arena s³u¿y do przeprowadzania rozgrywek i turniejów pomiêdzy programami komputerowymi. Programy rywalizuj±
+ze sob± w wybranych grach, przeliczaj±c i wykonuj±c zagrania zgodnie z algorytmami sztucznej inteligencji.
+System ma w zamierzeniu twórców s³u¿yæ osobom zainteresowanym sztuczn± inteligencj± do sprawdzenia swoich umiejêtno¶ci,
+lub jako pomoc przy badaniach nad t± dziedzin± wiedzy.
 \end{abstract}
 
 \tableofcontents
 
-\chapter*{Wprowadzenie}
-\addcontentsline{toc}{chapter}{Wprowadzenie}
+\chapter{Wprowadzenie}
+
+    Serwis AI-Arena jest uniwersaln± platform± przeznaczon± do organizowania konkursów algorytmicznych, których 
+    g³ówn± domen± jest dziedzina sztucznej inteligencji, w szczególno¶ci jej dzia³, po¶wiêcony inteligentnym
+    programom walcz±cym. AI-Arena pozwala równie¿ na organizacjê konkursów algorytmicznych, co sprawia, ¿e oferuje
+    du¿± dowolno¶æ wyboru rodzaju konkursu.\\
+
+    Od kilkudziesiêciu lat odbywaj± siê zawody, maj±ce na celu wy³oniæ programy najlepiej graj±ce w popularne gry,
+    takie jak szachy, warcaby itp. Serwis AI-Arena pozwala organizowaæ takie konkursy dla dowolnej gry wieloosobowej.
+    Serwis mo¿e mieæ zastosowania zarówno w nauce jak i w biznesie, ze wzglêdu na rosn±ce zapotrzebowanie na inteligentne programy
+    rozwi±zuj±ce problemy w warunkach rywalizacji, takich jak np gie³da. Twórcy serwisu licz± na to,
+    ¿e wraz ze wzrostem jego popularno¶ci, AI-Arena skupi spo³eczno¶æ osób zafascynowanych dziedzin±
+    sztucznej inteligencji i przyczyni siê do rozwoju tej ga³êzi nauki.\\
+
+    Projekt jest udostêpniony w serwisie \href{http://github.com/Buzdygan/ai-arena}{Github} na prawach otwartej licencji GPL. 
+    Ka¿da osoba chêtna do pomocy przy jego rozwoju mo¿e uzyskaæ prawa zapisu i samodzielnie usprawniaæ jego dzia³anie.
+
+
+\chapter{Metodologia Pracy}
+	Aby usprawniæ proces tworzenia systemu AI-Arena, autorzy postanowili na pocz±tku prac nad systemem
+    wybraæ odpowiedni± do potrzeb metodologiê pracy. Pocz±tkowo rozwa¿ane by³y nastêpuj±ce metodologie: Agile Uniformed Process, Extreme Programming, Scrum.
+    Przy dokonywaniu wyboru kierowano siê nastêpuj±cymi kryteriami:
+	\begin{itemize}
+	\item Poniewa¿ praca przebiega³a w zespole czteroosobowym, wybrana metodyka powinna byæ metodyk± lekk±.
+	\item Ze wzglêdu na cotygodniowe spotkania na proseminarium, jako podstawow± jednostkê pracy przyjêto tygodniowe iteracje.
+	\item W trakcie tworzenia projektu wszyscy cz³onkowie zespo³u kontynuowali studia i musieli wype³niaæ zwi±zane z tym obowi±zki,
+          dlatego po¿±danym by³o aby ka¿dy z cz³onków móg³ samodzielnie podj±æ decyzjê o ilo¶ci pracy jak± wykona w najbli¿szym tygodniu.
+	\item Praca nad projektem mia³a przebiegaæ w sposób rozproszony. Istotna by³a mo¿liwo¶æ pracy w dogodnych dla siebie godzinach,
+          niezale¿nie od pozosta³ych cz³onków zespo³u.
+	\item Wybrana metodyka powinna pozwalaæ na ³atwe ¶ledzenie zmian w projekcie, oraz u³atwiaæ zapewnianie kontroli jako¶ci.
+	\end{itemize}
+	
+    ¯adna z pocz±tkowo rozwa¿anych metodologii nie spe³nia³a wszystkich powy¿szych wymagañ.
+    Zdecydowano siê wiêc na w³asne rozwi±zanie, inspirowane metodologi± Scrum.
+    Scrum to metodologia typu lekkiego. Dzieli okres pracy na krótsze podokresy nazywane sprintami.
+    Podczas ka¿dego takiego sprintu, realizowana jest skoñczona czê¶æ funkcjonalno¶ci.
+    Sprinty trwaj± zazwyczaj kilka tygodni.
+
+    Poniewa¿ zajêcia z przedmiotu ZPP odbywa³y siê cotygodniowo, zdecydowano siê przyj±æ tydzieñ miêdzy
+    zajêciami jako odpowiednik sprintu.
+    Podczas takich zajêæ, ustalany by³ zakres pracy przydzielony poszczególnym osobom na przysz³y tydzieñ, oraz weryfikowana
+    by³a praca wykonana w tygodniu poprzednim. Prowadz±cy zg³asza³ uwagi do niektórych funkcjonalno¶ci.
+    Dyskutowane by³y równie¿ dokumenty powstaj±ce przy okazji pracy nad projektem, przede wszystkim
+    poni¿sza praca licencjacka. Zapis przebiegu zajêæ wraz z celami na przysz³y tydzieñ, nazywany
+    minutkami, by³ przechowywany w systemie Google Documents, tak by ka¿dy z cz³onków zespo³u oraz prowadz±cy
+    zajêcia posiada³ do niego dostêp.\\
+
+    Dodatkowo organizowane by³y spotkania samego zespo³u. Odbywa³y siê one równie¿ raz w tygodniu
+    i mia³y na celu kontrolowanie przebiegu prac i zadbanie o to by zosta³y wykonane zaplanowane
+    zadania. Spotkania odbywa³y siê w budynku Wydzia³u Matematyki Informatyki i Mechaniki UW,
+    b±d¼ jako konferencje video z wykorzystaniem technologii Google Hangouts.
+    Ich przebieg nadzorowa³ Lider Projektu, który by³ odpowiedzialny równie¿ za realizowanie
+    za³o¿eñ przyjêtej metodologii pracy.\\
+
+    Podzia³ obowi±zków miêdzy cz³onków zespo³u by³ wynikiem porozumienia miêdzy cz³onkami i by³
+    zatwierdzany przez Lidera Projektu, a nastêpnie przedstawiany prowadz±cemu zajêcia.\\
+
+    Do bie¿±cej kontroli stanu projektu u¿yty zosta³ system Redmine. Umo¿liwia on tworzenie
+    zadañ i przydzielanie ich cz³onkom zespo³u. Ka¿de zadanie ma status, który zawiera siê w zbiorze
+    (otwarte, przydzielone, zrealizowane, zamkniête). Stan otwarty oznacza, ¿e zadanie nie jest
+    jeszcze przydzielone konkretnej osobie. Stan przydzielone oznacza, ¿e zadanie jest przydzielone,
+    a osoba odpowiedzialna za jego wykonanie jest w trakcie jego realizacji. Stan zrealizowane
+    oznacza, ¿e zadanie zosta³o wykonane przez osobê odpowiedzialn±, ale nie zosta³o jeszcze
+    zweryfikowane pod k±tem poprawno¶ci. Stan zamkniête oznacza, ¿e zadanie zosta³o zrealizowane
+    i zweryfikowane. Odpowiedzialno¶æ za tworzenie i przydzielanie zadañ by³a podzielona miêdzy
+    cz³onków zespo³ów, jednak g³ównym koordynatorem procesu by³ Lider Projektu. Cz³onek zespo³u,
+    który wykona³ zadanie oznacza³ jego stan jako zrealizowany, natomiast za zamkniêcie odpowiedzialny
+    by³ Lider Projektu, po uprzedniej weryfikacji wykonanej pracy.
+
+    Kod projektu, oraz dokumenty takie jak praca licencjacka, zosta³y umieszczone w repozytorium Gita.
+    Git to system kontroli wersji dbaj±cy o archiwizacjê kodu oraz koordynacjê równoleg³ych zmian
+    wszystkich cz³onków zespo³u. Repozytorium jest publiczne i dostêpne online w serwisie GitHub.
+    Wszystkie zmiany dokonywane przez cz³onków zespo³u s± archiwizowane, tak by mo¿na je by³o
+    odtworzyæ. Mo¿liwe jest równie¿ jednoczesne rozwijanie projektu w kilku niezale¿nych kierunkach,
+    a nastêpnie po³±czenie efektów pracy.\\
+
+    Z uwagi na niewielk± liczebno¶æ zespo³u zdecydowano siê nie u¿ywaæ narzêdzi wspomagaj±cych ¶ledzenie zmian. Do obowi±zków
+    ka¿dego cz³onka zespo³u nale¿a³o upewnienie siê, ¿e po zmianach przez niego wprowadzonych projekt uruchamia siê i nie
+    pojawi³y siê nowe problemy (regresje). W przypadku gdyby regresje wyst±pi³y, mechanizmy kontroli wersji udostêpniane
+    przez system Git pozwoli³yby na odtworzenie starszej wersji projektu.\\
+
+    Czêste spotkania projektowe umo¿liwia³y cz³onkom zespo³u bie¿±ce ¶ledzenie aktualnych zmian. W czasie takich spotkañ,
+    ka¿dy z cz³onków relacjonowa³ postêp prac, który nastêpnie by³ weryfikowany przez Lidera Projektu, b±d¼ te¿ przez innego cz³onka zespo³u. \\
+
+\chapter{Wymagania projektowe}
+
+\section{Rozpoznanie problemu}
+
+    Sztuczna inteligencja jest wspó³cze¶nie bardzo popularn± dziedzin± informatyki. Znajduje zastosowania w kolejnych ga³êziach 
+    tej nauki. Nic wiêc dziwnego, ¿e coraz wiêcej programistów pragnie pog³êbiaæ swoj± wiedzê w tym zakresie.
+    Potrzeba ta nie jest jednak w pe³ni zaspokojona. W Internecie istnieje wiele platform wspieraj±cych
+    naukê algorytmiki (przede wszystkim popularne platformy przygotowuj±ce do konkursów ACM), jednak nie ma ¿adnego odpowiednika platformy 
+    umo¿liwiaj±cej naukê sztucznej inteligencji.\\
+
+    W odpowiedzi na tê potrzebê, autorzy zdecydowali siê stworzyæ serwis AI-Arena. Jest to serwis umo¿liwiaj±cy porównanie 
+    programów walcz±cych. Program walcz±cy mo¿na opisaæ jako program podejmuj±cy decyzje w zmieniaj±cych siê warunkach, rywalizuj±cy
+    przy tym z innymi programami wg pewnych ¶ci¶le okre¶lonych zasad. Tworzenie efektywnych programów walcz±cych jest czê¶ci±
+    pracy nad rozwojem sztucznej inteligencji. Serwis AI-Arena u³atwia nie tylko rywalizacjê programistów, ale tak¿e wymianê
+    ich do¶wiadczeñ z dotychczasowej pracy nad programami walcz±cymi.
+
+\section{Grupa docelowa}
+
+    Jak wynika z dotychczasowego okre¶lenia problemu, grupê docelow± stanowi± programi¶ci, którzy s± zainteresowani tematem sztucznej inteligencji.
+    Nale¿a³o uwzglêdniæ to podczas tworzenia serwisu. Mo¿na siê spodziewaæ, ¿e czê¶æ tej grupy, zafasynowana równie¿ bezpieczeñstwem
+    systemów komputerowych, bêdzie chcia³a sprawdziæ zabezpieczenia systemu. Nale¿a³o wiêc ze zdwojonym wysi³kiem zapewniæ szeroko rozumiane
+    bezpieczeñstwo.\\
+
+    Równie¿ wygl±d serwisu by³ zdeterminowany przez charakter grupy docelowej. Autorzy zdecydowali, ¿e powinien byæ przede wszystkim schludny
+    i czytelny. Nie by³o potrzeby umieszczania efektownych animacji, b±d¼ wystylizowanych obrazków, które spowolni³yby dzia³anie strony
+    i wprowadza³y dezorientacjê u¿ytkownika.
+
+
+\chapter{Podstawowe pojêcia}
+
+\section{Gra}
+    
+    Gra oznacza pojedynczy obszar rywalizacji programów walcz±cych na ¶ci¶le okre¶lonych zasadach.
+    Zasady s± opisane w dokumencie tekstowym zwanym Regu³ami, który powinien byæ publicznie dostêpny.
+    Na Grê sk³ada siê równie¿ program Sêdziego, który jest implementacj± tych Regu³.
+    Gra mo¿e byæ jedno, b±d¼ wieloosobowa. W przypadku jednoosobowym mamy do czynienia z rozwi±zywaniem
+    zagadnieñ algorytmicznych bez wprowadzania elementu rywalizacji z przeciwnikiem.
+    W warunkach serwisu AI-Arena graczami s± programy komputerowe,
+    nazywane Botami b±d¼ Programami Walcz±cymi. \\
+    Nie ma ograniczeñ dotycz±cych tematyki Gry. Jedynym warunkiem jest to, by jej zasady da³y siê
+    zapisaæ w postaci programu weryfikuj±cego, zwanego Sêdzi±.
+
+\section{Program Walcz±cy - Bot}
+
+    Jest to program napisany w jednym z obs³ugiwanych przez serwis jêzyków programowania.
+    Musi byæ przypisany do konkretnej Gry dostêpnej w serwisie.
+    Uczestniczy w rozgrywkach (Meczach) z innymi botami przypisanymi do tej Gry.
+    Ma za zadanie przetwarzaæ informacje o dotychczasowym przebiegu rozgrywki
+    i produkowaæ kolejne posuniêcia, zgodne z regu³ami Gry.
+
+\section{Sêdzia}
+
+    Jest to program zwi±zany z dan± Gr±. Ma on za zadanie kontrolowaæ przebieg Meczu,
+    weryfikowaæ zagrywki graczy, informowaæ ich o aktualnym stanie, oraz ustalaæ wynik Meczu,
+    zgodnie z zasadami zwi±zanymi z Gr±, opisanymi w Regu³ach.
+    Kod Sêdziego jest publiczny i dostêpny wszystkim graczom.
+
+\section{Regu³y}
+    Dokument udostêpniany publicznie, opisuj±cy zasady gry, oraz protokó³ formatu komunikatów
+    przesy³anych miêdzy Botami a Sêdzi±. Powinien byæ zgodny z implementacj± programu
+    Sêdziego, oraz zapewniaæ mo¿liwo¶æ przeprowadzenia dowolnej rozgrywki w obrêbie
+    zasad Gry.
+
+\section{Mecz/Rozgrywka}
+    Jest rozgrywany miêdzy Botami, w obrêbie konkursu lub poza nim. Jego przebieg jest kontrolowany przez 
+    Sêdziego. Za przesy³anie komunikatów miêdzy Botami a Sêdzi± oraz odebranie od Sêdziego rezultatu
+    meczu, odpowiedzialny jest Nadzorca.
+
+\section{Nadzorca}
+    Program bêd±cy integraln± czê¶ci± serwisu AI-Arena. Jego zadaniem jest uruchamianie programów Botów
+    i Sêdziego podczas Meczu, a nastêpnie transportowanie miêdzy nimi komunikatów tekstowych zgodnych z ustalonym
+    protoko³em. Nadzorca odbiera wynik Meczu od Sêdziego i przekazuje go do Gearmana (narzêdzie u¿ywane do kolejkowania zadañ)
+    w celu zapisania rezultatu w bazie.
+    Dodatkowo Nadzorca kontroluje czas i pamiêæ zu¿ywan± przez Boty, tak by nie przekroczy³y dozwolonych limitów.
+    Informacje o ich zu¿yciu wraz z logiem rozgrywki generowanym przez Sêdziego, Nadzorca zwraca do Gearmana.
+
+\section{Gearman}
+    Zewnêtrzne narzêdzie kolejkowania zadañ i transportu danych. W AI-Arena s³u¿y jako pomost miêdzy Nadzorc±,
+    a Baz± danych. Kolejkuje Mecze do rozegrania, zleca ich rozegranie Nadzorcy, a nastêpnie zapisuje do bazy
+    przekazany przez Nadzorcê rezultat i dodatkowe informacje o przebiegu rozgrywki.\\
+    Strona projektu Gearman:\\
+    \url{http://gearman.org}
+
+\section{Konkurs}
+
+    Konkurs mo¿e mieæ okre¶lon± datê zakoñczenia, b±d¼ byæ tzw konkursem sta³ym, w którym nie ma ostatecznego
+    terminu wysy³ania rozwi±zañ. Dla ka¿dego konkursu tworzony jest ranking, b±d¼ drabinka rozgrywek.
+    Okre¶laj± one kolejno¶æ botów, w szczególno¶ci zwyciêzcê, b±d¼ aktualnego lidera konkursu.
+    W przypadku konkursu sta³ego istnieje ranking, który jest posortowany po sumie zdobytych przez Bota
+    punktów w meczach, przy czym ka¿dy Bot powinien mieæ tê sam± liczbê rozegranych meczy.
+
+    
+\chapter{Zastosowania w nauce i biznesie}
+
+    Zastosowania algorytmów Sztucznej Inteligencji siêgaj± prawie wszystkich obszarów nie tylko
+    Internetu ale i codziennego ¿ycia. Serwis AI-Arena pomaga rozwijaæ ga³±¼ tej nauki
+    zwi±zan± z rywalizacj±.\\
+
+    Najprostsze przyk³ady rywalizacji to oczywi¶cie wszelkiego
+    rodzaju gry i sporty. Obecnie komputery s± w stanie wygrywaæ z cz³owiekiem w
+    wiêkszo¶ci gier takich jak szachy, warcaby itp. Warto wspomnieæ mecz szachowy mistrza ¶wiata
+    Garriego Kasparowa z komputerem Deep Blue czy teleturniej Va Banque z udzia³em komputera Watson
+    - w obu przypadkach zwyciê¿y³a sztuczna inteligencja
+    (\url{http://www.benchmark.pl/aktualnosci/Superkomputer_IBM_wystapil_w_teleturnieju-32781.html} - dane z 04/2012).
+    Coraz bardziej zaawansowani staj± siê przeciwnicy kierowani przez
+    komputer w grach video. Równie¿ w sporcie zaczêto doceniaæ znaczenie metod naukowych
+    do opracowywania optymalnych strategii. Z powodzeniem wykorzystuje siê komputer do badania
+    statystyk w amerykañskiej lidze baseballowej
+    (\url{http://research.sabr.org/journals/online/38-brj-1976/165-computers-in-baseball-analysis} - dane z 04/2012).
+    Prawdopodobnie kwesti± czasu jest analizowanie
+    gry wirtualnych zespo³ów kierowanych sztuczn± inteligencj±, a nastêpnie wykorzystywanie
+    obserwacji do poprawy gry prawdziwej dru¿yny.\\
+
+    Rywalizacja mo¿e byæ wykorzystana równie¿ jako metoda rozwi±zywania problemów.
+    Przyk³adem takiego podej¶cia s± algorytmy genetyczne, w których najlepsze jednostki
+    pozostaj± w obiegu, ca³y czas udoskanalaj±c swoje podej¶cie do rozwi±zywania danego problemu.\\
+    
+    Serwis AI-Arena ma du¿e zastosowanie w biznesie. Firmy nieustannie rywalizuj± miêdzy sob± w walce
+    o klienta. Serwis umo¿liwia symulowanie takiej rywalizacji i dziêki temu odkrywanie skutecznych
+    algorytmów sztucznej inteligencji, które bêd± podejmowa³y decyzje decyduj±ce o sukcesie
+    wykorzystuj±cej je firmy. Mo¿na tak¿e symulowaæ inwestowanie funduszy np. na gie³dzie.
+    Banki wykorzystuj± sztuczn± inteligencjê do organizacji operacji finansowych i zarz±dzania ¶rodkami.
+    Sztuczna inteligencja odnosi ju¿ sukcesy w rywalizacji z lud¼mi w symulacji obrotów finansowych
+    (\url{http://news.bbc.co.uk/2/hi/business/1481339.stm} - dane z 04/2012).\\
+
+    Innym przyk³adem zastosowania AI-Arena s± dzia³ania wojenne. Serwis mo¿e pomóæ w szukaniu
+    algorytmów, które bêd± potrafi³y adaptowaæ siê do ró¿nych warunków i w zale¿no¶ci od nich
+    sugerowaæ najlepsze strategie i taktyki w walce z przeciwnikiem.
+
+\chapter{Podobne platformy}
+
+Obecnie istniej± serwisy internetowe podobne do AI-Arena. Oto kilka z nich:
+
+\section{Top Coder}
+
+    (\url{http://topcoder.com/tc})\\
+
+    Bardzo popularny serwis organizuj±cy ró¿nego rodzaju konkursy programistyczne.
+    Jednym z nich s± tzw Marathon Matche, podczas których uczestnicy wysy³aj±
+    programy, które staraj± siê najbardziej optymalnie rozwi±zaæ dany problem, przy czym
+    nie istnieje rozwi±zanie ca³kowicie optymalne. W terminach serwisu AI-Arena, taki typ
+    zadania mo¿na zapisaæ jako grê jednoosobow±.\\
+
+    G³ównym za³o¿eniem serwisu TopCoder jest umo¿liwenie pracodawcom przetestowanie ewentualnych przysz³ych pracowników, 
+    nawet jeszcze przed rozpoczêciem rekrutacji. Pozwala na szybkie wyeliminowanie sporej liczby kandydatów, 
+    którzy oka¿± siê po prostu nieefektywni w przysz³ej pracy.\\
+
+    U¿ytkownicy serwisu maj± za¶ mo¿liwo¶æ zmierzyæ siê z praktycznymi problemami, które czêsto okazuj± siê byæ
+    trudne obliczeniowo. Mog± siê wiêc nauczyæ stosowania ró¿nego rodzaju heurystyk czy te¿ algorytmów probabilistycznych, 
+    co odró¿nia platformê TopCoder od innych serwisów nastawionych konkretnie na przygotowanie do konkursów ACM.
+
+\section{AI Challenge}
+
+    (\url{http://aichallenge.org})\\
+
+    Serwis organizuj±cy w sposób cykliczny zawody dla programów walcz±cych. Najczê¶ciej
+    ok 2 konkursy rocznie. Ka¿dy konkurs ma okre¶lony czas trwania i nie mo¿na w nim
+    uczestniczyæ po jego zakoñczeniu.\\
+
+    Ciekaw± stron± (niektórych) gier publikiwanych na AI Challenge jest mo¿liwo¶æ wizualnego ¶ledzenia zmian.
+    Pozwala to na ³atwiejsze ¶ledzenie zachowania programu walcz±cego jako ca³o¶ci i ewentualne usuniêcie niedoskona³o¶ci
+    sztucznej inteligencji. Poza tym generuje równie¿ ciekawe animacje obrazuj±ce przebieg partii.\\
+
+    Do tej pory (maj 2012 r.) za po¶rednictwem serwisu AI Challenge zosta³y przeprowadzone 3 konkursy. Najwcze¶niejszy 
+    z nich odby³ siê na jesieni 2010 r. Ostatni za¶ zakoñczy³ sie w grudniu 2011 r. i od tamtego czasu nie ma oficjalnych
+    informacji na temat przysz³ych potyczek.
+
+\section{SIO}
+
+    (\url{http://sio.mimuw.edu.pl})\\
+
+    Projekt od lat wykorzystywany do organizowania konkursów algorytmicznych, w szczególno¶ci
+    polskiej Olimpiady Informatycznej, ale te¿ Miêdzynarodowej Olimpiady Informatycznej.
+    Jest to framework, który mo¿na wykorzystywaæ równie¿ w wersji lokalnej, nie tylko
+    jako serwis internetowy.\\
+
+    Serwis ten umo¿liwia jednak wysy³anie rozwi±zañ wy³±cznie w trakcie trwania zawodów, które odbywaj± siê ok. 1-2 razy w roku.
+    Sprawdza siê jako platforma do organizacji konkursów, jednak nie nadaje siê do nauki algorytmiki.
+
+\section{SPOJ}
+
+    (\url{http://spoj.pl})\\
+
+    Serwis zawieraj±cy du¿± bazê zadañ algorytmicznych dostêpnych do rozwi±zywania u¿ytkownikom.
+    Zadania nie maj± okre¶lonego terminu rozwi±zywania. Istnieje ranking bior±cy pod uwagê
+    liczbê wszystkich rozwi±zanych przez u¿ytkowników zadañ.\\
+
+    Platforma ta umo¿liwia przygotowanie siê do zawodów algorytmicznych jak np. Olimpiada Informatyczna, czy ACM.
+    Za jej po¶rednictwem organizowane s± równie¿ konkursy: zarówno oficjalne (HSPL - High School Programming League), 
+    jak i nieoficjalne - towarzyskie. Mo¿na ponadto zamówiæ organizacjê konkursu za po¶rednictwem serwisu SPOJ.\\
+
+    Na co dzieñ jedak g³ówn± zalet± tej witryny jest dostêpno¶æ du¿ej liczby problemów, na które mo¿na nadsy³aæ rozwi±zania
+    w trybie ci±g³ym.
+
+\section{MAIN}
+
+    (\url{http://main.edu.pl})\\
+    
+    Posiada du¿± bazê zadañ z olimpiad informatycznych, ale tak¿e kursy umo¿liwiaj±ce pog³êbienie wiedzy algorytmicznej.
+    Jest to popularna witryna w¶ród uczniów szkó³ licealnych i gimnazjalnych przygotowuj±cych siê do konkursów
+    informatycznych. Umo¿liwia ona wysy³anie rozwi±zañ do problemów z ubieg³ych olimipad i innych konkursów.\\
+
+    Wad± serwisu jest jednak ograniczenie bazy zadañ wy³acznie do problemów archiwalnych z konkursów. Ogranicza to w pewnym stopniu
+    mozliwo¶æ wszechstronnego przygotowania siê do konkursów. Istniej± jednak serwisy (np. wy¿ej wymieniony SPOJ), 
+    które ³ataj± tê lukê.
+
+\section{Porównanie serwisów}
+
+\begin{center}
+\begin{tabular}{|p{2.7cm}|p{4.3cm}|p{4cm}|p{4cm}|}
+\hline
+       & \begin{center}\textbf{tematyka}\end{center} & \begin{center}\textbf{typ konkursów}\end{center}& \begin{center}\textbf{baza zadañ}\end{center}\\  \hline
+\begin{center}Top Coder\end{center} & zadania algorytmiczne, problemy optymalizacyjne, architektura, GUI i inne & okresowe, kilkaset w ci±gu roku, czêsto z nagrodami pieniê¿nymi & bardzo du¿a baza z przesz³ych zawodów i nie tylko \\ \hline
+\begin{center}AI Challenge\end{center} & programy walcz±ce i sztuczna inteligencja & okresowe, ok. 2 razy w roku & konkurs co pó³ roku \\ \hline
+\begin{center}SPOJ\end{center} & problemy algorytmczne & sta³e i okresowe, ok. raz w roku & du¿a baza zadañ \\ \hline
+\begin{center}AI-Arena\end{center} & programy walcz±ce & sta³e i okresowe & baza gier moderowana przez u¿ytkowników \\ \hline
+\begin{center}SIO\end{center} & algorytmy, wy³±cznie zadania konkursowe & okresowe, ok. raz w roku & zadania dostêpne tylko podczas zawodów \\ \hline
+\begin{center}MAIN\end{center} & algorytmy, stare zadania konkursowe & sta³e & archiwalne zadania z najwa¿niejszych zawodów informatycznych \\ \hline
+\end{tabular}
+\end{center}
+
 
 \chapter{Architektura systemu}
+Na serwis AI-Arena sk³adaj± siê cztery wartwy: Nadzorcy, Schedulera, Bazy Danych i Interfejsu Webowego.
+
+\section{Schemat Architektury}
+\includegraphics[width=1.00\textwidth]{img/architecture.png}
+
+
+\section{Nadzorca}
+Nadzorca jest j±drem serwisu AI-Arena.
+Warstwa nadzorcy jest odpowiedzialna za uruchamianie rozgrywek pomiêdzy wybranymi graczami,
+zbieranie informacji o ich wynikach i przekazywnie ich do warstwy schedulera.
+Nadzorca jest skryptem napisanym w pythonie, którego najwa¿niejsz± czê¶ci± jest metoda play.
+Metoda ta przyjmuje jako argumenty uruchamialne pliki Sêdziego i programów graj±cych, oraz limity czasowy i pamiêciowy dla ka¿dego programu graj±cego.
+Nastêpnie metoda play przeprowadza odpowiedni± rozgrywkê, zwracaj±c jako wynik s³ownik zawieraj±cy:
+\begin{itemize}
+    \item Ci±g liczb oznaczaj±cy przydzielone przez sedziego punkty za rozgrywkê
+    \item Informacje na temat przebiegu rozgrywki
+    \item Czas jaki zu¿y³y programy walcz±ce
+    \item Pamiêæ RAM jak± wykorzystywa³y programy walcz±ce
+\end{itemize}
+
+Rozgrywka zaczyna siê przez uruchomienie programów walcz±cych, oraz Sêdziego, kontroluj±cego przebieg rozgrywki.
+Komunikacja miêdzy sêdzi± a poszczególnymi programami odbywa siê za po¶rednictwem nadzorcy, który odczytuje
+komunikaty ze standardowego wyj¶cia programów i wypisuje informacje zwrotne na ich standardowe wej¶cie.
+Format komunikatów od Sêdziego i botów powinien byæ wyspecyfikowany dla ka¿dej gry, przy czym powinien on
+byæ zgodny z poni¿szym protoko³em:\\
+\begin{itemize}
+    \item Bot wysy³a komunikaty TYLKO do Sêdziego (za po¶rednictwem Nadzorcy)
+    \item Ka¿dy komunikat od Sêdziego musi byæ potwierdzony komunikatem zwrotnym od Bota.
+    \item Komunikaty wysy³ane przez Sêdziego maj± nastêpuj±cy format: zaczynaj± siê od nawiasów kwadratowych,
+          w ktorych znajduje siê lista garczy oddzielona przecinkami. Nastêpnie znajduje siê wiadomo¶æ,
+          która zostanie przekazana odpowiednim botom. Komunikat musi koñczy siê ci±giem '<<<' i znakiem
+          nowej linii, n.p: '[1,2,3,4,5]INIT<<<newline'.
+    \item Sêdzia otrzymuje komunikaty zwrotne od botów w takiej kolejno¶ci w jakiej zostali wylistowani.
+    \item Zak³ada siê ¿e ci±g '<<<newline' koñczy komunikat. Wys³anie komunikatu o nieprawid³owym formacie skutkuje zakoñczeniem rozgrywki.
+    \item Komunikaty od nadzorcy do botów i do Sêdziego równie¿ koñcz± siê ci±giem znaków '<<<newline'.
+          Dziêki temu mo¿na przesy³aæ komunikaty wielowierszowe.
+    \item Je¶li Sêdzia chce wys³aæ komunikat do wszystkich mo¿e zacz±æ ALBO od wylistowania wszystkich graczy,
+          ALBO u¿yæ skrótu notacyjnego: '[0]'.
+    \item Ponadto, je¶li Sêdzia stwierdzi³, ¿e gra siê zakoñczy³a i chce poinformowaæ wszystkich o tym,
+          ¿e nast±pi³ koniec gry wysy³a do Nadzorcy komunikat o tre¶ci "[0]END<<<newline".
+          Nastêpnie powinien wys³aæ komunikat zawieraj±cy punktacjê dla wszystkich graczy w postaci: '[score1, score2, ... ]<<<newline'.
+    \item Je¶li sêdzia chce zakoñczyæ dzia³anie którego¶ z graczy nale¿y wys³aæ do niego wiadomo¶æ KILL (np. "[4]KILL<<<newline").
+          Mo¿na te¿ w ten sposób zabiæ wiêksz± liczbê graczy lub nawet wszystkich ("[0]KILL<<<newline")
+    \item Je¶li sêdzia wy¶le komunikat do bota który odszed³ w pokoju, dostanie komunikat zwrotny '\_DEAD\_<<<newline'.
+          Boty powinny unikaæ wysy³ania tego komunikatu, gdy¿ mog± zostaæ uznane za martwe.
+\end{itemize}
+
+Innym z zadañ nadzorcy jest odczytywanie informacji z stderr botów i Sêdziego, a nastêpnie przekazanie ich warstwie schedulera. Pozwala to na umo¿liwienie u¿ytkownikowi dostêp do informacji które jego program wypisywa³ na stderr. Nadzorca realizuje tê funkcjonalno¶æ, tworz±c dodatkowy w±tek odpowiedzialny za czytanie infromacji pojawiaj±cych siê na stderr Sêdziego i botów. W±tek ten przy u¿yciu polecenia select czeka na mo¿liwo¶æ nieblokuj±cego odczytu na odpowiednich deskryptorach, a gdy taka mo¿liwo¶æ siê pojawia odczytuje informacje a¿ do opró¿nienia potoku zwi±zanego z danym deskryptorem.
+
+Nietrywialnym problemem jest wybór mechanizmu odpowiedzialnego za ograniczanie i zbieranie informacji o zu¿ywanych przez Sêdziego i boty zasobach systemowych. Dostêpnych metod jest wiele, jednak nie wszystkie s± mo¿liwe do zastosowania w przypadku systemu AI-Arena. Mechanizm ten, jak równie¿ motywacje do jego wyboru zosta³y przedstawione w rozdziale 8.1.
+
+\section{Scheduler}
+\begin{wrapfigure}{r}{0.65\textwidth}
+	\begin{center}
+		\includegraphics[width=0.63\textwidth]{img/gearman_stack.png}
+	\end{center}
+	\caption{Aplikacja Gearmana}
+\end{wrapfigure}
+Do realizacji warstwy Schedulera u¿ywany jest program Gearmand0.26. Gearman jest lekkim frameworkiem s³u¿±cym do
+przydzielania zadañ do wykonania okre¶lonym maszynom lub procesom. Posiada prosty interfejs i jest ³atwy w u¿yciu.
+Ka¿da aplikacja korzystaj±ca z tego frameworku sk³ada siê z trzech czê¶ci: klienta, workera oraz serwera. Rolê
+klienta pe³ni czê¶æ webowa serwisu, która zleca rozegranie odpowiedniej Rozgrywki, podaj±c jako argumenty grê,
+boty i Sêdziego Rozgrywki. To zadanie jest zg³aszane do serwera, który je kolejkuje oraz przydziela workerowi.
+Zadanie workera ogranicza siê do uruchomienia nadzorcy z odpowiednimi parametrami, a po zakoñczeniu Rozgrywki
+zapisaniu wyników do bazy danych.\\
+
+\begin{wrapfigure}{l}{0.51\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/gearman_cluster.png}
+	\caption{Klaster Gearmana}
+    \end{center}
+\end{wrapfigure}
+Warstwa Schedulera umo¿liwia zakolejkowanie kilku Meczy do rozegrania np. w razie
+du¿ego ruchu w serwisie lub gdy wymaga tego organizacja Turnieju, oraz wykonanie tych zadañ w sposób asynchroniczny.
+Gearman ³±czy czê¶æ webow± serwisu z nadzorc±, przez co obie czê¶ci funkcjonuj± i mog± byæ rozwijane niezale¿nie.
+Umo¿liwia tak¿e u¿ycie wielu klientów, serwerów i workerów tworz±cych klaster. U¿ycie zapasowego serwera
+pomog³oby ustabilizowaæ pracê serwisu, a uruchomienie kilku workerów na wielordzeniowej maszynie znacznie j± przyspieszyæ.
+
+\section{Serwis webowy}
+    
+    Serwis AI-Arena jest platform± internetow±. U¿ytkownik ma zatem, po zalogowaniu sie, ca³odobowy dostêp do zasobów zgromadzonych w serwisie.
+    Podstawowe funkcjonalno¶ci serwisu mo¿na podzieliæ na nastêpuj±ce kategorie:
+
+    \begin{enumerate}
+        \item{Tworzenie gry lub konkursu} - U¿ytkownik, który ma pomys³ na ciekaw± grê ma mo¿liwo¶æ dodania jej bez konieczno¶ci
+        uzyskania akceptacji administratora strony. Staje siê on automatycznie moderatorem dodanej przez siebie gry. Warunkiem 
+        dodania gry jest napisanie kodu ¼ród³owego Sêdziego oraz szczegó³owych zasad gry. Kod ¿ród³owy Sêdziego jest dostêpny dla
+        wszystkich zalogowanych u¿ytkowników serwisu. Ma to pozwoliæ unikn±æ stronniczych sêdziów, bowiem wszelkie nieprawid³owo¶ci
+        mog± byæ zg³aszane do administracji strony, która ma mo¿liwo¶æ usuniêcia gry.
+        
+        \item{Wys³anie bota do gry lub konkursu} - U¿ytkownik ma mo¿liwo¶æ napisania w³asnego programu graj±cego w grê zdefiniowan±
+        przez innego u¿ytkownika. Program ten (Bot) musi ¶ci¶le spe³niaæ warunki narzucone przez regu³y gry. W szczególno¶ci musi równie¿
+        spe³niaæ limity czasu i pamiêci wyznaczone w specyfikacji gry.
+
+        W przypadku, gdy bot przekroczy limit czasu lub pamiêci, b±d¼ te¿ naruszy regu³y gry w dowolny inny sposób (np. poprzez wys³anie 
+        komunikatu sformatowanego w niepoprawny sposób lub wykona niedozwolon± akcjê - przyk³adowo utworzy dodatkowy w±tek potomny) bêdzie 
+        natychmiast przerywany i bêdzie to traktowane jako automatyczna przegrana z minimaln± ilo¶ci± punktów.
+
+        Nale¿y zaznaczyæ, i¿ sêdzia ma mo¿liwo¶æ przerwania wykonania dowolnego bota, je¶li stwierdzi, i¿ narusza on warunki gry.
+    \end{enumerate}
+
+    Serwis webowy jest zaimplementowany w Django. Ponadto czê¶ci lu¼no zwi±zane z serwisem, jak np. sêdziowie gier mog± byæ napisane równie¿ w C, C++ czy w Javie. W celu zwiêkszenia
+    komfortu u¿ytkowania serwisu, pewne funkcjonalno¶ci zosta³y równie¿ napisane w JavaScripcie z wykorzystaniem biblitek JQuery i JQuery-UI.
+    Naturalnie wykorzystane zosta³u równie¿ arkusze stylów CSS. Dodatkowo zosta³y wykorzystane pewne standardowe mechanizmy linuxowe, jak
+    np. Makefile.
+
+    Oprócz podstawowych funkcjonalno¶ci, ¶ci¶le zwi±zanych z charakterem serwisu, udostêpniane s± ponadto nastêpuj±ce operacje:
+    \begin{itemize}
+        \item{Wy¶wietlenie i edycja strony profilowej}
+        \item{Wy¶wietlenie kodu ¼ród³owego Sêdziego}
+        \item{Udostêpnienie kodu ¼ród³owego wysy³anego bota}
+        \item{Wy¶wietlenie udostêpnionego kodu ¼ród³owego}
+        \item{Wy¶wietlenie rankingu konkursu}
+        \item{Uruchomienie i przeprowadzenie meczu, czyli pojedyñczej rozgrywki z wybranym przez siebie botem}
+        \item{Wy¶wietlenie szczegó³ów poszczególnych rozgrywek}
+        \item{Dodanie, usuniêcie i edycjê komentarza do gry i do konkursu}
+    \end{itemize}
+    
+\section{Baza danych}
+Za obs³ugê bazy danych odpowiedzialny jest framework Django. Wspó³pracuje z bazami:
+PostgreSQL, MySQL, SQLite, Microsoft SQL Server oraz Oracle. Domy¶ln± baz±, na której dzia³a serwis
+jest PostgreSQL, ale nie jest to wymagane. Tabele w bazie danych s± tworzone przez Django w sposób automatyczny
+na podstawie modeli w pliku models.py, ka¿demu modelowi odpowiada jedna tabela w bazie.
+Oprócz tego istnieje plik fixture, do którego mo¿na zapisaæ lub wczytaæ z niego dane znajduj±ce siê w bazie.
+S³u¿y on do tworzenia testowej bazy danych.
+\begin{figure}[!ht]
+    \begin{center}
+    \makebox[\textwidth]{
+        \includegraphics[width=1.15\textwidth]{img/contests_uml.png}
+    }
+    \end{center}
+    \caption{Diagram UML bazy danych}
+\end{figure}
+Najwa¿niejsze modele w serwisie to:
+\begin{itemize}
+    \item {\bf Game} - zawiera plik z zasadami Gry oraz ¶cie¿kê do programu Sêdziego
+    \item {\bf Bot} - reprezentuje bota graj±cego w konkretn± Grê, zawiera m.in. plik ¼ród³owy
+    \item {\bf Contest} - zawiera informacje o Konkursie, a wiêc Grê, Ranking i listê Botów bior±cych w nim udzia³
+    \item {\bf Ranking} - od jego typu zale¿y w jaki sposób bêdzie rozgrywany Konkurs, np. "ka¿dy z ka¿dym"
+    \item {\bf BotRanking} - opisuje pozycjê Bota w danym Rankingu
+    \item {\bf Match} i {\bf MatchBotResult} - przechowuj± informacjê o rozegranym Meczu tzn. które Boty bra³y w nim udzia³ oraz ich wyniki, wykorzystany czas i zu¿yt± pamiêæ
+    \item {\bf UserProfile} - najwa¿niejsze dane o u¿ytkowniku tj, zdjêcie, pañstwo pochodzenia
+\end{itemize}
+\FloatBarrier
+\section{Testowanie}
+
+Poprawne dzia³anie serwisu jest testowane przy pomocy standardowych Unit Testów w Django.
+Framework umo¿liwia automatyczne testowanie wszystkich warstw aplikacji: obs³ugi ¿±dañ HTTP,
+walidacji i przetwarzania formularzy, renderowania szablonów. Bardzo proste jest symulowanie
+¿±dañ, u¿ywanie testowych danych oraz weryfikowanie konkretnych widoków i metod.\\
+
+Aby dodaæ test jednostkowy wystarczy w pliku tests.py umieszczonym w folderze testowanej aplikacji
+zdefiniowaæ klasê dziedzicz±c± po django.test.TestCase. Ka¿da z jej metod bêdzie uruchomiona oddzielnie
+podczas uruchomienia automatycznych testów. W przypadku gdy korzysta z bazy danych, nie u¿ywa tej "produkcyjnej",
+na potrzebê testów tworzona jest nowa, pusta baza. Mo¿na jednak wskazaæ plik zawieraj±cy fixtures,
+w którym jest zapisana testowa baza w formacie json.\\
+
+Django udostêpnia klasê testowego klienta, wykorzystywanego do zaprogramowania interakcji z aplikacj±.
+Przy jego u¿yciu mo¿na symulowaæ ¿±dania GET i POST na konkretny URL i weryfikowaæ odpowied¼(status, zawarto¶æ itp.),
+sprawdziæ czy dla danego URL wywo³ywany jest odpowiedni widok oraz
+czy odpowied¼ jest renderowana przy u¿yciu w³a¶ciwego szablonu w odpowiednim ¶rodowisku.
+Jest to mo¿liwe dziêki ró¿nego rodzaju asercjom.\\
+
+Uruchomienie automatycznych testów jest bardzo proste. Domy¶lnie u¿ywane s± wszystkie przypadki testowe
+z wszystkich aplikacji, ale wolno wyspecyfikowaæ konkretn± aplikacjê lub przypadek testowy.
+W razie niepowodzenia którego¶ z testów wy¶wietlane s± szczegó³y b³êdu.\\
+
+Testy zawarte w projekcie zosta³y podzielone na dwie kategorie. Pierwsza, zawarta w klasie \emph{WebPageTest},
+to testy symuluj±ce wysy³anie okre¶lonych ¿±dañ na konkretne adresy url. Wszystkie korzystaj± z tej samej bazy testowej
+zapisanej w pliku test\_fixture.json. Poprawno¶æ odpowiedzi jest sprawdzana przy pomocy asercji pod k±tem tre¶ci,
+a wiêc czy zawiera spodziewany tekst. Analizowane s± tak¿e przekierowania, je¿eli np. edycja danych wymaga zalogowania,
+to u¿ytkownik powinien byæ przekierowany na panel logowania, a nastêpnie na odpowiedni± stronê.\\
+
+Na drug± kategoriê sk³adaj± siê testy zawarte w klasie \emph{ModelTest}, które sprawdzaj± poprawno¶æ metod modeli
+wykorzystywanych w serwisie. W tym przypadku nie jest potrzebna baza testowa.\\
+
+Testy jednostkowe pokrywaj± kod w ca³o¶ci. Dla ka¿dego prawid³owego adresu url zamieszczonego w pliku urls.py
+istnieje przynajmniej jeden przypadek testowy wysy³aj±cy ¿±danie na ten adres. Podobnie, ka¿da metoda zawarta
+w pliku models.py ma swój odpowiednik w testach.
+
+\chapter{Decyzje technologiczne}
+
+\section{Django}
+
+Django jest wysokopoziomowym frameworkiem przeznaczonym do tworzenia aplikacji internetowych.
+Opiera siê na wzorcu projektowym podobnym do MVC nazywanym MVT. Z tego wzglêdu aplikacjê mo¿na podzieliæ na kilka warstw:
+\begin{itemize}
+    \item {\bf Model} - reprezentuje logikê aplikacji. Ka¿dej klasie zdefiniowanej w pliku models.py dziedzicz±cej po Models.model odpowiada tabela w bazie danych
+    \item {\bf View} - okre¶la jakie dane bêd± zaprezentowane u¿ytkownikowi. W pliku views.py znajduj± siê funkcje obliczaj±ce odpowied¼ na dane ¿±danie.
+    \item {\bf Template} - obejmuje szablony html. S± one renderowane na podstawie kontekstu obliczonego w warswie widoku.
+\end{itemize}
+Oprócz tego framework zapewnia opart± na wyra¿eniach regularnych obs³ugê URL, co pozwala na prost±, przejrzyst± adresacjê.
+Django posiada w³asny, lekki serwer umo¿liwiaj±cy rozwijanie i testowanie aplikacji. Ponadto zajmuje siê obs³ug± bazy danych
+i systemem cache'owania danych. Do zalet tego frameworku nale¿± te¿ du¿a skalowalno¶æ i wydajno¶æ oraz wbudowany panel administracyjny.\\
+
+Na rynku dostêpnych jest wiele frameworków przeznaczonych do tworzenia aplikacji internetowych. Django jest jednym z bardziej popularnych.
+Autorzy projektu zdecydowali siê w³a¶nie na ten framework z kilku wzglêdów.
+\begin{itemize}
+    \item Rozwi±zuje wszystkie podstawowe kwestie zwi±zane z projektem, tj. obs³uga bazy danych, adresacja.
+    \item Serwis od strony webowej jest standardow± aplikacj±.
+    \item Django jest proste w u¿yciu.
+    \item Nie bez znaczenia by³o to, ¿e cz³onkowie zespo³u znali tê technologiê ju¿ wcze¶niej z przedmiotu Aplikacje WWW.
+\end{itemize}
+Django powsta³o w celu ³atwego, szybkiego tworzenia standardowych aplikacji internetowych i po do¶wiadczeniach zwi±zanych z projektem
+autorzy w pe³ni potwierdzaj± skuteczno¶æ tego frameworku.
 
 \section{Nadzorca}
 
-\section{Scheduler}
+W pocz±tkowej fazie projektu autorzy planowali udostêpniæ u¿ytkownikom mo¿liwo¶æ wysy³ania programów wieloprocesowych. Okaza³o siê jednak, ¿e implementacja takiej funkcjonalno¶ci stwarza wiele trudnych do rozwi±zania problemów w warstwie nadzorcy. G³ównymi problemami okaza³y siê ograniczenie zu¿ycia czasu i pamiêci przez grupê procesów, pomiar zu¿ycia tych zasobów po zakoñczeniu dzia³ania grup procesów, i zabijanie odpowiednich grup procesów na ¿±danie Sêdziego.\\
 
-\section{Baza danych}
+Standardowe metody ograniczania zu¿ycia pamiêci i czasu przez procesy : ulimit i setrlimit niestety zawodz±. Setrlimit ogranicza jedynie zu¿ycie zasobów przez dany proces, nie ograniczaj±c w ¿aden sposób jego dzieci. Ulimit ogranicza co prawda wszystkie procesy danego u¿ytkownika, jednak na³o¿enie osobnych limitów na wszystkie procesy nie jest poprawnym rozwi±zaniem, nale¿y bowiem ograniczyæ sumaryczne zu¿ycie zasobów przez dany proces i wszystkich jego potomków.\\
 
-\section{API uzytkownika}
+Metody pomiaru udostêpniane przez system operacyjny takie jak wait3 lub wait4 równie¿ nie znajduj± zastosowania w tym przypadku. Co prawda wait3 i wait4 potrafi± zebraæ informacje o procesie i jego zakoñczonych dzieciach, jednak informacje o wnukach procesu mog± zostaæ utracone, je¶li tylko u¿ytkownik serwisu nie bêdzie sam u¿ywa³ wait3 lub wait4 (czego oczywi¶cie nie mo¿emy za³o¿yæ ani kontrolowaæ). Nale¿y równie¿ pamiêtaæ ¿e informacje udostêpniane prze te dwie funkcje s± dostêpne jedynie po zakoñczeniu procesu, ich u¿ycie jest wiêc mo¿liwe jedynie gdy przy pomocy innych mechanizmów zapewnione zostanie, ¿e proces który zu¿y³ zbyt du¿o zasobów zostanie zakoñczony.\\
+
+Inny mechanizm systemowy który by³ rozwa¿any jako rozwi±zanie tych problemów, to grupy procesów. Mechanizm ten pozwal³by miêdzy innymi na wys³anie sygna³u do procesu i wszystkich jego potomków, jak równie¿ prostsze monitorowanie zu¿ycia zasobów systmowych przez grupê procesów. Niestety, pewne luki w tym mechani¼mie pozwala³yby z³o¶liwemu u¿ytkownikowi tworzyæ procesy które nie podlega³yby kontroli.\\
+
+Na licencji open source dostêpne jest rozwi±zanie podobnego problemu. Jest to napisany w jêzyku Perl skrypt timeout, stworzony w Institute for System Programming of Russian Academy of Sciences, dostêpny przez github. Zosta³ on stworzony do mierzenia i ograniczania zu¿ycia zasobów przez eksperymentalne wieloprocesowe programy, których zachowanie by³o trudne do przewidzenia. Dzia³anie tego skryptu oparte jest na prostej idei. Skrypt kilkukrotnie w ciagu sekundy sprawdza infromacje dotycz±ce zu¿ycia zasobów przez monitorowany proces i wszystkich jego potomków, i gdy warto¶æ ta przekroczy dozwolony limit zatrzymuje obserwowane procesy. Jednak poniewa¿ skrypt nie by³ tworzony do u¿ytu w sposób jaki jest potrzebny w systemie AI-Arena, brak mu pewnych funkcjonalno¶ci. Szczególnie wa¿n± jest mo¿liwo¶æ zatrzymania danego procesu i wszystkich jego potomków na rz±danie Sêdziego. Mniej powa¿n± wad± tego rozwi±zania jest to, ¿e dokonywane pomiary mog± nie byæ dok³adne, w szczególno¶ci niektóre programy mog³yby dzia³aæ i komunikowaæ siê przez u³amek sekundy po przekroczeniu limitu.\\
+
+Najlepszym rozwi±zaniem wydaje siê wiêc zaimplementowanie w³asnego mechanizmu, opartego na podobnej idei jak wspomniany skrpyt timeout. Mechanizm ten móg³by byæ oddzielnym procesem, który na pocz±tku swojego dzia³ania otrzymuje numery pid obserwowanych procesów i przyznane im limity. Nastêpnie kilkukrotnie w ciagu sekundy na podstawie informacji zawartych w katalogu proc móg³by mierzyæ sumaryczne zu¿ycie zasobów przez kontrolowane procesy i ich potomków, oraz na ¿yczenie Sêdziego przekazane przez nadzorcê zatrzymaæ okre¶lone grupy procesów. Pomiar zu¿ycia zasobów w tym przypadku jest obci±¿ony tym samym b³êdem co skrpyt timeout, jest to jednak b³±d akceptowalny. \\
+
+Z powodu wymienionych problemów z kontorolowaniem zu¿ycia zasobów systemowych, jak równie¿ potencjalnych problemów z bezpieczeñstwem systemu, autorzy zdecydowali, ¿e programy u¿ytkowników i sêdziowie nie bêd± mog³y tworzyæ nowych procesów.\\
+
+Ta decyzja znacznie znacznie zredukowa³a rozwa¿ane powy¿ej trudno¶ci, jednocze¶nie nie ograniczaj±c prawie w ogóle funkcjonalno¶ci dostêpnej u¿ytkownikowi, gdy¿ ci±gle mo¿e on tworzyæ w±tki w obrêbie dostêpnego procesu.\\
+
+Ograniczenie zu¿ycia czasu i pamiêci zosta³o zrealizowane przy pomocy funkcji setrlimit. Polecenie to pozwala na ustawienie miêkkiego i twardego limitu na dostêpne procesowi zasoby systemowe, miêdzy innymi pamiêæ wirtualn± i czas zu¿ywany przez proces w trybie u¿ytkownika lub systemowym. 
+W przypadku przekroczenia miêkkiego limitu czasowego do procesu wysy³any jest SIGINT, po przekroczeniu limitu twardego do procesu wysy³any jest SIGKILL. Jasne jest wiêc ¿e limit który chcemy na¿uciæ procesowi musi byæ limitem twardym, gdy¿ SIGINT mo¿e zostaæ obs³u¿ony. Mo¿liwe s± równie¿ sytuacje w których kernel nie mo¿e dostarczyæ SIGKILL do procesu: gdy proces jest zombie lub gdy czeka w nieprzerywalnym u¶pieniu. Jednak w obu przypadkach proces ten nie zu¿ywa ju¿ wiêcej procesora, wiêc nie stanowi to zagro¿enia dla systemu.\\
+
+Pomiar czasu zu¿ytego przez proces realizowany jest przy u¿yciu funkcji systemowej wait4. Potrafi ona czekaæ na zakoñczonego potomka o danym pid, jednocze¶nie zwracaj±c pewne informacje dotycz±ce zu¿ytych przez niego zasobów w trakcie jego dzia³ania. W¶ród tych informacji znajduj± siê ilo¶æ czasu jak± proces spêdzi³ w trybie u¿ytkownika lub w trybie systemowym, mierzone z dok³adno¶ci± co do milisekundy.\\
+
+\chapter{Dokumentacja u¿ytkowa}
+
+Najwa¿niejszym dokumentem okre¶laj±cym po¿±dany kszta³t serwisu jest dokumentacja przypadków u¿ycia. Opisuje on sposób interakcji koñcowego u¿ytkownika z ca³ym systemem.
+W przypadku platformy AI-Arena interakcja ta odbywa siê za pomoc± przegl±darki internetowej.\\
+
+Z punktu widzenia u¿ytkownika AI-Arena jest zwyk³± stron± internetow±. Najwiêkszy wp³yw na jego koñcowy wygl±d maj± wiêc arkusze stylów, oraz w pewnym stopniu
+skrypty JavaScript. Arkusze stulów pochodz± z dwóch ¼róde³: wykorzystany zosta³ open source'owy projekt nale¿±cy do twittera o nazwie bootstrap (\url{http://twitter.github.com/bootstrap/}).
+Projekt ten (opublikowany na licencji Apache v.2.0) stanowi dobr± podstawê wygl±du strony. Drugim ¼ród³em arkuszy stylów s± autorzy serwisu, którzy nadali stronie ostateczny wygl±d.\\
+
+U¿ytkownicy serwisu maj± zró¿nicowane prawa. Najbardziej ograniczone mo¿liwo¶ci ma uzytkownik niezalogowany, najszersze za¶ - naturalnie Administrator strony.
+Ponadto w zale¿no¶ci od sytuacji U¿ytkownik (który siê poprawnie zalogowa³) mo¿e mieæ prawa Moderatora gry lub konkursu, co daje mu mo¿liwo¶æ edycji m.in. zasad, terminów czy
+komentarzy wypowiadanych przez innch U¿ytkowników. Nale¿y jednak zauwa¿yæ, i¿ w przypadku naduzyæ Administrator strony mo¿e odebraæ Moderatorowi jego specjalne uprawnienia.
+
+\section{Przypadki u¿ycia systemu}
+
+\subsection{Z udzia³em u¿ytkownika niezalogowanego (Go¶cia)}
+U¿ytkownik niezalogowany ma bardzo ograniczone prawa u¿ywania serwisu. Praktycznie jedyn± dozwolon± aktywno¶ci± jest rejestracja
+w serwisie lub próba zalogowania siê do utworzonego wcze¶niej konta.\\
+
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=0.65\textwidth]{img/UseCasesUser.jpg}
+    \end{center}
+    \caption{Podstawowe u¿ycie systemu}
+\end{figure}
+
+\subsubsection{Rejestracja w systemie}
+Aby zarejestrowaæ siê w systemie nale¿y wykonaæ kilka kroków. Na pocz±tku nale¿y klikn±æ w napis "Register" zlokalizowany po prawej stronie 
+na górze.\\
+
+Nastêpnie system przekieruje u¿ytkownika do strony, gdzie bêdzie móg³ wybraæ swój login oraz has³o. Nale¿y zwróciæ uwagê, i¿ login
+musi byæ unikalny, mo¿e zawieraæ wy³±cznie ma³e i du¿e litery, cyfry oraz znak '\_'. W przeciwnym wypadku pojawi siê komunikat o b³êdzie.\\
+\begin{wrapfigure}{r}{0.45\textwidth}
+	\begin{center}
+		\includegraphics[width=0.43\textwidth]{img/register.png}
+	\end{center}
+	\caption{Pasek logowania i rejestracji do serwisu}
+\end{wrapfigure}
+
+Po prawid³owym wykonaniu tego kroku u¼ytkownik zostanie przeniesiony na swoj± stronê profilow±. Mo¿e st±d zarz±dzaæ swoim kontem. 
+Od tej chwili jest równie¿ zalogowany w serwisie, co znaczy, ¿e mo¿e m. in. wysy³aæ swoje boty do gier lub wykonywaæ inne akcje dostêpne
+wy³±cznie dla zalogowanych u¿ytkowników.\\
+
+\subsubsection{Logowanie}
+Logowanie jest standardow± aktywno¶ci±. któr± siê spotyka na wszystkich forach i wielu serwisach. Przycisk logowania znajduje siê tu¿ obok 
+przycisku rejestracji. Aby siê zalogowaæ nale¿y klikn±æ w ten przycisk a nastêpnie wype³niæ pola formularza, który siê pojawi na ekranie.
+Je¶li dane bêd± zgodne z tymi zapisanymi w bazie danych, system przekieruje u¿ytkownika na jego stronê profilow±.
+
+\subsection{Z udzia³em u¿ytkownika zalogowanego}
+
+\subsubsection{Wylogowanie siê z serwisu}
+%\begin{wrapfigure}{l}{0.5\textwidth}
+%	\begin{center}
+%		\includegraphics[width=0.48\textwidth]{img/logout.png}
+%	\end{center}
+%	\caption{Pasek wylogowania z serwisu}
+%\end{wrapfigure}
+Wylogowanie jest kolejn± standardow± aktywno¶ci± udostêpnian± przez wiele serwisów. Aby wylogowaæ siê z serwisu nale¿y klikn±æ przycisk "Logout", 
+który znajduje siê w prawym, górnym roku strony. Zastêpuje on przycisk "Login", który widoczny jest dla niezalogowanych u¿ytkowników. Po klikniêciu tego przycisku
+u¿ytkownik jest przekierowywany na stronê g³ówn± serwisu.
+
+\subsubsection{Otwarcie swojej strony profilowej}
+Aby otworzyæ swoj± stronê profilow± u¿ytkownik musi klikn±æ w link znajduj±cy siê pod jego loginem. Loginy u¿ytkownika pojawiaj± siê w ró¿nych miejscach systemu
+i klikniêcie w dowolny z nich powoduje otwarcie strony profilowej danego u¿ytkownika. W szczególno¶ci po klikniêciu na w³asny login pojawi siê w³asna strona u¿ytkownika.
+Isnieje równie¿ tzw. "sta³y link do profilu" znajduj±cy siê na górze strony w prawym rogu. Po klikniêciu w znajduj±cy siê tam login u¿ytkownika (zaznaczonego innym kolorem
+ni¿ reszta napisu) system wy¶wietla stronê profilow± aktualnie zalogowanego u¿ytkownika.
+
+\subsubsection{Edycja profilu u¿ytkownika}
+Gdy u¿ytkownik znajduje siê na swojej stronie profilowej ma dostêp do kilku odno¶ników. Jednym z nich jest odno¶nik do strony konfiguracyjnej profilu. Aby j± otworzyæ nale¿y klikn±æ 
+w link "Edit profile" znajduj±cy siê pod zdjêciem profilowym. W oknie edycji profilu pojawia siê formularz zawieraj±cy kilka pól, m.in. zdjêcie, kraj, szko³a/uniwersytet czy zainteresowania. 
+¯adne z nich nie jest obowi±zkowe. U¿ytkownik zatwierdza zmiany klikaj±c na prycisk "Update" znajduj±cy siê na samym dole fornularza.
+
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=0.85\textwidth]{img/UseCasesContestant.jpg}
+    \end{center}
+    \caption{Przypadki u¿ycia zwi±zane z konkursami}
+\end{figure}
+
+\subsubsection{Utworzenie nowej gry lub konkursu}
+\begin{wrapfigure}{l}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/create_game.png}
+	\end{center}
+	\caption{Formularz do tworzenia nowej gry}
+\end{wrapfigure}
+Tworzenie gry (konkursu) jest jedn± z centralnych aktywno¶ci w serwisie. Aby utworzyæ grê, u¿ytkownik musi mieæ zawczasu przygotowany plik ¼ród³owy
+Sêdziego oraz plik z zasadami rozgrywki.\\
+
+Sêdzia jest programem, który nadzoruje przebieg gry. Powinien byæ napisany w jednym z jêzyków: C, C++, Java, Python. Otrzymuje on komunikaty od Nadzorcy, który z kolei zczytuje je ze standardowego wej¶cia Botów. 
+Sêdzia musi dokonaæ walidacji komunikatu, tj. upewniæ siê, i¿ format komunikatu jest zgodny z protoko³em opisanym w zasadach gry oraz, ¿e ruch zawarty w komunikacie nie narusza regu³ gry (przyk³adowo, ¿e
+gracz graj±cy pionami czarnymi nie ruszy³ siê bia³ym pionem). Gdy upewni siê, ¿e otrzymany komunikat jest poprawny wysy³a na swoje standardowe wyj¶cie komunikat zgodnie z formatem opisanym w regu³ach gry.\\
+
+Plik ¼ród³owy Sêdziego jest dostêpny dla wszystkich zalogowanych u¿ytkowników serwisu. Ma to zapobiec wysy³aniu "stronniczych" sêdziów oraz ³atwieszemu ujawnieniu pewnych "ukrytych" wad protoko³u.
+Administratorzy zastrzegaj± sobie prawo do usuniêcia lub poprawienia wadliwych sêdziów.\\
+
+Plik z zasadami rozgrywki musi zawieraæ ogólny opis gry (np. historiê wprowadzaj±c±) oraz szczegó³owy opis i znaczenie komunikatów. W szczególno¶ci musz± byæ zawarte informacje takie jak
+dok³adny format komunikatu, dozwolone odpowiedzi na ka¼dy rodzaj komunikatu czy komunikaty informuj±ce o b³êdzie.
+Zosta³o przyjête za³o¿enie, ¿e Bot, który wy¶le komunikat o innej, ni¿ zdefiniowanej formie automatycznie przegrywa dan± grê i jest przerywany przez Nadzorcê.\\
+\begin{wrapfigure}{r}{0.7\textwidth}
+	\begin{center}
+		\includegraphics[width=0.68\textwidth]{img/game_details.png}
+	\end{center}
+	\caption{Szczegó³y gry}
+\end{wrapfigure}
+
+Aby utworzyæ konkurs nie jest potrzebne wcze¶niejsze przygotowywanie plików, jednak musi istnieæ gra, na bazie której chcemy utworzyæ nowy konkurs.\\
+
+Gdy u¿ytkownik przygotowa³ ju¿ powy¿sze pliki powinien, w celu utworzenia nowej gry, klikn±æ w link "Create New Game" znajduj±cy siê na górnym pasku strony. Otworzy siê formularz zawieraj±cy pola, do których 
+nale¿y wprowadziæ informacje nt. tworzonej gry (miêdzy innymi 2 wymienione wcze¶niej pliki czy nazwa gry). Warto zwróciæ uwagê, i¿ nazwa gry musi byæ unikalna, gdy¿ 
+definiuje ona ¶cie¿kê do poszczególnych plików na dysku.\\
+
+Gdy u¿ytkownik wype³ni formularz i zatwierdzi przyciskiem "Submit" na dole formularza zostanie przeniesiony na stronê zawieraj±c± detale w³a¶nie utworzonej gry.
+Autor staje siê automatycznie moderatorem gry i ma prawo m. in. do edycji czy usuniêcia gry lub edycji i usuwania komentarzy u¿ytkowników.
+
+\subsubsection{Wys³anie bota do gry lub konkursu}
+\begin{wrapfigure}{l}{0.6\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/send_bot.png}
+	\end{center}
+	\caption{Formularz do wysy³ania bota}
+\end{wrapfigure}
+Aby wys³aæ bota do gry (konkursu) nale¿y w pierwszej kolejno¶ci przej¶æ na stronê zawieraj±c± szczegó³owy opis gry. Mo¿na to zrobiæ klikaj±c na przycisk "Games list" ("Contests") znajduj±cy siê na górze strony, a nastêpnie 
+wybraæ grê (konkurs) z wy¶wietlonej listy.\\
+
+Gdy znajdujemy siê ju¿ na stronie z detalami nale¿y, w celu zg³oszenia bota, klikn±æ na link "Send bot for this game" (lub "Add contestant" w przypadku konkursu) i wype³niæ formularz wy¶wietlony przez system.
+Podobnie, jak w przypadku tworzenia gry nale¿y mieæ uprzednio przygotowany plik zawieraj±cy kod ¼ród³owy bota. Bot komunikuje siê z sêdzi± za pomoc± komunikatów opisanych w zasadach gry wypisywanych i zczytywanych ze standatdowego 
+wej¶cia i wyj¶cia. W przypadku, gdy bot wy¶le ¼le sformatowany lub b³êdny komunikat - automatycznie przegrywa rozgrywkê dostaj±c za ni± mo¿liwe minimum punktów.
+
+\subsubsection{Wy¶wietlenie kodu ¼ród³owego Sêdziego}
+\begin{wrapfigure}{l}{0.7\textwidth}
+	\begin{center}
+		\includegraphics[width=0.68\textwidth]{img/source_code.png}
+	\end{center}
+	\caption{Sposób wy¶wietlania kodu ¼ród³owego}
+\end{wrapfigure}
+W celu wy¶wietlenia kodu ¼ród³owego Sêdziego nale¿y przej¶æ na stronê gry zawiejaj±cej szczegó³owy jej opis. Potem, po klikniêciu w link "Show source of the judge" system przekieruje nas na stronê. gdzie wy¶wietlony zostanie 
+kod ¼ród³owy Sêdziego.\\
+
+Mo¿liwe jest równie¿ wy¶wietlenie kodu w postaci surowej, tj. bez numerów linii i dodatkowego formatowania tekstu. Aby wy¶wietliæ surowy kod nale¿y klikn±æ w przycisk "Raw" znajduj±cy siê 
+w prawym górnym rogu wy¶wietlanego kodu. Dostêpna jest ponadto opcja pobrania kodu ¼ród³owego Sêdziego w postaci pliku tekstowego. Aby pobraæ kod ¼ród³owy
+u¿ywtkownik powinien klikn±æ w przycisk "Download" znajduj±dy siê na prawo od przycisku "Raw".
+
+\subsubsection{Dodanie komentarza pod gr± lub konkursem}
+Aby dodaæ komentarz do gry (konkursu) nale¿y znajdowaæ siê na stronie ze szczegó³owym opisem danej gry (konkursu). Nastêpnie klikn±æ w link "Add comment" i wype³niæ formularz wy¶wietlony przez system.
+Komunikat ten pojawi siê pod opisem zasad gry (bez konieczno¶ci zatwierdzania go przez Moderatora). Moderator ma jednak prawo edytowaæ lub nawet usun±æ ten komentarz 
+w pó¼niejszym terminie.\\
+
+Zwróæmy uwagê na fakt, i¿ na pó¼niejszym etapie ¿ycia serwisu liczba umieszczanych komentarzy mo¿e byæ znacz±ca. Jakakolwiek forma automatycznej notyfikacji mog³aby byæ
+uci±¿liwa dla Moderatorów. Z tego powodu autorzy serwisu zdecydowali siê nie umieszczaæ mechanizmu automatycznego powiadamiania w serwisie.\\
+
+\begin{wrapfigure}{l}{0.7\textwidth}
+	\begin{center}
+		\includegraphics[width=0.68\textwidth]{img/comment.png}
+	\end{center}
+	\caption{Komentarz umieszczony pod gr±}
+\end{wrapfigure}
 
 
-\chapter{Dokumentacja uzytkowa i opis implementacji}
+Nale¿y zwróciæ uwagê, i¿ w przypadku naruszania zasad publicznego wypowiadania siê (tre¶ci wulgarne, obra¼liwe, naruszaj±ce prywatno¶æ itp.) moderator konkursu ma prawo do edycji lub usuniêcia komentarza. 
+Takie samo prawa ma równie¿ autor komentarza.
+
+\subsection{Z udzia³em moderatora konkursu lub gry}
+
+Moderator pe³ni specjaln± funkcjê. Czuwa on nad prawid³owym i kulturalnym przebiegiem konkursu. W serwisie AI-Arena
+moderatorzy delegowani s± do poszczególnych gier i konkursów. Naturalnie dany u¿ytkownik mo¿e byæ moderatorem wielu
+gier jednocze¶nie.\\
+
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{img/UseCasesModerator.jpg}
+    \end{center}
+    \caption{U¿ycie systemu przez Moderatora}
+\end{figure}
+
+\subsubsection{Usuniêcie komentarza do gry lub konkursu}
+¯eby móc usun±æ komentarz u¿ytkownik musi spe³niaæ (minimum) jeden z poni¿szych warunków:
+\begin{enumerate}
+	\item{Byæ autorem komentarza}
+	\item{Byæ Administratorem strony lub Moderatorem gry (konkursu), pod którym zosta³ ten komentarz dodany}
+\end{enumerate}
+
+Je¶li wymaganie wstêpne jest spe³nione, wystarczy klikn±æ w przycisk "Delete" znajduj±cy siê w prawym górnym rogu komentarza. Pojawi siê wtedy okienko z pro¶b± o potwierdzenie swojej decyzji.
+Nale¿y pamiêtaæ, ¿e usuniêtego komentarza nie mo¿na przywróciæ! Wci¶niêcie przycisku "OK" na pojawiaj±cym siê okienku spowoduje usuniêcie komentarza i powrót do strony z detalami gry (konkursu)
+
+\subsubsection{Usuniêcie gry lub konkursu}
+Aby móc usun±æ grê (konkurs) trzeba byæ Administratorem strony lub Moderatorem danej gry (konkursu):
+
+\begin{wrapfigure}{r}{0.45\textwidth}
+	\begin{center}
+		\includegraphics[width=0.43\textwidth]{img/delete_confirm.png}
+	\end{center}
+%	\caption{Monit o potwierdzenie usuniêcia gry}
+\end{wrapfigure}
+\\
+W celu usuniêcia gry nale¿y znajdowaæ siê na stronie zawieraj±cej szczegó³owy opis gry. Nastêpnie klikn±æ w znajduj±cy siê po lewej stronie link "Delete this game". Spowoduje to wyskoczenie okienka z pro¶b± o potwierdzenie swojej 
+decyzji. Pamiêtajmy, i¿ jest to decyzja nieodwracalna! Potwierdzenie wykonania operacji sposoduje usuniêcie gry z listy dostêpnych i przeniesienie na stronê g³ówn± serwisu.
+System usunie wszelkie dane zwi±zane z dan± gr±.
+
+\subsubsection{Edycja gry lub konkursu}
+\begin{wrapfigure}{l}{0.4\textwidth}
+	\begin{center}
+		\includegraphics[width=0.38\textwidth]{img/game_options.png}
+	\end{center}
+%	\caption{Edycja gry lub konkursu}
+\end{wrapfigure}
+Mo¿liwa jest edycja konkursu. Aby tego dokonaæ trzeba byæ adnimistratorem lub moderatorem gry. Nale¿y klikn±æ w link "Edit game". 
+System przeniesie nas do okna, w którym wy¶wietli siê formularz do edycji gry. Po wprowadzeniu zmian nale¿y zatwierdziæ przyciskiem "Save".\\
+
+Nale¿y pamiêtaæ, i¿ nazwa gry okre¶la fizyczn± ¶cie¿kê dostepu. Oznacza to, ¿e je¶li u¿ytkownik bêdzie chcia³ zmieniæ nazwê gry, system przeniesie
+wszystkie pliki zwi±zane z gr± do nowych lokalizacji. U¿ytkownik musi jednak pamiêtaæ, aby nowa nazwa gry by³a unikalna. W przeciwnym razie system odmówi
+zmiany nazwy i próba edycji zakoñczy siê pora¿k±.
+\vspace{1cm}
+
+\subsubsection{Edycja komentarza do gry lub konkursu}
+Edycja komentarza jest podobna do dodawania nowego komentarza. Aby edytowaæ istniej±cy komentarz nale¿y klikn±æ w link "Edit" znajduj±cy siê w górnej czê¶ci komentarza. Pojawi siê wtedy 
+formularz analogiczny do tego, który siê pojawia przy dodawaniu komentarza. Po zatwierdzeniu dokonywanych zmian poprzez naci¶niêcie przycisku "Save" zostaniemy przekierowani do strony ze szczegó³owymi informacjami o grze.
+Zauwa¿my, ¿e edytowany komentarz jest ju¿ wy¶wietlany w zmienionej formie.
+
+\chapter{Harmonogram prac}
+
+Praca nad projektem zosta³a podzielona na cztery kluczowe okresy:
+
+\begin{itemize}
+    \item{Stworzenie dzia³aj±cego prototypu} - termin wykonania: \textbf{do 30 listopada 2011r.}
+    \item{Wykonanie wersji minimalistycznej serwisu} - termin wykonania: \textbf{do 30 stycznia 2012 r.}
+    \item{Wykonanie wersji rozszerzonej serwisu} - termin wykonania: \textbf{do 4 kwietnia 2012 r.}
+    \item{Dopracowywanie interfejsu i ostatnie testy u¿ytkownika} - termin wykonania: \textbf{do 15 maja 2012 r.}
+\end{itemize}
+
+Zauwa¿my, ¿e taki plan prac umo¿liwia³, w wypadku nieporzewidzianych okoliczno¶ci, mo¿liwo¶æ zrealizowania 
+ograniczonej funkcjonalno¶ci. Okaza³o siê jednak, ¿e opcja ta nie by³a potrzebna, gdy¿ praca postêpowa³a zgodnie z harmonogramem.\\
+
+\begin{figure}[h]
+\begin{center}
+    \includegraphics{img/suma_czasow.png}
+\end{center}
+\caption{Podzia³ pracy w kolejnych fazach rozwoju projektu}
+\end{figure}
+
+Wykresy prezentowane w dalszej czê¶ci rozdzia³u obrazuj± podzia³ prac miêdzy poszczególne zagadnienia zwi±zane z rozwojem projektu takie jak
+spotkania projektowe, administracja projektem, tworzenie dokumentacji i automatycznej dokumentacji, rozwój kodu czy testowanie. Nale¿y pamiêtaæ, 
+i¿ wielko¶ci prezentowane na wykresach s± jedynie orientacyjne, jednak dobrze oddaj± ilo¶æ pracy, jaka zosta³a przez nas w³o¿ona w projekt.\\
+
+Spotkania projektowe oznaczaj± spotkania zespo³u, w czasie których omawiana by³a wizja projektu czy bie¿±cy podzia³ prac. Administracja 
+uwzglêdnia takie zagadnienia jak obs³uga systemu Redmine, obs³uga repozytorium czy wdro¿enie projektu na serwer. Obejmuje równie¿ obs³ugê 
+majowego konkursu przeprowadzonego pod patronatem Codility. Tworzenie dokumentacji i automatycznej dokumentacji opisuje czas potrzebny na 
+stworzenie wszystkich dokumentów, w³±cznie z prac± licencjack±, oraz dodaniem docstringów s³u¿±cym do generowania automatycznej dokumentacji.
+Testowanie za¶ oznacza czas przeznaczony na napisanie unit testów oraz przeprowadzenie test-case'ów. Obejmuje ponatdo zagadnienie kontroli kodu
+przez innych cz³onków zespo³u.
+
+\vspace{1cm}
+\begin{wrapfigure}{l}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/faza1.png}
+	\end{center}
+\end{wrapfigure}
+
+W pierwszej fazie projektu skupiono siê na kluczowych zagadnieniach maj±cych wp³yw na ostateczny kszta³t serwisu. Powsta³y wtedy m.in. takie
+dokumenty jak Software Development Plan czy przypadki u¿ycia. Zosta³a uzgodniona wspólna wizja i opracowane zosta³y szczegó³y techniczne.
+Zaprojektowany zosta³ ponadto model interakcji z u¿ytkownikiem koñcowym. Ujrza³a ¶wiat³o dzienne pierwsza wersja nadzorcy oraz powsta³
+szkielet projektu utworzony w Django.\\
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/faza2.png}
+	\end{center}
+\end{wrapfigure}
+
+W efekcie tych prac, przed koñcem listopada mo¿na by³o zaprezentowaæ dzia³aj±cy przyk³ad gry dwuosobowej nadzorowanej przed Nadzorcê. Gra ta
+jednak by³a uruchamiana z linii poleceñ. Warto jednak wspomnieæ, i¿ model komunikacji miêdzy uczestnikami (botami i sêdzi±) by³ bliski koñcowego, 
+tj. programy porozumiewa³y siê korzystaj±c ze standarowego wej¶cia i wyj¶cia.\\
+
+\vspace{1cm}
+Druga faza projektu zaowocowa³a powstaniem interfejsu graficznego. Mo¿liwe sta³o siê logowanie i rejestracja na stronie, oraz podstawowa 
+dzia³alno¶æ zwi±zana z u¿ytkowaniem serwisu. Da³o siê m.in. stworzyæ now± grê czy wys³aæ bota graj±cego w dan± grê (i realizuj±cego protokó³ okre¶lony w regu³ach gry).\\
+
+Udostêpniona zosta³a ponadto mo¿liwo¶æ uruchomienia meczu pomiêdzy dowolnymi dwoma botami graj±cymi w t± sam± grê. Wyniki takich meczów
+by³y nastêpnie zapisywane w bazie danych. Zosta³y równie¿ poczynione pierwsze kroki w celu zapewnienia bezpieczeñstwa na stronie. Dodano podstawow±
+obs³ugê b³êdów zabezpieczaj±c± przed najprostszymi typami ataków.\\
+
+Dodatkowym rezultatem tej czê¶ci projektu by³o wprowadzenie do projektu AI-Arena modu³u Gearman - zewnêtrzenego modu³u odpowiedzialnego 
+za kolejkowanie zleconych zadañ. W czasie tej fazy zosta³a dodana równiez funkcjonalno¶æ automatycznej generacji dokumentacji.\\
+
+\vspace{1cm}
+\begin{wrapfigure}{l}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/faza3.png}
+	\end{center}
+\end{wrapfigure}
+Podczas trzeciej fazy projektu zosta³ znacznie rozwiniêty interfejs u¿ytkownika. Zosta³y dodane funkcjonalno¶ci dodatkowe, zbêdne z punktu widzenia
+funkcjonowania serwisu, jednak u³atwiaj±ce jego u¿ycie. Powsta³y modu³y odpowiedzialne za wy¶wietlanie kodu ¼ród³owego, dodawanie konkursów, 
+profile u¿ytkownika i preferencje, ranking czy komentarze. Strona internetowa zyska³a tak¿e nowy wygl±d dziêki arkuszom stylów. 
+W niektórych miejscach zosta³y dodane równie¿ skrypty JavaScript, sprawiaj±ce, ¿e interakcja z u¿ytkownikiem sta³a siê bardziej dynamiczna.\\
+
+W miêdzy czasie trwa³y prace równie¿ nad warstw± Nadzorcy. Dodane zosta³y skrypty umo¿liwiaj±ce automatyczn± kompilacjê 
+gier i botów wys³anych za po¶rednictwem serwisu webowego. Dodatkowo umo¿liwiono Nadzorcy przejêcie kontroli nad procesem (w celu jego zakoñczenia), 
+który przekroczy³ swój limit czasu b±d¼ pamiêci lub bêdzie postêpowa³ niezgodnie z regu³ami gry.\\
+
+Udostêpniona zosta³a botom równie¿ mo¿liwo¶æ zapisywania logów na standardowy strumieñ b³êdów. Komunikaty wypisane na strumieñ b³êdów bêda przekazywane
+botom po zakoñczeniu danej rozgrywki.\\
+
+Trzecia faza projektu zakoñczona zosta³a wro¿eniem systemu na udostêpniony go¶cinnie, przez Codility, serwer. 
+Zostali¶my przy tym poproszeni o przeprowadzenie w po³owie maja konkursu, pod patronatem Codility, w którym
+platforma AI-Arena mia³aby odgrywaæ znacz±c± rolê.\\
+
+Istotnym rezultatem tej czê¶ci projektu by³o równie¿ napisanie znacz±cej czê¶ci pracy licencjackiej. 
+Pó¼niejsze zmiany ogranicza³y siê do wprowadzania mniejszych zmian stylistycznych, b±d¼ poprawienia ogólnego uk³adu pracy.
+
+\vspace{1cm}
+\begin{wrapfigure}{r}{0.5\textwidth}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{img/faza4.png}
+	\end{center}
+\end{wrapfigure}
+Finalna, czwarta faza projektu obfitowa³a w wiele poprawek kodu, maj±cych na celu usprawnienie i poprawê interakcji z u¿ytkownikiem. Nie zosta³y
+dodane do frontendu ¿adne znacz±ce funkcjonalno¶ci. Udoskonalona zosta³a natomiast obs³uga b³êdów. Du¿y nacisk po³o¿ono równie¿ na bezpieczeñstwo 
+¶rodowiska, w którym sêdzia i boty s± uruchamiane. Do zapewnienia bezpieczeñstwa wykorzystano tzw. Sandboxa - mechanizm pozwalaj±cy na 
+odizolowanie ¶rodowiska systemu od tymczasowego ¶rodowiska programu.\\
+
+Ostateczn± formê przybra³a równie¿ dokumentacja kodu. Zosta³a do³±czona do repozytorium razem z pozosta³± czê¶ci± projektu. Mo¿na j± w wygodny 
+sposób przegl±daæ z wykorzystaniem przegl±darki internetowej.\\
+
+Przeprowadzony zosta³ szereg testów: zarówno testów sprawdzaj±cych scenariusze u¿ycia systemu, jak i sprawdzaj±ce przypadki niew³a¶ciwego jego 
+u¿ycia. Kluczowym testem okaza³ siê konkurs zorganizowany na pro¶bê Codility. Okaza³o siê, ¿e ...... << Do uzupe³nienia po tym konkursie >> .....\\
+
+\chapter{Przysz³o¶æ projektu}
+
+Projekt powinien rozwijaæ siê jako niezale¿ny serwis internetowy. Jest on projektem open-source'owym udostêpnionym na licencji GPL,
+czyli osoby zainteresowane rozwijaniem go, mog± ³atwo uzyskaæ prawa do modyfikacji kodu. Licencja GPL jest najbardziej popularn±
+licencj± wolnego oprogramowania, daje ona u¿ytkownikom nastêpuj±ce cztery wolno¶ci:
+\begin{itemize}
+    \item{wolno¶æ uruchomienia programu w dowolnym celu}
+    \item{wolno¶æ analizowania jak program dzia³a i dostosowywania go do swoich potrzeb}
+    \item{wolno¶æ rozpowszechniania niezmodyfikowanej kopii programu}
+    \item{wolno¶æ udoskonalania programu i publicznego rozpowszechniania w³asnych ulepszeñ}
+\end{itemize}
+Autorzy serwisu maj± nadziejê, ¿e u¿ycie licencji GPL pozwoli serwisowi AI-Arena rozwijaæ siê przy pomocy spo³eczno¶ci
+programistów sztucznej inteligencji gdyby twórcy przestali mieæ mo¿liwo¶æ dalszego zajmowania siê serwisem.\\
+
+Nale¿y przy tym dodaæ, i¿ licencja GPL zak³ada, i¿ ka¿dy program wykorzystuj±cy kod udostêpniony na zasadzie tej licencji równie¿ bêdzie
+udostêpniony na tych samych zasadach. Ogranicza to mo¿liwo¶c wykorzystania kodu projektu w zastosowaniach wymagaj±cych tajno¶ci kodu.
+Autorzy pragn± w tym miejscu zachêciæ wszystkich zainteresowanych dalszym rozwojem do kontaktu z nami oraz do odwiedzenia 
+repozytorium zawieraj±cego najbardziej aktualn± wersjê (\url{https://github.com/Buzdygan/ai-arena/}). Repozytorium to zawiera równie¿ 
+powsta³± dokumentacjê (równie¿ generowan± automatycznie). Poniewa¿ na chwilê obecn± liczymy bardziej na polskich developerów, 
+wiêkszo¶æ dokumentów jest dostêpna tylko w jêzyku polskim. Wyj±tkiem jest dokumentacja generowana automatycznie napisana w jêzyku angielskim.\\
+
+Ambicj± twórców serwisu jest uczynienie go centrum rozwoju dziedziny sztucznej inteligencji zwi±zanej z tworzeniem inteligentnych botów,
+dzia³aj±cych w warunkach rywalizacji. Swoboda w dodawaniu w³asnych gier/wyzwañ umo¿liwia rozwijanie serwisu przez jego u¿ytkowników.
+Istotnym celem jest stworzenie spo³eczno¶ci programistów/badaczy, którzy mogliby wymieniaæ siê pomys³ami na temat rozwi±zañ
+na ³amach serwisu.\\
+
+Serwis mo¿e byæ wykorzystany równie¿ przez firmy szukaj±ce rozwi±zañ skomplikowanych problemów optymalizacyjnych
+\footnote{Zauwa¿my, ¿e w tym przypadku licencja GPL nie ogranicza firm. Rozwi±zanie zg³oszonego problemu s± bowiem w³asno¶ci±
+U¿ytkownika, który je wys³a³ w ramach normalnego u¿ycia systemu (nie za¶ jako wykorzystanie w ramach swojego projektu).
+Nie jest on zatem zobowi±zany do publikowania swojego kodu i mo¿e z nim zrobiæ co chce, w szczególno¶ci mo¿e odsprzedaæ go 
+zainteresowanej firmie.}.
+Wystarczy, ¿e stworz± odpowiedni± grê i zorganizuj± konkurs dla u¿ytkowników serwisu. Przyk³adem platformy
+organizuj±cej podobne konkursy mo¿e byæ tunedit.com.\\
+
+Pierwsz± okazj± do wykorzystania AI-Arena bêdzie konkurs organizowany we wspó³pracy z firm± Codility. Odbêdzie siê on
+przy okazji fina³ów mistrzostw ¶wiata w programowaniu zespo³owym organizowanego w maju 2012 roku w Warszawie. Bêdzie
+to konkurs programów walcz±cych w grê przygotowan± przez Codility. Za kontrolowanie rozwi±zañ uczestników, rozgrywanie
+meczy i opracowanie rankingu bêdzie odpowiedzialne AI-Arena.
+
+\chapter{Podzia³ prac}
+
+\section{Jakub Tla³ka}
+\begin{itemize}
+    \item{Rola w zespole} - Lider projektu
+        \begin{itemize}
+            \item{Ustalanie terminów dodatkowych spotkañ}
+            \item{Koordynowanie zadañ w platformie Redmine}
+            \item{Prezentacja postêpów prac i planów na najbli¿szy okres, na spotkaniach z prowadz±cym zajêcia}
+        \end{itemize}
+    \item{Kod ¼ród³owy}
+        \begin{itemize}
+            \item{Modele w bazie danych}
+            \item{Ekran uruchamiania pojedynczej rozgrywki}
+            \item{Generowanie rankingu do konkursu}
+            \item{Wy¶wietlanie informacji o konkursie wraz z rankingiem}
+            \item{Testy interfejsu graficznego}
+            \item{Automatyczna dokumentacja}
+        \end{itemize}
+    \item{Praca licencjacka}
+        \begin{itemize}
+            \item{Rozdzia³ 1: Wprowadzenie}
+            \item{Rozdzia³ 2: Metodologia Pracy}
+            \item{Rozdzia³ 4: Podstawowe pojêcia}
+            \item{Rozdzia³ 5: Zastosowania w nauce i biznesie}
+            \item{Rozdzia³ 6: Podobne platformy}
+            \item{Dodatek A: przyk³adowe gry}
+        \end{itemize}
+    \item{Dokumentacja}
+        \begin{itemize}
+            \item{Plan architektury serwisu}
+            \item{Model bazy danych}
+        \end{itemize}
+    \item{Inne}
+        \begin{itemize}
+            \item{Ustalenie wspó³pracy z serwisem Codility - wspólne zorganizowanie konkursu programów walcz±cych przy okazji akademickich mistrzostw ¶wiata w programowaniu zespo³owym}
+            \item{Wdro¿enie serwisu AI-Arena na serwerze Codility}
+            \item{Usuwanie b³êdów}
+            \item{Kontrola przesy³anego kodu}
+        \end{itemize}
+\end{itemize}
+
+\section{Micha³ Kawiak}
+\begin{itemize}
+    \item{Rola w zespole} - Zastêpca lidera projektu
+    \item{Kod ¼ród³owy}
+        \begin{itemize}
+            \item{Modu³ logowania i rejestracji}
+            \item{Profil u¿ytkownika}
+            \item{Tworzenie nowej gry}
+            \item{Wy¶wietlanie szczegó³ów gry}
+            \item{Dodawanie komentarzy do gier}
+            \item{Dodawanie komentarzy do konkursów}
+            \item{Usuwanie i edycja gier}
+            \item{Usuwanie i edycja konkursów}
+            \item{Wy¶wietlanie kodu ¼ród³owego Sêdziego}
+            \item{Wysy³anie bota do gry z menu gry}
+            \item{Edycja profilu u¿ytkownika}
+            \item{Dodanie podstawowej funkcjonalno¶ci JS do serwisu}
+            \item{Zapewnienie czê¶ci obs³ugi b³êdów}
+            \item{Dodanie ról u¿ytkowników: Moderator gry i konkursu}
+            \item{Kompilacja przes³anych programów z u¿yciem skryptów napisanych przez Szymona Majewskiego}
+        \end{itemize}
+    \item{Praca licencjacka}
+        \begin{itemize}
+            \item{Rozdzia³ 9: Dokumentacja u¿ytkowa i opis implementacji}
+            \item{Rozdzia³ 11: Harmonogram prac}
+            \item{Rozdzia³ 3: Wymagania projektowe}
+            \item{Rozdzia³ 7.4: Serwis webowy}
+            \item{Czê¶æ rozdzia³u 2: Metodologia pracy} - dotycz±ca opisu procesu ¶ledzenia zmian
+            \item{Mniejsze poprawki w pracy}
+        \end{itemize}
+    \item{Dokumentacja}
+        \begin{itemize}
+            \item{Dokumentacja przypadków u¿ycia}
+            \item{Diagram przypadków u¿ycia}
+            \item{Sowtware Development Plan}
+            \item{Pierwsza wersja wizji serwisu}
+        \end{itemize}
+    \item{Inne}
+        \begin{itemize}
+            \item{Pomoc Jakubowi Tla³ce w koordynacji projektu - g³ównie w zakresie GUI}
+            \item{Usuwanie powstaj±cych na bie¿±co b³êdów w kodzie}
+            \item{Kontrola przes³anego kodu}
+        \end{itemize}
+\end{itemize}
+\section{Szymon Majewski}
+\begin{itemize}
+    \item{Rola w zespole} - Deweloper backendu
+    \item{Kod ¼ród³owy}
+    	\begin{itemize}
+    		\item Przesy³anie komunikatów
+    		\item Przeprowadzanie rozgrywki
+    		\item Zbieranie logów
+    		\item Ograniczenie zu¿ycia zasobów przez procesy
+    		\item Pomiar zu¿ycia zasobów przez procesy
+    		\item Automayczny makefile
+    	\end{itemize}
+    \item{Praca licencjacka}
+    	\begin{itemize}
+    		\item Pocz±tkowy szkielet pracy
+    		\item Rozdzia³y dotycz±ce nadzorcy 7.2 i 8.1
+    		\item Fragmenty rozdzia³ów 1 i 2
+    	\end{itemize}
+    \item{Dokumentacja}
+    \item{Inne}
+\end{itemize}
+\section{Karol ¯ebrowski}
+\begin{itemize}
+    \item{Rola w zespole} - Tester/Deweloper
+    \item{Kod ¼ród³owy}
+        \begin{itemize}
+            \item Wykorzystanie frameworku Gearman
+            \item Automatyczne testy aplikacji
+            \item Testowanie z poziomu GUI
+            \item Usuwanie drobnych b³êdów
+        \end{itemize}
+    \item{Praca licencjacka}
+        \begin{itemize}
+            \item Podrozdzia³ 7.3 Scheduler
+            \item Podrozdzia³ 7.5 Baza danych
+            \item Podrozdzia³ 7.6 Testowanie
+            \item Podrozdzia³ 8.1 Django
+            \item Fragmenty rozdzia³u 5
+            \item Drobne poprawki stylistyczne
+        \end{itemize}
+    \item{Dokumentacja}
+        \begin{itemize}
+            \item Wizja serwisu
+            \item Komunikacja ze Schedulerem Partii
+        \end{itemize}
+    \item{Inne}
+        \begin{itemize}
+            \item Research na temat Gearmana
+            \item Przygotowanie i poprowadzenie prezentacji na zajêciach ZPP pt."Django - porównanie z innymi web frameworkami"
+        \end{itemize}
+\end{itemize}
 
 \chapter{Podsumowanie}
 
-\chapter{Podzia{\l} prac}
+Praca nad serwisem AI-Arena by³a ciekawym, ale wymagaj±cym do¶wiadczeniem. S³uszn± decyzj± by³o rozdzielenie struktury projektu
+na niezale¿ne czê¶ci i zgodny z nimi podzia³ pracy w zespole. Najwiêkszym wyzwaniem okaza³o siê zaprojektowanie
+systemu rozgrywania meczy, tak by niemo¿liwe by³y ¿adne nadu¿ycia ze strony u¿ytkowników, a jednocze¶nie pozwala³
+on na du¿± swobodê dodawania ró¿norodnych gier. Za bardzo pozytywny fakt mo¿na uznaæ szybkie zainteresowanie
+i zapotrzebowanie na wykorzystanie AI-Arena przy okazji Mistrzostw ¦wiata w Programowaniu Zespo³owym.\\
+
+Postêpy w pracach by³y regularne dziêki co tygodniowym spotkaniom na zajêciach z prowadz±cym. Wyznaczanie krótkoterminowych
+celów zapobieg³o opó¼nieniom wzglêdem planowanego przyrostu. Równie dobrym rozwi±zaniem by³y spotkania w obrêbie zespo³u,
+na których kontrolowany by³ postêp prac w danym tygodniu. Najczê¶ciej u¿ywanym przez nas narzêdziem do koordynowania pracy
+okaza³y siê Google Documents. Dodatkowo, u¿ywany by³ równie¿ system Redmine w celu kontroli przydzia³u zadañ i podzia³u pracy. 
+W trakcie roku okaza³o siê jednak, i¿ ilo¶æ czasu, któr± trzeba w³o¿yæ w zarz±dzanie projektem za pomoca tego systemu jest nieproporcjonalnie du¿a w stosunku do
+wielko¶ci zespo³u.\\
+
+Podsumowuj±c, tworzenie serwisu AI-Arena podczas zajêæ ZPP by³o bardzo cennym do¶wiadczeniem. Podczas pracy
+rozwinêli oni nie tylko umiejêtno¶ci programistyczne, ale przede wszystkim umiejêtno¶æ pracy w zespole, podzia³u
+obowi±zków oraz samodzielnego prowadzenia projektu, ³±cznie z jego wdro¿eniem. Wierzymy, ¿e zdobyta wiedza bêdzie pomocna
+w przysz³ym ¿yciu zawodowym, zarówno w pracy jak i w zarz±dzaniu w³asnymi projektami.\\
 
 \chapter{Spis p{\l}yty}
 
 \appendix
 
-\chapter{Przykladowa gra}
+\chapter{Przykladowe gry}
+
+\section{Szachy}
+    Znana na ca³ym ¶wiecie gra dwuosobowa, rozgrywana na kwadratowej planszy o 64 polach. Gracze wykonuj±
+    naprzemienne posuniêcia figurami, a gra koñczy siê remisem, b±d¼ zwyciêstwem którego¶ z graczy.
+    Gra jest ca³kowicie deterministyczna, ale jej z³o¿ono¶æ nie pozwoli³a dotychczas na znalezienie
+    uniwersalnej strategii wygrywaj±cej, b±d¼ nieprzegrywaj±cej. Jednak obecne programy s± ju¿ od wielu
+    lat w stanie wygraæ z najlepszymi graczami ludzkimi.
+
+\section{Poker}
+    Gra wieloosobowa, zawieraj±ca elementy hazardu. Rozgrywka zaczyna siê od losowego
+    przydzia³u kart graczom, dlatego nie istnieje jedyna optymalna strategia grania.
+    Celem gry jest zdobycie wszystkich punktów posiadanych przez innych graczy, które s± potrzebne,
+    by uczestniczyæ w kolejnych rozdaniach. Istnieje wiele wariantów Pokera, najbardziej znanym
+    jest tzw Texas Hold'em.
+
+\section{Gra gie³dowa}
+    Ka¿dy gracz ma pocz±tkowo okre¶lone fundusze. Nastêpnie inwestuje on w akcje dostêpne na gie³dzie.
+    W zale¿no¶ci od inwestycji innych graczy, zmienia siê warto¶æ akcji, a co za tym idzie, dorobek
+    ka¿dego z graczy. Celem jest oczywi¶cie powiêkszenie swojego kapita³u o jak najwiêksz± sumê,
+    w kolejnych rundach.
+
+\section{Gra w wybory}
+    Programy steruj± fikcyjnymi partiami politycznymi. Maj± ograniczony bud¿et, który mog± przeznaczaæ
+    na reklamy, agencje public relations, preparowanie zarzutów pod adresem przeciwnej partii itp.
+    Jest przyjêty konkretny model tego, jak akcje wp³ywaj± na wyniki wyborów, ale programy go nie znaj±.
+    Mog± analizowaæ efekty swoich dzia³añ na podstawie sonda¿y, które pojawiaj± siê po kolejnych rundach.
+    Wygrywa program, który uzyska najwiêksze poparcie w wyborach.
+
 
 \chapter{Przykladowe programy}
 

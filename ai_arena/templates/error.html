@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel='stylesheet' href='{{ MEDIA_URL }}/error.css' />
+{% endblock %}
+
+{% block content %}
+<h1> We're sorry </h1>
+
+<h3> An error has occured </h3>
+
+<p>
+The file that you tried to upload has probably some issues!
+Please check in game results to get more info!
+</p>
+
+<p> 
+If you didn't just upload any files this is probably our bug - please let us know about it!
+</p>
+
+{% if error_details %}
+<h3> Here are error details</h3>
+
+<p id='error_details'>
+{% for line in error_details %}
+   {{ line }} <br/>
+{% endfor %}
+</p>
+{% endif %}
+{% endblock %}
