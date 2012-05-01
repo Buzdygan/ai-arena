@@ -1,7 +1,7 @@
 from os import system
 from ai_arena import settings
 
-def compile(src, target, lang):
+def compile(src, target, lang, log_target=None):
     """
         Executes makefile with params LANG, SRC and TARGET.
 
@@ -14,6 +14,8 @@ def compile(src, target, lang):
         The command also creates a log file capturing all logs output'd to command line
         and stores it to file named <target>.log in the same directory as source file.
     """
-    return system('make -f ' + settings.MAKEFILE_PATH + ' LANG=' + lang +
-            ' SRC=' + src + ' TARGET=' + target + ' 2> ' + target + '.log')
+    command = 'make -f ' + settings.MAKEFILE_PATH + ' LANG=' + lang + ' SRC=' + src + ' TARGET=' + target
+    if log_target:
+        command += ' 2> ' + log_target
+    return system(command)
 

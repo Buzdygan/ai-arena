@@ -35,9 +35,10 @@ class Game(models.Model):
         from django.core.files import File
 
         src = settings.MEDIA_ROOT + self.judge_source_file.name
-        target = settings.MEDIA_ROOT + self.name + '.bin' 
+        log_target = settings.COMPILATION_TEMP_PATH + self.name + '.log'
+        target = settings.COMPILATION_TEMP_PATH + self.name + '.bin' 
         lang = self.judge_lang
-        compile(src, target, lang)
+        compile(src, target, lang, log_target)
 
         # Use compiled file in object game
         f = File(open(target))
@@ -79,10 +80,11 @@ class Bot(models.Model):
         from ai_arena.contests.compilation import compile
         from django.core.files import File
 
-        src = settings.MEDIA_ROOT + self.bot_source_file.name + settings.SOURCE_FORMATS[self.bot_lang]
-        target = settings.MEDIA_ROOT + self.bot_source_file.name + '.bin' 
+        src = settings.MEDIA_ROOT + self.bot_source_file.name
+        log_target = settings.COMPILATION_TEMP_PATH + self.name + '.log'
+        target = settings.COMPILATION_TEMP_PATH + self.name + '.bin' 
         lang = self.bot_lang
-        compile(src, target, lang)
+        compile(src, target, lang, log_target)
 
         # Use compiled file in object game
         f = File(open(target))
