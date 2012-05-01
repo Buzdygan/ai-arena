@@ -230,3 +230,10 @@ PYTHON_TYPES = []
 # contests/game_launcher.py
 
 GEARMAN_HOST = 'localhost:4730'
+
+
+# May Contest constants
+
+MAY_CONTEST_NAME = "May Contest"
+MAY_CONTEST_GAME_NAME = "POK"
+MAY_CONTEST_DEFAULT_BOT_NAME = "POK_default_bot"

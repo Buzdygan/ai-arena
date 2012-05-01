@@ -1,18 +1,17 @@
+from django.conf import settings
 from ai_arena.contests.models import Game, Bot, Contest, Ranking
 
 # TODO: change it when judge for may contest is ready
 def getMayGame():
-    return Game.objects.get(name='test_game_kk')
-
+    return Game.objects.get(name=settings.MAY_CONTEST_GAME_NAME)
 
 # TODO: change it when sample bot for may contest is ready
 def getDefaultMayContestBot():
-    return Bot.objects.get(id=1)
+    return Bot.objects.get(name=settings.MAY_CONTEST_DEFAULT_BOT_NAME)
 
-# TODO: Change it when may contest object will be created
 def getDefaultMayContest():
-    return Contest.objects.all()[0]
+    return Contest.objects.get(name=settings.MAY_CONTEST_NAME)
 
-# TODO: change it when may contest object will be created
 def getDefaultMayRanking():
-    return Ranking.objects.all()[0]
+    contest = getDefaultMayContest()
+    return contest.ranking
