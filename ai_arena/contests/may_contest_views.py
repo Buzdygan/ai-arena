@@ -10,7 +10,7 @@ from contests.forms import MayContestSendBotForTest
 from ai_arena.contests.models import Bot, Game, Match
 from ai_arena import settings
 from ai_arena.contests.compilation import compile
-from ai_arena.contests.bot_views import create_bot_from_request
+from ai_arena.contests.bot_views import create_bot_from_request, send_bot
 from ai_arena.contests.game_launcher import launch_single_match
 from ai_arena.contests.may_contest_helper_functions import *
 
@@ -56,6 +56,17 @@ def show_ladder(request):
                 'ladder': ladder,
             },
             context_instance=RequestContext(request))
+
+@login_required
+def send_bot(request):
+    """
+        This view is used when user wants to send bot from game details view.
+        It is different from simple send bot view, because game is known, so there is
+        no need to pick it form list.
+    """
+
+    game_id = getMayGame().id
+    return send_bot(request, game_id)
 
 @login_required
 def testing(request):

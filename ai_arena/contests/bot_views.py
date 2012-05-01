@@ -131,11 +131,7 @@ def send_bot_with_game(request):
         It is different from simple send bot view, because game is known, so there is
         no need to pick it form list.
     """
-    # Na czas konkursu majowego funkcjonalnosc musi zostac nieznacznie zmieniona
-    # Potem nalezy usunac ponizsze 2 linie i odkomentowac pozostale
-    game_id = getMayGame().id
-    return send_bot(request, game_id)
-    """
+
     if request.method == 'POST':
         form = SendBotWithGameForm(request.POST, request.FILES)
         if form.is_valid():
@@ -159,4 +155,3 @@ def send_bot_with_game(request):
                 'form': form,
             },
             context_instance=RequestContext(request))
-    """
