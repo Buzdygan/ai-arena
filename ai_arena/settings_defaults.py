@@ -168,8 +168,8 @@ LANGUAGES = (
     ('PYTHON', 'Python'),
 )
 
-MAKEFILE_DIR = os.path.abspath('../makefile/')
-MAKEFILE_PATH = MAKEFILE_DIR + '/Makefile'
+MAKEFILE_DIR = ABS_DIR('../makefile/')
+MAKEFILE_PATH = MAKEFILE_DIR + 'Makefile'
 
 # contests/models.py
 
