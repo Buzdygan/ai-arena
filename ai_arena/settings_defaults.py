@@ -247,14 +247,14 @@ MAY_MODERATOR_NAME = "may_master"
 MAY_CONTEST_NAME = "May Contest"
 MAY_CONTEST_BEGIN_DATE = '2012-05-12 00:00'
 MAY_CONTEST_END_DATE = '2012-05-16 23:59'
-MAY_CONTEST_REGULATIONS_PATH = "../files/may_game/contest_regulations.txt"
+MAY_CONTEST_REGULATIONS_PATH = ABS_DIR("../files/may_game/contest_regulations.txt")
 
 MAY_CONTEST_GAME_NAME = "POK"
 MAY_CONTEST_GAME_JUDGE_LANG = CPP_LANGUAGE 
-MAY_CONTEST_GAME_JUDGE_PATH = "../files/may_game/pok_judge.cpp"
-MAY_CONTEST_GAME_RULES_PATH = "../files/may_game/pok_rules.txt"
+MAY_CONTEST_GAME_JUDGE_PATH = ABS_DIR("../files/may_game/pok_judge.cpp")
+MAY_CONTEST_GAME_RULES_PATH = ABS_DIR("../files/may_game/pok_rules.txt")
 MAY_CONTEST_PLAYERS_NUMBER = 2
 
-MAY_CONTEST_DEFAULT_BOT_PATH = "../files/may_game/pok_bot.cpp"
+MAY_CONTEST_DEFAULT_BOT_PATH = ABS_DIR("../files/may_game/pok_bot.cpp")
 MAY_CONTEST_DEFAULT_BOT_NAME = "POK_default_bot"
 MAY_CONTEST_DEFAULT_BOT_LANG = CPP_LANGUAGE 
