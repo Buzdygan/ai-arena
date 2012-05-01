@@ -50,7 +50,7 @@ urlpatterns = patterns('',
     
     url(r'^send_bot/$', 'contests.bot_views.send_bot_with_game', name='send_bot_with_game'),
     url(r'^send_bot/(?P<game_id>\d+)/$', 'contests.bot_views.send_bot'),
-    url(r'^send_bot_may_contest/$', 'contests.may_contest_views.send_bot', name='may_contest_send_bot'),
+    url(r'^send_bot_may_contest/$', 'contests.may_contest_views.may_contest_send_bot', name='may_contest_send_bot'),
 
     url(r'^results/match_results_list/$', 'contests.match_views.match_results_list', name='match_results_list'),
     url(r'^results/show_match_result/(?P<match_id>\d+)/$', 'contests.match_views.show_match_result', name='show_match_result'),

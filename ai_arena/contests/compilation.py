@@ -15,5 +15,5 @@ def compile(src, target, lang):
         and stores it to file named <target>.log in the same directory as source file.
     """
     return system('make -f ' + settings.MAKEFILE_PATH + ' LANG=' + lang +
-            ' SRC=' + src + ' TARGET=' + target + ' 2> ' + src + '.log')
+            ' SRC=' + src + ' TARGET=' + target + ' 2> ' + target + '.log')
 

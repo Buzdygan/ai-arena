@@ -1,3 +1,4 @@
+from os import system
 from django.db import models
 from django.contrib.auth.models import User
 from itertools import combinations
@@ -27,6 +28,27 @@ class Game(models.Model):
     judge_lang = models.CharField(max_length=settings.LANG_LENGTH, choices=settings.LANGUAGES)
     moderators = models.ManyToManyField(User, related_name='game_moderators', null=True, blank=True)
 
+    def compile_judge(self):
+        """ Compile source file to directory with source file """
+
+        from ai_arena.contests.compilation import compile
+        from django.core.files import File
+
+        src = settings.MEDIA_ROOT + self.judge_source_file.name
+        target = settings.MEDIA_ROOT + self.name + '.bin' 
+        lang = self.judge_lang
+        compile(src, target, lang)
+
+        # Use compiled file in object game
+        f = File(open(target))
+        self.judge_bin_file.save(self.name, f)
+
+        # Save changes made to game object
+        self.save()
+
+        # Remove compiled file from directory with source
+        system('rm ' + target)
+
 
 class Bot(models.Model):
     """
@@ -50,6 +72,27 @@ class Bot(models.Model):
     bot_bin_file = models.FileField(upload_to=path(settings.BOTS_BINARIES_DIR))
     bot_source_file = models.FileField(upload_to=path(settings.BOTS_SOURCES_DIR))
     bot_lang = models.CharField(max_length=settings.LANG_LENGTH, choices=settings.LANGUAGES)
+
+    def compile_bot(self):
+        """ Compile source file to directory with source file """
+
+        from ai_arena.contests.compilation import compile
+        from django.core.files import File
+
+        src = settings.MEDIA_ROOT + self.bot_source_file.name + settings.SOURCE_FORMATS[self.bot_lang]
+        target = settings.MEDIA_ROOT + self.bot_source_file.name + '.bin' 
+        lang = self.bot_lang
+        compile(src, target, lang)
+
+        # Use compiled file in object game
+        f = File(open(target))
+        self.bot_bin_file.save(self.name, f)
+
+        # Save changes made to game object
+        self.save()
+
+        # Remove compiled file from directory with source
+        system('rm ' + target)
 
 class Ranking(models.Model):
     """

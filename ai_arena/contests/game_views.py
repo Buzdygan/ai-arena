@@ -43,22 +43,7 @@ def create_new_game(request):
             game.judge_lang = request.POST['judge_language']
             game.save()
             game.moderators.add(request.user)
-
-            # Compile source file to directory with source file
-            src = settings.MEDIA_ROOT + game.judge_source_file.name
-            target = settings.MEDIA_ROOT + game.judge_source_file.name + '.bin' 
-            lang = game.judge_lang
-            compile(src, target, lang)
-
-            # Use compiled file in object game
-            f = File(open(target))
-            game.judge_bin_file.save(request.POST['game_name'], f)
-
-            # Save changes made to game object
-            game.save()
-
-            # Remove compiled file from directory with source
-            system('rm ' + target)
+            game.compile_judge()
             
             return HttpResponseRedirect('/game_details/' + str(game.id) + '/')
     else:

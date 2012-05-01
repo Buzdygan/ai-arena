@@ -12,9 +12,6 @@ from ai_arena.contests.compilation import compile
 from ai_arena.contests.forms import SendBotForm, SendBotWithGameForm
 from ai_arena.contests.models import Game, Bot
 
-# na konkurs majowy potrzebny jest ten import
-from ai_arena.contests.may_contest_helper_functions import getMayGame
-
 @login_required
 def create_bot_from_request(request, game, bot_field='bot_source'):
     """

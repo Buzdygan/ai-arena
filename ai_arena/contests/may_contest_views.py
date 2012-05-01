@@ -48,7 +48,7 @@ def match_details(request, match_id):
 
 
 def show_ladder(request):
-    ranking = getDefaultMayRanking()
+    ranking = get_default_may_ranking()
     ladder = sorted(ranking.botranking_set.all(), key=lambda botranking: botranking.position)
     return render_to_response('may_contest/show_ranking.html',
             {
@@ -58,14 +58,14 @@ def show_ladder(request):
             context_instance=RequestContext(request))
 
 @login_required
-def send_bot(request):
+def may_contest_send_bot(request):
     """
         This view is used when user wants to send bot from game details view.
         It is different from simple send bot view, because game is known, so there is
         no need to pick it form list.
     """
 
-    game_id = getMayGame().id
+    game_id = get_may_game().id
     return send_bot(request, game_id)
 
 @login_required
@@ -80,7 +80,7 @@ def testing(request):
                     context_instance=RequestContext(request))
         else:
             # Handle a bot
-            (exit_status, bot) = create_bot_from_request(request, getMayGame())
+            (exit_status, bot) = create_bot_from_request(request, get_may_game())
             if exit_status != 0:
                 return render_to_response('error.html',
                         {
@@ -91,7 +91,7 @@ def testing(request):
             # Check is user uploaded also an opponent
             # If so - handle it
             if 'opponent_source' in request.FILES:
-                (exit_status, opp) = create_bot_from_request(request, getMayGame(), bot_field='opponent_source')
+                (exit_status, opp) = create_bot_from_request(request, get_may_game(), bot_field='opponent_source')
                 if exit_status != 0:
                     # error occured
                     return render_to_response('error.html',
@@ -101,9 +101,9 @@ def testing(request):
                             context_instance = RequestContext(request))
             # otherwise - use default bot as an opponent
             else: 
-                opp = getDefaultMayContestBot()
+                opp = get_default_may_contest_bot()
             
-            launch_single_match(getMayGame(), [bot, opp])
+            launch_single_match(get_may_game(), [bot, opp])
             
             return HttpResponseRedirect('/testing/uploaded/')
 
