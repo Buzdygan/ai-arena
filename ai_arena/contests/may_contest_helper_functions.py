@@ -13,10 +13,10 @@ def create_may_game():
         game.min_players = settings.MAY_CONTEST_PLAYERS_NUMBER
         game.max_players = settings.MAY_CONTEST_PLAYERS_NUMBER
         game.judge_lang = settings.MAY_CONTEST_GAME_JUDGE_LANG
-        moderator = User.objects.get(username=settings.MAY_MODERATOR_NAME)
-        game.judge_source_file.save(game.name, File(open(settings.MAY_CONTEST_GAME_JUDGE_PATH)))
+        game.judge_source_file.save(game.name + settings.SOURCE_FORMATS[game.judge_lang], File(open(settings.MAY_CONTEST_GAME_JUDGE_PATH)))
         game.rules_file.save(game.name, File(open(settings.MAY_CONTEST_GAME_RULES_PATH)))
         game.save()
+        moderator = User.objects.get(username=settings.MAY_MODERATOR_NAME)
         game.moderators.add(moderator)
         game.compile_judge()
         return game
