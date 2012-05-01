@@ -38,18 +38,21 @@ class Game(models.Model):
         log_target = settings.COMPILATION_TEMP_PATH + self.name + '.log'
         target = settings.COMPILATION_TEMP_PATH + self.name + '.bin' 
         lang = self.judge_lang
-        compile(src, target, lang, log_target)
+        exit_status = compile(src, target, lang, log_target)
+        if exit_status != 0:
+            log_file = open(log_target, 'r')
+            logs = parse_logs(log_file.read())
+            return (exit_status, logs)
+        else:
+            # Use compiled file in object bot
+            self.judge_bin_file.save(self.name, File(open(target)))
+     
+            # Save changes made to bot object
+            self.save()
 
-        # Use compiled file in object game
-        f = File(open(target))
-        self.judge_bin_file.save(self.name, f)
-
-        # Save changes made to game object
-        self.save()
-
-        # Remove compiled file from directory with source
-        system('rm ' + target)
-
+            # Remove compiled file from directory with source
+            system('rm ' + target)
+            return (exit_status, "")
 
 class Bot(models.Model):
     """
@@ -84,17 +87,21 @@ class Bot(models.Model):
         log_target = settings.COMPILATION_TEMP_PATH + self.name + '.log'
         target = settings.COMPILATION_TEMP_PATH + self.name + '.bin' 
         lang = self.bot_lang
-        compile(src, target, lang, log_target)
+        exit_status = compile(src, target, lang, log_target)
+        if exit_status != 0:
+            log_file = open(log_target, 'r')
+            logs = parse_logs(log_file.read())
+            return (exit_status, logs)
+        else:
+            # Use compiled file in object bot
+            self.bot_bin_file.save(self.name, File(open(target)))
+     
+            # Save changes made to bot object
+            self.save()
 
-        # Use compiled file in object game
-        f = File(open(target))
-        self.bot_bin_file.save(self.name, f)
-
-        # Save changes made to game object
-        self.save()
-
-        # Remove compiled file from directory with source
-        system('rm ' + target)
+            # Remove compiled file from directory with source
+            system('rm ' + target)
+            return (exit_status, "")
 
 class Ranking(models.Model):
     """

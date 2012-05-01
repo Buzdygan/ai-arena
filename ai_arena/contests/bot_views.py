@@ -50,27 +50,13 @@ def create_bot_from_request(request, game, bot_field='bot_source'):
     bot.save()
 
     # Compile source file to directory with source file
-    src = settings.MEDIA_ROOT + bot.bot_source_file.name
-    target = settings.MEDIA_ROOT + bot.bot_source_file.name + '.bin' 
-    lang = bot.bot_lang
-    exit_status = compile(src, target, lang)
+    exit_status, logs = bot.compile_bot()
 
     if exit_status != 0:
-        log_file = open(src + '.log', 'r')
-        logs = parse_logs(log_file.read())
         bot.delete()
         return (exit_status, logs)
 
     else:
-        # Use compiled file in object bot
-        f = File(open(target))
-        bot.bot_bin_file.save(bot.name, f)
- 
-        # Save changes made to bot object
-        bot.save()
-
-        # Remove compiled file from directory with source
-        system('rm ' + target)
         return (exit_status, bot)
 
 
