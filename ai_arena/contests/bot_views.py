@@ -98,14 +98,6 @@ def send_bot(request, game_id):
             context_instance=RequestContext(request))
 
 
-def parse_logs(logs):
-    """
-        Helper funstion to prepare logs to display.
-
-        If we would pass logs simply without parsing they would be unreadable, 
-        e.g. new line chars would be ignored
-    """
-    return logs.split('\n')
 
 @login_required
 def send_bot_with_game(request):
