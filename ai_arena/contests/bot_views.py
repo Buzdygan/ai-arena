@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect
 from ai_arena import settings
 from ai_arena.contests.compilation import compile
 from ai_arena.contests.forms import SendBotForm, SendBotWithGameForm
-from ai_arena.contests.models import Game, Bot
+from ai_arena.contests.models import Game, Bot, Contest
 
 @login_required
 def create_bot_from_request(request, game, bot_field='bot_source'):
@@ -41,6 +41,9 @@ def create_bot_from_request(request, game, bot_field='bot_source'):
     if bot_field=='opponent_source':
         bot.name = 'opponent_from_' + datetime.now().isoformat().replace(':', '-').replace('.', '-')
 
+    if Bot.objects.filter(name=bot.name).count():
+        return (1, ["There is bot called %s already!" % bot.name], None)
+
     bot.bot_source_file = request.FILES[bot_field]
     bot.bot_lang = request.POST['bot_language']
     bot.game = game
@@ -54,30 +57,31 @@ def create_bot_from_request(request, game, bot_field='bot_source'):
 
     if exit_status != 0:
         bot.delete()
-        return (exit_status, logs)
+        return (exit_status, logs, None)
 
     else:
-        return (exit_status, bot)
+        return (exit_status, "", bot)
 
 
 @login_required
 def send_bot(request, game_id):
     """
         Displays form to send bot for a game with id equal to game_id.
-        If game_id is nto given or there is no Game object with id equal to game_id
+        If game_id is not given or there is no Game object with id equal to game_id
         then Exception is thrown
+        If contest_id is given, the bot is added to this contest as a contestant
     """
     if not game_id:
         raise Exception("In game_details: No game_id given")
-
     game = Game.objects.get(id=game_id)
+
     if game is None:
         raise Exception("In game_details: Wrong game_id given")
-    
+
     if request.method == 'POST':
         form = SendBotForm(request.POST, request.FILES)
         if form.is_valid():
-            (exit_status, logs) = create_bot_from_request(request, game)
+            (exit_status, logs, bot) = create_bot_from_request(request, game)
             if exit_status != 0:
                 # error occured
                 return render_to_response('error.html',
@@ -113,7 +117,7 @@ def send_bot_with_game(request):
             game = Game.objects.get(id = request.POST['game'])
             if game is None:
                 raise Exception("In send_bot_with_game: Wrong game_id given")
-            (exit_status, logs) = create_bot_from_request(request, game)
+            (exit_status, logs, bot) = create_bot_from_request(request, game)
             if exit_status != 0:
                 # error occured
                 return render_to_response('error.html',

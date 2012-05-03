@@ -80,23 +80,23 @@ def testing(request):
                     context_instance=RequestContext(request))
         else:
             # Handle a bot
-            (exit_status, bot) = create_bot_from_request(request, get_may_game())
+            (exit_status, logs, bot) = create_bot_from_request(request, get_may_game())
             if exit_status != 0:
                 return render_to_response('error.html',
                         {
-                            'error_details': bot,
+                            'error_details': logs,
                         },
                         context_instance = RequestContext(request))
 
             # Check is user uploaded also an opponent
             # If so - handle it
             if 'opponent_source' in request.FILES:
-                (exit_status, opp) = create_bot_from_request(request, get_may_game(), bot_field='opponent_source')
+                (exit_status, logs, opponent_bot) = create_bot_from_request(request, get_may_game(), bot_field='opponent_source')
                 if exit_status != 0:
                     # error occured
                     return render_to_response('error.html',
                             {
-                                'error_details': opp,
+                                'error_details': logs,
                             },
                             context_instance = RequestContext(request))
             # otherwise - use default bot as an opponent
