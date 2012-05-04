@@ -5,9 +5,26 @@
 {% endblock %}
 
 {% block content %}
-<div class='content_container'>
-    {% for bot in ladder %}
-    <div>{{ forloop.counter }}: {{ bot.bot.name }}</div>
-    {% endfor %}
-</div>
+    {% if ladder%}
+    <p>
+        <table>
+            <tr>
+                <td> Position </td>
+                <td> Bot name </td> 
+                <td> Owner </td>
+                <td> Matches played </td>
+                <td> Score </td>
+            </tr>
+            {% for rank in ladder %}
+            <tr>
+                <td> {{ rank.position }} </td>
+                <td> {{ rank.bot.name }} </td>
+                <td> {{ rank.bot.owner.username }} </td>
+                <td> {{ rank.matches_played }} </td>
+                <td> {{ rank.overall_score }} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </p>
+    {% endif %}
 {% endblock %}
