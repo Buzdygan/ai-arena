@@ -78,6 +78,8 @@ class Bot(models.Model):
     bot_source_file = models.FileField(upload_to=path(settings.BOTS_SOURCES_DIR))
     bot_lang = models.CharField(max_length=settings.LANG_LENGTH, choices=settings.LANGUAGES)
 
+    invalid = models.BooleanField(default=False)
+
     def compile_bot(self):
         """ Compile source file to directory with source file """
 

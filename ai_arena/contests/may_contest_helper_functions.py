@@ -90,3 +90,14 @@ def get_default_may_ranking():
     if not contest:
         raise Exception("There is no may contest")
     return contest.ranking
+
+def generate_ranking():
+    contest = get_default_may_contest()
+    if not contest:
+        raise Exception("There is no may contest")
+    contest.contestants.filter(invalid=True).delete()
+    game = get_may_game()
+    game_bots = Bot.objects.filter(game=game, invalid=False)
+    for bot in game_bots:
+        contest.contestants.add(bot)
+    contest.generate_group_ranking()

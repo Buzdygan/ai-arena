@@ -28,7 +28,7 @@ def create_bot_from_request(request, game, bot_field='bot_source'):
             log = "" if compilation succedes, where exit_status == 0
             and bot is created bot object.
     """
-    if Bot.objects.filter(owner=request.user).count >= settings.MAX_BOTS_PER_USER:
+    if Bot.objects.filter(owner=request.user).count() >= settings.MAX_BOTS_PER_USER:
         return(2, ["You can't upload more than %d bots." % settings.MAX_BOTS_PER_USER], None)
 
     # Save known fields
