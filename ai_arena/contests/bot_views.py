@@ -22,12 +22,15 @@ def create_bot_from_request(request, game, bot_field='bot_source'):
         apriopriate files in theirs final destination. In case of compilation
         failure bot object is not created.
 
-        Function returns 2-tuple:
-            (exit_status, logs) in case of compilation failure, where
+        Function returns 3-tuple:
+            (exit_status, logs, bot) in case of compilation failure, where
             exit_status != 0 and logs is a string representation of error or
-            (exit_status, bot) if compilation succedes, where exit_status == 0
+            log = "" if compilation succedes, where exit_status == 0
             and bot is created bot object.
     """
+    if Bot.objects.filter(owner=request.user).count >= settings.MAX_BOTS_PER_USER:
+        return(2, ["You can't upload more than %d bots." % settings.MAX_BOTS_PER_USER], None)
+
     # Save known fields
     bot = Bot()
     if 'bot_name' in request.POST and len(request.POST['bot_name']) > 0:
@@ -36,13 +39,14 @@ def create_bot_from_request(request, game, bot_field='bot_source'):
         if 'test_name' in request.POST and len(request.POST['test_name']) > 0:
             bot.name = request.POST['test_name']
         else:
-            bot.name = 'test_from_' + datetime.now().isoformat().replace(':', '-').replace('.', '-')
+            bot.name = settings.TEST_BOT_PREFIX + datetime.now().isoformat().replace(':', '-').replace('.', '-')
 
     if bot_field=='opponent_source':
-        bot.name = 'opponent_from_' + datetime.now().isoformat().replace(':', '-').replace('.', '-')
+        bot.name = settings.OPPONENT_TEST_BOT_PREFIX + datetime.now().isoformat().replace(':', '-').replace('.', '-')
 
-    if Bot.objects.filter(name=bot.name).count():
+    if Bot.objects.filter(name=bot.name).exclude(owner=request.user).count():
         return (1, ["There is bot called %s already!" % bot.name], None)
+    Bot.objects.filter(name=bot.name).delete()
 
     bot.bot_source_file = request.FILES[bot_field]
     bot.bot_lang = request.POST['bot_language']
