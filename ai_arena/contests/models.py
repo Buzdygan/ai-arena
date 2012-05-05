@@ -21,6 +21,12 @@ class Game(models.Model):
     name = models.CharField(max_length=settings.NAME_LENGTH)
     min_players = models.IntegerField(default=settings.GAME_MIN_PLAYERS_DEFAULT)
     max_players = models.IntegerField()
+
+    # in MB
+    memory_limit = models.IntegerField(default=settings.DEFAULT_GAME_MEMORY_LIMIT)
+    # in Miliseconds
+    time_limit = models.IntegerField(default=settings.DEFAULT_GAME_TIME_LIMIT)
+
     # File with rules of the Game
     rules_file = models.FileField(upload_to=path(settings.RULES_DIR))
     # Executable with judge
@@ -147,6 +153,12 @@ class Contest(models.Model):
     # Game related to the Contest
     game = models.ForeignKey(Game)
     # List of Bots participating in the Contest
+
+    # in MB
+    memory_limit = models.IntegerField(default=settings.DEFAULT_CONTEST_MEMORY_LIMIT)
+    # in Miliseconds
+    time_limit = models.IntegerField(default=settings.DEFAULT_CONTEST_TIME_LIMIT)
+
     contestants = models.ManyToManyField(Bot, related_name="contestants",
             null=True, blank=True)
     # Contest regulations

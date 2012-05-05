@@ -22,7 +22,8 @@ def launch_single_match(game, bots):
         with given list of bots
     """
 
-    arguments = {'game': game, 'bots': bots}
+    arguments = {'game': game, 'bots': bots,
+            'memory_limit': game.memory_limit, 'time_limit': game.time_limit}
 
     gearman_client = PickleClient([settings.GEARMAN_HOST])
     gearman_client.submit_job('single_match', arguments, background=True)
@@ -33,7 +34,8 @@ def launch_contest_match(game, bots, contest):
         with given list of bots and contest
     """
 
-    arguments = {'game': game, 'bots': bots, 'contest':contest}
+    arguments = {'game': game, 'bots': bots, 'contest':contest,
+            'memory_limit': contest.memory_limit, 'time_limit': contest.time_limit}
 
     gearman_client = PickleClient([settings.GEARMAN_HOST])
     gearman_client.submit_job('contest_match', arguments, background=True)

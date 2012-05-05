@@ -51,6 +51,8 @@ def create_may_contest():
         contest.begin_date = settings.MAY_CONTEST_BEGIN_DATE
         contest.end_date = settings.MAY_CONTEST_END_DATE
         contest.regulations_file.save(contest.name, File(open(settings.MAY_CONTEST_REGULATIONS_PATH)))
+        contest.memory_limit = settings.MAY_CONTEST_MEMORY_LIMIT
+        contest.time_limit = settings.MAY_CONTEST_TIME_LIMIT
 
         ranking = Ranking(type=Ranking.TYPE_GROUP)
         ranking.date_updated = get_current_date_time()
