@@ -42,7 +42,7 @@ def single_match(gearman_worker, gearman_job, ranked_match=False):
 
     scores = results['results']
     time_used = results['time']
-    if len(scores) < len(bots) or len(time_used) < len(bots + 1:
+    if len(scores) < len(bots) or len(time_used) < len(bots) + 1:
         return
 
     log = ''.join(results['supervisor_log'])
