@@ -217,7 +217,7 @@ def play(judge_file, players, time_limit, memory_limit):
                 break
             try:
                 (scores, empty_mes) = parse_message(res)
-                results['results'] = scores
+                results['results'] = dict(enumerate(scores))
             except:
                 results['exit_status'] = 12
                 log(supervisor_log, "Wrong scores message from judge.")

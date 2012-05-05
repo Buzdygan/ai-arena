@@ -40,12 +40,18 @@ def single_match(gearman_worker, gearman_job, ranked_match=False):
     results = nadzorca.play(judge_file=judge_program, players=bots_programs,
                     memory_limit=memory_limit, time_limit=time_limit)
 
+    scores = results['results']
+    time_used = results['time']
+    if len(scores) < len(bots) or len(time_used) < len(bots + 1:
+        return
+
     log = ''.join(results['supervisor_log'])
     print(log)
+    print(results)
     match = Match(ranked_match=ranked_match, game=game, contest=contest, match_log=log, time_limit=time_limit, memory_limit=memory_limit)
     match.save()
     for (i, bot) in enumerate(bots):
-        bot_result = MatchBotResult(score=results['results'][i], bot=bot, time_used=results['times'][i], memory_used=results['memory'][i]) 
+        bot_result = MatchBotResult(score=scores[i], bot=bot, time_used=time_used[i], memory_used=0) 
         bot_result.save()
         match.players_results.add(bot_result)
     match.save()

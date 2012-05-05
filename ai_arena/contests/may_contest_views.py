@@ -50,7 +50,10 @@ def match_details(request, match_id):
 def show_ladder(request):
     generate_ranking() 
     ranking = get_default_may_ranking()
-    ladder = sorted(ranking.botranking_set.all(), key=lambda botranking: botranking.position)
+    if ranking:
+        ladder = sorted(ranking.botranking_set.all(), key=lambda botranking: botranking.position)
+    else:
+        ladder = []
     return render_to_response('may_contest/show_ranking.html',
             {
                 'ranking': ranking,
