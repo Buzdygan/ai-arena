@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # Filename: nadzorca.py
+
 import subprocess
 import os
 import tempfile
@@ -10,7 +11,7 @@ import time
 import select
 import threading
 import resource
-
+import exit_status
 
 def read_logs(judge_process, bots_process_list, log_map, run_thread):
     """
@@ -115,7 +116,7 @@ def set_limits(time_limit, memory_limit):
         (see subprocess.Popen constructor preexec_fn argument)
         Used for setting limits of time and memory consumption for the process
     """
-    mem_limit = memory_limit * 1024
+    mem_limit =  memory_limit * 1024 * 1024
     resource.setrlimit(resource.RLIMIT_CPU, (time_limit, time_limit))
     resource.setrlimit(resource.RLIMIT_AS, (mem_limit, mem_limit))
 
@@ -182,12 +183,12 @@ def play(judge_file, players, time_limit, memory_limit):
         try:
             judge_mes = readout(judge_process.stdout, time_limit*10)
         except TimeoutException:
-            results['exit_status'] = 14
+            results['exit_status'] = exit_status.JUDGE_TIMEOUT
             judge_process.kill()
             log(supervisor_log, "Timeout reached while waiting for judge message.")
             break
         except EOFException:
-            results['exit_status'] = 15
+            results['exit_status'] = exit_status.JUDGE_EOF
             try:
                 judge_process.kill()
             except:
@@ -197,7 +198,7 @@ def play(judge_file, players, time_limit, memory_limit):
         try:
             (bots, message) = parse_message(judge_mes)
         except:
-            results['exit_status'] = 11
+            results['exit_status'] = exit_status.JUDGE_WRONG_MESSAGE
             log(supervisor_log, "Wrong message format from judge.")
             break
         if bots == [0]:
@@ -208,18 +209,18 @@ def play(judge_file, players, time_limit, memory_limit):
             try:
                 res = readout(judge_process.stdout, time_limit * 10)
             except TimeoutException:
-                results['exit_status'] = 16
+                results['exit_status'] = exit_status.JUDGE_SCORES_TIMEOUT
                 log(supervisor_log, "Timeout reached while waiting for scores from judge.")
                 break
             except EOFException:
-                results['exit_status'] = 17
+                results['exit_status'] = exit_status.JUDGE_SCORES_EOF
                 log(supervisor_log, "EOF reached while waiting for scores from judge.")
                 break
             try:
                 (scores, empty_mes) = parse_message(res)
                 results['results'] = dict(enumerate(scores))
             except:
-                results['exit_status'] = 12
+                results['exit_status'] = exit_status.JUDGE_WRONG_SCORES
                 log(supervisor_log, "Wrong scores message from judge.")
             break
         elif message == 'KILL':
@@ -230,7 +231,7 @@ def play(judge_file, players, time_limit, memory_limit):
                     except:
                         pass
                 else:
-                    results['exit_status'] = 13
+                    results['exit_status'] = exit_status.NOT_EXISTING_KILL
                     log(supervisor_log, "Tried to kill an unexsisting bot.")
                     game_in_progress = False
                     break
@@ -260,11 +261,11 @@ def play(judge_file, players, time_limit, memory_limit):
                         try:
                             judge_process.stdin.write(response)
                         except:
-                            result['exit_status'] = 104
+                            result['exit_status'] = exit_status.JUDGE_WRITE
                             log(supervisor_log, "Failed to send message to judge")
                             break
                 else:
-                    results['exit_status'] = 13
+                    results['exit_status'] = exit_status.NOT_EXISTING_MESSAGE
                     log(supervisor_log, "Tried to send a message to an unexsiting bot.")
                     game_in_progress = False
                     break
