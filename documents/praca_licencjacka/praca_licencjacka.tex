@@ -552,28 +552,36 @@ w pliku models.py ma swój odpowiednik w testach.
 
 \chapter{Decyzje technologiczne}
 
+Podczas tworzenia projektu Niezbêdne by³o podjêcie kluczowych decyzji definiuj±cych w du¿ym stopniu kszta³t dalszej pracy nad serwisem.
+Najbardziej istotn± decyzj± by³ wybór jêzyka programowania. Twórcy zdecydowali siê na wykorzystanie Pythona z frameworkiem Django, który w du¿ym stopniu u³atwia 
+tworzenie i rozwój stron internetowych.\\
+
+W przypadku backendu równie¿ zdecydowano siê na u¿ycie Pythona, g³ównie z uwagi na ³atwo¶æ rozwoju programów i czytelno¶æ kodu w nim napisanego. Zgodnie 
+stwierdzili¶my, i¿ w przypadku AI-Areny, ze wzglêdu na charakter serwisu, wydajno¶æ nie jest spraw± kluczow±, lecz jedynie poboczn±.
+
 \section{Django}
 
 Django jest wysokopoziomowym frameworkiem przeznaczonym do tworzenia aplikacji internetowych.
 Opiera siê na wzorcu projektowym podobnym do MVC nazywanym MVT. Z tego wzglêdu aplikacjê mo¿na podzieliæ na kilka warstw:
 \begin{itemize}
-    \item {\bf Model} - reprezentuje logikê aplikacji. Ka¿dej klasie zdefiniowanej w pliku models.py dziedzicz±cej po Models.model odpowiada tabela w bazie danych
-    \item {\bf View} - okre¶la jakie dane bêd± zaprezentowane u¿ytkownikowi. W pliku views.py znajduj± siê funkcje obliczaj±ce odpowied¼ na dane ¿±danie.
-    \item {\bf Template} - obejmuje szablony html. S± one renderowane na podstawie kontekstu obliczonego w warswie widoku.
+    \item {\bf Model (eng. Model)} - reprezentuje logikê aplikacji. Ka¿dej klasie (zdefiniowanej w pliku models.py) odpowiada pewna tabela (lub kilka tabel) w bazie danych
+    \item {\bf Widok (eng. View)} - okre¶la jakie dane bêd± zaprezentowane u¿ytkownikowi.
+    \item {\bf Szablon (eng. Template)} - obejmuje szablony html. S± one renderowane na podstawie kontekstu obliczonego w warswie widoku.
 \end{itemize}
-Oprócz tego framework zapewnia opart± na wyra¿eniach regularnych obs³ugê URL, co pozwala na prost±, przejrzyst± adresacjê.
+Oprócz tego framework zapewnia opart± na wyra¿eniach regularnych obs³ugê URL, co pozwala na proste, przejrzyste adresowanie.
 Django posiada w³asny, lekki serwer umo¿liwiaj±cy rozwijanie i testowanie aplikacji. Ponadto zajmuje siê obs³ug± bazy danych
 i systemem cache'owania danych. Do zalet tego frameworku nale¿± te¿ du¿a skalowalno¶æ i wydajno¶æ oraz wbudowany panel administracyjny.\\
 
-Na rynku dostêpnych jest wiele frameworków przeznaczonych do tworzenia aplikacji internetowych. Django jest jednym z bardziej popularnych.
-Autorzy projektu zdecydowali siê w³a¶nie na ten framework z kilku wzglêdów.
+Django jest jednym z bardziej popularnych frameworków przeznaczonych do tworzenia aplikacji internetowych.
+Autorzy projektu zdecydowali siê w³a¶nie na ten z kilku wzglêdów.
 \begin{itemize}
-    \item Rozwi±zuje wszystkie podstawowe kwestie zwi±zane z projektem, tj. obs³uga bazy danych, adresacja.
-    \item Serwis od strony webowej jest standardow± aplikacj±.
-    \item Django jest proste w u¿yciu.
-    \item Nie bez znaczenia by³o to, ¿e cz³onkowie zespo³u znali tê technologiê ju¿ wcze¶niej z przedmiotu Aplikacje WWW.
+    \item Rozwi±zuje wszystkie podstawowe kwestie zwi±zane z projektem, tj. obs³uga bazy danych, adresowanie.
+    \item Serwis od strony webowej jest standardow± aplikacj±, zatem istniej± mechanizmy wbudowane w Django pozwalaj±ce w prosty sposób 
+          rozwi±zaæ wiele problemów technicznych.
+    \item Wa¿ne by³o to, ¿e cz³onkowie zespo³u znali tê technologiê ju¿ wcze¶niej z przedmiotu Aplikacje WWW. Nale¿y zauwa¿yæ, i¿ Django 
+          jest proste w u¿yciu, dziêki maksymalnej automatyzacji wielu standardowych procesów (np. renderowania stron WWW).
 \end{itemize}
-Django powsta³o w celu ³atwego, szybkiego tworzenia standardowych aplikacji internetowych i po do¶wiadczeniach zwi±zanych z projektem
+Django powsta³o w celu szybkiego tworzenia standardowych aplikacji internetowych i po do¶wiadczeniach zwi±zanych z tworzeniem projektu
 autorzy w pe³ni potwierdzaj± skuteczno¶æ tego frameworku.
 
 \section{Nadzorca}
@@ -586,13 +594,11 @@ Metody pomiaru udostêpniane przez system operacyjny takie jak wait3 lub wait4 ró
 
 Inny mechanizm systemowy który by³ rozwa¿any jako rozwi±zanie tych problemów, to grupy procesów. Mechanizm ten pozwal³by miêdzy innymi na wys³anie sygna³u do procesu i wszystkich jego potomków, jak równie¿ prostsze monitorowanie zu¿ycia zasobów systmowych przez grupê procesów. Niestety, pewne luki w tym mechani¼mie pozwala³yby z³o¶liwemu u¿ytkownikowi tworzyæ procesy które nie podlega³yby kontroli.\\
 
-Na licencji open source dostêpne jest rozwi±zanie podobnego problemu. Jest to napisany w jêzyku Perl skrypt timeout, stworzony w Institute for System Programming of Russian Academy of Sciences, dostêpny przez github. Zosta³ on stworzony do mierzenia i ograniczania zu¿ycia zasobów przez eksperymentalne wieloprocesowe programy, których zachowanie by³o trudne do przewidzenia. Dzia³anie tego skryptu oparte jest na prostej idei. Skrypt kilkukrotnie w ciagu sekundy sprawdza infromacje dotycz±ce zu¿ycia zasobów przez monitorowany proces i wszystkich jego potomków, i gdy warto¶æ ta przekroczy dozwolony limit zatrzymuje obserwowane procesy. Jednak poniewa¿ skrypt nie by³ tworzony do u¿ytu w sposób jaki jest potrzebny w systemie AI-Arena, brak mu pewnych funkcjonalno¶ci. Szczególnie wa¿n± jest mo¿liwo¶æ zatrzymania danego procesu i wszystkich jego potomków na rz±danie Sêdziego. Mniej powa¿n± wad± tego rozwi±zania jest to, ¿e dokonywane pomiary mog± nie byæ dok³adne, w szczególno¶ci niektóre programy mog³yby dzia³aæ i komunikowaæ siê przez u³amek sekundy po przekroczeniu limitu.\\
+Na licencji open source dostêpne jest rozwi±zanie podobnego problemu. Jest to napisany w jêzyku Perl skrypt timeout, stworzony w Institute for System Programming of Russian Academy of Sciences, dostêpny przez github (\url{https://github.com/Buzdygan/ai-arena}). Zosta³ on stworzony do mierzenia i ograniczania zu¿ycia zasobów przez eksperymentalne wieloprocesowe programy, których zachowanie by³o trudne do przewidzenia. Dzia³anie tego skryptu oparte jest na prostej idei. Skrypt kilkukrotnie w ciagu sekundy sprawdza infromacje dotycz±ce zu¿ycia zasobów przez monitorowany proces i wszystkich jego potomków, i gdy warto¶æ ta przekroczy dozwolony limit zatrzymuje obserwowane procesy. Jednak poniewa¿ skrypt nie by³ tworzony do u¿ytu w sposób jaki jest potrzebny w systemie AI-Arena, brak mu pewnych funkcjonalno¶ci. Szczególnie wa¿n± jest mo¿liwo¶æ zatrzymania danego procesu i wszystkich jego potomków na rz±danie Sêdziego. Mniej powa¿n± wad± tego rozwi±zania jest to, ¿e dokonywane pomiary mog± nie byæ dok³adne, w szczególno¶ci niektóre programy mog³yby dzia³aæ i komunikowaæ siê przez u³amek sekundy po przekroczeniu limitu.\\
 
 Najlepszym rozwi±zaniem wydaje siê wiêc zaimplementowanie w³asnego mechanizmu, opartego na podobnej idei jak wspomniany skrpyt timeout. Mechanizm ten móg³by byæ oddzielnym procesem, który na pocz±tku swojego dzia³ania otrzymuje numery pid obserwowanych procesów i przyznane im limity. Nastêpnie kilkukrotnie w ciagu sekundy na podstawie informacji zawartych w katalogu proc móg³by mierzyæ sumaryczne zu¿ycie zasobów przez kontrolowane procesy i ich potomków, oraz na ¿yczenie Sêdziego przekazane przez nadzorcê zatrzymaæ okre¶lone grupy procesów. Pomiar zu¿ycia zasobów w tym przypadku jest obci±¿ony tym samym b³êdem co skrpyt timeout, jest to jednak b³±d akceptowalny. \\
 
 Z powodu wymienionych problemów z kontorolowaniem zu¿ycia zasobów systemowych, jak równie¿ potencjalnych problemów z bezpieczeñstwem systemu, autorzy zdecydowali, ¿e programy u¿ytkowników i sêdziowie nie bêd± mog³y tworzyæ nowych procesów.\\
-
-Ta decyzja znacznie znacznie zredukowa³a rozwa¿ane powy¿ej trudno¶ci, jednocze¶nie nie ograniczaj±c prawie w ogóle funkcjonalno¶ci dostêpnej u¿ytkownikowi, gdy¿ ci±gle mo¿e on tworzyæ w±tki w obrêbie dostêpnego procesu.\\
 
 Ograniczenie zu¿ycia czasu i pamiêci zosta³o zrealizowane przy pomocy funkcji setrlimit. Polecenie to pozwala na ustawienie miêkkiego i twardego limitu na dostêpne procesowi zasoby systemowe, miêdzy innymi pamiêæ wirtualn± i czas zu¿ywany przez proces w trybie u¿ytkownika lub systemowym. 
 W przypadku przekroczenia miêkkiego limitu czasowego do procesu wysy³any jest SIGINT, po przekroczeniu limitu twardego do procesu wysy³any jest SIGKILL. Jasne jest wiêc ¿e limit który chcemy na¿uciæ procesowi musi byæ limitem twardym, gdy¿ SIGINT mo¿e zostaæ obs³u¿ony. Mo¿liwe s± równie¿ sytuacje w których kernel nie mo¿e dostarczyæ SIGKILL do procesu: gdy proces jest zombie lub gdy czeka w nieprzerywalnym u¶pieniu. Jednak w obu przypadkach proces ten nie zu¿ywa ju¿ wiêcej procesora, wiêc nie stanowi to zagro¿enia dla systemu.\\
