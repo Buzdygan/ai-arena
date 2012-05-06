@@ -115,6 +115,9 @@ def testing(request):
         return render_to_response('may_contest/testing.html',
             {
                 'form': form,
+                'judge_path': settings.MAY_CONTEST_EXAMPLE_JUDGE_PATH,
+                'bot_path': settings.MAY_CONTEST_EXAMPLE_BOT_PATH,
+                'judge_manual_path': settings.MAY_CONTEST_JUDGE_MANUAL_PATH,
             },
             context_instance=RequestContext(request))
 

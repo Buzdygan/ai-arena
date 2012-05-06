@@ -266,8 +266,14 @@ MAY_CONTEST_TIME_LIMIT = 5000
 MAY_CONTEST_GAME_NAME = "POK"
 MAY_CONTEST_GAME_JUDGE_LANG = CPP_LANGUAGE 
 MAY_CONTEST_GAME_JUDGE_PATH = ABS_DIR("../files/may_game/pok_judge.cpp")
+MAY_CONTEST_JUDGE_MANUAL_PATH = ABS_DIR("../files/may_game/pok_judge_manual.txt")
+MAY_CONTEST_BOT_PATH = ABS_DIR("../files/may_game/pok_bot.cpp")
 MAY_CONTEST_GAME_RULES_PATH = ABS_DIR("../files/may_game/pok_rules.txt")
 MAY_CONTEST_PLAYERS_NUMBER = 2
+
+MAY_CONTEST_EXAMPLE_JUDGE_PATH = MEDIA_URL + "may_contest/judge.cpp"
+MAY_CONTEST_EXAMPLE_BOT_PATH = MEDIA_URL + "may_contest/bot.cpp"
+MAY_CONTEST_JUDGE_MANUAL_PATH = MEDIA_URL + "may_contest/README.txt"
 
 MAY_CONTEST_DEFAULT_BOT_PATH = ABS_DIR("../files/may_game/pok_bot.cpp")
 MAY_CONTEST_DEFAULT_BOT_NAME = "POK_default_bot"
