@@ -135,9 +135,9 @@ class BotRanking(models.Model):
 
     ranking = models.ForeignKey(Ranking)
     bot = models.ForeignKey(Bot)
-    overall_score = models.DecimalField(max_digits=settings.SCORE_DIGITS, decimal_places=settings.SCORE_DECIMAL_PLACES)
+    overall_score = models.DecimalField(max_digits=settings.SCORE_DIGITS, decimal_places=settings.SCORE_DECIMAL_PLACES, default=Decimal('0.0'))
     position = models.IntegerField(null=True, blank=True)
-    matches_played = models.IntegerField(null=True, blank=True)
+    matches_played = models.IntegerField(null=True, blank=True, default=0)
 
 class Contest(models.Model):
     """
@@ -194,8 +194,7 @@ class Contest(models.Model):
         played_matches = [sorted(match.players_results.all().values_list('bot__id', flat=True)) for match in played_matches]
 
         contestants = sorted(self.contestants.all(), key=lambda x: x.id)
-        contestants_ranks = dict([(bot, BotRanking.objects.get_or_create(ranking=self.ranking, bot=bot, 
-                overall_score=Decimal('0.0'), matches_played=0)[0]) for bot in contestants])
+        contestants_ranks = dict([(bot, BotRanking.objects.get_or_create(ranking=self.ranking, bot=bot)[0]) for bot in contestants])
         contestants = [c.id for c in contestants]
 
         matches_to_play = combinations(contestants, match_size)
