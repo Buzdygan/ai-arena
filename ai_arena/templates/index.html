@@ -27,6 +27,7 @@ The game called Pok is one-on-one simple version of Texas Hold'em Poker. The rul
 There are two players and every deal, each of them receives one private card.
 Then they bet twice and the winner gets points, which are in the final stake.
 The goal is to gain more points then the opponent, what can be achieved by betting cautiously, depending on the card and opponent behaviour.
+A draw is possible if players reached the same amount of points.
 </p>
 <p class='p_news'>
 The game consists of 200 deals. Here is precise description of a deal:
@@ -50,6 +51,32 @@ The game consists of 200 deals. Here is precise description of a deal:
             <li> Players show their cards. The one with higher card gains the stake. In case of draw nobody gains any points.
         </ul>
 </ol>
+</p>
+
+<h2> Protocol </h2>
+
+<p class='p_news'>
+A bot program should write on standard output and read from standard input.
+Every message he sends consists of one integer number followed by endline character.
+Messages sent to bot may contain one or more integers separeted by whitespace characters, ended by endline character.
+During a single deal bot exchanges following numbers in this order:
+<ol>
+    <li> Receives a number(from 0 to 4) indicating his private card.
+    <li> First bet:
+        <ul>
+            <li> Sends his bet(from 10 to 200).
+            <li> Receives a number indicating a bet of his opponent.
+        </ul>
+    <li> Then, depending on if his opponent's(nie wiem czy to z apostrofem czy bez, poprawcie!) bet is:
+        <ul>
+            <li> higher - if bot is going to call skips to the next step, else(folding) sends 0 finishing a deal.
+            <li> lower - receives 0 or 1. 0 means that his opponent folds and this is the end of a deal, 1 means that opponent calls and a deal continues.
+            <li> equal - then just goes to next step.
+        </ul>
+    <li> Second bet. Looks exactly like steps 2 and 3. If he or his opponent folds, a deal is finished.
+    <li> Showdown. If players agreed on a stake value, receives a number indicating his opponent's(znowu!) card.
+</ol>
+A single game consists of 200 deals in a row. If bot exceeds time or memory limit, or does not follow the protocol, he loses the game.
 </p>
 
 <h2>
