@@ -187,24 +187,26 @@ class Contest(models.Model):
             self.ranking = Ranking(type=Ranking.TYPE_GROUP)
             self.ranking.save()
 
+        BotRanking.objects.filter(ranking=self.ranking).delete()
+
         # how many players required for the match
         match_size = self.game.min_players
         played_matches = Match.objects.filter(ranked_match=True, contest=self, game=self.game)
-        matches_results = [match.players_results.all() for match in played_matches]
-        played_matches = [sorted(match.players_results.all().values_list('bot__id', flat=True)) for match in played_matches]
+        played_matches_set = [sorted(match.players_results.all().values_list('bot__id', flat=True)) for match in played_matches]
 
         contestants = sorted(self.contestants.all(), key=lambda x: x.id)
-        contestants_ranks = dict([(bot, BotRanking.objects.get_or_create(ranking=self.ranking, bot=bot)[0]) for bot in contestants])
-        contestants = [c.id for c in contestants]
+        contestants_ranks = dict([(bot, BotRanking(ranking=self.ranking, bot=bot)) for bot in contestants])
 
-        matches_to_play = combinations(contestants, match_size)
+        # order execution of missing matches
+        matches_to_play = combinations([c.id for c in contestants], match_size)
         for match in matches_to_play:
-            if list(match) not in played_matches:
+            if list(match) not in played_matches_set:
                 bots = [Bot.objects.get(id=bot_id) for bot_id in match]
                 launch_contest_match(self.game, bots, self)
 
-        for results in matches_results:
-            for res in results:
+        # collect results from played matches
+        for match in played_matches:
+            for res in match.players_results.all():
                 rank = contestants_ranks[res.bot]
                 rank.overall_score += res.score
                 rank.matches_played += 1
