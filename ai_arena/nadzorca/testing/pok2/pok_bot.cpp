@@ -36,6 +36,10 @@ int decision(int myBet, int opBet, int card){
 }
 
 int main(){
+    //cin.sync_with_stdio(false);
+    //cout.sync_with_stdio(false);
+    //cerr.sync_with_stdio(false);
+
     int card, my1bet, op1bet, bet1, my2bet, op2bet, decision1, decision2, opCard;
     int trash;
     while(true){

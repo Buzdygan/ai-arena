@@ -120,6 +120,10 @@ bool readBets(int * bets, bool firstRound){
 }
 
 int main(){
+    //cin.sync_with_stdio(false);
+    //cout.sync_with_stdio(false);
+    //cerr.sync_with_stdio(false);
+
     for(int i=0; i < 3; i++){
         toSend[i] = "";
         receivedMes[i] = -1;
@@ -134,6 +138,8 @@ int main(){
     int sum1=0, sum2=0;
 
     scores[0] = scores[1] = scores[2] = 0;
+
+    srand(getpid() + time(NULL));
 
     for(int i=0; i<ROUNDS_COUNT; i++){
         pl1card = rand() % CARD_COUNT;

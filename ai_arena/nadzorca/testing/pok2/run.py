@@ -8,9 +8,9 @@ print 'TEST pok'
 
 judge_path = current_dir + "/pok_judge"
 bot_path = current_dir + "/pok_bot"
-results = nadzorca.play(judge_file=judge_path, players=[bot_path, bot_path], time_limit=100, memory_limit=100000)
+results = nadzorca.play(judge_file=judge_path, players=[bot_path, bot_path], time_limit=10000, memory_limit=1000000)
 
-print results
+#print results
 
 passed = True
 judge_info = ''
