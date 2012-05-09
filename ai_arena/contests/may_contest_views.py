@@ -94,7 +94,7 @@ def testing(request):
             # Check is user uploaded also an opponent
             # If so - handle it
             if 'opponent_source' in request.FILES:
-                (exit_status, logs, opponent_bot) = create_bot_from_request(request, get_may_game(), bot_field='opponent_source', testing=True)
+                (exit_status, logs, opp) = create_bot_from_request(request, get_may_game(), bot_field='opponent_source', testing=True)
                 if exit_status != 0:
                     # error occured
                     return render_to_response('error.html',
