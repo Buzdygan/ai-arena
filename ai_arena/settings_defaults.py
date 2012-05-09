@@ -123,9 +123,13 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'ai_arena.contests',
     'ai_arena.registration',
+    'captcha',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+RECAPTCHA_PUBLIC_KEY = '6LcqQtESAAAAALMiHq85_8QIaOwevpTe01PoZ4eu'
+RECAPTCHA_PRIVATE_KEY = '6LcqQtESAAAAACkn_VW7df3bmEatgsHx4rAldJAO'
 
 AUTH_PROFILE_MODULE = 'contests.UserProfile'
 
