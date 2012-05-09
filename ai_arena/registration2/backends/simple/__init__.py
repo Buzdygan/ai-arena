@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 
-from registration import signals
-from registration.forms import RegistrationForm
+from registration2 import signals
+from registration2.forms import RegistrationForm
 
 
 class SimpleBackend(object):

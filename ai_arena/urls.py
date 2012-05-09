@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     url(r'^testing/uploaded/$', 'contests.may_contest_views.uploaded_for_tests'),
     url(r'^contact_us/$', 'contests.may_contest_views.contact', name='may_contest_contact_us'),
 
-    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^accounts/', include('registration2.backends.simple.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     
     url(r'^profile/$', 'contests.user_views.show_profile'),
