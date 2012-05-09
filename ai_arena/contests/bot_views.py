@@ -9,11 +9,11 @@ from django.http import HttpResponseRedirect
 
 from ai_arena import settings
 from ai_arena.contests.compilation import compile
-from ai_arena.contests.forms import SendBotForm, SendBotWithGameForm
+from ai_arena.contests.forms import SendBotForm, SendBotWithoutNameForm, SendBotWithGameForm
 from ai_arena.contests.models import Game, Bot, Contest
 
 @login_required
-def create_bot_from_request(request, game, bot_field='bot_source'):
+def create_bot_from_request(request, game, testing=False, bot_field='bot_source'):
     """
         Helper function used to create bot object after receiving POST data
         from html form.
@@ -33,9 +33,12 @@ def create_bot_from_request(request, game, bot_field='bot_source'):
 
     # Save known fields
     bot = Bot()
+    bot.name = request.user.username + '_bot'
+
     if 'bot_name' in request.POST and len(request.POST['bot_name']) > 0:
         bot.name = request.POST['bot_name'] 
-    else:
+
+    if testing:
         if 'test_name' in request.POST and len(request.POST['test_name']) > 0:
             bot.name = request.POST['test_name']
         else:
@@ -44,9 +47,7 @@ def create_bot_from_request(request, game, bot_field='bot_source'):
     if bot_field=='opponent_source':
         bot.name = settings.OPPONENT_TEST_BOT_PREFIX + datetime.now().isoformat().replace(':', '-').replace('.', '-')
 
-    if Bot.objects.filter(name=bot.name).exclude(owner=request.user).count():
-        return (1, ["There is bot called %s already!" % bot.name], None)
-    Bot.objects.filter(name=bot.name).delete()
+    Bot.objects.filter(owner=request.user, name=bot.name).delete()
 
     bot.bot_source_file = request.FILES[bot_field]
     bot.bot_lang = request.POST['bot_language']
@@ -99,6 +100,44 @@ def send_bot(request, game_id):
         form = SendBotForm()
     
     return render_to_response('gaming/send_bot.html',
+            {
+                'form': form,
+                'game_id': game_id,
+            },
+            context_instance=RequestContext(request))
+
+@login_required
+def send_bot_without_name(request, game_id):
+    """
+        Displays form to send bot for a game with id equal to game_id.
+        If game_id is not given or there is no Game object with id equal to game_id
+        then Exception is thrown
+        If contest_id is given, the bot is added to this contest as a contestant
+    """
+    if not game_id:
+        raise Exception("In game_details: No game_id given")
+    game = Game.objects.get(id=game_id)
+
+    if game is None:
+        raise Exception("In game_details: Wrong game_id given")
+
+    if request.method == 'POST':
+        form = SendBotWithoutNameForm(request.POST, request.FILES)
+        if form.is_valid():
+            (exit_status, logs, bot) = create_bot_from_request(request, game)
+            if exit_status != 0:
+                # error occured
+                return render_to_response('error.html',
+                        {
+                            'error_details': logs,
+                        },
+                        context_instance=RequestContext(request))
+            else:
+                return HttpResponseRedirect('/')
+    else:
+        form = SendBotWithoutNameForm()
+    
+    return render_to_response('gaming/send_bot_without_name.html',
             {
                 'form': form,
                 'game_id': game_id,

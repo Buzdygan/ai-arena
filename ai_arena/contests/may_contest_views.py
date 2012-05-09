@@ -10,7 +10,7 @@ from contests.forms import MayContestSendBotForTest
 from ai_arena.contests.models import Bot, Game, Match
 from ai_arena import settings
 from ai_arena.contests.compilation import compile
-from ai_arena.contests.bot_views import create_bot_from_request, send_bot
+from ai_arena.contests.bot_views import create_bot_from_request, send_bot_without_name
 from ai_arena.contests.game_launcher import launch_single_match
 from ai_arena.contests.may_contest_helper_functions import *
 
@@ -69,7 +69,7 @@ def may_contest_send_bot(request):
     """
 
     game_id = get_may_game().id
-    return send_bot(request, game_id)
+    return send_bot_without_name(request, game_id)
 
 @login_required
 def testing(request):
@@ -83,7 +83,7 @@ def testing(request):
                     context_instance=RequestContext(request))
         else:
             # Handle a bot
-            (exit_status, logs, bot) = create_bot_from_request(request, get_may_game())
+            (exit_status, logs, bot) = create_bot_from_request(request, get_may_game(), testing=True)
             if exit_status != 0:
                 return render_to_response('error.html',
                         {

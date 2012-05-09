@@ -40,6 +40,11 @@ class SendBotForm(forms.Form):
     bot_source = forms.FileField()
     bot_language = forms.ChoiceField(choices = settings.LANGUAGES)
 
+class SendBotWithoutNameForm(forms.Form):
+
+    bot_source = forms.FileField()
+    bot_language = forms.ChoiceField(choices = settings.LANGUAGES)
+
 class SendBotWithGameForm(forms.Form):
 
     games = Game.objects
