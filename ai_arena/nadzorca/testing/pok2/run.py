@@ -23,7 +23,7 @@ bot2_info = ''
 for item in results['logs'][1]:
     bot2_info = bot2_info + item
 
-#print "judge info:\n" + judge_info
+print "judge info:\n" + judge_info
 
 #print "bot1 info:\n" + bot1_info
 
