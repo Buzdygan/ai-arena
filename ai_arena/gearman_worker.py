@@ -18,21 +18,15 @@ class PickleWorker(gearman.GearmanWorker):
 
 gearman_worker = PickleWorker(['localhost'])
 
-def single_match(gearman_worker, gearman_job, ranked_match=False):
+def single_match(gearman_worker, gearman_job):
     print "lets play single match\n"
     arguments = gearman_job.data
     game = arguments['game']
+    match = arguments['match']
     bots = arguments['bots']
-    memory_limit = arguments['memory_limit'] 
+    memory_limit = match.memory_limit 
     # convert miliseconds to seconds
-    time_limit = arguments['time_limit'] / 1000.0 
-    print('memory limit', memory_limit)
-    print('time limit', time_limit)
-    if ranked_match:
-        contest = arguments['contest']
-    else:
-        contest=None
-
+    time_limit = match.time_limit / 1000.0 
 
     judge_program = game.judge_bin_file.path
     bots_programs = [bot.bot_bin_file.path for bot in bots]
@@ -46,20 +40,13 @@ def single_match(gearman_worker, gearman_job, ranked_match=False):
         return
 
     log = ''.join(results['supervisor_log'])
-    print(log)
     print(results)
-    match = Match(ranked_match=ranked_match, game=game, contest=contest, match_log=log, time_limit=time_limit, memory_limit=memory_limit)
-    match.save()
+    match.log = log
     for (i, bot) in enumerate(bots):
         bot_result = MatchBotResult(score=scores[i], bot=bot, time_used=time_used[i], memory_used=0) 
         bot_result.save()
         match.players_results.add(bot_result)
     match.save()
 
-def contest_match(gearman_worker, gearman_job):
-    print "lets play contest match.\n"
-    single_match(gearman_worker, gearman_job, ranked_match=True)
-
-gearman_worker.register_task("contest_match", contest_match)
 gearman_worker.register_task("single_match", single_match)
 gearman_worker.work()
