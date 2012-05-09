@@ -12,6 +12,7 @@ import select
 import threading
 import resource
 import exit_status
+import multiprocessing as mp
 
 def read_logs(judge_process, bots_process_list, log_map, run_thread):
     """
@@ -117,18 +118,56 @@ def set_limits(time_limit, memory_limit):
         Used for setting limits of time and memory consumption for the process
     """
     mem_limit =  memory_limit * 1024 * 1024
-    resource.setrlimit(resource.RLIMIT_CPU, (time_limit, time_limit))
-    resource.setrlimit(resource.RLIMIT_AS, (mem_limit, mem_limit))
+    resource.setrlimit(resource.RLIMIT_CPU, (time_limit + 1, time_limit + 1))
+    resource.setrlimit(resource.RLIMIT_AS, (mem_limit* 2, mem_limit*2))
 
 def get_stats(pid):
     """
         Reads informaton about time and memory consumption of the process 
         with given pid from the proc folder.
-        Currently not in use
     """
-    proc_stats = open('/proc/{0}/stat'.format(str(pid)))
-    line = proc_stats.readline().split()
-    return (float(line[13]) + float(line[14]), int(line[22]))
+    try:
+        proc_stats = open('/proc/{0}/stat'.format(str(pid)))
+        line = proc_stats.readline().split()
+        return (float(line[13]) + float(line[14]), int(line[22]))
+    except:
+        return (None, None)
+
+def limiter(proc_list, stop_indicator, proc_info, max_memory, time_limit, memory_limit):
+    """
+        Function executed in separate process, that measures memory and time
+        consumption of processes with pids in pids_list.
+        Reads information from proc folder about all relevant processes, every 0.1 seconds.
+    """
+    sc_clk_tck_id = os.sysconf_names['SC_CLK_TCK']
+    ticks_per_second = os.sysconf(sc_clk_tck_id)
+    mem_lmt = memory_limit * 1024 * 1024
+    time_lmt = time_limit * ticks_per_second
+    while(True):
+        judge_proc = proc_list[0]
+        if judge_proc.poll() == None:
+            time_elapsed, memory = get_stats(judge_proc.pid)
+            if time_elapsed > 10*time_lmt:
+                judge_proc.kill()
+                proc_info[0] = exit_status.BOT_TLE
+            elif memory > 10*mem_lmt:
+                judge_proc.kill()
+                proc_info[0] = exit_status.BOT_MLE
+            max_memory[0] = max(max_memory[0], memory)
+        for proc_num in range(1,len(proc_list)):
+            proc = proc_list[proc_num]
+            if proc.poll() == None:
+                time_elapsed, memory = get_stats(proc.pid)
+                if time_elapsed > time_lmt:
+                    proc.kill()
+                    proc_info[proc_num] = exit_status.BOT_TLE
+                elif memory > mem_lmt:
+                    proc.kill()
+                    proc_info[proc_num] = exit_status.BOT_MLE
+                max_memory[proc_num] = max(max_memory[proc_num], memory)
+        time.sleep(0.1)
+        if stop_indicator[0]:
+            break;
 
 def play(judge_file, players, time_limit, memory_limit):
     """
@@ -171,11 +210,22 @@ def play(judge_file, players, time_limit, memory_limit):
     log_thread = threading.Thread(None, read_logs, None, (judge_process, bots_process_list, log_map, run_thread), {})
     log_thread.start()
 
+    manager = mp.Manager()
+    proc_list = manager.list()
+    proc_list.append(judge_process)
+    proc_list.extend(bots_process_list)
+    max_memory = manager.list([0.0 for x in range(players_num+1)])
+    stop_indicator = manager.dict([(0, False)])
+    proc_info = manager.list([exit_status.BOT_OK for x in range(players_num+1)])
+    
+    limiter_proc = mp.Process(target=limiter, args=(proc_list, stop_indicator, proc_info, max_memory, time_limit, memory_limit))
+    limiter_proc.start()
+
     bots = []
     message = ''
     
-    results = {'exit_status' : 0, 'time' : {}, 'memory' : {}, 
-            'supervisor_log' : supervisor_log}
+    results = {'exit_status' : exit_status.SUPERVISOR_OK, 'time' : {}, 'memory' : {}, 
+            'supervisor_log' : supervisor_log, 'bots_exit' : {}, }
     
     game_in_progress = True
 
@@ -200,11 +250,10 @@ def play(judge_file, players, time_limit, memory_limit):
         except:
             results['exit_status'] = exit_status.JUDGE_WRONG_MESSAGE
             log(supervisor_log, "Wrong message format from judge.")
+            judge_process.kill()
             break
         if bots == [0]:
-            b = range(players_num + 1)
-            del(b[0])
-            bots = b
+            bots = range(1,players_num + 1)
         if message == 'END':
             try:
                 res = readout(judge_process.stdout, time_limit * 10)
@@ -228,6 +277,7 @@ def play(judge_file, players, time_limit, memory_limit):
                 if bnum > 0 and bnum <= players_num:
                     try:
                         bots_process_list[bnum-1].kill()
+                        proc_info[bnum+1] = exit_status.BOT_KILLED
                     except:
                         pass
                 else:
@@ -261,7 +311,7 @@ def play(judge_file, players, time_limit, memory_limit):
                         try:
                             judge_process.stdin.write(response)
                         except:
-                            result['exit_status'] = exit_status.JUDGE_WRITE
+                            results['exit_status'] = exit_status.JUDGE_WRITE
                             log(supervisor_log, "Failed to send message to judge")
                             break
                 else:
@@ -284,6 +334,10 @@ def play(judge_file, players, time_limit, memory_limit):
             pass
     log_thread.join()
 
+    # Stop the limiter
+    stop_indicator[0] = True
+    limiter_proc.join()
+
     final_times = {}
     final_memory = {}
     
@@ -293,10 +347,15 @@ def play(judge_file, players, time_limit, memory_limit):
         bot_process = bots_process_list[i]
         wait_info = os.wait4(bot_process.pid, 0)
         final_times[i] = wait_info[2].ru_utime + wait_info[2].ru_stime
+        final_memory[i] = float(max_memory[i+1])/(1024*1024)
+        results['bots_exit'][i] = proc_info[i+1]
 
     judge_wait_info = os.wait4(judge_process.pid, 0)
     final_times['judge'] = judge_wait_info[2].ru_utime + judge_wait_info[2].ru_stime
+    final_memory['judge'] = float(max_memory[0])/(1024*1024)
     
+    results['judge_exit'] = proc_info[0]
+
     results['time'] = final_times
     results['memory'] = final_memory
     results['logs'] = log_map
