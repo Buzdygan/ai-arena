@@ -43,14 +43,14 @@ def create_bot_from_request(request, game, testing=False, bot_field='bot_source'
         if 'test_name' in request.POST and len(request.POST['test_name']) > 0:
             bot.name = request.POST['test_name']
         else:
-            bot.name = ''
+            bot.name = 'test_bot'
 #            bot.name = settings.TEST_BOT_PREFIX + datetime.now().isoformat().replace(':', '-').replace('.', '-')
     
     bot.bot_lang = request.POST['bot_language']
 
     if bot_field=='opponent_source':
 #        bot.name = settings.OPPONENT_TEST_BOT_PREFIX + datetime.now().isoformat().replace(':', '-').replace('.', '-')
-        bot.name = ''
+        bot.name = 'test_opponent'
         bot.bot_lang = request.POST['opponent_language']
 
     Bot.objects.filter(owner=request.user, name=bot.name).delete()
