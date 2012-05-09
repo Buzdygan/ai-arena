@@ -39,6 +39,7 @@ def create_bot_from_request(request, game, testing=False, bot_field='bot_source'
         bot.name = request.POST['bot_name'] 
 
     if testing:
+        bot.ranked = False
         if 'test_name' in request.POST and len(request.POST['test_name']) > 0:
             bot.name = request.POST['test_name']
         else:
@@ -48,6 +49,7 @@ def create_bot_from_request(request, game, testing=False, bot_field='bot_source'
         bot.name = settings.OPPONENT_TEST_BOT_PREFIX + datetime.now().isoformat().replace(':', '-').replace('.', '-')
 
     Bot.objects.filter(owner=request.user, name=bot.name).delete()
+
 
     bot.bot_source_file = request.FILES[bot_field]
     bot.bot_lang = request.POST['bot_language']

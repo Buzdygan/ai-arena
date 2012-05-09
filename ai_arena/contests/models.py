@@ -85,6 +85,8 @@ class Bot(models.Model):
     bot_lang = models.CharField(max_length=settings.LANG_LENGTH, choices=settings.LANGUAGES)
 
     invalid = models.BooleanField(default=False)
+    # whether to include in rankings
+    ranked = models.BooleanField(default=True)
 
     def compile_bot(self):
         """ Compile source file to directory with source file """
