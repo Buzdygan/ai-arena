@@ -288,3 +288,8 @@ TEST_BOT_PREFIX = "test_from_"
 OPPONENT_TEST_BOT_PREFIX = "opponent_from_"
 MAX_BOTS_PER_USER = 10
 
+# Running programs from nadzorca
+C_RUN_COMMAND = ""
+CPP_RUN_COMMAND = ""
+JAVA_RUN_COMMAND = "java "
+PYTHON_RUN_COMMAND = "python "

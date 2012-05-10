@@ -13,6 +13,7 @@ import threading
 import resource
 import exit_status
 import multiprocessing as mp
+import shlex
 
 def read_logs(judge_process, bots_process_list, log_map, run_thread):
     """
@@ -169,7 +170,29 @@ def limiter(proc_list, stop_indicator, proc_info, max_memory, time_limit, memory
         if stop_indicator[0]:
             break;
 
-def play(judge_file, players, time_limit, memory_limit):
+C_LANGUAGE = 'C'
+CPP_LANGUAGE = 'CPP'
+JAVA_LANGUAGE = 'JAVA'
+PYTHON_LANGUAGE = 'PYTHON'
+
+C_RUN_COMMAND = ''
+CPP_RUN_COMMAND = ''
+JAVA_RUN_COMMAND = 'java '
+PYTHON_RUN_COMMAND = 'python '
+
+def get_run_command(program_name, program_lang):
+    if program_lang == C_LANGUAGE:
+        command = C_RUN_COMMAND + program_name
+    if program_lang == CPP_LANGUAGE:
+        command = CPP_RUN_COMMAND + program_name
+    if program_lang == JAVA_LANGUAGE:
+        command = JAVA_RUN_COMMAND + program_name
+    if program_lang == PYTHON_LANGUAGE:
+        command = PYTHON_RUN_COMMAND + program_name
+    command = shlex.split(command)
+    return command
+
+def play(judge_file, judge_lang, players, time_limit, memory_limit):
     """
         judge_file - file containing judge program
         players - list of bots binaries
@@ -180,7 +203,7 @@ def play(judge_file, players, time_limit, memory_limit):
     players_num = len(players)
     supervisor_log = []
 
-    to_execute = "%s" % judge_file
+    to_execute = get_run_command(judge_file, judge_lang)
     judge_process = subprocess.Popen(
             to_execute,
             stdout=subprocess.PIPE,
@@ -192,8 +215,8 @@ def play(judge_file, players, time_limit, memory_limit):
     log(supervisor_log, "Started judge succesfully\n")
 
     bots_process_list = []
-    for bot_program in players:
-        arg_to_execute = "%s" % (bot_program,)
+    for (bot_program, bot_lang) in players:
+        arg_to_execute = get_run_command(bot_program, bot_lang)
         bot_process = subprocess.Popen(
                 arg_to_execute,
                 stdin = subprocess.PIPE,
