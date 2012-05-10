@@ -44,22 +44,22 @@ urlpatterns = patterns('',
     url(r'^game_details/(?P<game_id>\d+)/edit/$', 'contests.game_views.edit_game'),
     url(r'^game_details/(?P<game_id>\d+)/delete/$', 'contests.game_views.delete_game'),
    
-    url(r'^(?P<comment_type>\w+)/add_comment/(?P<object_id>\d+)/$', 'contests.comment_views.add_comment'),
-    url(r'^(?P<comment_type>\w+)/del_comment/(?P<object_id>\d+)/(?P<comment_id>\d+)/$', 'contests.comment_views.del_comment'),
-    url(r'^(?P<comment_type>\w+)/edit_comment/(?P<object_id>\d+)/(?P<comment_id>\d+)/$', 'contests.comment_views.edit_comment'),
+    #url(r'^(?P<comment_type>\w+)/add_comment/(?P<object_id>\d+)/$', 'contests.comment_views.add_comment'),
+    #url(r'^(?P<comment_type>\w+)/del_comment/(?P<object_id>\d+)/(?P<comment_id>\d+)/$', 'contests.comment_views.del_comment'),
+    #url(r'^(?P<comment_type>\w+)/edit_comment/(?P<object_id>\d+)/(?P<comment_id>\d+)/$', 'contests.comment_views.edit_comment'),
     
     url(r'^send_bot/$', 'contests.bot_views.send_bot_with_game', name='send_bot_with_game'),
-    url(r'^send_bot/(?P<game_id>\d+)/$', 'contests.bot_views.send_bot'),
+    #url(r'^send_bot/(?P<game_id>\d+)/$', 'contests.bot_views.send_bot'),
     url(r'^send_bot_without_name/(?P<game_id>\d+)/$', 'contests.bot_views.send_bot_without_name'),
     url(r'^send_bot_may_contest/$', 'contests.may_contest_views.may_contest_send_bot', name='may_contest_send_bot'),
 
     url(r'^results/match_results_list/$', 'contests.match_views.match_results_list', name='match_results_list'),
     url(r'^results/show_match_result/(?P<match_id>\d+)/$', 'contests.match_views.show_match_result', name='show_match_result'),
-    url(r'^launch_match/$', 'contests.match_views.launch_match', name='launch_match'),
-    url(r'^launch_match/(?P<game_id>\d+)/(?P<number_of_bots>\d+)/$', 'contests.match_views.launch_match', name='launch_game_match'),
-    url(r'^contests/contests_list/$', 'contests.contest_views.contests_list', name='contests_list'),
-    url(r'^contests/show_contest/(?P<contest_id>\d+)/$', 'contests.contest_views.show_contest', name='show_contest'),
-    url(r'^contests/add_contestant/(?P<contest_id>\d+)/$', 'contests.contest_views.add_contestant', name='add_contestant'),
+    #url(r'^launch_match/$', 'contests.match_views.launch_match', name='launch_match'),
+    #url(r'^launch_match/(?P<game_id>\d+)/(?P<number_of_bots>\d+)/$', 'contests.match_views.launch_match', name='launch_game_match'),
+    #url(r'^contests/contests_list/$', 'contests.contest_views.contests_list', name='contests_list'),
+    #url(r'^contests/show_contest/(?P<contest_id>\d+)/$', 'contests.contest_views.show_contest', name='show_contest'),
+    #url(r'^contests/add_contestant/(?P<contest_id>\d+)/$', 'contests.contest_views.add_contestant', name='add_contestant'),
 
 )
 

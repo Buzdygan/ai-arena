@@ -6,7 +6,7 @@
         Contests:
             <ul>
                 {% for contest in contests %}
-                    <li><a href="{% url show_contest contest.id %}">{{ contest.name }}</a></li>
+                    <li><a href="{% url may_contest_ladder %}">{{ contest.name }}</a></li>
                 {% endfor %}
             <ul>
         {% endif %}
