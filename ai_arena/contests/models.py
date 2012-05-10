@@ -274,6 +274,13 @@ class Match(models.Model):
     # Status of the match (described in settings)
     status = models.IntegerField(null=True, blank=True)
 
+    # String representing status
+    def string_status(self):
+        return {
+            settings.MATCH_NOT_PLAYED: "NOT PLAYED YET",
+            settings.MATCH_PLAYED: "OK, PLAYED",
+        }.get(self.status, "UNKNOWN")                
+
 
 class UserProfile(models.Model):
     
