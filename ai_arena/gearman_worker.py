@@ -29,7 +29,7 @@ def single_match(gearman_worker, gearman_job):
     time_limit = match.time_limit / 1000.0 
 
     judge_program = game.judge_bin_file.path
-    judge_land = game.judge_lang
+    judge_lang = game.judge_lang
     bots_programs = [(bot.bot_bin_file.path, bot.bot_lang) for bot in bots]
 
     results = nadzorca.play(judge_file=judge_program, judge_lang=judge_lang, players=bots_programs,
