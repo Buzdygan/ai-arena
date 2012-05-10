@@ -10,15 +10,60 @@
 
 #define ROUNDS_COUNT 200
 
+#define CALL 1
+#define FOLD 0
+
 using namespace std;
 
-bool readBet(int player, int message, int * bet){
-    string line;
-    //cerr << "sending " << "[" << player << "] " << message << "\n";
-    cout << "[" << player << "] " << message << "\n";
-    getline(cin, line);
-    //cerr << "received " << line << "\n";
-    return (stringstream(line) >> *bet);
+void error(int pl, string info){
+    cerr << "ERRRORR: player " << pl << " " << info << "\n";
+    cout << "[0]END\n";
+    if(pl == 1)
+        cout << "[0, 2]\n";
+    else
+        cout << "[2, 0]\n";
+}
+
+string toSend[3];
+int receivedMes[3];
+
+int actualBet = 0;
+
+void buffer(int pl, int mes){
+    stringstream ss;
+    ss << mes;
+    if(toSend[pl] != "")
+        toSend[pl] += " ";
+    toSend[pl] += ss.str();
+}
+
+void send(int pl){
+    string mes, received;
+    mes = toSend[pl];
+    toSend[pl] = "";
+    cerr << "wys " << "[" << pl << "]" << mes << "\n";
+    cout << "[" << pl << "]" << mes << "\n";
+    getline(cin, received);
+    cerr << "dost " << received << "\n";
+    if(received == "_DEAD_")
+        error(pl, "dead");
+    else{
+        istringstream ss(received);
+        int num;
+        if((ss >> num).fail())
+            error(pl, "NaN");
+        else
+            receivedMes[pl] = num;
+    }            
+}
+
+void readMes(int pl, int& mes, int min, int max, bool maybe0){
+    int num = receivedMes[pl];
+    if(((num >= min) && (num <= max)) || (maybe0 && (num == 0))){
+        mes = num;
+        receivedMes[pl] = -1;
+    }else
+        error(pl, "mes out of range");
 }
 
 int decisionMaker(int * bets){
@@ -33,77 +78,101 @@ int opponent(int player){
     return 3 - player;
 }
 
-bool readBets(int mes1, int mes2, int * bets, bool secondRound){
-    readBet(1, mes1, bets+1);
-    readBet(2, mes2, bets+2);
-    //cerr << "BETS1 " << bets[1] << " " << bets[2] << "\n";
+bool readBets(int * bets, bool firstRound){
+    for(int pl=1; pl <= 2; pl++)
+        if(bets[pl] == 0)
+            readMes(pl, bets[pl], MIN_BET, MAX_BET, false);
+    for(int pl=1; pl <= 2; pl++)
+        buffer(opponent(pl), bets[pl]);
     int dm = decisionMaker(bets);
-    int trash;
     if(dm){
         int op = opponent(dm);
-        readBet(dm, bets[op], bets);
-        if(bets[0]){
-            readBet(op, bets[dm], &trash);
-            readBet(op, 1, &trash);
-            bets[dm] = bets[op];
+            send(dm);
+        int response;
+        if(firstRound)
+            readMes(dm, response, MIN_BET, MAX_BET, true);
+        else
+            readMes(dm, response, 0, 1, true);
+        if(response > 0){
+            buffer(op, CALL);
+            if(firstRound){
+                send(op);
+                bets[dm] = response;
+            }
+            actualBet += bets[op];
+            bets[op] = 0;
             bets[0] = 0;
         }else{
-            readBet(op, bets[dm], &trash);
-            readBet(op, 0, &trash);
+            actualBet += bets[dm];
+            buffer(op, FOLD);
             bets[0] = op;
         }
     }else{
+        actualBet += bets[1];
         bets[0] = 0;
-        readBet(1, bets[2], &trash);
-        readBet(2, bets[1], &trash);
+        for(int pl=1; pl <= 2; pl++)
+            bets[pl] = 0;
+        if(firstRound)
+            for(int pl=1; pl <= 2; pl++)
+                send(pl);
     }
     return true;
 }
 
 int main(){
+    //cin.sync_with_stdio(false);
+    //cout.sync_with_stdio(false);
+    //cerr.sync_with_stdio(false);
+
+    for(int i=0; i < 3; i++){
+        toSend[i] = "";
+        receivedMes[i] = -1;
+    }
     int bets[3];
     int scores[3];
-    int actualBet=0,
-        pl1card=0,
+    int pl1card=0,
         pl2card=0;
     int decision=0;
-    int trash=0;
     int winner=0;
 
     int sum1=0, sum2=0;
 
-    bets[0] = bets[1] = bets[2] = 0;
     scores[0] = scores[1] = scores[2] = 0;
+
+    srand(getpid() + time(NULL));
 
     for(int i=0; i<ROUNDS_COUNT; i++){
         pl1card = rand() % CARD_COUNT;
         pl2card = rand() % CARD_COUNT;
+        for(int i=0; i < 3; i++)
+            bets[i] = 0;
+        buffer(1, pl1card);
+        buffer(2, pl2card);
+        cerr << "sending CARDS " << pl1card << " " << pl2card << "\n";
+        send(1);
+        send(2);
         sum1 += pl1card;
         sum2 += pl2card;
-        //cerr << "CARDS " << pl1card << " " << pl2card << "\n";
         winner = 0;
         actualBet = 0;
         if(pl1card > pl2card)
             winner = 1;
         if(pl2card > pl1card)
             winner = 2;
-        //cerr << "first BET\n";
-        readBets(pl1card, pl2card, bets, false);
-        actualBet = min(bets[1], bets[2]);
+        readBets(bets, true);
         if(bets[0])
             winner = bets[0];
         else{
-            //cerr << "second BET\n";
-            readBets(bets[2], bets[1], bets, true);
-            actualBet += min(bets[1], bets[2]);
+            cerr << "second BET\n";
+            readBets(bets, false);
             if(bets[0])
                 winner = bets[0];
             else{
-                readBet(1, pl2card, bets);
-                readBet(2, pl1card, bets);
+                buffer(1, pl2card);
+                buffer(2, pl1card);
             }
         }
-
+        cerr << "winner " << winner << " actBet " << actualBet << "\n";
         if(winner)
             scores[winner] += actualBet;
     }
