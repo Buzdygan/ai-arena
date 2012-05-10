@@ -75,6 +75,7 @@ A bot program should write on standard output and read from standard input.
 Every message he sends consists of one integer number followed by endline character.
 Messages sent to bot may contain one or more integers separeted by whitespace characters, ended by endline character.
 During a single deal bot exchanges following numbers in this order:
+</p>
 <ol>
     <li> Receives a number(from 0 to 4) indicating his private card.
     <li> First bet:
@@ -91,6 +92,7 @@ During a single deal bot exchanges following numbers in this order:
     <li> Second bet. Looks exactly like steps 2 and 3. If he or his opponent folds, a deal is finished.
     <li> Showdown. If players agreed on a stake value, receives a number indicating his opponent's card.
 </ol>
+<p class='p_news'>
 A single game consists of 200 deals in a row. If bot exceeds time or memory limit, or does not follow the protocol, he loses the game.
 </p>
 
