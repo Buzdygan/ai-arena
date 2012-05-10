@@ -2,6 +2,7 @@ import gearman
 import pickle
 from nadzorca import nadzorca
 from decimal import Decimal
+from django.conf import settings
 from ai_arena.contests.models import Match, MatchBotResult
 
 class PickleDataEncoder(gearman.DataEncoder):
@@ -43,13 +44,14 @@ def single_match(gearman_worker, gearman_job):
 
     log = ''.join(results['supervisor_log'])
     print(results)
-    match.log = log
-    match.save()
     for (i, bot) in enumerate(bots):
         bot_result = bot_results[bot]
         bot_result.score = scores[i]
         bot_result.time_used = time_used[i]
         bot_result.save()
+    match.log = log
+    match.status = settings.MATCH_PLAYED
+    match.save()
 
 gearman_worker.register_task("single_match", single_match)
 gearman_worker.work()

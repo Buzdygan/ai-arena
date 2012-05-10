@@ -210,6 +210,7 @@ COMPILATION_TEMP_PATH = MEDIA_ROOT + COMPILATION_TEMP_DIR + '/'
 
 # match statuses
 MATCH_NOT_PLAYED = 1
+MATCH_PLAYED = 2
 
 C_LANGUAGE = 'C'
 C_KEYWORDS = ['auto', 'break', 'case', 'const', 'continue', 'default', 'do', 'else', 'enum', 
