@@ -26,12 +26,21 @@ def my_results(request):
     matches = []#Match.objects.all() #[]
     for match in Match.objects.all():
         for mbr in match.players_results.all():
-            if mbr.bot.owner == request.user:
+            if (mbr.bot.owner == request.user) & (match not in matches):
                 matches.append(match)
+    
+    ranked_matches = []
+    test_matches = []
+    for match in matches:
+        if match.ranked_match:
+            ranked_matches.append(match)
+        else:
+            test_matches.append(match)
 
     return render_to_response('may_contest/results.html',
             {
-                'matches': matches,
+                'ranked_matches': ranked_matches,
+                'test_matches': test_matches,
             },
             context_instance=RequestContext(request))
 

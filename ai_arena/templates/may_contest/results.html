@@ -6,19 +6,16 @@
 
 {% block content %}
 <div class='content_container'>
-    <h2>Results</h2>
-    <p class='small_p'>
-    Here you can view details of your matches against other bots.
-    </p>
 
     <table id='matches_list'>
-        <tr>
-            <td><b> Player 1 </b></td>
-            <td><b> Score </b></td>
-            <td><b> Player 2 </b></td>
-            <td><b> Status </b></td>
-        </tr>
-        {% for match in matches %}
+        <caption><h3> Ranked Matches </h3></caption>
+        <thead>
+            <th><b> Player 1 </b></th>
+            <th><b> Score </b></th>
+            <th><b> Player 2 </b></th>
+            <th><b> Status </b></th>
+        </thead>
+        {% for match in ranked_matches %}
         <tr>
             <td>
                 {% for result in match.players_results.all %}
@@ -43,6 +40,43 @@
         </tr>
         {% endfor %}
     </table>
+
+    <br><br>
+
+    <table id='matches_list'>
+        <caption><h3> Test Matches </h3></caption>
+        <thead>
+            <th><b> Player 1 </b></th>
+            <th><b> Score </b></th>
+            <th><b> Player 2 </b></th>
+            <th><b> Status </b></th>
+        </thead>
+        {% for match in test_matches %}
+        <tr>
+            <td>
+                {% for result in match.players_results.all %}
+                {% if forloop.counter == 1 %} {{ result.bot.name }} {% endif %}
+                {% endfor %}
+            </td>
+            <td><b>
+                {% for result in match.players_results.all %}
+                {{ result.score }} {% if forloop.counter == 1 %}:{% endif %}
+                {% endfor %}
+            </b></td>
+            <td>
+                {% for result in match.players_results.all %}
+                {% if forloop.counter == 2 %} {{ result.bot.name }} {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                <a href='/my_results/details/{{ match.id }}/' >
+                    {{ match.string_status }}
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
 </div>
 
 {% endblock %}
