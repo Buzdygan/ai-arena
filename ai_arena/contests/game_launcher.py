@@ -23,9 +23,16 @@ def launch_single_match(game, bots):
     """
 
     match = Match(ranked_match=False, game=game, contest=None,
-            time_limit=game.time_limit, memory_limit=game.memory_limit)
+            time_limit=game.time_limit, memory_limit=game.memory_limit,
+            status=settings.MATCH_NOT_PLAYED)
     match.save()
-    arguments = {'game': game, 'bots': bots, 'match': match}
+    bot_results = dict()
+    for bot in bots:
+        bot_result = MatchBotResult(score=0, bot=bot, time_used=0, memory_used=0) 
+        bot_result.save()
+        match.players_results.add(bot_result)
+        bot_results[bot] = bot_result
+    arguments = {'game': game, 'bots': bots, 'match': match, 'bot_results': bot_results}
 
     gearman_client = PickleClient([settings.GEARMAN_HOST])
     gearman_client.submit_job('single_match', arguments, background=True)
@@ -37,9 +44,16 @@ def launch_contest_match(game, bots, contest):
     """
 
     match = Match(ranked_match=True, game=game, contest=contest,
-            time_limit=contest.time_limit, memory_limit=contest.memory_limit)
+            time_limit=contest.time_limit, memory_limit=contest.memory_limit,
+            status=settings.MATCH_NOT_PLAYED)
     match.save()
-    arguments = {'game': game, 'bots': bots, 'match': match}
+    bot_results = dict()
+    for bot in bots:
+        bot_result = MatchBotResult(score=0, bot=bot, time_used=0, memory_used=0) 
+        bot_result.save()
+        match.players_results.add(bot_result)
+        bot_results[bot] = bot_result
+    arguments = {'game': game, 'bots': bots, 'match': match, 'bot_results': bot_results}
 
     gearman_client = PickleClient([settings.GEARMAN_HOST])
     gearman_client.submit_job('single_match', arguments, background=True)

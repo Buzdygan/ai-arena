@@ -208,6 +208,9 @@ GAME_JUDGE_SOURCES_PATH = MEDIA_ROOT + JUDGES_SOURCES_DIR + '/'
 GAME_JUDGE_BINARIES_PATH = MEDIA_ROOT + JUDGES_BINARIES_DIR + '/'
 COMPILATION_TEMP_PATH = MEDIA_ROOT + COMPILATION_TEMP_DIR + '/'
 
+# match statuses
+MATCH_NOT_PLAYED = 1
+
 C_LANGUAGE = 'C'
 C_KEYWORDS = ['auto', 'break', 'case', 'const', 'continue', 'default', 'do', 'else', 'enum', 
         'extern', 'for', 'goto', 'if', 'register', 'return', 'signed', 'sizeof', 

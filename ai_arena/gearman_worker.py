@@ -24,6 +24,7 @@ def single_match(gearman_worker, gearman_job):
     game = arguments['game']
     match = arguments['match']
     bots = arguments['bots']
+    bot_results = arguments['bot_results']
     memory_limit = match.memory_limit 
     # convert miliseconds to seconds
     time_limit = match.time_limit / 1000.0 
@@ -43,11 +44,12 @@ def single_match(gearman_worker, gearman_job):
     log = ''.join(results['supervisor_log'])
     print(results)
     match.log = log
-    for (i, bot) in enumerate(bots):
-        bot_result = MatchBotResult(score=scores[i], bot=bot, time_used=time_used[i], memory_used=0) 
-        bot_result.save()
-        match.players_results.add(bot_result)
     match.save()
+    for (i, bot) in enumerate(bots):
+        bot_result = bot_results[bot]
+        bot_result.score = scores[i]
+        bot_result.time_used = time_used[i]
+        bot_result.save()
 
 gearman_worker.register_task("single_match", single_match)
 gearman_worker.work()

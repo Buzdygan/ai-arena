@@ -193,8 +193,9 @@ class Contest(models.Model):
 
         # how many players required for the match
         match_size = self.game.min_players
-        played_matches = Match.objects.filter(ranked_match=True, contest=self, game=self.game)
-        played_matches_set = [sorted(match.players_results.all().values_list('bot__id', flat=True)) for match in played_matches]
+        matches = Match.objects.filter(ranked_match=True, contest=self, game=self.game)
+        played_matches = Match.objects.exclude(status=settings.MATCH_NOT_PLAYED)
+        matches_set = [sorted(match.players_results.all().values_list('bot__id', flat=True)) for match in matches]
 
         contestants = sorted(self.contestants.all(), key=lambda x: x.id)
         contestants_ranks = dict([(bot, BotRanking(ranking=self.ranking, bot=bot)) for bot in contestants])
@@ -202,7 +203,7 @@ class Contest(models.Model):
         # order execution of missing matches
         matches_to_play = combinations([c.id for c in contestants], match_size)
         for match in matches_to_play:
-            if list(match) not in played_matches_set:
+            if list(match) not in matches_set:
                 bots = [Bot.objects.get(id=bot_id) for bot_id in match]
                 launch_contest_match(self.game, bots, self)
 
@@ -265,6 +266,8 @@ class Match(models.Model):
     time_limit = models.IntegerField(null=True, blank=True)
     # Max memory (in MB) for one player
     memory_limit = models.IntegerField(null=True, blank=True)
+    # Status of the match (described in settings)
+    status = models.IntegerField(null=True, blank=True)
 
 
 class UserProfile(models.Model):
