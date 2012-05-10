@@ -8,7 +8,7 @@ print 'TEST bot_logs'
 
 judge_path = current_dir + "/bot_logs_judge"
 bot_path = current_dir + "/bot_logs_bot"
-results = nadzorca.play(judge_file=judge_path, players=[bot_path, bot_path], time_limit=1, memory_limit=100000)
+results = nadzorca.play(judge_file=judge_path, judge_lang='CPP', players=[(bot_path, 'CPP'), (bot_path, 'CPP')], time_limit=1, memory_limit=100000)
 
 passed = True
 bot1_info = ''

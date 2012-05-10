@@ -8,8 +8,10 @@ print 'TEST pok'
 
 judge_path = current_dir + "/pok_judge"
 bot_path = current_dir + "/cpp_pok_bot"
+bot_lang = 'CPP'
 bot2_path = current_dir + "/py_pok_bot.py"
-results = nadzorca.play(judge_file=judge_path, players=[bot_path, bot2_path], time_limit=10, memory_limit=1000000)
+bot2_lang = 'PYTHON'
+results = nadzorca.play(judge_file=judge_path, judge_lang='CPP', players=[(bot_path, bot_lang), (bot2_path, bot2_lang)], time_limit=10, memory_limit=1000000)
 
 #print results
 
