@@ -53,8 +53,11 @@ def create_bot_from_request(request, game, testing=False, bot_field='bot_source'
         bot.name = 'test_opponent'
         bot.bot_lang = request.POST['opponent_language']
 
-    Bot.objects.filter(owner=request.user, name=bot.name).delete()
-
+    bots_to_delete = Bot.objects.filter(owner=request.user, name=bot.name)
+    # Delete matches bot played in
+    for bot in bots_to_delete:
+        bot.delete_bot_matches()
+    bots_to_delete.delete()
 
     bot.bot_source_file = request.FILES[bot_field]
     bot.game = game

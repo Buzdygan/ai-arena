@@ -88,6 +88,11 @@ class Bot(models.Model):
     # whether to include in rankings
     ranked = models.BooleanField(default=True)
 
+    def delete_bot_matches(self):
+        for match in Match.objects.filter(game=self.game):
+            if self.id in set([bot_res.bot.id for bot_res in match.players_results.all()]):
+                match.delete()
+
     def compile_bot(self):
         """ Compile source file to directory with source file """
 
