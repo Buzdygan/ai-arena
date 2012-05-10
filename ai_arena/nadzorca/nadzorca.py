@@ -189,7 +189,7 @@ def get_run_command(program_name, program_lang):
         command = JAVA_RUN_COMMAND + program_name
     if program_lang == PYTHON_LANGUAGE:
         command = PYTHON_RUN_COMMAND + program_name
-    command = shlex.split(command)
+    #command = shlex.split(command)
     return command
 
 def play(judge_file, judge_lang, players, time_limit, memory_limit):
