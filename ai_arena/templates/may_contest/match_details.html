@@ -52,5 +52,12 @@
             <td colspan=2>{{ match.logs }}</td>
         </tr>
     </table>
+    <br>
+    {% for botres in match.players_results.all %}
+        {% if botres.bot.owner == user %}
+            Your bot {{ botres.bot.name }} logs: <br>
+            {{ botres.logs }}
+        {% endif %}
+    {% endfor %}    
 </div>
 {% endblock %}

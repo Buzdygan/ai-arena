@@ -247,15 +247,17 @@ class MatchBotResult(models.Model):
     memory_used = models.IntegerField(null=True, blank=True)
     # status of bot behaviour during match
     status = models.IntegerField(null=True, blank=True)
+    # logs
+    logs = models.TextField()
     bot = models.ForeignKey(Bot)
 
     # String representing status
     def string_status(self):
         return {
-            0: "OK",
-            1: "TIME LIMIT EXCEEDED",
-            2: "MEMORY LIMIT EXCEEDED",
-            3: "DIDN'T FOLLOW PROTOCOL",
+            BOT_OK: "OK",
+            BOT_TLE: "TIME LIMIT EXCEEDED",
+            BOT_MLE: "MEMORY LIMIT EXCEEDED",
+            BOT_KILLED: "DIDN'T FOLLOW PROTOCOL OR RULES",
         }.get(self.status, "UNKNOWN")
 
 

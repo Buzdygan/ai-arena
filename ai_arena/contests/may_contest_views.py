@@ -50,6 +50,7 @@ def match_details(request, match_id):
     return render_to_response('may_contest/match_details.html',
             {
                 'match': match,
+                'user': request.user,
 #                'player1': match.objects.all()[0],
 #                'player2': match.objects.all()[1],
             },
