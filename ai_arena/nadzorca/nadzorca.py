@@ -300,7 +300,7 @@ def play(judge_file, judge_lang, players, time_limit, memory_limit):
                 if bnum > 0 and bnum <= players_num:
                     try:
                         bots_process_list[bnum-1].kill()
-                        proc_info[bnum-1] = exit_status.BOT_KILLED
+                        proc_info[bnum] = exit_status.BOT_KILLED
                     except:
                         pass
                 else:
