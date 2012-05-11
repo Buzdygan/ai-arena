@@ -292,7 +292,17 @@ class Match(models.Model):
     def string_status(self):
         return {
             MATCH_NOT_PLAYED: "NOT PLAYED YET",
-            MATCH_PLAYED: "OK, PLAYED",
+            SUPERVISOR_OK: "OK",
+            JUDGE_TIMEOUT: "JUDGETIMEOUT",
+            JUDGE_EOF: "JUDGE EOF",
+            JUDGE_WRONG_MESSAGE: "JUDGE WRONG MESSAGE",
+            JUDGE_SCORES_TIMEOUT: "JUDGE SCORES TIMEOUT",
+            JUDGE_SCORES_EOF: "JUDGE SCORES EOF",
+            JUDGE_WRONG_SCORES: "JUDGE WRONG SCORES",
+            NOT_EXISTING_KILL: "NOT EXISTING KILL",
+            NOT_EXISTING_MESSAGE: "NOT EXISTING MESSAGE",
+            JUDGE_WRITE: "JUDGE WRITE???",
+            #MATCH_PLAYED: "OK, PLAYED",
         }.get(self.status, "UNKNOWN")
 
 
