@@ -199,7 +199,7 @@ class Contest(models.Model):
         # how many players required for the match
         match_size = self.game.min_players
         matches = Match.objects.filter(ranked_match=True, contest=self, game=self.game)
-        played_matches = Match.objects.exclude(status=settings.MATCH_NOT_PLAYED)
+        played_matches = matches.exclude(status=settings.MATCH_NOT_PLAYED)
         matches_set = [sorted(match.players_results.all().values_list('bot__id', flat=True)) for match in matches]
 
         contestants = sorted(self.contestants.all(), key=lambda x: x.id)
