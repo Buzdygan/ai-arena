@@ -8,7 +8,7 @@
 
 #define CARD_COUNT 5
 
-#define ROUNDS_COUNT 2
+#define ROUNDS_COUNT 200
 
 #define CALL 1
 #define FOLD 0
