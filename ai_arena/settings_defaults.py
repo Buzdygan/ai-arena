@@ -168,7 +168,6 @@ EMAIL_PORT='1025'
 LANGUAGES = (
     ('C', 'C'),
     ('CPP', 'C++'),
-    ('JAVA', 'Java'),
     ('PYTHON', 'Python'),
 )
 
