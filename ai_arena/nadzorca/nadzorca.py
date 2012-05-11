@@ -296,7 +296,7 @@ def play(judge_file, judge_lang, players, time_limit, memory_limit):
                 log(supervisor_log, "Wrong scores message from judge.")
             break
         elif message == 'KILL':
-            for bnum in players:
+            for bnum in bots:
                 if bnum > 0 and bnum <= players_num:
                     try:
                         bots_process_list[bnum-1].kill()
