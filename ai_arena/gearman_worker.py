@@ -39,15 +39,17 @@ def single_match(gearman_worker, gearman_job):
 
     scores = results['results']
     time_used = results['time']
+    memory_used = results['memory']
     if len(scores) < len(bots) or len(time_used) < len(bots) + 1:
         return
 
     log = ''.join(results['supervisor_log'])
-    print(results)
+    print(log)
     for (i, bot) in enumerate(bots):
         bot_result = bot_results[bot]
         bot_result.score = scores[i]
         bot_result.time_used = time_used[i]
+        bot_result.memory_used = memory_used[i]
         bot_result.save()
     match.log = log
     match.status = settings.MATCH_PLAYED

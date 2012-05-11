@@ -11,6 +11,7 @@ from ai_arena import settings
 from ai_arena.contests.compilation import compile
 from ai_arena.contests.forms import SendBotForm, SendBotWithoutNameForm, SendBotWithGameForm
 from ai_arena.contests.models import Game, Bot, Contest
+from ai_arena.contests.may_contest_helper_functions import generate_ranking
 
 @login_required
 def create_bot_from_request(request, game, testing=False, bot_field='bot_source'):
@@ -142,6 +143,7 @@ def send_bot_without_name(request, game_id):
                         },
                         context_instance=RequestContext(request))
             else:
+                generate_ranking()
                 return HttpResponseRedirect('/')
     else:
         form = SendBotWithoutNameForm()
