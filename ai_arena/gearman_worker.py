@@ -58,7 +58,7 @@ def single_match(gearman_worker, gearman_job):
         bot_result.logs = ''.join(bot_logs[i])
         bot_result.save()
     match.log = log
-    match.status = MATCH_PLAYED
+    match.status = results['exit_status']
     match.save()
 
 gearman_worker.register_task("single_match", single_match)

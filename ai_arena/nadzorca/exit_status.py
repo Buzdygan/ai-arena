@@ -20,4 +20,4 @@ BOT_KILLED = 3 # Bot killed by judge
 
 # Match statuses
 MATCH_NOT_PLAYED = 1
-MATCH_PLAYED = 2
+#MATCH_PLAYED = 2
