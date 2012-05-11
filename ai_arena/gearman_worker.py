@@ -1,6 +1,7 @@
 import gearman
 import pickle
 from nadzorca import nadzorca
+from nadzorca.exit_status import *
 from decimal import Decimal
 from django.conf import settings
 from ai_arena.contests.models import Match, MatchBotResult
@@ -45,7 +46,7 @@ def single_match(gearman_worker, gearman_job):
         return
 
     log = ''.join(results['supervisor_log'])
-    print(log)
+    print(results)
     for (i, bot) in enumerate(bots):
         bot_result = bot_results[bot]
         bot_result.score = scores[i]
@@ -55,7 +56,7 @@ def single_match(gearman_worker, gearman_job):
         bot_result.status = bots_exit[i]
         bot_result.save()
     match.log = log
-    match.status = settings.MATCH_PLAYED
+    match.status = MATCH_PLAYED
     match.save()
 
 gearman_worker.register_task("single_match", single_match)

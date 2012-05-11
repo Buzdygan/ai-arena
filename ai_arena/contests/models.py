@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from itertools import combinations
 from decimal import Decimal
 from ai_arena import settings
+from nadzorca.exit_status import *
 from utils import parse_logs
 
 class Game(models.Model):
@@ -199,7 +200,7 @@ class Contest(models.Model):
         # how many players required for the match
         match_size = self.game.min_players
         matches = Match.objects.filter(ranked_match=True, contest=self, game=self.game)
-        played_matches = matches.exclude(status=settings.MATCH_NOT_PLAYED)
+        played_matches = matches.exclude(status=MATCH_NOT_PLAYED)
         matches_set = [sorted(match.players_results.all().values_list('bot__id', flat=True)) for match in matches]
 
         contestants = sorted(self.contestants.all(), key=lambda x: x.id)
@@ -288,8 +289,8 @@ class Match(models.Model):
     # String representing status
     def string_status(self):
         return {
-            settings.MATCH_NOT_PLAYED: "NOT PLAYED YET",
-            settings.MATCH_PLAYED: "OK, PLAYED",
+            MATCH_NOT_PLAYED: "NOT PLAYED YET",
+            MATCH_PLAYED: "OK, PLAYED",
         }.get(self.status, "UNKNOWN")
 
 

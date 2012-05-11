@@ -1,6 +1,7 @@
 from decimal import Decimal
 from ai_arena.contests.models import Match, MatchBotResult
 from ai_arena import settings
+from nadzorca.exit_status import *
 import gearman
 import pickle
 
@@ -24,7 +25,7 @@ def launch_single_match(game, bots):
 
     match = Match(ranked_match=False, game=game, contest=None,
             time_limit=game.time_limit, memory_limit=game.memory_limit,
-            status=settings.MATCH_NOT_PLAYED)
+            status=MATCH_NOT_PLAYED)
     match.save()
     bot_results = dict()
     for bot in bots:
@@ -45,7 +46,7 @@ def launch_contest_match(game, bots, contest):
 
     match = Match(ranked_match=True, game=game, contest=contest,
             time_limit=contest.time_limit, memory_limit=contest.memory_limit,
-            status=settings.MATCH_NOT_PLAYED)
+            status=MATCH_NOT_PLAYED)
     match.save()
     bot_results = dict()
     for bot in bots:
