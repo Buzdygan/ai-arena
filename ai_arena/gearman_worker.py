@@ -48,7 +48,8 @@ def single_match(gearman_worker, gearman_job):
     for (i, bot) in enumerate(bots):
         bot_result = bot_results[bot]
         bot_result.score = scores[i]
-        bot_result.time_used = time_used[i]
+        # convert from seconds to miliseconds
+        bot_result.time_used = int(1000.0 * time_used[i])
         bot_result.memory_used = memory_used[i]
         bot_result.save()
     match.log = log

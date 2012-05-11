@@ -24,7 +24,7 @@
             </td>
             <td><b>
                 {% for result in match.players_results.all %}
-                {{ result.score }} {% if forloop.counter == 1 %}:{% endif %}
+                {{ result.score|floatformat:"-3" }} {% if forloop.counter == 1 %}:{% endif %}
                 {% endfor %}
             </b></td>
             <td>
@@ -60,7 +60,7 @@
             </td>
             <td><b>
                 {% for result in match.players_results.all %}
-                {{ result.score }} {% if forloop.counter == 1 %}:{% endif %}
+                {{ result.score|floatformat:"-3" }} {% if forloop.counter == 1 %}:{% endif %}
                 {% endfor %}
             </b></td>
             <td>
