@@ -21,7 +21,7 @@
                 <td> {{ rank.bot.name }} </td>
                 <td> {{ rank.bot.owner.username }} </td>
                 <td> {{ rank.matches_played }} </td>
-                <td> {{ rank.overall_score }} </td>
+                <td> {{ rank.overall_score|floatformat:"-3" }} </td>
             </tr>
             {% endfor %}
         </table>

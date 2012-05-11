@@ -199,7 +199,7 @@ class Contest(models.Model):
         # how many players required for the match
         match_size = self.game.min_players
         matches = Match.objects.filter(ranked_match=True, contest=self, game=self.game)
-        played_matches = Match.objects.exclude(status=settings.MATCH_NOT_PLAYED)
+        played_matches = matches.exclude(status=settings.MATCH_NOT_PLAYED)
         matches_set = [sorted(match.players_results.all().values_list('bot__id', flat=True)) for match in matches]
 
         contestants = sorted(self.contestants.all(), key=lambda x: x.id)
@@ -244,7 +244,18 @@ class MatchBotResult(models.Model):
     time_used = models.IntegerField(null=True, blank=True)
     # in MB
     memory_used = models.IntegerField(null=True, blank=True)
+    # status of bot behaviour during match
+    status = models.IntegerField(null=True, blank=True)
     bot = models.ForeignKey(Bot)
+
+    # String representing status
+    def string_status(self):
+        return {
+            0: "OK",
+            1: "TIME LIMIT EXCEEDED",
+            2: "MEMORY LIMIT EXCEEDED",
+            3: "DIDN'T FOLLOW PROTOCOL",
+        }.get(self.status, "UNKNOWN")
 
 
 class Match(models.Model):
@@ -279,7 +290,7 @@ class Match(models.Model):
         return {
             settings.MATCH_NOT_PLAYED: "NOT PLAYED YET",
             settings.MATCH_PLAYED: "OK, PLAYED",
-        }.get(self.status, "UNKNOWN")                
+        }.get(self.status, "UNKNOWN")
 
 
 class UserProfile(models.Model):

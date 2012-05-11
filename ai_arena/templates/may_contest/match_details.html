@@ -19,12 +19,12 @@
             <td>Scores:</td>
             {% for player in match.players_results.all %}
                 <td>
-                    <span class='player_name'>{{ player.score }} </span>
+                    <span class='player_name'>{{ player.score|floatformat:"-3" }} </span>
                 </td>
             {% endfor %}
         </tr>
         <tr>
-            <td>Time:</td>
+            <td>Time(miliseconds):</td>
             {% for player in match.players_results.all %}
                 <td>
                     <span class='player_name'>{{ player.time_used }} </span>
@@ -36,6 +36,14 @@
             {% for player in match.players_results.all %}
                 <td>
                     <span class='player_name'>{{ player.memory_used }} </span>
+                </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Status:</td>
+            {% for player in match.players_results.all %}
+                <td>
+                    <span class='player_name'>{{ player.string_status }} </span>
                 </td>
             {% endfor %}
         </tr>

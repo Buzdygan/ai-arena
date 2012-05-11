@@ -34,6 +34,7 @@ def create_may_default_bot():
         bot.game = get_may_game()
         bot.bot_lang = settings.MAY_CONTEST_DEFAULT_BOT_LANG
         bot.bot_source_file.save(bot.name + settings.SOURCE_FORMATS[bot.bot_lang], File(open(settings.MAY_CONTEST_DEFAULT_BOT_PATH)))
+        bot.ranked = False
         bot.save()
         bot.compile_bot()
         return bot
