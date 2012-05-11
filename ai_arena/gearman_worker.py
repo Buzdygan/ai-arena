@@ -40,6 +40,7 @@ def single_match(gearman_worker, gearman_job):
     scores = results['results']
     time_used = results['time']
     memory_used = results['memory']
+    bots_exit = results['bots_exit']
     if len(scores) < len(bots) or len(time_used) < len(bots) + 1:
         return
 
@@ -51,6 +52,7 @@ def single_match(gearman_worker, gearman_job):
         # convert from seconds to miliseconds
         bot_result.time_used = int(1000.0 * time_used[i])
         bot_result.memory_used = memory_used[i]
+        bot_result.status = bots_exit[i]
         bot_result.save()
     match.log = log
     match.status = settings.MATCH_PLAYED

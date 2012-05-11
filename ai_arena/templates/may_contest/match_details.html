@@ -40,6 +40,14 @@
             {% endfor %}
         </tr>
         <tr>
+            <td>Status:</td>
+            {% for player in match.players_results.all %}
+                <td>
+                    <span class='player_name'>{{ player.string_status }} </span>
+                </td>
+            {% endfor %}
+        </tr>
+        <tr>
             <td>Logs:</td>
             <td colspan=2>{{ match.logs }}</td>
         </tr>

@@ -244,7 +244,18 @@ class MatchBotResult(models.Model):
     time_used = models.IntegerField(null=True, blank=True)
     # in MB
     memory_used = models.IntegerField(null=True, blank=True)
+    # status of bot behaviour during match
+    status = models.IntegerField(null=True, blank=True)
     bot = models.ForeignKey(Bot)
+
+    # String representing status
+    def string_status(self):
+        return {
+            0: "OK",
+            1: "TIME LIMIT EXCEEDED",
+            2: "MEMORY LIMIT EXCEEDED",
+            3: "DIDN'T FOLLOW PROTOCOL",
+        }.get(self.status, "UNKNOWN")
 
 
 class Match(models.Model):
@@ -279,7 +290,7 @@ class Match(models.Model):
         return {
             settings.MATCH_NOT_PLAYED: "NOT PLAYED YET",
             settings.MATCH_PLAYED: "OK, PLAYED",
-        }.get(self.status, "UNKNOWN")                
+        }.get(self.status, "UNKNOWN")
 
 
 class UserProfile(models.Model):
