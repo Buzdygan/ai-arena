@@ -8,26 +8,32 @@
 
 #define CARD_COUNT 5
 
-#define ROUNDS_COUNT 200
+#define ROUNDS_COUNT 2
 
 #define CALL 1
 #define FOLD 0
 
 using namespace std;
 
-void error(int pl, string info){
-    cerr << "ERRRORR: player " << pl << " " << info << "\n";
-    cout << "[0]END\n";
-    if(pl == 1)
-        cout << "[0, 2]\n";
-    else
-        cout << "[2, 0]\n";
-}
-
 string toSend[3];
 int receivedMes[3];
+bool communicate = true;
 
 int actualBet = 0;
+
+void error(int pl, string info){
+    if(communicate){
+        cerr << "ERRRORR: player " << pl << " " << info << "\n";
+        cerr << "wys " << "[" << pl << "]KILL\n";
+        cout << "[" << pl << "]KILL\n";
+        cout << "[0]END\n";
+        if(pl == 1)
+            cout << "[0, 2]\n";
+        else
+            cout << "[2, 0]\n";
+    }
+    communicate = false;
+}
 
 void buffer(int pl, int mes){
     stringstream ss;
@@ -41,10 +47,12 @@ void send(int pl){
     string mes, received;
     mes = toSend[pl];
     toSend[pl] = "";
-    cerr << "wys " << "[" << pl << "]" << mes << "\n";
-    cout << "[" << pl << "]" << mes << "\n";
-    getline(cin, received);
-    cerr << "dost " << received << "\n";
+    if(communicate){
+        cerr << "wys " << "[" << pl << "]" << mes << "\n";
+        cout << "[" << pl << "]" << mes << "\n";
+        getline(cin, received);
+        cerr << "dost " << received << "\n";
+    }
     if(received == "_DEAD_")
         error(pl, "dead");
     else{
@@ -120,10 +128,6 @@ bool readBets(int * bets, bool firstRound){
 }
 
 int main(){
-    //cin.sync_with_stdio(false);
-    //cout.sync_with_stdio(false);
-    //cerr.sync_with_stdio(false);
-
     for(int i=0; i < 3; i++){
         toSend[i] = "";
         receivedMes[i] = -1;
