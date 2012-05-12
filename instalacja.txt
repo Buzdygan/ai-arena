@@ -1,0 +1,19 @@
+Żeby móc uruchomić poprawnie serwis AI-Arena niezbędne jest zainstalowanie kilku modułów.
+Aby je zainstalować należy w linii poleceń wpisać następujące komendy:
+
+sudo apt-get install postfix
+sudo apt-get install libevent-dev
+sudo apt-get install uuid-dev
+sudo apt-get install libboost-dev libboost-graph-dev libboost-iostreams-dev
+sudo apt-get install libboost-program-options-dev
+
+Następnie można pobrać paczkę z Gearmanem (https://launchpad.net/gearmand/+milestone/0.26)
+i wykonać nstępujące polecenia:
+
+tar -xvzf gearmand-0.26.tar.gz
+cd gearmand-0.26
+sudo ./configure
+sudo ldconfig
+sudo make 
+sudo make install
+
