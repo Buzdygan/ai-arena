@@ -30,49 +30,49 @@ def create_bot_from_request(request, game, testing=False, bot_field='bot_source'
             and bot is created bot object.
     """
     # Save known fields
-    bot = Bot()
-    bot.name = request.user.username + '_bot'
+    new_bot = Bot()
+    new_bot.name = request.user.username + '_bot'
 
     if 'bot_name' in request.POST and len(request.POST['bot_name']) > 0:
-        bot.name = request.POST['bot_name'] 
+        new_bot.name = request.POST['bot_name'] 
 
     if testing:
-        bot.ranked = False
+        new_bot.ranked = False
         if 'test_name' in request.POST and len(request.POST['test_name']) > 0:
-            bot.name = request.POST['test_name']
+            new_bot.name = request.POST['test_name']
         else:
-            bot.name = 'test_bot'
+            new_bot.name = 'test_bot'
 #            bot.name = settings.TEST_BOT_PREFIX + datetime.now().isoformat().replace(':', '-').replace('.', '-')
     
-    bot.bot_lang = request.POST['bot_language']
+    new_bot.bot_lang = request.POST['bot_language']
 
     if bot_field=='opponent_source':
 #        bot.name = settings.OPPONENT_TEST_BOT_PREFIX + datetime.now().isoformat().replace(':', '-').replace('.', '-')
-        bot.name = 'test_opponent'
-        bot.bot_lang = request.POST['opponent_language']
+        new_bot.name = 'test_opponent'
+        new_bot.bot_lang = request.POST['opponent_language']
 
-    bots_to_delete = Bot.objects.filter(owner=request.user, name=bot.name)
-    # Delete matches bot played in
-    for bot in bots_to_delete:
-        bot.delete_bot_matches()
-    bots_to_delete.delete()
+    bots_to_delete = Bot.objects.filter(owner=request.user, name=new_bot.name)
 
-    bot.bot_source_file = request.FILES[bot_field]
-    bot.game = game
+    new_bot.bot_source_file = request.FILES[bot_field]
+    new_bot.game = game
  
     # Add owner info
-    bot.owner = request.user
-    bot.save()
+    new_bot.owner = request.user
+    new_bot.save()
 
     # Compile source file to directory with source file
-    exit_status, logs = bot.compile_bot()
+    exit_status, logs = new_bot.compile_bot()
 
     if exit_status != 0:
-        bot.delete()
+        new_bot.delete()
         return (exit_status, logs, None)
 
     else:
-        return (exit_status, "", bot)
+        for bot in bots_to_delete:
+            if bot.id != new_bot.id:
+                bot.delete_bot_matches()
+                bot.delete()
+        return (exit_status, "", new_bot)
 
 
 @login_required
