@@ -292,6 +292,7 @@ class Match(models.Model):
     def string_status(self):
         return {
             MATCH_NOT_PLAYED: "NOT PLAYED YET",
+            MATCH_WALKOVER: "WALKOVER",
             SUPERVISOR_OK: "OK",
             JUDGE_TIMEOUT: "JUDGETIMEOUT",
             JUDGE_EOF: "JUDGE EOF",
