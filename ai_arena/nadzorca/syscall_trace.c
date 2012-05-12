@@ -61,7 +61,7 @@ int main(int argc, char **argv)
         
             for (i=0; i<forbidden_syscalls_number; ++i) {
                 if (syscall_nr == forbidden_syscalls[i]) {
-                    printf("Child tried to use forbiden system call %d. Terminating child.\n", syscall_nr);
+                    //printf("Child tried to use forbiden system call %d. Terminating child.\n", syscall_nr);
                     ptrace(PTRACE_KILL, child, NULL, NULL);
                     i = forbidden_syscalls_number;
                     naughty_child = 1;
