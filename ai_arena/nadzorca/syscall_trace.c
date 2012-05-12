@@ -16,14 +16,16 @@
 
 #endif
 
+#define fsn 8
+
 int main(int argc, char **argv)
 {
     int exec_status;
     int naughty_child;
     pid_t child;
     int status, syscall_nr, i;
-    int forbidden_syscalls_number = 2; 
-    int forbidden_syscalls[2] = {__NR_fork, __NR_clone};
+    int forbidden_syscalls_number = fsn; 
+    int forbidden_syscalls[fsn] = {__NR_fork, __NR_clone, __NR_creat, __NR_link, __NR_unlink, __NR_chdir, __NR_mknod, __NR_chmod};
 
     child = fork();
     if (child == 0) {
@@ -59,7 +61,7 @@ int main(int argc, char **argv)
         
             for (i=0; i<forbidden_syscalls_number; ++i) {
                 if (syscall_nr == forbidden_syscalls[i]) {
-                    //printf("Child tried to use forbiden system call %d. Terminating child.\n", syscall_nr);
+                    printf("Child tried to use forbiden system call %d. Terminating child.\n", syscall_nr);
                     ptrace(PTRACE_KILL, child, NULL, NULL);
                     i = forbidden_syscalls_number;
                     naughty_child = 1;
