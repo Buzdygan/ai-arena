@@ -7,4 +7,6 @@ else ifeq ($(LANG), C)
 else ifeq ($(LANG), JAVA)
 print settings.MAKEFILE_DIR
 	include $(TOP)/java.mk
+else ifeq ($(LANG), PYTHON)
+	include $(TOP)/python.mk
 endif
