@@ -48,17 +48,19 @@ def single_match(gearman_worker, gearman_job):
 
     log = ''.join(results['supervisor_log'])
     print(results)
+    match.status = results['exit_status']
     for (i, bot) in enumerate(bots):
         bot_result = bot_results[bot]
         bot_result.score = scores[i]
         # convert from seconds to miliseconds
         bot_result.time_used = int(1000.0 * time_used[i])
         bot_result.memory_used = memory_used[i]
-        bot_result.status = bots_exit[i]        
+        bot_result.status = bots_exit[i]
+        if (bot_result.status != BOT_OK) & (match.status == SUPERVISOR_OK):
+            match.status = MATCH_WALKOVER
         bot_result.logs = ''.join(bot_logs[i])
         bot_result.save()
     match.log = log
-    match.status = results['exit_status']
     match.save()
 
 gearman_worker.register_task("single_match", single_match)
