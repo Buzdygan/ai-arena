@@ -13,7 +13,11 @@ import threading
 import resource
 import exit_status
 import multiprocessing as mp
-import shlex
+import signal
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+grand_dir = os.path.dirname(current_dir)
+os.sys.path.insert(0, current_dir)
 
 def read_logs(judge_process, bots_process_list, log_map, run_thread):
     """
@@ -116,7 +120,8 @@ def set_limits(time_limit, memory_limit):
     """
         A function that is run in forked processes before exec
         (see subprocess.Popen constructor preexec_fn argument)
-        Used for setting limits of time and memory consumption for the process
+        Previously used for setting limits of time and memory consumption for the process.
+        Currently not in use.
     """
     mem_limit =  memory_limit * 1024 * 1024
     resource.setrlimit(resource.RLIMIT_CPU, (time_limit + 1, time_limit + 1))
@@ -134,7 +139,7 @@ def get_stats(pid):
     except:
         return (None, None)
 
-def limiter(proc_list, stop_indicator, proc_info, max_memory, time_limit, memory_limit):
+def limiter(pids_list, stop_indicator, proc_info, max_time, max_memory, time_limit, memory_limit):
     """
         Function executed in separate process, that measures memory and time
         consumption of processes with pids in pids_list.
@@ -145,9 +150,9 @@ def limiter(proc_list, stop_indicator, proc_info, max_memory, time_limit, memory
     mem_lmt = memory_limit * 1024 * 1024
     time_lmt = time_limit * ticks_per_second
     while(True):
-        judge_proc = proc_list[0]
-        if judge_proc.poll() == None:
-            time_elapsed, memory = get_stats(judge_proc.pid)
+        judge_pid = pids_list[0]
+        if os.path.exists("/proc/{0}/stat".format(judge_pid)):
+            time_elapsed, memory = get_stats(judge_pid)
             if time_elapsed > 10*time_lmt:
                 judge_proc.kill()
                 proc_info[0] = exit_status.BOT_TLE
@@ -155,17 +160,18 @@ def limiter(proc_list, stop_indicator, proc_info, max_memory, time_limit, memory
                 judge_proc.kill()
                 proc_info[0] = exit_status.BOT_MLE
             max_memory[0] = max(max_memory[0], memory)
-        for proc_num in range(1,len(proc_list)):
-            proc = proc_list[proc_num]
-            if proc.poll() == None:
-                time_elapsed, memory = get_stats(proc.pid)
+        for pid_num in range(1,len(pids_list)):
+            bot_pid = pids_list[pid_num]
+            if os.path.exists("/proc/{0}/stat".format(bot_pid)):
+                time_elapsed, memory = get_stats(bot_pid)
                 if time_elapsed > time_lmt:
-                    proc.kill()
+                    os.kill(bot_pid, signal.SIGKILL)
                     proc_info[proc_num] = exit_status.BOT_TLE
                 elif memory > mem_lmt:
-                    proc.kill()
+                    os.kill(bot_pid, signal.SIGKILL)
                     proc_info[proc_num] = exit_status.BOT_MLE
-                max_memory[proc_num] = max(max_memory[proc_num], memory)
+                max_memory[pid_num] = max(max_memory[pid_num], memory)
+                max_time[pid_num] = max(max_time[pid_num], time_elapsed)
         time.sleep(0.1)
         if stop_indicator[0]:
             break;
@@ -175,21 +181,16 @@ CPP_LANGUAGE = 'CPP'
 JAVA_LANGUAGE = 'JAVA'
 PYTHON_LANGUAGE = 'PYTHON'
 
-C_RUN_COMMAND = ''
-CPP_RUN_COMMAND = ''
-JAVA_RUN_COMMAND = 'java '
-PYTHON_RUN_COMMAND = 'python '
-
 def get_run_command(program_name, program_lang):
-    if program_lang == C_LANGUAGE:
-        command = C_RUN_COMMAND + program_name
-    if program_lang == CPP_LANGUAGE:
-        command = CPP_RUN_COMMAND + program_name
-    if program_lang == JAVA_LANGUAGE:
-        command = JAVA_RUN_COMMAND + program_name
-    if program_lang == PYTHON_LANGUAGE:
-        command = PYTHON_RUN_COMMAND + program_name
-    #command = shlex.split(command)
+    return [current_dir + "/syscall_trace" , program_name ,   program_lang]
+    #if program_lang == C_LANGUAGE:
+    #    command = C_RUN_COMMAND + program_name
+    #if program_lang == CPP_LANGUAGE:
+    #    command = CPP_RUN_COMMAND + program_name
+    #if program_lang == JAVA_LANGUAGE:
+    #    command = JAVA_RUN_COMMAND + program_name
+    #if program_lang == PYTHON_LANGUAGE:
+    #    command = PYTHON_RUN_COMMAND + program_name
     return command
 
 def play(judge_file, judge_lang, players, time_limit, memory_limit):
@@ -210,11 +211,13 @@ def play(judge_file, judge_lang, players, time_limit, memory_limit):
             stdin=subprocess.PIPE,
             stderr=subprocess.PIPE,
             close_fds = True,
-            preexec_fn = lambda : set_limits(10*time_limit, 10*memory_limit),
+            #preexec_fn = lambda : set_limits(10*time_limit, 10*memory_limit),
             )
+    judge_pid = int(judge_process.stdout.readline())
     log(supervisor_log, "Started judge succesfully\n")
 
     bots_process_list = []
+    bots_pids = []
     for (bot_program, bot_lang) in players:
         arg_to_execute = get_run_command(bot_program, bot_lang)
         bot_process = subprocess.Popen(
@@ -223,9 +226,10 @@ def play(judge_file, judge_lang, players, time_limit, memory_limit):
                 stdout = subprocess.PIPE,
                 stderr = subprocess.PIPE,
                 close_fds = True,
-                preexec_fn = lambda : set_limits(time_limit, memory_limit),
+                #preexec_fn = lambda : set_limits(time_limit, memory_limit),
                 )
         bots_process_list.append(bot_process)
+        bots_pids.append(int(bot_process.stdout.readline()))
     log(supervisor_log, "Started all bots succesfully\n")
 
     log_map = {}
@@ -234,14 +238,15 @@ def play(judge_file, judge_lang, players, time_limit, memory_limit):
     log_thread.start()
 
     manager = mp.Manager()
-    proc_list = manager.list()
-    proc_list.append(judge_process)
-    proc_list.extend(bots_process_list)
+    pids_list = manager.list()
+    pids_list.append(judge_pid)
+    pids_list.extend(bots_pids)
     max_memory = manager.list([0.0 for x in range(players_num+1)])
+    max_time = manager.list([0.0 for x in range(players_num+1)])
     stop_indicator = manager.dict([(0, False)])
     proc_info = manager.list([exit_status.BOT_OK for x in range(players_num+1)])
     
-    limiter_proc = mp.Process(target=limiter, args=(proc_list, stop_indicator, proc_info, max_memory, time_limit, memory_limit))
+    limiter_proc = mp.Process(target=limiter, args=(pids_list, stop_indicator, proc_info, max_time, max_memory, time_limit, memory_limit))
     limiter_proc.start()
 
     bots = []
@@ -257,13 +262,13 @@ def play(judge_file, judge_lang, players, time_limit, memory_limit):
             judge_mes = readout(judge_process.stdout, time_limit*10)
         except TimeoutException:
             results['exit_status'] = exit_status.JUDGE_TIMEOUT
-            judge_process.kill()
+            os.kill(judge_pid, signal.SIGKILL)
             log(supervisor_log, "Timeout reached while waiting for judge message.")
             break
         except EOFException:
             results['exit_status'] = exit_status.JUDGE_EOF
             try:
-                judge_process.kill()
+                os.kill(judge_pid, signal.SIGKILL)
             except:
                 pass
             log(supervisor_log, "EOF reached while reading message from judge.")
@@ -273,7 +278,7 @@ def play(judge_file, judge_lang, players, time_limit, memory_limit):
         except:
             results['exit_status'] = exit_status.JUDGE_WRONG_MESSAGE
             log(supervisor_log, "Wrong message format from judge.")
-            judge_process.kill()
+            os.kill(judge_pid, signal.SIGKILL)
             break
         if bots == [0]:
             bots = range(1,players_num + 1)
@@ -299,7 +304,8 @@ def play(judge_file, judge_lang, players, time_limit, memory_limit):
             for bnum in bots:
                 if bnum > 0 and bnum <= players_num:
                     try:
-                        bots_process_list[bnum-1].kill()
+                        os.kill(bots_pids[bnum-1], signal.SIGKILL)
+                        #bots_process_list[bnum-1].kill()
                         proc_info[bnum] = exit_status.BOT_KILLED
                     except:
                         pass
@@ -319,13 +325,13 @@ def play(judge_file, judge_lang, players, time_limit, memory_limit):
                     except TimeoutException:
                         response = '_DEAD_\n'
                         try:
-                            bot_process.kill()
+                            os.kill(bot_pids[bnum-1], signal.SIGKILL)
                         except:
                             pass
                     except EOFException:
                         response = '_DEAD_\n'
                         try:
-                            bot_process.kill()
+                            os.kill(bot_pids[bnum-1], signal.SIGKILL)
                         except:
                             pass
                     except:
@@ -347,13 +353,14 @@ def play(judge_file, judge_lang, players, time_limit, memory_limit):
     run_thread['val'] = False
     # Kill all the processes
     try:
+        os.kill(judge_pid, signal.SIGKILL)
         judge_process.kill()
     except:
         pass
-    for bot in bots_process_list:
+    for bot_num in range(len(bots_pids)):
         try:
-            bot.kill()
-        except:
+            os.kill(bots_pids[bot_num], signal.SIGKILL)
+        except Exception as inst:
             pass
     log_thread.join()
 
@@ -364,17 +371,15 @@ def play(judge_file, judge_lang, players, time_limit, memory_limit):
     final_times = {}
     final_memory = {}
     
-    # Wait for dead bots and judge using wait4
-    # Save information about their time usage in final_times
     for i in range(len(bots_process_list)):
         bot_process = bots_process_list[i]
-        wait_info = os.wait4(bot_process.pid, 0)
-        final_times[i] = wait_info[2].ru_utime + wait_info[2].ru_stime
+        #wait_info = os.wait4(bot_process.pid, 0)
+        final_times[i] = float(max_time[i+1])
         final_memory[i] = float(max_memory[i+1])/(1024*1024)
         results['bots_exit'][i] = proc_info[i+1]
 
-    judge_wait_info = os.wait4(judge_process.pid, 0)
-    final_times['judge'] = judge_wait_info[2].ru_utime + judge_wait_info[2].ru_stime
+    #judge_wait_info = os.wait4(judge_process.pid, 0)
+    final_times['judge'] = float(max_time[0])
     final_memory['judge'] = float(max_memory[0])/(1024*1024)
     
     results['judge_exit'] = proc_info[0]
