@@ -1,7 +1,7 @@
 from decimal import Decimal
 from ai_arena.contests.models import Match, MatchBotResult
 from ai_arena import settings
-from nadzorca.exit_status import *
+from ai_arena.nadzorca.exit_status import *
 import gearman
 import pickle
 

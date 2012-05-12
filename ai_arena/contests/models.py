@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from itertools import combinations
 from decimal import Decimal
 from ai_arena import settings
-from nadzorca.exit_status import *
+from ai_arena.nadzorca.exit_status import *
 from utils import parse_logs
 
 class Game(models.Model):
@@ -248,7 +248,7 @@ class MatchBotResult(models.Model):
     # status of bot behaviour during match
     status = models.IntegerField(null=True, blank=True)
     # logs
-    logs = models.TextField()
+    logs = models.TextField(null=True)
     bot = models.ForeignKey(Bot)
 
     # String representing status
