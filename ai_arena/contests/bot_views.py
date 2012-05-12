@@ -29,9 +29,6 @@ def create_bot_from_request(request, game, testing=False, bot_field='bot_source'
             log = "" if compilation succedes, where exit_status == 0
             and bot is created bot object.
     """
-    if Bot.objects.filter(owner=request.user).count() >= settings.MAX_BOTS_PER_USER:
-        return(2, ["You can't upload more than %d bots." % settings.MAX_BOTS_PER_USER], None)
-
     # Save known fields
     bot = Bot()
     bot.name = request.user.username + '_bot'
@@ -55,10 +52,6 @@ def create_bot_from_request(request, game, testing=False, bot_field='bot_source'
         bot.bot_lang = request.POST['opponent_language']
 
     bots_to_delete = Bot.objects.filter(owner=request.user, name=bot.name)
-    # Delete matches bot played in
-    for bot in bots_to_delete:
-        bot.delete_bot_matches()
-    bots_to_delete.delete()
 
     bot.bot_source_file = request.FILES[bot_field]
     bot.game = game
@@ -75,6 +68,10 @@ def create_bot_from_request(request, game, testing=False, bot_field='bot_source'
         return (exit_status, logs, None)
 
     else:
+        # Delete matches bot played in
+        for bot in bots_to_delete:
+            bot.delete_bot_matches()
+        bots_to_delete.delete()
         return (exit_status, "", bot)
 
 
