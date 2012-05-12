@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'ai_arena.contests',
+    'ai_arena.nadzorca',
     'ai_arena.registration2',
     'captcha',
     # Uncomment the next line to enable admin documentation:
