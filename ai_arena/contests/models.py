@@ -248,7 +248,7 @@ class MatchBotResult(models.Model):
     # status of bot behaviour during match
     status = models.IntegerField(null=True, blank=True)
     # logs
-    logs = models.TextField()
+    logs = models.TextField(null=True)
     bot = models.ForeignKey(Bot)
 
     # String representing status
