@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <sys/syscall.h>
 #include <sys/ptrace.h>
+#include <sys/time.h>
 
 #if __WORDSIZE == 64
 #define bits_num 8
@@ -16,7 +17,7 @@
 
 #endif
 
-#define fsn 8
+#define fsn 43
 
 int main(int argc, char **argv)
 {
@@ -25,7 +26,24 @@ int main(int argc, char **argv)
     pid_t child;
     int status, syscall_nr, i;
     int forbidden_syscalls_number = fsn; 
-    int forbidden_syscalls[fsn] = {__NR_fork, __NR_clone, __NR_creat, __NR_link, __NR_unlink, __NR_chdir, __NR_mknod, __NR_chmod};
+    int forbidden_syscalls[fsn] = {
+        //multiprocess kernel/process.c 4
+        __NR_fork, __NR_clone, __NR_vfork, __NR_wait4,
+        //open, directories fs/open.c  10
+         __NR_creat, __NR_link, __NR_unlink, __NR_chdir, __NR_mknod, __NR_chmod, __NR_lchown, __NR_rmdir, __NR_rename, __NR_chroot,
+        //system misc 11
+        __NR_mount, __NR_umount2,__NR_setuid, __NR_getuid, __NR_ptrace, __NR_sysinfo, __NR_getuid, __NR_setuid, __NR_getppid, __NR_ioctl,
+        __NR_system,
+        //pipes 4
+        __NR_pipe, __NR_dup, __NR_dup2, __NR_fcntl,
+        //time 1
+        __NR_utime,
+        //net 12
+        __NR_shutdown, __NR_socket, __NR_socketpair, __NR_bind, __NR_listen, __NR_accept, __NR_connect, __NR_getsockname, __NR_getpeername,  __NR_recvfrom, 
+        __NR_sendmsg, __NR_recvmsg,
+        //signals 1
+        __NR_kill, 
+        };
 
     child = fork();
     if (child == 0) {
@@ -61,7 +79,7 @@ int main(int argc, char **argv)
         
             for (i=0; i<forbidden_syscalls_number; ++i) {
                 if (syscall_nr == forbidden_syscalls[i]) {
-                    //printf("Child tried to use forbiden system call %d. Terminating child.\n", syscall_nr);
+                    fprintf(stderr ,"Program tried to use forbiden system call %d. Terminating program.\n", syscall_nr);
                     ptrace(PTRACE_KILL, child, NULL, NULL);
                     i = forbidden_syscalls_number;
                     naughty_child = 1;
