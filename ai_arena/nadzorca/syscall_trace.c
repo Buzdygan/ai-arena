@@ -17,7 +17,7 @@
 
 #endif
 
-#define fsn 42
+#define fsn 37
 
 int main(int argc, char **argv)
 {
@@ -31,17 +31,21 @@ int main(int argc, char **argv)
         __NR_fork, __NR_clone, __NR_vfork, __NR_wait4,
         //open, directories fs/open.c  10
          __NR_creat, __NR_link, __NR_unlink, __NR_chdir, __NR_mknod, __NR_chmod, __NR_lchown, __NR_rmdir, __NR_rename, __NR_chroot,
-        //system misc 10
+         __NR_readdir,
+        //system misc 12
         __NR_mount, __NR_umount2,__NR_setuid, __NR_getuid, __NR_ptrace, __NR_sysinfo, __NR_getuid, __NR_setuid, __NR_getppid, __NR_ioctl,
-        //pipes 4
-        __NR_pipe, __NR_dup, __NR_dup2, __NR_fcntl,
+        __NR_reboot, __NR_uname,
+        //pipes 6
+        __NR_pipe, __NR_pipe2, __NR_dup, __NR_dup2, __NR_dup3, __NR_fcntl,
         //time 1
         __NR_utime,
         //net 12
-        __NR_shutdown, __NR_socket, __NR_socketpair, __NR_bind, __NR_listen, __NR_accept, __NR_connect, __NR_getsockname, __NR_getpeername,  __NR_recvfrom, 
-        __NR_sendmsg, __NR_recvmsg,
+        //__NR_shutdown, __NR_socket, __NR_socketpair, __NR_bind, __NR_listen, __NR_accept, __NR_connect, __NR_getsockname, __NR_getpeername,  __NR_recvfrom, 
+        //__NR_sendmsg, __NR_recvmsg,
         //signals 1
-        __NR_kill, 
+        __NR_kill,
+        //limits 2
+        __NR_setrlimit, __NR_getrlimit,
         };
 
     child = fork();
