@@ -31,6 +31,7 @@ while True:
     stderr.write("CARD " + str(card) + "\n")
     my1bet = firstBet(card)
     stdout.write("" + str(my1bet) + "\n")
+    stdout.flush()
     op1bet = int(stdin.readline()[:-1])
     stderr.write("op1bet " + str(op1bet) + "\n")
     if op1bet > my1bet:
@@ -38,6 +39,7 @@ while True:
         stderr.write("making decision " + str(decision1) + "\n")
         if decision1 == 0:
             stdout.write(str(decision1) + "\n")
+            stdout.flush()
             continue
     if my1bet > op1bet:
         decision1 = int(stdin.readline()[:-1])
@@ -51,12 +53,14 @@ while True:
     stderr.write("Second round \n")
     my2bet = secondBet(my1bet, op1bet, card)
     stdout.write(str(my2bet) + "\n")
+    stdout.flush()
     op2bet = int(stdin.readline()[:-1])
     stderr.write("op2bet " + str(op2bet) + "\n")
     if op2bet > my2bet:
         decision2 = decision(my1bet+my2bet, op1bet + op2bet, card)
         stderr.write("making decision " + str(decision2) + "\n")
         stdout.write(str(decision2) + "\n")
+        stdout.flush()
         if decision2 == 0:
             continue
     if my2bet > op2bet:

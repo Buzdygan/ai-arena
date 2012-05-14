@@ -4,7 +4,7 @@
 #define false 0
 #define true 1
 
-#define CONFIRM printf("0\n")
+#define CONFIRM printf("0\n");fflush(stdout)
 #define WAIT scanf("%d", &trash)
 
 int firstBet(int card){
@@ -44,6 +44,7 @@ int main(){
         fprintf(stderr, "CARD %d\n", card);
         my1bet = firstBet(card);
         printf("%d\n",my1bet);
+        fflush(stdout);
         scanf("%d",&op1bet);
         fprintf(stderr,"op1bet %d\n", op1bet);
         if(op1bet > my1bet){
@@ -51,6 +52,7 @@ int main(){
             fprintf(stderr, "making decision %d\n", decision1);
             if(decision1 == 0){
                 printf("%d\n", decision1);
+                fflush(stdout);
                 continue;
             }
         }
@@ -69,12 +71,14 @@ int main(){
         fprintf(stderr, "second round\n");
         my2bet = secondBet(my1bet, op1bet, card);
         printf("%d\n", my2bet);
+        fflush(stdout);
         scanf("%d", &op2bet);
         fprintf(stderr, "op2bet %d\n", op2bet);
         if(op2bet > my2bet){
             decision2 = decision(my1bet+my2bet, op1bet+op2bet, card);
             fprintf(stderr, "making decision %d\n", decision2);
             printf("%d\n", decision2);
+            fflush(stdout); 
             if(decision2 == 0)
                 continue;
         }
