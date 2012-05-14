@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel='stylesheet' href='{{ MEDIA_URL }}testing.css' />
+{% endblock %}
+
+{% block content %}
+
+<div class='content_container'>
+<p class='small_p'>
+Here you can create a bot of your own!
+</p>
+</div>
+
+<div id='bot_creation'>
+    <h2>Bot Creator</h2>
+
+    <form action='/online_bot_creation/' method='POST' enctype='multipart/form-data'>
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <p>
+            <label for='submit'></label>
+            <input type="submit" id='submit' value="Send your bot!">
+        </p>
+    </form>
+</div>
+
+{% endblock %}

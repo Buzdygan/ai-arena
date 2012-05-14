@@ -208,6 +208,11 @@ GAME_JUDGE_SOURCES_PATH = MEDIA_ROOT + JUDGES_SOURCES_DIR + '/'
 GAME_JUDGE_BINARIES_PATH = MEDIA_ROOT + JUDGES_BINARIES_DIR + '/'
 COMPILATION_TEMP_PATH = MEDIA_ROOT + COMPILATION_TEMP_DIR + '/'
 
+# bot create page
+
+BOT_CREATE_FIELD_COLUMNS = 200
+BOT_CREATE_FIELD_ROWS = 20 
+
 C_LANGUAGE = 'C'
 C_KEYWORDS = ['auto', 'break', 'case', 'const', 'continue', 'default', 'do', 'else', 'enum', 
         'extern', 'for', 'goto', 'if', 'register', 'return', 'signed', 'sizeof', 
@@ -283,6 +288,10 @@ MAY_CONTEST_DEFAULT_BOT_PATH = ABS_DIR("../files/may_game/pok_bot.cpp")
 MAY_CONTEST_DEFAULT_BOT_NAME = "POK_default_bot"
 MAY_CONTEST_DEFAULT_BOT_LANG = CPP_LANGUAGE 
 
+MAY_CONTEST_PICNIC_USERNAME = "picnic_user"
+
+PICNIC_DEFAULT_LANGUAGE = PYTHON_LANGUAGE
+PICNIC_BOTS_PATH = "media/picnic_bots/"
 
 TEST_BOT_PREFIX = "test_from_"
 OPPONENT_TEST_BOT_PREFIX = "opponent_from_"

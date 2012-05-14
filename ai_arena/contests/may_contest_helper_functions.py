@@ -1,3 +1,4 @@
+import os
 from django.conf import settings
 from django.core.files import File
 from django.core.exceptions import ObjectDoesNotExist
@@ -88,6 +89,9 @@ def get_default_may_contest():
     except ObjectDoesNotExist:
         return create_may_contest()
 
+def get_picnic_user():
+    return User.objects.get(username=settings.MAY_CONTEST_PICNIC_USERNAME)
+
 def get_default_may_ranking():
     contest = get_default_may_contest()
     if not contest:
@@ -105,3 +109,35 @@ def generate_ranking():
         contest.contestants.add(bot)
     contest.generate_group_ranking()
     return contest.ranking
+
+def find_new_name_for_bot(bot_name, owner):
+    if not Bot.objects.filter(owner=owner, name=bot_name).count(): 
+        return bot_name
+    suffix = 2
+    while Bot.objects.filter(owner=owner, name=bot_name + str(suffix)).count():
+        suffix += 1
+    return bot_name + str(suffix)
+
+def create_bot_and_add_to_contest(bot_name, source_code, owner, contest, bot_language):
+    """
+        Creates new bot with owner from source code, adds suffix to name if needed
+        Returns new name and error_log if something went wrong.
+    """
+
+    bot_name = find_new_name_for_bot(bot_name, owner)
+    bot_path = settings.PICNIC_BOTS_PATH + bot_name + settings.SOURCE_FORMATS[bot_language]
+    bot_file = open(bot_path, 'w')
+    bot_file.write(source_code)
+    bot_file.close()
+
+    new_bot = Bot(name=bot_name, owner=owner, game=contest.game, bot_lang=bot_language)
+    new_bot.bot_source_file.save(new_bot.name + settings.SOURCE_FORMATS[new_bot.bot_lang], File(open(bot_path)))
+    new_bot.save()
+    exit_status, logs = new_bot.compile_bot()
+    print('logs', logs)
+    if exit_status != 0:
+        new_bot.delete()
+        return None, logs 
+    else:
+        contest.contestants.add(new_bot)
+        return new_bot.name, None

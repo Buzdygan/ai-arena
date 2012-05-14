@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-from contests.forms import MayContestSendBotForTest
+from contests.forms import MayContestSendBotForTest, OnlineBotCreationForm
 
 from ai_arena.contests.models import Bot, Game, Match
 from ai_arena import settings
@@ -137,5 +137,47 @@ def uploaded_for_tests(request):
 
 def contact(request):
     return render_to_response('may_contest/contact.html',
+            context_instance=RequestContext(request))
+
+def online_bot_uploaded(request, bot_name):
+    return render_to_response('may_contest/online_bot_uploaded.html',
+            {
+                'bot_name': bot_name,
+            },
+            context_instance=RequestContext(request))
+
+def online_bot_creation(request):
+    """
+        Page where everyone can prepare bot online and submit it to contest.
+    """
+
+    picnic_user = get_picnic_user() 
+    may_contest = get_default_may_contest()
+    if request.method == 'POST':
+        form = OnlineBotCreationForm(request.POST)
+        if not form.is_valid():
+            return render_to_response('may_contest/online_bot_creation.html',
+                    {
+                        'form': form,
+                    },
+                    context_instance=RequestContext(request))
+        else:
+            bot_name = request.POST['bot_name']
+            source_code = request.POST['code']
+            bot_name, error_log = create_bot_and_add_to_contest(bot_name=bot_name, source_code=source_code,
+                    owner=picnic_user, contest=may_contest, bot_language=settings.PICNIC_DEFAULT_LANGUAGE)
+            if error_log:
+                return render_to_response('error.html',
+                        {
+                            'error_details': error_log,
+                        },
+                        context_instance = RequestContext(request))
+            return HttpResponseRedirect('/online_bot_creation/uploaded/%s' % bot_name)
+    else:
+        form = OnlineBotCreationForm()
+        return render_to_response('may_contest/online_bot_creation.html',
+            {
+                'form': form,
+            },
             context_instance=RequestContext(request))
         
