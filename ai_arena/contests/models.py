@@ -222,10 +222,14 @@ class Contest(models.Model):
 
         prev_score = Decimal('-1.0')
         pos = 0
+        pos_cnt = 1
         for rank in sorted(contestants_ranks.values(), key = lambda x: x.overall_score, reverse=True):
             if rank.overall_score != prev_score:
                 prev_score = rank.overall_score
-                pos += 1
+                pos += pos_cnt 
+                pos_cnt = 1
+            else:
+                pos_cnt += 1
             rank.position = pos
             rank.save()
     
