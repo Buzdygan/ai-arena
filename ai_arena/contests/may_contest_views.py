@@ -156,9 +156,7 @@ def online_bot_creation(request):
     picnic_user = get_picnic_user() 
     may_contest = get_default_may_contest()
     if request.method == 'POST':
-        form = OnlineBotCreationForm(request.POST)
-        for code_field, code_text in default_bot_codes.items():
-            form.base_fields[code_field].initial = code_text 
+        form = OnlineBotCreationForm(request.POST, initial=default_bot_codes)
         if not form.is_valid():
             return render_to_response('may_contest/online_bot_creation.html',
                     {
@@ -179,9 +177,7 @@ def online_bot_creation(request):
                         context_instance = RequestContext(request))
             return HttpResponseRedirect('/online_bot_creation/uploaded/%s' % bot_name)
     else:
-        form = OnlineBotCreationForm()
-        for code_field, code_text in default_bot_codes.items():
-            form.base_fields[code_field].initial = code_text 
+        form = OnlineBotCreationForm(initial=default_bot_codes)
         return render_to_response('may_contest/online_bot_creation.html',
             {
                 'form': form,
