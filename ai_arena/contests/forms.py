@@ -93,3 +93,7 @@ class OnlineBotCreationForm(forms.Form):
     code = forms.CharField ( widget=forms.widgets.Textarea(
             attrs={'cols':settings.BOT_CREATE_FIELD_COLUMNS,
                    'rows':settings.BOT_CREATE_FIELD_ROWS}) )
+    bot_code1 = forms.CharField ( widget=forms.widgets.HiddenInput())
+    bot_code2 = forms.CharField ( widget=forms.widgets.HiddenInput())
+    bot_code3 = forms.CharField ( widget=forms.widgets.HiddenInput())
+    bot_code4 = forms.CharField ( widget=forms.widgets.HiddenInput())

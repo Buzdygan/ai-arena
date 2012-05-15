@@ -141,3 +141,17 @@ def create_bot_and_add_to_contest(bot_name, source_code, owner, contest, bot_lan
     else:
         contest.contestants.add(new_bot)
         return new_bot.name, None
+
+def read_code_from_file(filename):
+    file = open(filename, 'r')
+    code = file.read()
+    file.close()
+    return code
+
+def get_default_bot_codes():
+    bot_codes = dict()
+    bot_codes['bot_code1'] = read_code_from_file(settings.PICNIC_BOT_CODES_FILES['bot_code1']) 
+    bot_codes['bot_code2'] = read_code_from_file(settings.PICNIC_BOT_CODES_FILES['bot_code2'])
+    bot_codes['bot_code3'] = read_code_from_file(settings.PICNIC_BOT_CODES_FILES['bot_code3'])
+    bot_codes['bot_code4'] = read_code_from_file(settings.PICNIC_BOT_CODES_FILES['bot_code4'])
+    return bot_codes

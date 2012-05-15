@@ -151,14 +151,19 @@ def online_bot_creation(request):
         Page where everyone can prepare bot online and submit it to contest.
     """
 
+    default_bot_codes = get_default_bot_codes()
+    code_names = settings.PICNIC_DEFAULT_BOTS_NAMES
     picnic_user = get_picnic_user() 
     may_contest = get_default_may_contest()
     if request.method == 'POST':
         form = OnlineBotCreationForm(request.POST)
+        for code_field, code_text in default_bot_codes.items():
+            form.base_fields[code_field].initial = code_text 
         if not form.is_valid():
             return render_to_response('may_contest/online_bot_creation.html',
                     {
                         'form': form,
+                        'code_names': code_names,
                     },
                     context_instance=RequestContext(request))
         else:
@@ -175,9 +180,12 @@ def online_bot_creation(request):
             return HttpResponseRedirect('/online_bot_creation/uploaded/%s' % bot_name)
     else:
         form = OnlineBotCreationForm()
+        for code_field, code_text in default_bot_codes.items():
+            form.base_fields[code_field].initial = code_text 
         return render_to_response('may_contest/online_bot_creation.html',
             {
                 'form': form,
+                'code_names': code_names,
             },
             context_instance=RequestContext(request))
         

@@ -1,5 +1,22 @@
 {% extends "base.html" %}
 
+{% block head %}
+    <script type="text/javascript">
+        function loadCode1(){
+            document.code_form.code.value = document.code_form.bot_code1.value;
+        }
+        function loadCode2(){
+            document.code_form.code.value = document.code_form.bot_code2.value;
+        }
+        function loadCode3(){
+            document.code_form.code.value = document.code_form.bot_code3.value;
+        }
+        function loadCode4(){
+            document.code_form.code.value = document.code_form.bot_code4.value;
+        }
+    </script>
+{% endblock %}
+
 {% block css %}
 <link rel='stylesheet' href='{{ MEDIA_URL }}testing.css' />
 {% endblock %}
@@ -9,13 +26,14 @@
 <div class='content_container'>
 <p class='small_p'>
 Here you can create a bot of your own!
+{{ text }}
 </p>
 </div>
 
 <div id='bot_creation'>
     <h2>Bot Creator</h2>
 
-    <form action='/online_bot_creation/' method='POST' enctype='multipart/form-data'>
+    <form name="code_form" action='/online_bot_creation/' method='POST' enctype='multipart/form-data'>
         {% csrf_token %}
 
         {{ form.as_p }}
@@ -25,5 +43,10 @@ Here you can create a bot of your own!
         </p>
     </form>
 </div>
+
+<button type="button" onclick="loadCode1()">{{ code_names.bot_code1 }} </button>
+<button type="button" onclick="loadCode2()">{{ code_names.bot_code2 }} </button>
+<button type="button" onclick="loadCode3()">{{ code_names.bot_code3 }} </button>
+<button type="button" onclick="loadCode4()">{{ code_names.bot_code4 }} </button>
 
 {% endblock %}
