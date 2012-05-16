@@ -79,6 +79,10 @@ def may_contest_send_bot(request):
     """
 
     game_id = get_may_game().id
+    may_contest = get_default_may_contest()
+    if may_contest.ranking:
+        may_contest.ranking.updated = False
+        may_contest.ranking.save()
     return send_bot_without_name(request, game_id)
 
 @login_required
@@ -155,6 +159,9 @@ def online_bot_creation(request):
     code_names = settings.PICNIC_DEFAULT_BOTS_NAMES
     picnic_user = get_picnic_user() 
     may_contest = get_default_may_contest()
+    if may_contest.ranking:
+        may_contest.ranking.updated = False
+        may_contest.ranking.save()
     if request.method == 'POST':
         form = OnlineBotCreationForm(request.POST, initial=default_bot_codes)
         if not form.is_valid():

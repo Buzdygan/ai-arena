@@ -239,6 +239,7 @@ class Contest(models.Model):
             rank.position = pos
             rank.save()
         self.ranking.updated = updated
+        self.ranking.save()
     
 
 class MatchBotResult(models.Model):
