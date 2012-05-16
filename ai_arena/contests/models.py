@@ -134,6 +134,8 @@ class Ranking(models.Model):
             (TYPE_GROUP, 'Type group'),
     )
     type = models.IntegerField(choices=RANKING_TYPES)
+    updated = models.BooleanField(default = False)
+
 
 class BotRanking(models.Model):
     """
@@ -190,6 +192,8 @@ class Contest(models.Model):
 
         from contests.game_launcher import launch_contest_match
 
+        updated = True
+
         # if ranking does not exist yet
         if not self.ranking:
             self.ranking = Ranking(type=Ranking.TYPE_GROUP)
@@ -212,6 +216,8 @@ class Contest(models.Model):
             if list(match) not in matches_set:
                 bots = [Bot.objects.get(id=bot_id) for bot_id in match]
                 launch_contest_match(self.game, bots, self)
+                # Ranking still needs some matches to be played
+                updated = False
 
         # collect results from played matches
         for match in played_matches:
@@ -232,6 +238,7 @@ class Contest(models.Model):
                 pos_cnt += 1
             rank.position = pos
             rank.save()
+        self.ranking.updated = updated
     
 
 class MatchBotResult(models.Model):
