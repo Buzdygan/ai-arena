@@ -293,17 +293,17 @@ MAY_CONTEST_PICNIC_USERNAME = "picnic_user"
 PICNIC_DEFAULT_LANGUAGE = PYTHON_LANGUAGE
 PICNIC_BOTS_PATH = ABS_DIR("media/picnic_bots/")
 PICNIC_DEFAULT_BOTS_NAMES = {
-        'bot_code1' : 'Example Bot',
-        'bot_code2' : 'Intelligent Bot',
-        'bot_code3' : 'Dummy Bot',
-        'bot_code4' : 'Fluent Bot',
+        'bot_code1' : 'Bot Template',
+        'bot_code2' : 'Weak Bot',
+        'bot_code3' : 'Medium Bot',
+        'bot_code4' : 'Strong Bot',
         }
 
 PICNIC_BOT_CODES_FILES = {
-        'bot_code1' : ABS_DIR("../files/may_game/default_bots/example_bot.py"),
-        'bot_code2' : ABS_DIR("../files/may_game/default_bots/intelligent_bot.py"),
-        'bot_code3' : ABS_DIR("../files/may_game/default_bots/dummy_bot.py"),
-        'bot_code4' : ABS_DIR("../files/may_game/default_bots/fluent_bot.py"),
+        'bot_code1' : ABS_DIR("../files/may_game/default_bots/template_bot.py"),
+        'bot_code2' : ABS_DIR("../files/may_game/default_bots/weak_bot.py"),
+        'bot_code3' : ABS_DIR("../files/may_game/default_bots/medium_bot.py"),
+        'bot_code4' : ABS_DIR("../files/may_game/default_bots/strong_bot.py"),
         }
 
 TEST_BOT_PREFIX = "test_from_"
