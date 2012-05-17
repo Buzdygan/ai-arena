@@ -102,9 +102,11 @@ def generate_ranking():
     contest = get_default_may_contest()
     if not contest:
         raise Exception("There is no may contest")
+    """
     if contest.ranking:
         if contest.ranking.updated:
             return contest.ranking
+    """
     contest.contestants.clear()
     game = get_may_game()
     game_bots = Bot.objects.filter(game=game, invalid=False, ranked=True)
