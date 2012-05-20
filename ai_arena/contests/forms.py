@@ -89,7 +89,6 @@ class EditGameForm(forms.Form):
 
 class OnlineBotCreationForm(forms.Form): 
 
-    bot_name = forms.CharField(max_length=settings.NAME_LENGTH)
     code = forms.CharField ( widget=forms.widgets.Textarea(
             attrs={'cols':settings.BOT_CREATE_FIELD_COLUMNS,
                    'rows':settings.BOT_CREATE_FIELD_ROWS}) )

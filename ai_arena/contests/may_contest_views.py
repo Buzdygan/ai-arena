@@ -150,6 +150,7 @@ def online_bot_uploaded(request, bot_name):
             },
             context_instance=RequestContext(request))
 
+@login_required
 def online_bot_creation(request):
     """
         Page where everyone can prepare bot online and submit it to contest.
@@ -157,7 +158,7 @@ def online_bot_creation(request):
 
     default_bot_codes = get_default_bot_codes()
     code_names = settings.PICNIC_DEFAULT_BOTS_NAMES
-    picnic_user = get_picnic_user() 
+    user = request.user 
     may_contest = get_default_may_contest()
     if may_contest.ranking:
         may_contest.ranking.updated = False
@@ -172,17 +173,16 @@ def online_bot_creation(request):
                     },
                     context_instance=RequestContext(request))
         else:
-            bot_name = request.POST['bot_name']
             source_code = request.POST['code']
-            bot_name, error_log = create_bot_and_add_to_contest(bot_name=bot_name, source_code=source_code,
-                    owner=picnic_user, contest=may_contest, bot_language=settings.PICNIC_DEFAULT_LANGUAGE)
+            error_log = create_bot_and_add_to_contest(bot_name=bot_name, source_code=source_code,
+                    owner=user, contest=may_contest, bot_language=settings.PICNIC_DEFAULT_LANGUAGE)
             if error_log:
                 return render_to_response('error.html',
                         {
                             'error_details': error_log,
                         },
                         context_instance = RequestContext(request))
-            return HttpResponseRedirect('/online_bot_creation/uploaded/%s' % bot_name)
+            return HttpResponseRedirect('/ladder/')
     else:
         form = OnlineBotCreationForm(initial=default_bot_codes)
         return render_to_response('may_contest/online_bot_creation.html',

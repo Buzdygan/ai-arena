@@ -123,13 +123,14 @@ def find_new_name_for_bot(bot_name, owner):
         suffix += 1
     return bot_name + str(suffix)
 
-def create_bot_and_add_to_contest(bot_name, source_code, owner, contest, bot_language):
+def create_bot_and_add_to_contest(source_code, owner, contest, bot_language):
     """
         Creates new bot with owner from source code, adds suffix to name if needed
         Returns new name and error_log if something went wrong.
     """
 
-    bot_name = find_new_name_for_bot(bot_name, owner)
+    bot_name = owner.username + '_bot'
+    bots_to_delete = Bot.objects.filter(owner=owner, name=new_bot.name)
     bot_path = settings.PICNIC_BOTS_PATH + bot_name + settings.SOURCE_FORMATS[bot_language]
     bot_file = open(bot_path, 'w')
     bot_file.write(source_code)
@@ -142,10 +143,14 @@ def create_bot_and_add_to_contest(bot_name, source_code, owner, contest, bot_lan
     print('logs', logs)
     if exit_status != 0:
         new_bot.delete()
-        return None, logs 
+        return logs 
     else:
+        for bot in bots_to_delete:
+            if bot.id != new_bot.id:
+                bot.delete_bot_matches()
+                bot.delete()
         contest.contestants.add(new_bot)
-        return new_bot.name, None
+        return None
 
 def read_code_from_file(filename):
     file = open(filename, 'r')
