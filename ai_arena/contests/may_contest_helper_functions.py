@@ -130,7 +130,7 @@ def create_bot_and_add_to_contest(source_code, owner, contest, bot_language):
     """
 
     bot_name = owner.username + '_bot'
-    bots_to_delete = Bot.objects.filter(owner=owner, name=new_bot.name)
+    bots_to_delete = Bot.objects.filter(owner=owner, name=bot_name)
     bot_path = settings.PICNIC_BOTS_PATH + bot_name + settings.SOURCE_FORMATS[bot_language]
     bot_file = open(bot_path, 'w')
     bot_file.write(source_code)
