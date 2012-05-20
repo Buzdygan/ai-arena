@@ -174,7 +174,7 @@ def online_bot_creation(request):
                     context_instance=RequestContext(request))
         else:
             source_code = request.POST['code']
-            error_log = create_bot_and_add_to_contest(bot_name=bot_name, source_code=source_code,
+            error_log = create_bot_and_add_to_contest(source_code=source_code,
                     owner=user, contest=may_contest, bot_language=settings.PICNIC_DEFAULT_LANGUAGE)
             if error_log:
                 return render_to_response('error.html',
