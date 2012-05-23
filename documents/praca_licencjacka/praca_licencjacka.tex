@@ -611,7 +611,14 @@ Pomiar czasu zu¿ytego przez proces realizowany jest przy u¿yciu funkcji systemow
 
 Poniewa¿ g³ówna funkcjonalno¶æ systemu jest oparta o kompilacjê i uruchamianie kodów ¼ród³owych nieznanego pochodzenia, w naturalny sposób najwiêkszym zagro¿eniem dla systemu s± z³o¶liwe kody wysy³ane przez u¿ytkowników. Zabezpieczenie przed takimi kodami mo¿na rozdzieliæ na dwa g³ówne podproblemy: zabronienie procesom uruchamiaj±cym programy graczy u¿ywania funkcji systemowych które nie s± niezbêdne dla programów graj±cych w gry, oraz umieszczenie tych procesów w sandboxie, aby z³o¶liwy kod nie mia³ mo¿liwo¶ci odczytu i modyfikiacji danych na serwerze.\\
 
-Autorzy systemu rozwazali trzy ró¿ne rozwi±zania pierwszego problemu: podmienianie bibliotek, skanowanie kodu i systrace.\\
+Autorzy systemu rozwazali cztery ró¿ne rozwi±zania pierwszego problemu: podmienianie bibliotek, skanowanie kodu, systrace i ptrace.\\
+
+Podmienianie bibliotek realizuje siê przy pomocy zmiennej ¶rodowskowej LD\_PRELOAD. Zmienna ta pozwala na kompilacjê kodu, w taki sposób ¿e wskazane biblioteki zostan± za³adowane przed wszystkimi innymi, równie¿ przed biblitekami CRT (C Run-Time libraries). Pozwala to na napisanie w³asnej biblioteki obs³uguj±cej wywo³ania funkcji systemowych które chcemy zablokowaæ, na przyk³ad zwracaj±c b³±d przy ka¿dym wywo³aniu takiej funkcji. Metoda ta jednak nie wystarcza do obrony przed z³o¶liwymi programami nawet w jêzyku $C$, gdy¿ mo¿na u¿yæ funkcji systemowej nie odwo³uj±c siê do biblioteki przy pomocy odpowiedniego przerwania (na przyk³ad $int 0x80$ dla wiekszo¶ci systemów Linux dzia³aj±cych na architekturze x86). 
+
+Skanowanie kodu to technika polegaj±ca na automatycznym przeszukaniu kodu i odrzucaniu tych programów których fragmenty zawieraj± niedozwolone polecenia (na przyk³ad "fork()"). Rozwi±zanie to jest trudne we w³a¶ciwej realizacji, z powodu wspomnianego ju¿ wcze¶niej, mianowicie mo¿liwo¶æ uruchamiania funkcji systemowych w $C$ bez wywo³ywania w³a¶ciwego polecenia. Bior±c pod uwagê fakt ¿e z³o¶liwy kod mo¿na na wiele sposobów maskowaæ (np. poleceniami $\#define$, lub sprawiaj±c, ¿e szkodliwy kod powstaje w wyniku wygl±daj±cych niegro¼nie obliczeñ) ca³kowite zabezpieczenie siê przed kreatywnym i z³o¶liwym u¿ytkownikiem u¿ywaj±c tej metody jest zadaniem bardzo trudnym, je¶li nie niemo¿liwym. Poza przeoczeniami nie trudno równie¿ o b³êdy typu false positive (odrzucanie zupe³nie nieszkodliwych kodów wys³anych w dobrej wierze).
+
+Kolejnym rozwa¿anym przez autorów systemu rozwi±zaniem by³ program systrace, autorstwa Nielsa Provosa.
+
 
 \chapter{Dokumentacja u¿ytkowa}
 
