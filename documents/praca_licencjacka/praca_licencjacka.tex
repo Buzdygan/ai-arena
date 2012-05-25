@@ -611,7 +611,28 @@ Pomiar czasu zu¿ytego przez proces realizowany jest przy u¿yciu funkcji systemow
 
 Poniewa¿ g³ówna funkcjonalno¶æ systemu jest oparta o kompilacjê i uruchamianie kodów ¼ród³owych nieznanego pochodzenia, w naturalny sposób najwiêkszym zagro¿eniem dla systemu s± z³o¶liwe kody wysy³ane przez u¿ytkowników. Zabezpieczenie przed takimi kodami mo¿na rozdzieliæ na dwa g³ówne podproblemy: zabronienie procesom uruchamiaj±cym programy graczy u¿ywania funkcji systemowych które nie s± niezbêdne dla programów graj±cych w gry, oraz umieszczenie tych procesów w sandboxie, aby z³o¶liwy kod nie mia³ mo¿liwo¶ci odczytu i modyfikiacji danych na serwerze.\\
 
-Autorzy systemu rozwazali trzy ró¿ne rozwi±zania pierwszego problemu: podmienianie bibliotek, skanowanie kodu i systrace.\\
+Autorzy systemu rozwazali cztery ró¿ne rozwi±zania pierwszego problemu: podmienianie bibliotek, skanowanie kodu, systrace i ptrace.\\
+
+Podmienianie bibliotek realizuje siê przy pomocy zmiennej ¶rodowskowej LD\_PRELOAD. Zmienna ta pozwala na kompilacjê kodu, w taki sposób ¿e wskazane biblioteki zostan± za³adowane przed wszystkimi innymi, równie¿ przed biblitekami CRT (C Run-Time libraries). Pozwala to na napisanie w³asnej biblioteki obs³uguj±cej wywo³ania funkcji systemowych które chcemy zablokowaæ, na przyk³ad zwracaj±c b³±d przy ka¿dym wywo³aniu takiej funkcji. Metoda ta jednak nie wystarcza do obrony przed z³o¶liwymi programami nawet w jêzyku $C$, gdy¿ mo¿na u¿yæ funkcji systemowej nie odwo³uj±c siê do biblioteki przy pomocy odpowiedniego przerwania (na przyk³ad $int 0x80$ dla wiekszo¶ci systemów Linux dzia³aj±cych na architekturze x86). 
+
+Skanowanie kodu to technika polegaj±ca na automatycznym przeszukaniu kodu i odrzucaniu tych programów których fragmenty zawieraj± niedozwolone polecenia (na przyk³ad "fork()"). Rozwi±zanie to jest trudne we w³a¶ciwej realizacji, z powodu wspomnianego ju¿ wcze¶niej, mianowicie mo¿liwo¶æ uruchamiania funkcji systemowych w $C$ bez wywo³ywania w³a¶ciwego polecenia. Bior±c pod uwagê fakt ¿e z³o¶liwy kod mo¿na na wiele sposobów maskowaæ (np. poleceniami $\#define$, lub sprawiaj±c, ¿e szkodliwy kod powstaje w wyniku wygl±daj±cych niegro¼nie obliczeñ) ca³kowite zabezpieczenie siê przed kreatywnym i z³o¶liwym u¿ytkownikiem u¿ywaj±c tej metody jest zadaniem bardzo trudnym, je¶li nie niemo¿liwym. Poza przeoczeniami nie trudno równie¿ o b³êdy typu false positive (odrzucanie zupe³nie nieszkodliwych kodów wys³anych w dobrej wierze).
+
+Kolejnym rozwa¿anym przez autorów systemu rozwi±zaniem by³ program systrace, autorstwa Nielsa Provosa. Systrace jest obecnie zintegrowany do j±dra OpenBSD, mozna go jednak zainstalowaæ jako ³atê do j±dra wielu systemów Unixowych (miêdzy innymi Ubuntu). Nowsze wersje mo¿na równie¿ uruchamiaæ jako program na tych systemach. 
+Systrace oferuje mo¿liwo¶æ tworzenia polityk dostêpu do wywo³añ funkcji systemowych. Po stworzeniu i za³adowaniu takiej polityki, programy ni± objête bêd± mia³y mo¿liwo¶æ u¿ywania jedynie wyszczególnionych w niej funkcji systemowych. Systrace oferuje równie¿ bardziej zaawansowane mo¿liwo¶ci kontroli, takie jak umo¿liwianie programom wywo³ywania pewnych funkcji systemowych na ograniczonym zbiorze argumentów lub dziedziczenie profili. Ponadto dostêpne s± narzêdzia i graficzne interfejsy pomagaj±ce w tworzeniu profili dostosowanych do potrzeb u¿ytkownika.
+
+Pocz±tkowo Systrace wydawa³ siê autorom systemu doskona³ym wyborem. Jest to program naprawdê wart polecenia. Niestety, uprawnienia autorów na serwerze, na którym uruchamiany by³ konkurs majowy nie pozwala³y na zmiany w kernelu, natomiast dostêpny na serwerze system operacyjny Ubuntu 10.04 okaza³ siê jedynym z rodziny Ubuntu na którym instalacja systrace jako programu sprawia problemy. Z tych powodów autorzy musieli zdecydowac sie na wybór innego rozwi±zania.
+
+Kolejnym rozwa¿anym rozwi±zaniem by³a funkcja systemowa ptrace. Jej zastosowania mog± byæ ró¿norodne w zale¿no¶ci od przekazanych argumentów, jednak¿e pozwala ona miêdzy innymi procesowi który j± wywo³uje, na ¶ledzenie wywo³añ funkcji systemowych procesów potomnych. Na ¿yczenie danego procesu, jego proces potomny zostanie zatrzymany tu¿ przed wywo³aniem i zaraz po zakoñczeniu wywo³ywania funkcji systemowych. Podczas gdy ¶ledzony proces jest zatrzymany, jego ojciec mo¿e sprawdziæ ró¿ne informacje zawarte w rejestrze ¶ledzonego procesu, miêdzy innymi jak± funckcjê systemow± próbowa³ w³a¶nie wywo³aæ (lub z wywo³ania jakiej funkcji systemowej nast±pi³ w³a¶nie powrót). Przy u¿yciu funkcji ptrace, autorzy napisali program syscall\_trace, który w procesie potomnym uruchamia przekazany mu jako argument program, a nastêpnie ¶ledzi go, nie zezwalaj±c na u¿ycie wybranych przez autorów funkcji systemowych. 
+
+Program syscall\_trace ma zdecydowanie mniejsze mo¿liwo¶ci ni¿ systrace, jednak w pe³ni realizuje potrzebn± funkcjonalno¶æ. Autorzy pozostawili równie¿ mo¿liwo¶æ do¶æ prostej modyfikacji zbioru zabronionych funkcji systemowych. Wystarczy dopisaæ numery funkcji systemowych których u¿ycie chcemy programom uniemo¿liwic, do wyszczególnionej w kodzie syscall\_trace.c tablicy zabronionych funkcji systemowych.
+
+Oddzieln± warstw± bezpieczeñstwa jest sandbox, który ogranicza programom nadsy³anym przez u¿ytkowników mo¿liwo¶æ dostêpu i modyfikacji plików znajduj±cych siê na serwerze. Z dostêpnych na rynku darmowych rozwi±zañ autorzy rozwa¿ali trzy : SELinux, AppArmor i Grsecurity. Wszystkie trzy rozwi±zania s± bardzo podobne. Wszystkie s± ³atami do j±dra systemów Linux, pozwalaj±cymi na tworzenie polityk, opisuj±cych dostêp programów do plików na i programów na komputerze. Te trzy rozwi±zania ró¿ni± siê od siebie jednak poziomem z³o¿ono¶ci, mo¿liwo¶ciami kontroli i ³atwo¶ci± w tworzeniu polis. Ostatecznie wybór autorów pad³ na AppArmor, z nastêpuj±cych powodów :
+\begin{itemize}
+\item[1)]Pocz±wszy od wersji $8.04$ systemu operacyjnego Ubuntu, AppArmor by³ zosta³ zintegrowany do j±dra systemu. Dziêki temu nie trzeba by³o dokonywaæ zmian w j±drze systemu na serwerze udostêpnionym autorom przez firmê $Codility$.
+\item[2)] Tworzenie polityk AppArmor jest intuicyjne. Tworzenie polityk i obs³uga SELinux jest niepomiernie bardziej skomplikowane.
+\end{itemize}
+
+Prosty profil AppArmor, zabraniajacy programom u¿ytkowników dostêpu do wszystkich plików i wszystkich programów jest udostêpniony na GitHub jako czê¶æ projektu.
 
 \chapter{Dokumentacja u¿ytkowa}
 
@@ -1069,11 +1090,13 @@ Za kontrolowanie rozwi±zañ uczestników, rozgrywanie meczy i opracowanie rankingu
     		\item Ograniczenie zu¿ycia zasobów przez procesy
     		\item Pomiar zu¿ycia zasobów przez procesy
     		\item Automayczny makefile
+    		\item Bezpieczeñstwo systemu
     	\end{itemize}
     \item{Praca licencjacka}
     	\begin{itemize}
     		\item Pocz±tkowy szkielet pracy
-    		\item Rozdzia³y dotycz±ce nadzorcy 7.2 i 8.1
+    		\item Podrozdzia³y dotycz±ce nadzorcy 7.2 i 8.2
+    		\item Podrozdzia³ o bezpieczeñstwie 8.3
     		\item Fragmenty rozdzia³ów 1 i 2
     	\end{itemize}
     \item{Dokumentacja}
