@@ -448,7 +448,7 @@ zapisaæ wyniki do bazy danych.\\
 	\begin{center}
 		\includegraphics[width=0.48\textwidth]{img/gearman_cluster.png}
 	\caption{Klaster Gearmana\newline
-    (¼ród³o:\url{http://gearman.org/}}
+    (¼ród³o:\url{http://gearman.org/})}
     \end{center}
 \end{wrapfigure}
 Warstwa Schedulera umo¿liwia zakolejkowanie kilku Meczy do rozegrania np. w razie
@@ -598,7 +598,7 @@ Metody pomiaru udostêpniane przez system operacyjny takie jak wait3 lub wait4 ró
 
 Inny mechanizm systemowy który by³ rozwa¿any jako rozwi±zanie tych problemów, to grupy procesów. Mechanizm ten pozwa³by miêdzy innymi na wys³anie sygna³u do procesu i wszystkich jego potomków, jak równie¿ prostsze monitorowanie zu¿ycia zasobów systmowych przez grupê procesów. Niestety istniej± znane sposoby obej¶cia tego mechanizmu, które umo¿liwilyby zlo¶liwemu u¿ytkownikowi tworzyæ procesy nie podlegaj±ce kontroli.\\
 
-Istnieje jednak rozwi±zanie analogicznego problemu dostêpne na zasadach licencji Open Source. Jest to napisany w jêzyku Perl skrypt \emph{timeout}, stworzony w Institute for System Programming of Russian Academy of Sciences, dostêpny przez github (\url{https://github.com/Buzdygan/ai-arena}). Zosta³ on stworzony do mierzenia i ograniczania zu¿ycia zasobów przez eksperymentalne wieloprocesowe programy, których zachowanie by³o trudne do przewidzenia. Dzia³anie tego skryptu oparte jest na prostej idei. Skrypt kilkukrotnie w ciagu sekundy sprawdza infromacje dotycz±ce zu¿ycia zasobów przez monitorowany proces i wszystkich jego potomków, i gdy warto¶æ ta przekroczy dozwolony limit zatrzymuje obserwowane procesy. Jednak skrypt nie by³ tworzony do u¿ytku w sposób potrzebny w systemie AI-Arena, wiêc brakuje mu pewnych funkcjonalno¶ci. Szczególnie istotnym brakiem jest mo¿liwo¶æ zatrzymania danego procesu i wszystkich jego potomków na ¿±danie Sêdziego. Mniej powa¿n± wad± tego rozwi±zania jest to, ¿e dokonywane pomiary mog± nie byæ dok³adne, w szczególno¶ci niektóre programy mog³yby dzia³aæ i komunikowaæ siê przez u³amek sekundy po przekroczeniu limitu.\\
+Istnieje jednak rozwi±zanie analogicznego problemu dostêpne na zasadach licencji Open Source. Jest to napisany w jêzyku Perl skrypt \emph{timeout}, stworzony w Institute for System Programming of Russian Academy of Sciences, dostêpny przez Github (\url{https://github.com/pshved/timeout}). Zosta³ on stworzony do mierzenia i ograniczania zu¿ycia zasobów przez eksperymentalne wieloprocesowe programy, których zachowanie by³o trudne do przewidzenia. Dzia³anie tego skryptu oparte jest na prostej idei. Skrypt kilkukrotnie w ciagu sekundy sprawdza infromacje dotycz±ce zu¿ycia zasobów przez monitorowany proces i wszystkich jego potomków, i gdy warto¶æ ta przekroczy dozwolony limit zatrzymuje obserwowane procesy. Jednak skrypt nie by³ tworzony do u¿ytku w sposób potrzebny w systemie AI-Arena, wiêc brakuje mu pewnych funkcjonalno¶ci. Szczególnie istotnym brakiem jest mo¿liwo¶æ zatrzymania danego procesu i wszystkich jego potomków na ¿±danie Sêdziego. Mniej powa¿n± wad± tego rozwi±zania jest to, ¿e dokonywane pomiary mog± nie byæ dok³adne, w szczególno¶ci niektóre programy mog³yby dzia³aæ i komunikowaæ siê przez u³amek sekundy po przekroczeniu limitu.\\
 
 Najlepszym rozwi±zaniem wydaje siê wiêc zaimplementowanie w³asnego mechanizmu, opartego na podobnej idei jak wspomniany skrpyt \emph{timeout}. Mechanizm ten móg³by byæ oddzielnym procesem, który na pocz±tku swojego dzia³ania otrzymuje numery pid obserwowanych procesów i przyznane im limity. Nastêpnie kilkukrotnie w ciagu sekundy na podstawie informacji zawartych w katalogu /proc/\emph{pid\_procesu}/ móg³by mierzyæ sumaryczne zu¿ycie zasobów przez kontrolowane procesy i ich potomków, oraz na ¿yczenie Sêdziego zatrzymaæ okre¶lone grupy procesów. Pomiar zu¿ycia zasobów w tym przypadku jest obci±¿ony pewnym b³êdem, wynikaj±cym z cyklicznego sprawdzania zawarto¶ci wspomnianego katalogu, jednak jest to b³±d akceptowalny. \\
 
@@ -615,7 +615,7 @@ Autorzy systemu rozwazali cztery ró¿ne rozwi±zania pierwszego problemu: podmieni
 
 Podmienianie bibliotek realizuje siê przy pomocy zmiennej ¶rodowskowej LD\_PRELOAD. Zmienna ta pozwala na kompilacjê kodu, w taki sposób ¿e wskazane biblioteki zostan± za³adowane przed wszystkimi innymi, równie¿ przed biblitekami CRT (C Run-Time libraries). Pozwala to na napisanie w³asnej biblioteki obs³uguj±cej wywo³ania funkcji systemowych które chcemy zablokowaæ, na przyk³ad zwracaj±c b³±d przy ka¿dym wywo³aniu takiej funkcji. Metoda ta jednak nie wystarcza do obrony przed z³o¶liwymi programami nawet w jêzyku $C$, gdy¿ mo¿na u¿yæ funkcji systemowej nie odwo³uj±c siê do biblioteki przy pomocy odpowiedniego przerwania (na przyk³ad $int 0x80$ dla wiekszo¶ci systemów Linux dzia³aj±cych na architekturze x86).\\ 
 
-Skanowanie kodu to technika polegaj±ca na automatycznym przeszukaniu kodu i odrzucaniu tych programów których fragmenty zawieraj± niedozwolone polecenia (na przyk³ad "fork()"). Rozwi±zanie to jest trudne we w³a¶ciwej realizacji, z powodu wspomnianego ju¿ wcze¶niej, mianowicie mo¿liwo¶æ uruchamiania funkcji systemowych w $C$ bez wywo³ywania w³a¶ciwego polecenia. Bior±c pod uwagê fakt ¿e z³o¶liwy kod mo¿na na wiele sposobów maskowaæ (np. poleceniami $\#define$, lub sprawiaj±c, ¿e szkodliwy kod powstaje w wyniku wygl±daj±cych niegro¼nie obliczeñ) ca³kowite zabezpieczenie siê przed kreatywnym i z³o¶liwym u¿ytkownikiem u¿ywaj±c tej metody jest zadaniem bardzo trudnym, je¶li nie niemo¿liwym. Poza przeoczeniami nie trudno równie¿ o b³êdy typu $false positive$ (odrzucanie zupe³nie nieszkodliwych kodów wys³anych w dobrej wierze).\\
+Skanowanie kodu to technika polegaj±ca na automatycznym przeszukaniu kodu i odrzucaniu tych programów których fragmenty zawieraj± niedozwolone polecenia (na przyk³ad "fork()"). Rozwi±zanie to jest trudne we w³a¶ciwej realizacji, z powodu wspomnianego ju¿ wcze¶niej, mianowicie mo¿liwo¶æ uruchamiania funkcji systemowych w $C$ bez wywo³ywania w³a¶ciwego polecenia. Bior±c pod uwagê fakt ¿e z³o¶liwy kod mo¿na na wiele sposobów maskowaæ (np. poleceniami $\#define$, lub sprawiaj±c, ¿e szkodliwy kod powstaje w wyniku wygl±daj±cych niegro¼nie obliczeñ) ca³kowite zabezpieczenie siê przed kreatywnym i z³o¶liwym u¿ytkownikiem u¿ywaj±c tej metody jest zadaniem bardzo trudnym, je¶li nie niemo¿liwym. Poza przeoczeniami nie trudno równie¿ o b³êdy typu $false$ $positive$ (odrzucanie zupe³nie nieszkodliwych kodów wys³anych w dobrej wierze).\\
 
 nolejnym rozwa¿anym przez autorów systemu rozwi±zaniem by³ program systrace, autorstwa Nielsa Provosa. Systrace jest obecnie zintegrowany do j±dra OpenBSD, mozna go jednak zainstalowaæ jako ³atê do j±dra wielu systemów Unixowych (miêdzy innymi Ubuntu). Nowsze wersje mo¿na równie¿ uruchamiaæ jako program na tych systemach. 
 Systrace oferuje mo¿liwo¶æ tworzenia polityk dostêpu do wywo³añ funkcji systemowych. Po stworzeniu i za³adowaniu takiej polityki, programy ni± objête bêd± mia³y mo¿liwo¶æ u¿ywania jedynie wyszczególnionych w niej funkcji systemowych. Systrace oferuje równie¿ bardziej zaawansowane mo¿liwo¶ci kontroli, takie jak umo¿liwianie programom wywo³ywania pewnych funkcji systemowych na ograniczonym zbiorze argumentów lub dziedziczenie profili. Ponadto dostêpne s± narzêdzia i graficzne interfejsy pomagaj±ce w tworzeniu profili dostosowanych do potrzeb u¿ytkownika.\\
@@ -953,7 +953,9 @@ Ostateczn± formê przybra³a równie¿ dokumentacja kodu. Zosta³a do³±czona do repoz
 sposób przegl±daæ z wykorzystaniem przegl±darki internetowej.\\
 
 Przeprowadzony zosta³ szereg testów: zarówno testów sprawdzaj±cych scenariusze u¿ycia systemu, jak i sprawdzaj±ce przypadki niew³a¶ciwego jego 
-u¿ycia. Kluczowym testem okaza³ siê konkurs zorganizowany na pro¶bê Codility. Okaza³o siê, ¿e ...... << Do uzupe³nienia po tym konkursie >> .....\\
+u¿ycia. Kluczowym testem okaza³ siê konkurs zorganizowany na pro¶bê $Codility$. Okaza³o siê, ¿e konkurs przebieg³ sprawnie, bez przykrych niespodzianek. Wziê³o udzia³ 14 zawodników
+(stan na 25.V), co mo¿na uznaæ za ¶redni sukces zwa¿aj±c na praktycznie zerow± kampaniê reklamow±. Uczestnicy potraktowali udzia³ w konkursie jako rodzaj zabawy, tote¿ nikt nie próbowa³
+nadu¿ywaæ uprawnieñ ani mo¿liwo¶ci swoich programów. Autorzy zgodnie uznali, i¿ ten test zakoñczy³ siê sukcesem.\\
 
 \chapter{Przysz³o¶æ projektu}
 
@@ -1278,6 +1280,15 @@ za³±czonej p³ycie w katalogu \emph{ai-arena/files/may\_contest/}. Znajduj± siê t
 
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
+\bibitem[PytDoc]{Python_documentation} Dokumentacja Pythona, \textit{\url{http://www.python.org/doc/} }
+\bibitem[DjaDoc]{Django_documentation} Dokumentacja Django, \textit{\url{https://www.djangoproject.com/en/1.4/} }
+\bibitem[GeaDoc]{Gearman_documentation} Dokumentacja frameworku Gearman, \textit{\url{http://www.gearman.org/} }
+\bibitem[WikiGPL]{Wikipedia_GPL} Opis licencji GNU GPL, \textit{\url{http://pl.wikipedia.org/wiki/GPL} }
+\bibitem[AppADoc]{AppArmor_documentation} Dokumentacja programu AppArmor, \textit{\url{https://help.ubuntu.com/comunity/AppArmor/} }
+\bibitem[PtraDoc]{Ptrace_documentation} Dokumentacja ptrace, \textit{\url{http://linux.die.net/man/2/ptrace/} }
+\bibitem[SystDoc]{Systrace_documentation} Dokumentacja systrace, \textit{\url{http://www.systrace.org/} }
+\bibitem[WaitMan]{Wait3_manual} Dokumentacja funkcji wait3, wait4, \textit{\url{http://linux.die.net/man/2/wait3/} }
+\bibitem[Scrumm]{Scrumm} Opis metodologii Scrumm, \textit{\url{http://pl.wikipedia.org/wiki/Scrumm} }
 \end{thebibliography}
 
 \end{document}
