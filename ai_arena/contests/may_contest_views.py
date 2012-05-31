@@ -139,9 +139,6 @@ def uploaded_for_tests(request):
     return render_to_response('may_contest/uploaded_for_testing.html',
             context_instance=RequestContext(request))
 
-def contact(request):
-    return render_to_response('may_contest/contact.html',
-            context_instance=RequestContext(request))
 
 def online_bot_uploaded(request, bot_name):
     return render_to_response('may_contest/online_bot_uploaded.html',
