@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>may_contest_helper_functions &mdash; Ai Arena 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Ai Arena 0.1 documentation" href="../index.html" />
+    <link rel="prev" title="may_contest_views" href="may_contest_views.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="may_contest_views.html" title="may_contest_views"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Ai Arena 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-ai_arena.contests.may_contest_helper_functions">
+<span id="may-contest-helper-functions"></span><h1>may_contest_helper_functions<a class="headerlink" href="#module-ai_arena.contests.may_contest_helper_functions" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_helper_functions.create_bot_and_add_to_contest">
+<tt class="descclassname">ai_arena.contests.may_contest_helper_functions.</tt><tt class="descname">create_bot_and_add_to_contest</tt><big>(</big><em>source_code</em>, <em>owner</em>, <em>contest</em>, <em>bot_language</em><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_helper_functions.create_bot_and_add_to_contest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates new bot with owner from source code, adds suffix to name if needed
+Returns new name and error_log if something went wrong.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_helper_functions.create_may_contest">
+<tt class="descclassname">ai_arena.contests.may_contest_helper_functions.</tt><tt class="descname">create_may_contest</tt><big>(</big><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_helper_functions.create_may_contest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an instance of may Contest.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_helper_functions.create_may_default_bot">
+<tt class="descclassname">ai_arena.contests.may_contest_helper_functions.</tt><tt class="descname">create_may_default_bot</tt><big>(</big><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_helper_functions.create_may_default_bot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function creating instance of may default Bot, against which other Bots could be tested.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_helper_functions.create_may_game">
+<tt class="descclassname">ai_arena.contests.may_contest_helper_functions.</tt><tt class="descname">create_may_game</tt><big>(</big><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_helper_functions.create_may_game" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function creating instance of may Game.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_helper_functions.generate_ranking">
+<tt class="descclassname">ai_arena.contests.may_contest_helper_functions.</tt><tt class="descname">generate_ranking</tt><big>(</big><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_helper_functions.generate_ranking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used to generate Ranking object to may Contest.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_helper_functions.get_default_bot_codes">
+<tt class="descclassname">ai_arena.contests.may_contest_helper_functions.</tt><tt class="descname">get_default_bot_codes</tt><big>(</big><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_helper_functions.get_default_bot_codes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function returning templates of bots for may Contest.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_helper_functions.get_default_may_contest">
+<tt class="descclassname">ai_arena.contests.may_contest_helper_functions.</tt><tt class="descname">get_default_may_contest</tt><big>(</big><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_helper_functions.get_default_may_contest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to access instance of may Contest. If no such object exist this function creates a new one.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_helper_functions.get_default_may_contest_bot">
+<tt class="descclassname">ai_arena.contests.may_contest_helper_functions.</tt><tt class="descname">get_default_may_contest_bot</tt><big>(</big><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_helper_functions.get_default_may_contest_bot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to access instance of default Bot. If no such object exist this function creates a new one.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_helper_functions.get_default_may_ranking">
+<tt class="descclassname">ai_arena.contests.may_contest_helper_functions.</tt><tt class="descname">get_default_may_ranking</tt><big>(</big><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_helper_functions.get_default_may_ranking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to access instance of Ranking.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_helper_functions.get_may_game">
+<tt class="descclassname">ai_arena.contests.may_contest_helper_functions.</tt><tt class="descname">get_may_game</tt><big>(</big><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_helper_functions.get_may_game" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to access instance of may Game. If no such object exist this function creates a new one.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="may_contest_views.html"
+                        title="previous chapter">may_contest_views</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/modules/may_contest_helper_functions.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="may_contest_views.html" title="may_contest_views"
+             >previous</a> |</li>
+        <li><a href="../index.html">Ai Arena 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, ZPP Project Team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
