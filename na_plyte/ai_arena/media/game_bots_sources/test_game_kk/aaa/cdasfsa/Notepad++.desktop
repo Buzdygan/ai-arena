@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=Notepad++
-Exec=env WINEPREFIX="/home/michal/.wine" wine C:\\\\Program\\ Files\\\\Notepad++\\\\notepad++.exe 
-Type=Application
-StartupNotify=true
-Path=/home/michal/.wine/dosdevices/c:/users/michal/Temp/nppLocalization
-Icon=33E8_notepad++.0
