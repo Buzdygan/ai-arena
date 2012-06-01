@@ -94,8 +94,8 @@ def parse_message(to_send):
 def readout(pipe, timeout):
     """
         This function reads communicates.
-        The assumption is that every communicate ends with char '\n'
-        In addition every '\n' is considered to be end of a communicate
+        The assumption is that every communicate ends with char '\\n'
+        In addition every '\\n' is considered to be end of a communicate
     """
     mes = ''
     while mes[len(mes)-1:] != '\n':
@@ -195,10 +195,10 @@ def get_run_command(program_name, program_lang):
 
 def play(judge_file, judge_lang, players, time_limit, memory_limit):
     """
-        judge_file - file containing judge program
-        players - list of bots binaries
-        memory_limit (in MB) - maximum memory for one bot
-        time_limit (in sec) - maximum time limit for one bot
+        judge_file - file containing judge program\n
+        players - list of bots binaries\n
+        memory_limit (in MB) - maximum memory for one bot\n
+        time_limit (in sec) - maximum time limit for one bot\n
     """
 
     players_num = len(players)

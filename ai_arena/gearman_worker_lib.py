@@ -6,20 +6,6 @@ from decimal import Decimal
 from django.conf import settings
 from ai_arena.contests.models import Match, MatchBotResult
 
-class PickleDataEncoder(gearman.DataEncoder):
-    @classmethod
-    def encode(cls, encodable_object):
-        return pickle.dumps(encodable_object)
-
-    @classmethod
-    def decode(cls, decodable_string):
-        return pickle.loads(decodable_string)
-
-class PickleWorker(gearman.GearmanWorker):
-    data_encoder = PickleDataEncoder
-
-gearman_worker = PickleWorker(['localhost'])
-
 def single_match(gearman_worker, gearman_job):
     """
         Gearman worker main function.\n
@@ -68,6 +54,3 @@ def single_match(gearman_worker, gearman_job):
         bot_result.save()
     match.log = log
     match.save()
-
-gearman_worker.register_task("single_match", single_match)
-gearman_worker.work()

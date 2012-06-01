@@ -1,4 +1,4 @@
-ai_arena.contests.models
+models
 =================================
 
 .. automodule:: ai_arena.contests.models

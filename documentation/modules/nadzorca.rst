@@ -1,5 +1,5 @@
-nadzorca.nadzorca
+nadzorca
 ======================
 
-.. automodule:: nadzorca.nadzorca 
+.. automodule:: ai_arena.nadzorca.nadzorca 
     :members:

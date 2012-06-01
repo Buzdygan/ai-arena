@@ -1,4 +1,4 @@
-ai_arena.contests.compilation
+compilation
 =================================
 
 .. automodule:: ai_arena.contests.compilation

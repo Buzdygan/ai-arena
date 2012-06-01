@@ -17,5 +17,8 @@ def error(request):
             context_instance=RequestContext(request))
 
 def contact(request):
+    """
+        Shows template with contact informations.
+    """
     return render_to_response('contact.html',
             context_instance=RequestContext(request))

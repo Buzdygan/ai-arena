@@ -1,4 +1,4 @@
-ai_arena.contests.user_views
+user_views
 =================================
 
 .. automodule:: ai_arena.contests.user_views

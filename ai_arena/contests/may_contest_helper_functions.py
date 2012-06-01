@@ -5,9 +5,18 @@ from django.core.exceptions import ObjectDoesNotExist
 from ai_arena.utils import get_current_date_time
 from ai_arena.contests.models import User, Game, Bot, Contest, Ranking
 
+"""
+    This module contains views needed to perform may contest.\n
+    The fact that GUI of may contest was slightly different from the final one
+    explains why separate views were needed.\n\n
+
+    WARNING: These views shoud not be used after closing may contest!
+"""
 
 def create_may_game():
-
+    """
+        Function creating instance of may Game.
+    """
     try:
         game = Game()
         game.name = settings.MAY_CONTEST_GAME_NAME
@@ -27,7 +36,9 @@ def create_may_game():
         raise e
 
 def create_may_default_bot():
-
+    """
+        Function creating instance of may default Bot, against which other Bots could be tested.
+    """
     try:
         bot = Bot()
         bot.name = settings.MAY_CONTEST_DEFAULT_BOT_NAME
@@ -45,7 +56,9 @@ def create_may_default_bot():
         raise e
 
 def create_may_contest():
-
+    """
+        Creates an instance of may Contest.
+    """
     try:
         contest = Contest()
         contest.name = settings.MAY_CONTEST_NAME
@@ -72,18 +85,27 @@ def create_may_contest():
         raise e
 
 def get_may_game():
+    """
+        Helper function to access instance of may Game. If no such object exist this function creates a new one.
+    """
     try:
         return Game.objects.get(name=settings.MAY_CONTEST_GAME_NAME)
     except ObjectDoesNotExist:
         return create_may_game()
 
 def get_default_may_contest_bot():
+    """
+        Helper function to access instance of default Bot. If no such object exist this function creates a new one. 
+    """
     try:
         return Bot.objects.get(name=settings.MAY_CONTEST_DEFAULT_BOT_NAME)
     except ObjectDoesNotExist:
         return create_may_default_bot()
 
 def get_default_may_contest():
+    """
+        Helper function to access instance of may Contest. If no such object exist this function creates a new one.
+    """
     try:
         return Contest.objects.get(name=settings.MAY_CONTEST_NAME)
     except ObjectDoesNotExist:
@@ -93,12 +115,18 @@ def get_picnic_user():
     return User.objects.get(username=settings.MAY_CONTEST_PICNIC_USERNAME)
 
 def get_default_may_ranking():
+    """
+        Helper function to access instance of Ranking.
+    """
     contest = get_default_may_contest()
     if not contest:
         raise Exception("There is no may contest")
     return contest.ranking
 
 def generate_ranking():
+    """
+        Function used to generate Ranking object to may Contest.
+    """
     contest = get_default_may_contest()
     if not contest:
         raise Exception("There is no may contest")
@@ -159,6 +187,9 @@ def read_code_from_file(filename):
     return code
 
 def get_default_bot_codes():
+    """
+        Helper function returning templates of bots for may Contest.
+    """
     bot_codes = dict()
     bot_codes['bot_code1'] = read_code_from_file(settings.PICNIC_BOT_CODES_FILES['bot_code1']) 
     bot_codes['bot_code2'] = read_code_from_file(settings.PICNIC_BOT_CODES_FILES['bot_code2'])

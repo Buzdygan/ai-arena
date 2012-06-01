@@ -49,7 +49,7 @@ def show_contest(request, contest_id, error_msg=None):
 
 def add_contestant(request, contest_id): 
     """
-        Adds selected Bot to the contest.
+        Returns a view to render that allows to select a bot to add to given contests.
     """
 
     contest = Contest.objects.get(id=contest_id)

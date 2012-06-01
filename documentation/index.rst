@@ -18,15 +18,21 @@ Modules
     :maxdepth: 2
 
     modules/nadzorca.rst
+    modules/gearman_worker_lib.rst
     modules/model.rst
-    modules/game_views.rst
+    modules/forms.rst
+    modules/compilation.rst
     modules/game_launcher.rst
+    modules/utils.rst
+    modules/views.rst
+    modules/game_views.rst
     modules/bot_views.rst
-    modules/contest_views.rst
     modules/match_views.rst
+    modules/contest_views.rst
     modules/user_views.rst
     modules/comment_views.rst
-    modules/compilation.rst
+    modules/may_contest_views.rst
+    modules/may_contest_helper_functions.rst
 
 Indices and tables
 ==================
