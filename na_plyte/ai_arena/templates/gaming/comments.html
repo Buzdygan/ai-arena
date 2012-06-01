@@ -1,0 +1,55 @@
+<div id='comments'>
+    {% for comment in comments %}
+    <table class='comment'>
+        <tr>
+            <td class='photo'>
+                <table>
+                    <tr><td>
+                    {% if request.user.get_profile %}
+                        <img src='{{ request.user.get_profile.photo }}' class='img_avatar' />
+                    {% else %}
+                        <img src='{{ MEDIA_URL }}profiles/photos/default_avatar.jpg' class='img_avatar'/>
+                    {% endif %}
+                    </td></tr>
+
+                    <tr><td class='comment_username'>
+                            <a href='/profile/{{ comment.user.username }}/'>{{ comment.user.username }}</a>
+                    </td></tr>
+                </table>
+            </td>
+
+            <td>
+            <table class='comment_all'>
+                <tr class='comment_info_bar'>
+                    <td class='comment_date'>
+                        This post was submitted {{ comment.date_set }}
+                    </td>
+                    <td class='comment_options'>
+                        {% if user.is_staff or user.username == comment.user.username or user in moderators %}
+<script>
+    function show_confirm(){
+        var x = confirm("Are you sure you want to delete this comment?");
+        if(x) location="/{{ template_type }}/del_comment/{{ object_id }}/{{ comment.id }}/";
+    }
+
+    $(function() {
+        $("#dialog").dialog();
+    });
+</script>
+                            <a href='/{{ template_type }}/quick_edit_commtent/{{ object_id }}/{{ comment.id }}'>Quick Edit </a>|
+                            <a href='/{{ template_type }}/edit_comment/{{ object_id }}/{{ comment.id }}'>Edit</a> |
+                            <a href='javascript:void(0);' onClick="show_confirm()">Delete</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td class='comment_content'>
+                        {{ comment.content }}
+                    </td>
+                </tr>
+            </table>
+            </td>
+        </tr>
+    </table>
+    {% endfor %}
+</div>

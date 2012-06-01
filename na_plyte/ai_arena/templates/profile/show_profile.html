@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link rel='stylesheet' href='{{ MEDIA_URL }}profile.css' />
+{% endblock %}
+
+{% block content %}
+
+    {% if error_message %}
+        <h1>{{ error_message }}</h1>
+    {% endif %}
+
+    {% if user_profile %}
+    {% block side_panel %} 
+    <div id='side_panel'>
+        {% if user_profile.photo %}
+        <div><img src='{{ MEDIA_URL }}/{{ user_profile.photo }}' alt='avatar' id='avatar'></div>
+        {% else %}
+            <div><img src='{{ MEDIA_URL }}/profiles/photos/default_avatar.jpg' alt='avatar' id='avatar' /></div>
+            {% endif %}
+        <div><a href='/profile/{{ user_profile.user.username }}/'>My profile</a></div>
+        <div><a href='/profile/{{ user_profile.user.username }}/contests/'>My contests</a></div>
+        <div><a href='/profile/{{ user_profile.user.username }}/news/'>News</a></div>
+        <div><a href='/profile_edit/'>Edit profile</a></div>
+    </div>
+    {% endblock %}
+
+    {% block main_panel %}
+    <div id='main_panel'>
+        <div id='personalities'>
+            <table>
+                {% if user_profile.about %}
+            <tr>
+                <td class='first_column'> About me: </td>
+                <td class='second_column'>{{ user_profile.about }}</td>
+            </tr>
+            {% endif %}
+
+            {% if user_profile.birthsday %}
+            <tr>
+                <td class='first_column'> Birthsday: </td>
+                <td class='second_column'>{{ user_profile.birthsday }} </td>
+            </tr>
+            {% endif %}
+
+            {% if user_profile.country %}
+            <tr>
+                <td class='first_column'> Country: </td>
+                <td class='second_column'>{{ user_profile.country }}</td>
+            </tr>
+            {% endif %}
+
+            {% if user_profile.city %}
+            <tr>
+                <td class='first_column'> City: </td>
+                <td class='second_column'>{{ user_profile.city }}</td>
+            </tr>
+            {% endif %}
+            
+            {% if user_profile.university %}
+            <tr>
+                <td class='first_column'> University: </td> 
+                <td class='second_column'>{{ user_profile.university }}</td>
+            </tr>
+            {% endif %}
+
+            {% if user_profile.interests %}
+            <tr>
+                <td class='first_column'> Interests: </td>
+                <td class='second_column'>{{ user_profile.interests }}</td>
+            </tr>
+            {% endif %}
+
+            {% if news %}
+            <tr>
+                <td class='first_column'> News: </td>
+                <td class='second_column'> 
+                    <table id='news_table'>
+                        {% for n in news %}
+                        <tr class='news_row'>
+                            <td class='news_cont'>{{ n.content }}</td>
+                            <td class='news_date_set'>{{ n.date_set }}</td>
+                        </tr>
+                        {% endfor %}
+                    <table> 
+                </td>
+            </tr>
+            {% endif %}
+        </table>
+    </div>
+    {% endblock %}
+    {% endif %}
+
+{% endblock %}

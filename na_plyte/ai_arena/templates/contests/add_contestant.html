@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+    {% if bot_form %}
+        <form action="{% url add_contestant contest_id %}" method="post"> {% csrf_token %}
+            {{ bot_form.as_p }}
+            <input name="bot_form" class="btn primary" type="submit" value="Add Bot to the contest" />
+        </form>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Game: {{ game.name }}</p>
+<p>Match log:</p>
+<p>{{ match.match_log }}</p>
+
+    <table>
+        <tr>
+            <td> Position </td>
+            <td> Bot name </td>
+            <td> Score </td>
+            <td> Time used </td>
+            <td> Memory used </td>
+        </tr>
+
+        {% for player_result in players_results %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td> {{ player_result.bot.name }} </td>
+                <td> {{ player_result.score }} </td>
+                <td> {{ player_result.time_used }}ms </td>
+                <td> {{ player_result.memory_used }}MB </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

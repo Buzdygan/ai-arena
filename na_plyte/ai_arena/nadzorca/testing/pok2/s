@@ -1,0 +1,1892 @@
+TEST pok
+/home/michal/ai-arena/ai_arena/nadzorca/testing/pok2/pok_judge
+/home/michal/ai-arena/ai_arena/nadzorca/testing/pok2/pok_judge
+java /home/michal/ai-arena/ai_arena/nadzorca/testing/pok2/pok_judge
+python /home/michal/ai-arena/ai_arena/nadzorca/testing/pok2/pok_judge
+judge info:
+sending CARDS 1 1
+wys [1]1
+dost 10
+wys [2]1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 1 4
+wys [1]50 1 1
+dost 10
+wys [2]50 1 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 2 0
+wys [1]2
+dost 100
+wys [2]10 0 0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 2 0
+wys [1]10 0 2
+dost 100
+wys [2]0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 1 2
+wys [1]10 0 1
+dost 10
+wys [2]2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 2 4
+wys [1]2
+dost 100
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 100
+sending CARDS 3 2
+wys [1]3
+dost 100
+wys [2]100 0 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 1 actBet 220
+sending CARDS 2 4
+wys [1]120 2 2
+dost 100
+wys [2]120 3 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 100
+sending CARDS 0 1
+wys [1]0
+dost 10
+wys [2]100 0 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 2 actBet 60
+sending CARDS 0 4
+wys [1]50 1 0
+dost 10
+wys [2]50 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 1 0
+wys [1]1
+dost 10
+wys [2]10 0 0
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 1 actBet 60
+sending CARDS 0 2
+wys [1]50 0 0
+dost 10
+wys [2]50 1 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 4 4
+wys [1]4
+dost 200
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 200
+wys [2]200
+dost 200
+second BET
+winner 0 actBet 400
+sending CARDS 0 2
+wys [1]200 4 0
+dost 10
+wys [2]200 4 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 4 2
+wys [1]4
+dost 200
+wys [2]10 0 2
+dost 100
+wys [2]200
+dost 0
+winner 1 actBet 100
+sending CARDS 0 3
+wys [1]100 0 0
+dost 10
+wys [2]3
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 0 3
+wys [1]0
+dost 10
+wys [2]10 0 3
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 2 3
+wys [1]2
+dost 100
+wys [2]10 0 3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 2 actBet 220
+sending CARDS 3 4
+wys [1]120 3 3
+dost 100
+wys [2]120 2 4
+dost 200
+wys [1]200
+dost 120
+wys [2]100 1
+dost 200
+second BET
+wys [1]200
+dost 1
+winner 2 actBet 400
+sending CARDS 3 1
+wys [1]4 3
+dost 100
+wys [2]120 1 3 1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 1 3
+wys [1]10 0 1
+dost 10
+wys [2]3
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 0 1
+wys [1]0
+dost 10
+wys [2]10 0 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 2 actBet 60
+sending CARDS 2 4
+wys [1]50 1 2
+dost 100
+wys [2]50 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 100
+sending CARDS 1 2
+wys [1]1
+dost 10
+wys [2]100 0 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 0 1
+wys [1]0
+dost 10
+wys [2]10 0 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 2 actBet 60
+sending CARDS 1 3
+wys [1]50 1 1
+dost 10
+wys [2]50 0 3
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 3 1
+wys [1]3
+dost 100
+wys [2]10 0 1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 0 2
+wys [1]10 0 0
+dost 10
+wys [2]2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 1 2
+wys [1]1
+dost 10
+wys [2]10 0 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 2 2
+wys [1]2
+dost 100
+wys [2]10 0 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 1 4
+wys [1]120 2 1
+dost 10
+wys [2]120 2 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 0 2
+wys [1]0
+dost 10
+wys [2]10 0 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 2 4
+wys [1]2
+dost 100
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 100
+sending CARDS 0 2
+wys [1]0
+dost 10
+wys [2]100 0 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 3 0
+wys [1]3
+dost 100
+wys [2]10 0 0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 3 1
+wys [1]10 0 3
+dost 100
+wys [2]1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 0 0
+wys [1]10 0 0
+dost 10
+wys [2]0
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 3 2
+wys [1]50 0 3
+dost 100
+wys [2]50 0 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 1 actBet 220
+sending CARDS 2 1
+wys [1]120 2 2
+dost 100
+wys [2]120 3 1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 4 2
+wys [1]10 0 4
+dost 200
+wys [2]2
+dost 100
+wys [2]200
+dost 0
+winner 1 actBet 100
+sending CARDS 4 3
+wys [1]100 0 4
+dost 200
+wys [2]3
+dost 100
+wys [2]200
+dost 120
+wys [1]100 1
+dost 200
+second BET
+wys [2]200
+dost 1
+winner 1 actBet 400
+sending CARDS 3 4
+wys [1]120 1 3 3
+dost 100
+wys [2]4 4
+dost 200
+wys [1]200
+dost 120
+wys [2]100 1
+dost 200
+second BET
+wys [1]200
+dost 1
+winner 2 actBet 400
+sending CARDS 4 3
+wys [1]4 4
+dost 200
+wys [2]120 1 3 3
+dost 100
+wys [2]200
+dost 120
+wys [1]100 1
+dost 200
+second BET
+wys [2]200
+dost 1
+winner 1 actBet 400
+sending CARDS 1 2
+wys [1]120 1 3 1
+dost 10
+wys [2]4 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 3 0
+wys [1]3
+dost 100
+wys [2]10 0 0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 2 4
+wys [1]10 0 2
+dost 100
+wys [2]4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 100
+sending CARDS 4 4
+wys [1]4
+dost 200
+wys [2]100 0 4
+dost 200
+wys [1]200
+dost 200
+wys [2]200
+dost 200
+second BET
+winner 0 actBet 400
+sending CARDS 1 1
+wys [1]200 4 1
+dost 10
+wys [2]200 4 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 4 3
+wys [1]50 1 4
+dost 200
+wys [2]50 1 3
+dost 100
+wys [2]200
+dost 120
+wys [1]100 1
+dost 200
+second BET
+wys [2]200
+dost 1
+winner 1 actBet 400
+sending CARDS 0 4
+wys [1]120 1 3 0
+dost 10
+wys [2]4 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 4 3
+wys [1]4
+dost 200
+wys [2]10 0 3
+dost 100
+wys [2]200
+dost 120
+wys [1]100 1
+dost 200
+second BET
+wys [2]200
+dost 1
+winner 1 actBet 400
+sending CARDS 1 4
+wys [1]120 1 3 1
+dost 10
+wys [2]4 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 1 1
+wys [1]1
+dost 10
+wys [2]10 0 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 4 3
+wys [1]50 1 4
+dost 200
+wys [2]50 1 3
+dost 100
+wys [2]200
+dost 120
+wys [1]100 1
+dost 200
+second BET
+wys [2]200
+dost 1
+winner 1 actBet 400
+sending CARDS 4 0
+wys [1]120 1 3 4
+dost 200
+wys [2]4 0
+dost 10
+wys [2]200
+dost 0
+winner 1 actBet 10
+sending CARDS 2 0
+wys [1]10 0 2
+dost 100
+wys [2]0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 3 0
+wys [1]10 0 3
+dost 100
+wys [2]0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 4 0
+wys [1]10 0 4
+dost 200
+wys [2]0
+dost 10
+wys [2]200
+dost 0
+winner 1 actBet 10
+sending CARDS 1 0
+wys [1]10 0 1
+dost 10
+wys [2]0
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 1 actBet 60
+sending CARDS 2 4
+wys [1]50 0 2
+dost 100
+wys [2]50 1 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 100
+sending CARDS 3 1
+wys [1]3
+dost 100
+wys [2]100 0 1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 3 2
+wys [1]10 0 3
+dost 100
+wys [2]2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 1 actBet 220
+sending CARDS 1 2
+wys [1]120 2 1
+dost 10
+wys [2]120 3 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 1 0
+wys [1]1
+dost 10
+wys [2]10 0 0
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 1 actBet 60
+sending CARDS 0 1
+wys [1]50 0 0
+dost 10
+wys [2]50 1 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 2 actBet 60
+sending CARDS 1 1
+wys [1]50 1 1
+dost 10
+wys [2]50 0 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 2 4
+wys [1]50 1 2
+dost 100
+wys [2]50 1 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 100
+sending CARDS 3 0
+wys [1]3
+dost 100
+wys [2]100 0 0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 0 2
+wys [1]10 0 0
+dost 10
+wys [2]2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 3 1
+wys [1]3
+dost 100
+wys [2]10 0 1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 2 2
+wys [1]10 0 2
+dost 100
+wys [2]2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 1 3
+wys [1]120 2 1
+dost 10
+wys [2]120 2 3
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 0 0
+wys [1]0
+dost 10
+wys [2]10 0 0
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 3 1
+wys [1]50 0 3
+dost 100
+wys [2]50 0 1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 3 0
+wys [1]10 0 3
+dost 100
+wys [2]0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 0 1
+wys [1]10 0 0
+dost 10
+wys [2]1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 2 actBet 60
+sending CARDS 2 0
+wys [1]50 1 2
+dost 100
+wys [2]50 0 0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 3 0
+wys [1]10 0 3
+dost 100
+wys [2]0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 2 1
+wys [1]10 0 2
+dost 100
+wys [2]1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 2 0
+wys [1]10 0 2
+dost 100
+wys [2]0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 3 3
+wys [1]10 0 3
+dost 100
+wys [2]3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 1 2
+wys [1]120 3 1
+dost 10
+wys [2]120 3 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 3 1
+wys [1]3
+dost 100
+wys [2]10 0 1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 2 0
+wys [1]10 0 2
+dost 100
+wys [2]0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 0 2
+wys [1]10 0 0
+dost 10
+wys [2]2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 2 3
+wys [1]2
+dost 100
+wys [2]10 0 3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 2 actBet 220
+sending CARDS 4 0
+wys [1]120 3 4
+dost 200
+wys [2]120 2 0
+dost 10
+wys [2]200
+dost 0
+winner 1 actBet 10
+sending CARDS 3 4
+wys [1]10 0 3
+dost 100
+wys [2]4
+dost 200
+wys [1]200
+dost 120
+wys [2]100 1
+dost 200
+second BET
+wys [1]200
+dost 1
+winner 2 actBet 400
+sending CARDS 1 1
+wys [1]4 1
+dost 10
+wys [2]120 1 3 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 2 4
+wys [1]50 1 2
+dost 100
+wys [2]50 1 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 100
+sending CARDS 3 2
+wys [1]3
+dost 100
+wys [2]100 0 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 1 actBet 220
+sending CARDS 2 2
+wys [1]120 2 2
+dost 100
+wys [2]120 3 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 0 2
+wys [1]120 2 0
+dost 10
+wys [2]120 2 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 2 4
+wys [1]2
+dost 100
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 100
+sending CARDS 4 4
+wys [1]4
+dost 200
+wys [2]100 0 4
+dost 200
+wys [1]200
+dost 200
+wys [2]200
+dost 200
+second BET
+winner 0 actBet 400
+sending CARDS 4 4
+wys [1]200 4 4
+dost 200
+wys [2]200 4 4
+dost 200
+wys [1]200
+dost 200
+wys [2]200
+dost 200
+second BET
+winner 0 actBet 400
+sending CARDS 0 3
+wys [1]200 4 0
+dost 10
+wys [2]200 4 3
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 1 3
+wys [1]1
+dost 10
+wys [2]10 0 3
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 4 0
+wys [1]4
+dost 200
+wys [2]10 0 0
+dost 10
+wys [2]200
+dost 0
+winner 1 actBet 10
+sending CARDS 3 0
+wys [1]10 0 3
+dost 100
+wys [2]0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 2 2
+wys [1]10 0 2
+dost 100
+wys [2]2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 0 3
+wys [1]120 2 0
+dost 10
+wys [2]120 2 3
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 3 0
+wys [1]3
+dost 100
+wys [2]10 0 0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 0 1
+wys [1]10 0 0
+dost 10
+wys [2]1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 2 actBet 60
+sending CARDS 1 2
+wys [1]50 1 1
+dost 10
+wys [2]50 0 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 2 4
+wys [1]2
+dost 100
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 100
+sending CARDS 0 4
+wys [1]0
+dost 10
+wys [2]100 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 2 2
+wys [1]2
+dost 100
+wys [2]10 0 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 1 1
+wys [1]120 2 1
+dost 10
+wys [2]120 2 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 1 2
+wys [1]50 1 1
+dost 10
+wys [2]50 1 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 1 1
+wys [1]1
+dost 10
+wys [2]10 0 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 1 1
+wys [1]50 1 1
+dost 10
+wys [2]50 1 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 1 4
+wys [1]50 1 1
+dost 10
+wys [2]50 1 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 1 0
+wys [1]1
+dost 10
+wys [2]10 0 0
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 1 actBet 60
+sending CARDS 1 1
+wys [1]50 0 1
+dost 10
+wys [2]50 1 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 2 3
+wys [1]50 1 2
+dost 100
+wys [2]50 1 3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 2 actBet 220
+sending CARDS 1 4
+wys [1]120 3 1
+dost 10
+wys [2]120 2 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 4 4
+wys [1]4
+dost 200
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 200
+wys [2]200
+dost 200
+second BET
+winner 0 actBet 400
+sending CARDS 4 4
+wys [1]200 4 4
+dost 200
+wys [2]200 4 4
+dost 200
+wys [1]200
+dost 200
+wys [2]200
+dost 200
+second BET
+winner 0 actBet 400
+sending CARDS 2 2
+wys [1]200 4 2
+dost 100
+wys [2]200 4 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 1 4
+wys [1]120 2 1
+dost 10
+wys [2]120 2 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 2 3
+wys [1]2
+dost 100
+wys [2]10 0 3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 2 actBet 220
+sending CARDS 3 1
+wys [1]120 3 3
+dost 100
+wys [2]120 2 1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 0 1
+wys [1]10 0 0
+dost 10
+wys [2]1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 2 actBet 60
+sending CARDS 2 2
+wys [1]50 1 2
+dost 100
+wys [2]50 0 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 4 0
+wys [1]120 2 4
+dost 200
+wys [2]120 2 0
+dost 10
+wys [2]200
+dost 0
+winner 1 actBet 10
+sending CARDS 0 2
+wys [1]10 0 0
+dost 10
+wys [2]2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 3 1
+wys [1]3
+dost 100
+wys [2]10 0 1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 4 4
+wys [1]10 0 4
+dost 200
+wys [2]4
+dost 200
+wys [1]200
+dost 200
+wys [2]200
+dost 200
+second BET
+winner 0 actBet 400
+sending CARDS 3 0
+wys [1]200 4 3
+dost 100
+wys [2]200 4 0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 1 1
+wys [1]10 0 1
+dost 10
+wys [2]1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 1 4
+wys [1]50 1 1
+dost 10
+wys [2]50 1 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 2 2
+wys [1]2
+dost 100
+wys [2]10 0 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 3 4
+wys [1]120 2 3
+dost 100
+wys [2]120 2 4
+dost 200
+wys [1]200
+dost 120
+wys [2]100 1
+dost 200
+second BET
+wys [1]200
+dost 1
+winner 2 actBet 400
+sending CARDS 1 0
+wys [1]4 1
+dost 10
+wys [2]120 1 3 0
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 1 actBet 60
+sending CARDS 1 4
+wys [1]50 0 1
+dost 10
+wys [2]50 1 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 1 3
+wys [1]1
+dost 10
+wys [2]10 0 3
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 3 1
+wys [1]3
+dost 100
+wys [2]10 0 1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 1 0
+wys [1]10 0 1
+dost 10
+wys [2]0
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 1 actBet 60
+sending CARDS 2 4
+wys [1]50 0 2
+dost 100
+wys [2]50 1 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 100
+sending CARDS 4 3
+wys [1]4
+dost 200
+wys [2]100 0 3
+dost 100
+wys [2]200
+dost 120
+wys [1]100 1
+dost 200
+second BET
+wys [2]200
+dost 1
+winner 1 actBet 400
+sending CARDS 4 4
+wys [1]120 1 3 4
+dost 200
+wys [2]4 4
+dost 200
+wys [1]200
+dost 200
+wys [2]200
+dost 200
+second BET
+winner 0 actBet 400
+sending CARDS 3 3
+wys [1]200 4 3
+dost 100
+wys [2]200 4 3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 0 2
+wys [1]120 3 0
+dost 10
+wys [2]120 3 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 4 4
+wys [1]4
+dost 200
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 200
+wys [2]200
+dost 200
+second BET
+winner 0 actBet 400
+sending CARDS 4 2
+wys [1]200 4 4
+dost 200
+wys [2]200 4 2
+dost 100
+wys [2]200
+dost 0
+winner 1 actBet 100
+sending CARDS 2 2
+wys [1]100 0 2
+dost 100
+wys [2]2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 1 1
+wys [1]120 2 1
+dost 10
+wys [2]120 2 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 4 1
+wys [1]50 1 4
+dost 200
+wys [2]50 1 1
+dost 10
+wys [2]200
+dost 0
+winner 1 actBet 10
+sending CARDS 0 2
+wys [1]10 0 0
+dost 10
+wys [2]2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 1 4
+wys [1]1
+dost 10
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 2 4
+wys [1]2
+dost 100
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 100
+sending CARDS 4 2
+wys [1]4
+dost 200
+wys [2]100 0 2
+dost 100
+wys [2]200
+dost 0
+winner 1 actBet 100
+sending CARDS 0 1
+wys [1]100 0 0
+dost 10
+wys [2]1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 2 actBet 60
+sending CARDS 2 3
+wys [1]50 1 2
+dost 100
+wys [2]50 0 3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 2 actBet 220
+sending CARDS 2 2
+wys [1]120 3 2
+dost 100
+wys [2]120 2 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 3 1
+wys [1]120 2 3
+dost 100
+wys [2]120 2 1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 1 1
+wys [1]10 0 1
+dost 10
+wys [2]1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 1 4
+wys [1]50 1 1
+dost 10
+wys [2]50 1 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 0 1
+wys [1]0
+dost 10
+wys [2]10 0 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 2 actBet 60
+sending CARDS 0 2
+wys [1]50 1 0
+dost 10
+wys [2]50 0 2
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 0 4
+wys [1]0
+dost 10
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 4 2
+wys [1]4
+dost 200
+wys [2]10 0 2
+dost 100
+wys [2]200
+dost 0
+winner 1 actBet 100
+sending CARDS 0 1
+wys [1]100 0 0
+dost 10
+wys [2]1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 2 actBet 60
+sending CARDS 3 3
+wys [1]50 1 3
+dost 100
+wys [2]50 0 3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 3 2
+wys [1]120 3 3
+dost 100
+wys [2]120 3 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 1 actBet 220
+sending CARDS 2 2
+wys [1]120 2 2
+dost 100
+wys [2]120 3 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 1 1
+wys [1]120 2 1
+dost 10
+wys [2]120 2 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 0 actBet 60
+sending CARDS 4 2
+wys [1]50 1 4
+dost 200
+wys [2]50 1 2
+dost 100
+wys [2]200
+dost 0
+winner 1 actBet 100
+sending CARDS 4 2
+wys [1]100 0 4
+dost 200
+wys [2]2
+dost 100
+wys [2]200
+dost 0
+winner 1 actBet 100
+sending CARDS 2 1
+wys [1]100 0 2
+dost 100
+wys [2]1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 1 0
+wys [1]10 0 1
+dost 10
+wys [2]0
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 1 actBet 60
+sending CARDS 0 4
+wys [1]50 0 0
+dost 10
+wys [2]50 1 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 4 1
+wys [1]4
+dost 200
+wys [2]10 0 1
+dost 10
+wys [2]200
+dost 0
+winner 1 actBet 10
+sending CARDS 3 1
+wys [1]10 0 3
+dost 100
+wys [2]1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 4 0
+wys [1]10 0 4
+dost 200
+wys [2]0
+dost 10
+wys [2]200
+dost 0
+winner 1 actBet 10
+sending CARDS 3 0
+wys [1]10 0 3
+dost 100
+wys [2]0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 4 0
+wys [1]10 0 4
+dost 200
+wys [2]0
+dost 10
+wys [2]200
+dost 0
+winner 1 actBet 10
+sending CARDS 4 2
+wys [1]10 0 4
+dost 200
+wys [2]2
+dost 100
+wys [2]200
+dost 0
+winner 1 actBet 100
+sending CARDS 3 2
+wys [1]100 0 3
+dost 100
+wys [2]2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 1 actBet 220
+sending CARDS 0 1
+wys [1]120 2 0
+dost 10
+wys [2]120 3 1
+dost 10
+wys [1]10
+dost 50
+wys [2]10
+dost 50
+second BET
+winner 2 actBet 60
+sending CARDS 1 4
+wys [1]50 1 1
+dost 10
+wys [2]50 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 4 0
+wys [1]4
+dost 200
+wys [2]10 0 0
+dost 10
+wys [2]200
+dost 0
+winner 1 actBet 10
+sending CARDS 2 3
+wys [1]10 0 2
+dost 100
+wys [2]3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 2 actBet 220
+sending CARDS 2 2
+wys [1]120 3 2
+dost 100
+wys [2]120 2 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 2 1
+wys [1]120 2 2
+dost 100
+wys [2]120 2 1
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 3 3
+wys [1]10 0 3
+dost 100
+wys [2]3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 3 3
+wys [1]120 3 3
+dost 100
+wys [2]120 3 3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 3 4
+wys [1]120 3 3
+dost 100
+wys [2]120 3 4
+dost 200
+wys [1]200
+dost 120
+wys [2]100 1
+dost 200
+second BET
+wys [1]200
+dost 1
+winner 2 actBet 400
+sending CARDS 2 3
+wys [1]4 2
+dost 100
+wys [2]120 1 3 3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 2 actBet 220
+sending CARDS 1 3
+wys [1]120 3 1
+dost 10
+wys [2]120 2 3
+dost 100
+wys [1]100
+dost 0
+winner 2 actBet 10
+sending CARDS 4 1
+wys [1]4
+dost 200
+wys [2]10 0 1
+dost 10
+wys [2]200
+dost 0
+winner 1 actBet 10
+sending CARDS 3 3
+wys [1]10 0 3
+dost 100
+wys [2]3
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 1 4
+wys [1]120 3 1
+dost 10
+wys [2]120 3 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 0 4
+wys [1]0
+dost 10
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 2 2
+wys [1]2
+dost 100
+wys [2]10 0 2
+dost 100
+wys [1]100
+dost 120
+wys [2]100
+dost 120
+second BET
+winner 0 actBet 220
+sending CARDS 3 0
+wys [1]120 2 3
+dost 100
+wys [2]120 2 0
+dost 10
+wys [2]100
+dost 0
+winner 1 actBet 10
+sending CARDS 1 4
+wys [1]10 0 1
+dost 10
+wys [2]4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 0 4
+wys [1]0
+dost 10
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 0
+winner 2 actBet 10
+sending CARDS 4 4
+wys [1]4
+dost 200
+wys [2]10 0 4
+dost 200
+wys [1]200
+dost 200
+wys [2]200
+dost 200
+second BET
+winner 0 actBet 400
+sum of cards 391 412
+scores 5380 5900
+
+exit status: 10 instead of 0
+results: {0: 0, 1: 2}
+FAIL

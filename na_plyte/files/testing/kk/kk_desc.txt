@@ -1,0 +1,12 @@
+To jest typowa gra w kolko i krzyzyk.
+
+----- KOMUNIKACJA Z SEDZIA ------
+W czasie gry bot moze dostac nastepujace komunikaty:
+
+START <<< - oznacza to, ze sedzia czeka na pierwszy ruch bota (pierwszy ruch w grze).
+    Nalezy na niego odpowiedziec komunikatem MOVE X Y <<<
+
+MOVE X Y <<< - oznacza to, ze przeciwik wykonal ruch X Y. Nalezy na niego odpowiedziec
+    komunikatem MOVE X Y <<<
+
+END <<< - koniec gry.

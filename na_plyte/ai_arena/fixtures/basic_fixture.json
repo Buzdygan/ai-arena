@@ -1,0 +1,2019 @@
+[
+    {
+        "pk": 22,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_logentry",
+            "name": "Can add log entry",
+            "content_type": 8
+        }
+    },
+    {
+        "pk": 23,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_logentry",
+            "name": "Can change log entry",
+            "content_type": 8
+        }
+    },
+    {
+        "pk": 24,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_logentry",
+            "name": "Can delete log entry",
+            "content_type": 8
+        }
+    },
+    {
+        "pk": 4,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_group",
+            "name": "Can add group",
+            "content_type": 2
+        }
+    },
+    {
+        "pk": 5,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_group",
+            "name": "Can change group",
+            "content_type": 2
+        }
+    },
+    {
+        "pk": 6,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_group",
+            "name": "Can delete group",
+            "content_type": 2
+        }
+    },
+    {
+        "pk": 10,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_message",
+            "name": "Can add message",
+            "content_type": 4
+        }
+    },
+    {
+        "pk": 11,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_message",
+            "name": "Can change message",
+            "content_type": 4
+        }
+    },
+    {
+        "pk": 12,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_message",
+            "name": "Can delete message",
+            "content_type": 4
+        }
+    },
+    {
+        "pk": 1,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_permission",
+            "name": "Can add permission",
+            "content_type": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_permission",
+            "name": "Can change permission",
+            "content_type": 1
+        }
+    },
+    {
+        "pk": 3,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_permission",
+            "name": "Can delete permission",
+            "content_type": 1
+        }
+    },
+    {
+        "pk": 7,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_user",
+            "name": "Can add user",
+            "content_type": 3
+        }
+    },
+    {
+        "pk": 8,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_user",
+            "name": "Can change user",
+            "content_type": 3
+        }
+    },
+    {
+        "pk": 9,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_user",
+            "name": "Can delete user",
+            "content_type": 3
+        }
+    },
+    {
+        "pk": 13,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_contenttype",
+            "name": "Can add content type",
+            "content_type": 5
+        }
+    },
+    {
+        "pk": 14,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_contenttype",
+            "name": "Can change content type",
+            "content_type": 5
+        }
+    },
+    {
+        "pk": 15,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_contenttype",
+            "name": "Can delete content type",
+            "content_type": 5
+        }
+    },
+    {
+        "pk": 28,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_bot",
+            "name": "Can add bot",
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 29,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_bot",
+            "name": "Can change bot",
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 30,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_bot",
+            "name": "Can delete bot",
+            "content_type": 10
+        }
+    },
+    {
+        "pk": 34,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_matchbotresult",
+            "name": "Can add match bot result",
+            "content_type": 12
+        }
+    },
+    {
+        "pk": 35,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_matchbotresult",
+            "name": "Can change match bot result",
+            "content_type": 12
+        }
+    },
+    {
+        "pk": 36,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_matchbotresult",
+            "name": "Can delete match bot result",
+            "content_type": 12
+        }
+    },
+    {
+        "pk": 37,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_match",
+            "name": "Can add match",
+            "content_type": 13
+        }
+    },
+    {
+        "pk": 38,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_match",
+            "name": "Can change match",
+            "content_type": 13
+        }
+    },
+    {
+        "pk": 39,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_match",
+            "name": "Can delete match",
+            "content_type": 13
+        }
+    },
+    {
+        "pk": 25,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_game",
+            "name": "Can add game",
+            "content_type": 9
+        }
+    },
+    {
+        "pk": 26,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_game",
+            "name": "Can change game",
+            "content_type": 9
+        }
+    },
+    {
+        "pk": 27,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_game",
+            "name": "Can delete game",
+            "content_type": 9
+        }
+    },
+    {
+        "pk": 43,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_registrationprofile",
+            "name": "Can add registration profile",
+            "content_type": 15
+        }
+    },
+    {
+        "pk": 44,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_registrationprofile",
+            "name": "Can change registration profile",
+            "content_type": 15
+        }
+    },
+    {
+        "pk": 45,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_registrationprofile",
+            "name": "Can delete registration profile",
+            "content_type": 15
+        }
+    },
+    {
+        "pk": 40,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_botcontestranking",
+            "name": "Can add bot contest ranking",
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 41,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_botcontestranking",
+            "name": "Can change bot contest ranking",
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 42,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_botcontestranking",
+            "name": "Can delete bot contest ranking",
+            "content_type": 14
+        }
+    },
+    {
+        "pk": 31,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_contest",
+            "name": "Can add contest",
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 32,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_contest",
+            "name": "Can change contest",
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 33,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_contest",
+            "name": "Can delete contest",
+            "content_type": 11
+        }
+    },
+    {
+        "pk": 49,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_botranking",
+            "name": "Can add bot ranking",
+            "content_type": 17
+        }
+    },
+    {
+        "pk": 50,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_botranking",
+            "name": "Can change bot ranking",
+            "content_type": 17
+        }
+    },
+    {
+        "pk": 51,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_botranking",
+            "name": "Can delete bot ranking",
+            "content_type": 17
+        }
+    },
+    {
+        "pk": 46,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_ranking",
+            "name": "Can add ranking",
+            "content_type": 16
+        }
+    },
+    {
+        "pk": 47,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_ranking",
+            "name": "Can change ranking",
+            "content_type": 16
+        }
+    },
+    {
+        "pk": 48,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_ranking",
+            "name": "Can delete ranking",
+            "content_type": 16
+        }
+    },
+    {
+        "pk": 52,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_registrationprofile",
+            "name": "Can add registration profile",
+            "content_type": 18
+        }
+    },
+    {
+        "pk": 53,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_registrationprofile",
+            "name": "Can change registration profile",
+            "content_type": 18
+        }
+    },
+    {
+        "pk": 54,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_registrationprofile",
+            "name": "Can delete registration profile",
+            "content_type": 18
+        }
+    },
+    {
+        "pk": 16,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_session",
+            "name": "Can add session",
+            "content_type": 6
+        }
+    },
+    {
+        "pk": 17,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_session",
+            "name": "Can change session",
+            "content_type": 6
+        }
+    },
+    {
+        "pk": 18,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_session",
+            "name": "Can delete session",
+            "content_type": 6
+        }
+    },
+    {
+        "pk": 19,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "add_site",
+            "name": "Can add site",
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 20,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "change_site",
+            "name": "Can change site",
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 21,
+        "model": "auth.permission",
+        "fields": {
+            "codename": "delete_site",
+            "name": "Can delete site",
+            "content_type": 7
+        }
+    },
+    {
+        "pk": 1,
+        "model": "auth.user",
+        "fields": {
+            "username": "jakubtlalka",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2011-12-14 15:32:00",
+            "groups": [],
+            "user_permissions": [],
+            "password": "sha1$52306$f419ba3242ac60e229c3378a6674a390024d8997",
+            "email": "mamba57@gmail.com",
+            "date_joined": "2011-12-14 15:32:00"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "auth.user",
+        "fields": {
+            "username": "test_user",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2012-02-25 11:28:48",
+            "groups": [],
+            "user_permissions": [],
+            "password": "sha1$e2017$826c54c374738130c3dd95cc759f8b5915643623",
+            "email": "test_user@mailinator.com",
+            "date_joined": "2011-12-17 04:31:40"
+        }
+    },
+    {
+        "pk": "28caa24cc26676f3db1662db6d058f6b",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2012-01-22 08:19:53",
+            "session_data": "M2FkY2Q1NDNlYTA3MzFjMTk3YmRmZGZkMTQ2MTYxMDI0ZmY1MGM5MzqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAnUu\n"
+        }
+    },
+    {
+        "pk": "c8a37c3f48f8d3cc7770d98a500ecc3f",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2012-01-31 14:02:40",
+            "session_data": "M2FkY2Q1NDNlYTA3MzFjMTk3YmRmZGZkMTQ2MTYxMDI0ZmY1MGM5MzqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAnUu\n"
+        }
+    },
+    {
+        "pk": "415c1b47868d5dfac5d7bbe9a6cc209e",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2012-02-24 12:27:57",
+            "session_data": "M2FkY2Q1NDNlYTA3MzFjMTk3YmRmZGZkMTQ2MTYxMDI0ZmY1MGM5MzqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAnUu\n"
+        }
+    },
+    {
+        "pk": "e1e62859e97195973fbc820402ae3a34",
+        "model": "sessions.session",
+        "fields": {
+            "expire_date": "2012-03-10 11:28:48",
+            "session_data": "M2FkY2Q1NDNlYTA3MzFjMTk3YmRmZGZkMTQ2MTYxMDI0ZmY1MGM5MzqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAnUu\n"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "sites.site",
+        "fields": {
+            "domain": "example.com",
+            "name": "example.com"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "contests.game",
+        "fields": {
+            "rules_file": "game_rules/test_game_kk/kk_desc.txt",
+            "judge_source_file": "game_judges_sources/test_game_kk/kk_judge.cpp",
+            "name": "test_game_kk",
+            "judge_lang": "CPP",
+            "judge_bin_file": "game_judges_binaries/test_game_kk/test_game_kk",
+            "min_players": 2,
+            "max_players": 2
+        }
+    },
+    {
+        "pk": 9,
+        "model": "contests.bot",
+        "fields": {
+            "name": "test_bot_kk1",
+            "bot_lang": "CPP",
+            "bot_bin_file": "game_bots_binaries/test_game_kk/test_user/test_bot_kk1/test_bot_kk1",
+            "bot_source_file": "game_bots_sources/test_game_kk/test_user/test_bot_kk1/kk_bot.cpp",
+            "game": 13,
+            "owner": 2
+        }
+    },
+    {
+        "pk": 10,
+        "model": "contests.bot",
+        "fields": {
+            "name": "test_bot_kk2",
+            "bot_lang": "CPP",
+            "bot_bin_file": "game_bots_binaries/test_game_kk/test_user/test_bot_kk2/test_bot_kk2",
+            "bot_source_file": "game_bots_sources/test_game_kk/test_user/test_bot_kk2/kk_bot.cpp",
+            "game": 13,
+            "owner": 2
+        }
+    },
+    {
+        "pk": 11,
+        "model": "contests.bot",
+        "fields": {
+            "name": "lepszy",
+            "bot_lang": "CPP",
+            "bot_bin_file": "game_bots_binaries/test_game_kk/test_user/lepszy/lepszy",
+            "bot_source_file": "game_bots_sources/test_game_kk/test_user/lepszy/kk_bot2.cpp",
+            "game": 13,
+            "owner": 2
+        }
+    },
+    {
+        "pk": 12,
+        "model": "contests.bot",
+        "fields": {
+            "name": "dummy",
+            "bot_lang": "CPP",
+            "bot_bin_file": "game_bots_binaries/test_game_kk/test_user/dummy/dummy",
+            "bot_source_file": "game_bots_sources/test_game_kk/test_user/dummy/dummy_bot.cpp",
+            "game": 13,
+            "owner": 2
+        }
+    },
+    {
+        "pk": 24,
+        "model": "contests.ranking",
+        "fields": {
+            "date_updated": null,
+            "type": 1
+        }
+    },
+    {
+        "pk": 25,
+        "model": "contests.ranking",
+        "fields": {
+            "date_updated": null,
+            "type": 1
+        }
+    },
+    {
+        "pk": 98,
+        "model": "contests.botranking",
+        "fields": {
+            "ranking": 25,
+            "matches_played": 3,
+            "bot": 9,
+            "overall_score": 1.00,
+            "position": 1
+        }
+    },
+    {
+        "pk": 99,
+        "model": "contests.botranking",
+        "fields": {
+            "ranking": 25,
+            "matches_played": 3,
+            "bot": 10,
+            "overall_score": 1.00,
+            "position": 1
+        }
+    },
+    {
+        "pk": 100,
+        "model": "contests.botranking",
+        "fields": {
+            "ranking": 25,
+            "matches_played": 3,
+            "bot": 11,
+            "overall_score": 1.00,
+            "position": 1
+        }
+    },
+    {
+        "pk": 101,
+        "model": "contests.botranking",
+        "fields": {
+            "ranking": 25,
+            "matches_played": 3,
+            "bot": 12,
+            "overall_score": 0.00,
+            "position": 2
+        }
+    },
+    {
+        "pk": 94,
+        "model": "contests.botranking",
+        "fields": {
+            "ranking": 24,
+            "matches_played": 3,
+            "bot": 9,
+            "overall_score": 1.00,
+            "position": 1
+        }
+    },
+    {
+        "pk": 95,
+        "model": "contests.botranking",
+        "fields": {
+            "ranking": 24,
+            "matches_played": 3,
+            "bot": 10,
+            "overall_score": 1.00,
+            "position": 1
+        }
+    },
+    {
+        "pk": 96,
+        "model": "contests.botranking",
+        "fields": {
+            "ranking": 24,
+            "matches_played": 3,
+            "bot": 11,
+            "overall_score": 1.00,
+            "position": 1
+        }
+    },
+    {
+        "pk": 97,
+        "model": "contests.botranking",
+        "fields": {
+            "ranking": 24,
+            "matches_played": 3,
+            "bot": 12,
+            "overall_score": 0.00,
+            "position": 2
+        }
+    },
+    {
+        "pk": 3,
+        "model": "contests.contest",
+        "fields": {
+            "ranking": null,
+            "begin_date": null,
+            "name": "test_contest",
+            "end_date": null,
+            "contestants": [
+                9,
+                10,
+                11,
+                12
+            ],
+            "game": 13,
+            "regulations_file": ""
+        }
+    },
+    {
+        "pk": 7,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 8,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 9,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 10,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 11,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 12,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 13,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 14,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 15,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 16,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 17,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 18,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 19,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 20,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 21,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 22,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 23,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 24,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 25,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 26,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 27,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 28,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 29,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 30,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 31,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 32,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 33,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 34,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 35,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 36,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 37,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 38,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 39,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 40,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 41,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 42,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 43,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 44,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 45,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 46,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 47,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 48,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 49,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 50,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 51,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 52,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 53,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 54,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 55,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 56,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 57,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 58,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 59,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 60,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 61,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 62,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 63,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 64,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 65,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 66,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 67,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 68,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 69,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 70,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 71,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 72,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 73,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 74,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 75,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 76,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 77,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 78,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 79,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 80,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 81,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 82,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 83,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 84,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 85,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 86,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 87,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 88,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 89,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 90,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 91,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 92,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 93,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 94,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 95,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 96,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 97,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 98,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 99,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 100,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 101,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 102,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 103,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 104,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 105,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 106,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 107,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 108,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 109,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 110,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 111,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 112,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 113,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 114,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 115,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 9
+        }
+    },
+    {
+        "pk": 116,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 117,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 118,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 119,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 10
+        }
+    },
+    {
+        "pk": 120,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 121,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 1.00,
+            "bot": 11
+        }
+    },
+    {
+        "pk": 122,
+        "model": "contests.matchbotresult",
+        "fields": {
+            "time_used": 2,
+            "memory_used": 32,
+            "score": 0.00,
+            "bot": 12
+        }
+    },
+    {
+        "pk": 50,
+        "model": "contests.match",
+        "fields": {
+            "time_limit": 2,
+            "contest": null,
+            "players_results": [
+                97,
+                98
+            ],
+            "memory_limit": 32,
+            "game": 13,
+            "ranked_match": false,
+            "match_log": ""
+        }
+    },
+    {
+        "pk": 57,
+        "model": "contests.match",
+        "fields": {
+            "time_limit": 2,
+            "contest": 3,
+            "players_results": [
+                111,
+                112
+            ],
+            "memory_limit": 32,
+            "game": 13,
+            "ranked_match": true,
+            "match_log": ""
+        }
+    },
+    {
+        "pk": 58,
+        "model": "contests.match",
+        "fields": {
+            "time_limit": 2,
+            "contest": 3,
+            "players_results": [
+                113,
+                114
+            ],
+            "memory_limit": 32,
+            "game": 13,
+            "ranked_match": true,
+            "match_log": ""
+        }
+    },
+    {
+        "pk": 59,
+        "model": "contests.match",
+        "fields": {
+            "time_limit": 2,
+            "contest": 3,
+            "players_results": [
+                115,
+                116
+            ],
+            "memory_limit": 32,
+            "game": 13,
+            "ranked_match": true,
+            "match_log": ""
+        }
+    },
+    {
+        "pk": 60,
+        "model": "contests.match",
+        "fields": {
+            "time_limit": 2,
+            "contest": 3,
+            "players_results": [
+                117,
+                118
+            ],
+            "memory_limit": 32,
+            "game": 13,
+            "ranked_match": true,
+            "match_log": ""
+        }
+    },
+    {
+        "pk": 61,
+        "model": "contests.match",
+        "fields": {
+            "time_limit": 2,
+            "contest": 3,
+            "players_results": [
+                119,
+                120
+            ],
+            "memory_limit": 32,
+            "game": 13,
+            "ranked_match": true,
+            "match_log": ""
+        }
+    },
+    {
+        "pk": 62,
+        "model": "contests.match",
+        "fields": {
+            "time_limit": 2,
+            "contest": 3,
+            "players_results": [
+                121,
+                122
+            ],
+            "memory_limit": 32,
+            "game": 13,
+            "ranked_match": true,
+            "match_log": ""
+        }
+    }
+]

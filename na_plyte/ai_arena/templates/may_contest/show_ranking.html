@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel='stylesheet' href='{{ MEDIA_URL }}/testing.css' />
+{% endblock %}
+
+{% block content %}
+    {% if ladder%}
+    <p>
+        <table>
+            <tr>
+                <td> Position </td>
+                <td> Bot name </td> 
+                <td> Owner </td>
+                <td> Matches played </td>
+                <td> Score </td>
+            </tr>
+            {% for rank in ladder %}
+            <tr>
+                <td> {{ rank.position }} </td>
+                <td> {{ rank.bot.name }} </td>
+                <td> {{ rank.bot.owner.username }} </td>
+                <td> {{ rank.matches_played }} </td>
+                <td> {{ rank.overall_score|floatformat:"-3" }} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </p>
+    {% endif %}
+{% endblock %}

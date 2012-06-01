@@ -1,0 +1,3 @@
+# Django settings for ai_arena project.
+
+from settings_defaults import *

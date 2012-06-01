@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p> Match Results </p>
+<ul>
+    {% for match in matches %}
+    <li> <a href="{% url show_match_result match.id %}"> {{ match.game.name }} </a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

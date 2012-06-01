@@ -1,0 +1,30 @@
+{% extends "send/base_send.html" %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+<h1> Results </h1>
+
+{% if lang1 %}
+<h2> Language1: {{ lang1 }} </h2>
+{% endif %}
+
+{% if prog1 %}
+<h3> Prog1: {{ prog1 }} </h3>
+{% endif %}
+
+{% if lang2 %}
+<h2> Language2: {{ lang2 }} </h2>
+{% endif %}
+
+{% if prog2 %}
+<h3> Prog2: {{ prog2 }} </h3>
+{% endif %}
+
+{% if i %}
+{{ i }}
+{% endif %}
+
+{% endblock %}
