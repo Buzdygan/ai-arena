@@ -1,0 +1,190 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>nadzorca &mdash; Ai Arena 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Ai Arena 0.1 documentation" href="../index.html" />
+    <link rel="next" title="models" href="model.html" />
+    <link rel="prev" title="Welcome to Ai Arena’s documentation!" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model.html" title="models"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Welcome to Ai Arena’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Ai Arena 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-ai_arena.nadzorca.nadzorca">
+<span id="nadzorca"></span><h1>nadzorca<a class="headerlink" href="#module-ai_arena.nadzorca.nadzorca" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="ai_arena.nadzorca.nadzorca.get_stats">
+<tt class="descclassname">ai_arena.nadzorca.nadzorca.</tt><tt class="descname">get_stats</tt><big>(</big><em>pid</em><big>)</big><a class="headerlink" href="#ai_arena.nadzorca.nadzorca.get_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads informaton about time and memory consumption of the process 
+with given pid from the proc folder.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.nadzorca.nadzorca.limiter">
+<tt class="descclassname">ai_arena.nadzorca.nadzorca.</tt><tt class="descname">limiter</tt><big>(</big><em>pids_list</em>, <em>stop_indicator</em>, <em>proc_info</em>, <em>max_time</em>, <em>max_memory</em>, <em>time_limit</em>, <em>memory_limit</em><big>)</big><a class="headerlink" href="#ai_arena.nadzorca.nadzorca.limiter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function executed in separate process, that measures memory and time
+consumption of processes with pids in pids_list.
+Reads information from proc folder about all relevant processes, every 0.1 seconds.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.nadzorca.nadzorca.log">
+<tt class="descclassname">ai_arena.nadzorca.nadzorca.</tt><tt class="descname">log</tt><big>(</big><em>log_list</em>, <em>log_message</em><big>)</big><a class="headerlink" href="#ai_arena.nadzorca.nadzorca.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>A convenience function for readability purposes</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.nadzorca.nadzorca.parse_message">
+<tt class="descclassname">ai_arena.nadzorca.nadzorca.</tt><tt class="descname">parse_message</tt><big>(</big><em>to_send</em><big>)</big><a class="headerlink" href="#ai_arena.nadzorca.nadzorca.parse_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function parses a message from judge returning list of players as a first of pair
+and an actual message as a second of pair</p>
+<p>Every message coming here must contain a list of players in brackets like these: &#8216;[&#8216; and &#8216;]&#8217;.
+It can contain multiple of any of them, in this case the first pair is treated as a list of players.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.nadzorca.nadzorca.play">
+<tt class="descclassname">ai_arena.nadzorca.nadzorca.</tt><tt class="descname">play</tt><big>(</big><em>judge_file</em>, <em>judge_lang</em>, <em>players</em>, <em>time_limit</em>, <em>memory_limit</em><big>)</big><a class="headerlink" href="#ai_arena.nadzorca.nadzorca.play" title="Permalink to this definition">¶</a></dt>
+<dd><p>judge_file - file containing judge program</p>
+<p>players - list of bots binaries</p>
+<p>memory_limit (in MB) - maximum memory for one bot</p>
+<p>time_limit (in sec) - maximum time limit for one bot</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.nadzorca.nadzorca.read_logs">
+<tt class="descclassname">ai_arena.nadzorca.nadzorca.</tt><tt class="descname">read_logs</tt><big>(</big><em>judge_process</em>, <em>bots_process_list</em>, <em>log_map</em>, <em>run_thread</em><big>)</big><a class="headerlink" href="#ai_arena.nadzorca.nadzorca.read_logs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that runs in a separate thread
+It polls stderrs of judge and bots, reads them and remembers the outputs
+in a map that is shared with the main thread (log_map argument)
+Later stderrs are returned as a form of logs</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.nadzorca.nadzorca.read_whole_pipe">
+<tt class="descclassname">ai_arena.nadzorca.nadzorca.</tt><tt class="descname">read_whole_pipe</tt><big>(</big><em>pipe</em><big>)</big><a class="headerlink" href="#ai_arena.nadzorca.nadzorca.read_whole_pipe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the pipe untill it&#8217;s empty
+Used for reading stderrs</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.nadzorca.nadzorca.readout">
+<tt class="descclassname">ai_arena.nadzorca.nadzorca.</tt><tt class="descname">readout</tt><big>(</big><em>pipe</em>, <em>timeout</em><big>)</big><a class="headerlink" href="#ai_arena.nadzorca.nadzorca.readout" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function reads communicates.
+The assumption is that every communicate ends with char &#8216;n&#8217;
+In addition every &#8216;n&#8217; is considered to be end of a communicate</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.nadzorca.nadzorca.set_limits">
+<tt class="descclassname">ai_arena.nadzorca.nadzorca.</tt><tt class="descname">set_limits</tt><big>(</big><em>time_limit</em>, <em>memory_limit</em><big>)</big><a class="headerlink" href="#ai_arena.nadzorca.nadzorca.set_limits" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function that is run in forked processes before exec
+(see subprocess.Popen constructor preexec_fn argument)
+Previously used for setting limits of time and memory consumption for the process.
+Currently not in use.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Welcome to Ai Arena&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="model.html"
+                        title="next chapter">models</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/modules/nadzorca.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="model.html" title="models"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Welcome to Ai Arena’s documentation!"
+             >previous</a> |</li>
+        <li><a href="../index.html">Ai Arena 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, ZPP Project Team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

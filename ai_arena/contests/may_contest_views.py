@@ -14,15 +14,12 @@ from ai_arena.contests.bot_views import create_bot_from_request, send_bot_withou
 from ai_arena.contests.game_launcher import launch_single_match
 from ai_arena.contests.may_contest_helper_functions import *
 
-def downloads(request):
-    """
-
-    """
-    return render_to_response('index.html',
-            context_instance=RequestContext(request))
-
 @login_required
 def my_results(request):
+    """
+        Selects from database results of all matches against a User's Bot.\n
+        Contains both ranked and test matches.
+    """
     matches = []#Match.objects.all() #[]
     for match in Match.objects.all():
         for mbr in match.players_results.all():
@@ -46,6 +43,9 @@ def my_results(request):
 
 @login_required
 def match_details(request, match_id):
+    """
+        Displays details of a Match object with given match_id.
+    """
     match = Match.objects.get(id=match_id)
     return render_to_response('may_contest/match_details.html',
             {
@@ -58,6 +58,9 @@ def match_details(request, match_id):
 
 
 def show_ladder(request):
+    """
+        Generates, refreshes and displays current ranking of may Contest.
+    """
     ranking = generate_ranking() 
     if ranking:
         ladder = sorted(ranking.botranking_set.all(), key=lambda botranking: botranking.position)
@@ -87,6 +90,12 @@ def may_contest_send_bot(request):
 
 @login_required
 def testing(request):
+    """
+        View responsible for displaying form to upload Bots to test.\n
+        Using provided form User can upload one or two Bot's source codes.
+        In case of uploading two source codes system performs a Match between these two Bots. If User uploads only one source code, then 
+        system performs Match against default Bot.
+    """
     if request.method == 'POST':
         form = MayContestSendBotForTest(request.POST, request.FILES)
         if not form.is_valid():

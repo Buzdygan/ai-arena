@@ -1,0 +1,160 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>may_contest_views &mdash; Ai Arena 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Ai Arena 0.1 documentation" href="../index.html" />
+    <link rel="next" title="may_contest_helper_functions" href="may_contest_helper_functions.html" />
+    <link rel="prev" title="comment_views" href="comment_views.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="may_contest_helper_functions.html" title="may_contest_helper_functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="comment_views.html" title="comment_views"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Ai Arena 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-ai_arena.contests.may_contest_views">
+<span id="may-contest-views"></span><h1>may_contest_views<a class="headerlink" href="#module-ai_arena.contests.may_contest_views" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_views.match_details">
+<tt class="descclassname">ai_arena.contests.may_contest_views.</tt><tt class="descname">match_details</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_views.match_details" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays details of a Match object with given match_id.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_views.may_contest_send_bot">
+<tt class="descclassname">ai_arena.contests.may_contest_views.</tt><tt class="descname">may_contest_send_bot</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_views.may_contest_send_bot" title="Permalink to this definition">¶</a></dt>
+<dd><p>This view is used when user wants to send bot from game details view.
+It is different from simple send bot view, because game is known, so there is
+no need to pick it form list.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_views.my_results">
+<tt class="descclassname">ai_arena.contests.may_contest_views.</tt><tt class="descname">my_results</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_views.my_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selects from database results of all matches against a User&#8217;s Bot.</p>
+<p>Contains both ranked and test matches.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_views.online_bot_creation">
+<tt class="descclassname">ai_arena.contests.may_contest_views.</tt><tt class="descname">online_bot_creation</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_views.online_bot_creation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Page where everyone can prepare bot online and submit it to contest.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_views.show_ladder">
+<tt class="descclassname">ai_arena.contests.may_contest_views.</tt><tt class="descname">show_ladder</tt><big>(</big><em>request</em><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_views.show_ladder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates, refreshes and displays current ranking of may Contest.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="ai_arena.contests.may_contest_views.testing">
+<tt class="descclassname">ai_arena.contests.may_contest_views.</tt><tt class="descname">testing</tt><big>(</big><em>request</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#ai_arena.contests.may_contest_views.testing" title="Permalink to this definition">¶</a></dt>
+<dd><p>View responsible for displaying form to upload Bots to test.</p>
+<p>Using provided form User can upload one or two Bot&#8217;s source codes.
+In case of uploading two source codes system performs a Match between these two Bots. If User uploads only one source code, then 
+system performs Match against default Bot.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="comment_views.html"
+                        title="previous chapter">comment_views</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="may_contest_helper_functions.html"
+                        title="next chapter">may_contest_helper_functions</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/modules/may_contest_views.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="may_contest_helper_functions.html" title="may_contest_helper_functions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="comment_views.html" title="comment_views"
+             >previous</a> |</li>
+        <li><a href="../index.html">Ai Arena 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, ZPP Project Team.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

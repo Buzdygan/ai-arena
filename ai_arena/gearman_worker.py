@@ -21,6 +21,12 @@ class PickleWorker(gearman.GearmanWorker):
 gearman_worker = PickleWorker(['localhost'])
 
 def single_match(gearman_worker, gearman_job):
+    """
+        Gearman worker main function.\n
+        It's responsible for getting argunemts from Gearman server, parsing them and finally
+        calling Nadzorca's play function (which performs Match between given Bots).\n
+        Then it stores results in match object (received from Gearman server) and saves changes to database.
+    """
     print "lets play single match\n"
     arguments = gearman_job.data
     game = arguments['game']
