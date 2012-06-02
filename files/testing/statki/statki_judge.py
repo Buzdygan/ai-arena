@@ -2,11 +2,16 @@ import random
 from itertools import product
 from collections import defaultdict
 
+CLASHES_NUMBER = 40
+MAX_ROUNDS_NUMBER = 1000
 MAX_SHIP_SIZE = 5
 MIN_N = 12
 MAX_N = 20
 EMPTY = 0
 OUT = -1
+MISS = -1
+
+DRAW = 3
 
 neighbours = [(-1,0), (1,0), (0,-1), (0,1)]
 
@@ -64,16 +69,17 @@ class Board:
             if self.ships[number].hp == 0:
                 self.ships[number].alive = False
                 self.alive_number -= 1
-            return number
-        return -1
+            return number, int(not self.ships[number].alive)
+        return MISS 
 
 class Game:
 
     def __init__(self):
         self.n = random.choice(range(MIN_N, MAX_N+1))
         self.stypes = self.choose_ships()
-        self.boards = [Board(self.n, len(self.stypes)), Board(self.n, len(self.stypes))]
-        self.ships_nums = [0, 0]
+        self.boards = [None, Board(self.n, len(self.stypes)), Board(self.n, len(self.stypes))]
+        self.ships_nums = [0, 0, 0]
+        self.players_ships = [[], [], []]
 
     def choose_ships(self):
         stypes = list() 
@@ -86,24 +92,119 @@ class Game:
         self.ships_nums[player] += 1
         ship = Ship(self.ships_nums[player], stype, x, y)
         try:
+            self.players_ships[player].append(ship)
             self.boards[player].add_ship(ship)
+
         except Exception as e:
             raise Exception(e.args[0], player)
 
     def shoot(self, player, x, y):
         try:
-            return self.boards[player].shoot(x, y)
+            number, dead = self.boards[player].shoot(x, y)
+            if dead:
+                self.ships_nums[player] -= 1
+            if number == MISS:
+                return MISS, dead
+            else:
+                return self.players_ships[player][number-1].stype, dead
         except Exception as e:
             raise Exception(e.args[0], player)
 
-try:
+    def game_over(self):
+        if self.ships_nums[1] <= 0:
+            return 2
+        if self.ships_nums[2] <= 0:
+            return 1
+        return -1
+
+
+
+def opponent(x):
+    return 3 - x 
+
+################  TODO ###################
+# Wypełnić poniższe funkcje
+
+def send_int(player_number, a):
+    pass
+
+def send_int_list(player_number, intlist):
+    """
+        At beggining we should send number of ints to be sent
+    """
+    pass
+
+def read_ship_position(player):
+    """
+        Returns ship_type, x, y
+    """
+    return 0,0,0
+
+def read_shot(player):
+    """
+        Returns x, y of player's shot
+    """
+    return 0,0
+
+def end_game(scores):
+    """
+        scores[i] - number of clashes won by i
+        scores[2] - number of draws
+    """
+    pass
+
+def end_error(error_player, error_message):
+    """
+        error_player did error with error_message
+    """
+    pass
+
+
+################ Koniec TODO ###################
+
+
+def send_ships_types(player, stypes):
+    send_int_list(player, stypes)
+
+def read_ships_positions(player, game):
+    ships_number = len(game.stypes)
+    for i in range(ships_number):
+        stype, x, y = read_ship_position(player)
+        game.place_ship(player, stype, x, y)
+
+
+def play_one(start_player):
     game = Game()
-    send_int(0, game.n)
-    send_ships_types(0, game.stypes)
-    send_int(1, game.n)
-    send_ships_types(1, game.stypes)
-    read_ships_positions(0, game)
-    read_ships_positions(1, game)
-except Exception as e:
-    error_message = e.args[0]
-    error_player  = e.args[1]
+    for player in [1,2]:
+        send_int(player, game.n)
+        send_ships_types(player, game.stypes)
+        read_ships_positions(player, game)
+
+    player = start_player 
+    for i in range(MAX_ROUNDS_NUMBER):
+        # player 0 shoots
+        x, y = read_shot(player)
+        stype, dead = game.shoot(opponent(player), x, y)
+        send_int(player, stype)
+        send_int(player, dead)
+        game_res = game.game_over() 
+        if game_res != -1:
+            return game_res
+        player = opponent(player)
+    return DRAW
+
+
+def play():
+    try:
+        scores = [0, 0, 0, 0]
+        start_player = 1
+        for i in range(CLASHES_NUMBER):
+            scores[play_one(start_player)] += 1
+            start_player = opponent(start_player)
+        end_game(scores)
+    except Exception as e:
+        error_message = e.args[0]
+        error_player  = e.args[1]
+        end_error(error_player, error_message)
+
+
