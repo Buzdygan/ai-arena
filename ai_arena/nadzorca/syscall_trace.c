@@ -31,9 +31,9 @@ int main(int argc, char **argv)
         __NR_fork, __NR_clone, __NR_vfork, __NR_wait4,
         //open, directories fs/open.c  10
          __NR_creat, __NR_link, __NR_unlink, __NR_chdir, __NR_mknod, __NR_chmod, __NR_lchown, __NR_rmdir, __NR_rename, __NR_chroot,
-        //system misc 12
+        //system misc 11
         __NR_mount, __NR_umount2,__NR_setuid, __NR_getuid, __NR_ptrace, __NR_sysinfo, __NR_getuid, __NR_setuid, __NR_getppid,
-        __NR_reboot, __NR_readdir,
+        __NR_reboot,
         //pipes 6
         __NR_pipe, __NR_pipe2, __NR_dup, __NR_dup2, __NR_dup3, __NR_fcntl,
         //time 1
@@ -46,7 +46,15 @@ int main(int argc, char **argv)
         //limits 2
         __NR_setrlimit, __NR_getrlimit,
         };
-
+    int max_fsn = -1;
+    for (i=0; i<fsn; ++i)
+        if (forbidden_syscalls[i] > max_fsn)
+            max_fsn = forbidden_syscalls[i];
+    short illegal_syscall[max_fsn+1];
+    for (i=0; i<= max_fsn; ++i)
+        illegal_syscall[i] = 0;
+    for (i=0; i<fsn; ++i)
+        illegal_syscall[forbidden_syscalls[i]] = 1;
     child = fork();
     if (child == 0) {
         /* In child. */
@@ -79,15 +87,11 @@ int main(int argc, char **argv)
             /* Obtain syscall number from the child's process context. */
             syscall_nr = ptrace(PTRACE_PEEKUSER, child, bits_num * syscall_place, NULL);
         
-            for (i=0; i<forbidden_syscalls_number; ++i) {
-                if (syscall_nr == forbidden_syscalls[i]) {
-                    fprintf(stderr ,"Program tried to use forbiden system call %d. Terminating program.\n", syscall_nr);
-                    ptrace(PTRACE_KILL, child, NULL, NULL);
-                    i = forbidden_syscalls_number;
-                    naughty_child = 1;
-                }
+            if (illegal_syscall[syscall_nr]) {
+                fprintf(stderr ,"Program tried to use forbiden system call %d. Terminating program.\n", syscall_nr);
+                ptrace(PTRACE_KILL, child, NULL, NULL);
             }
-            if (!naughty_child) {
+            else {
                 ptrace(PTRACE_SYSCALL, child, NULL, NULL);
             }
         }
