@@ -6,6 +6,7 @@
 #include <sys/syscall.h>
 #include <sys/ptrace.h>
 #include <sys/time.h>
+#include <errno.h>
 
 #if __WORDSIZE == 64
 #define bits_num 8
@@ -17,7 +18,7 @@
 
 #endif
 
-#define fsn 35
+#define fsn 34
 
 int main(int argc, char **argv)
 {
@@ -31,9 +32,8 @@ int main(int argc, char **argv)
         __NR_fork, __NR_clone, __NR_vfork, __NR_wait4,
         //open, directories fs/open.c  10
          __NR_creat, __NR_link, __NR_unlink, __NR_chdir, __NR_mknod, __NR_chmod, __NR_lchown, __NR_rmdir, __NR_rename, __NR_chroot,
-        //system misc 11
-        __NR_mount, __NR_umount2,__NR_setuid, __NR_getuid, __NR_ptrace, __NR_sysinfo, __NR_getuid, __NR_setuid, __NR_getppid,
-        __NR_reboot,
+        //system misc 10
+        __NR_mount, __NR_umount2,__NR_setuid, __NR_getuid, __NR_ptrace, __NR_sysinfo, __NR_getuid, __NR_setuid, __NR_getppid, __NR_reboot,
         //pipes 6
         __NR_pipe, __NR_pipe2, __NR_dup, __NR_dup2, __NR_dup3, __NR_fcntl,
         //time 1
@@ -66,6 +66,8 @@ int main(int argc, char **argv)
         } else if (strcmp(argv[2], "C") == 0 || strcmp(argv[2], "CPP") == 0) {
             exec_status = execl(argv[1], argv[1], NULL);
         }
+        if (exec_status == -1)
+            fprintf(stderr, "Exec failure %d\n", errno);
     }
     else if (child < 0) {
         printf("%d\n", child);

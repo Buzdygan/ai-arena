@@ -130,3 +130,5 @@ def main():
            ml = map(int, (ms[1][1:-1]).split(','))
            simulate(ml)
            move()
+
+main()

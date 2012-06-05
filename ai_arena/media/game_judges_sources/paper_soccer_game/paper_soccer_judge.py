@@ -2,6 +2,10 @@
 
 import sys
 
+def log(mes):
+    sys.stderr.write(mes)
+    sys.stderr.flush()
+
 def send(mes):
     sys.stdout.write(mes)
     sys.stdout.flush()
@@ -56,6 +60,8 @@ def main():
 
     points_1 = 0;
     points_2 = 0;
+
+    log('log1\n')
 
     for game_num in range(4):
         
