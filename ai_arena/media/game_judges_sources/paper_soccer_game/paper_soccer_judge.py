@@ -62,8 +62,25 @@ def main():
         init()
         
         send("[0] INIT\n")
+        ok = recv_mes()
+        if (ok != "OK\n"):
+            points_2 += 1
+            continue
+        ok = recv_mes()
+        if (ok != "OK\n"):
+            points_1 += 1
+            continue
         send("[{0}] UP\n".format(1 + (game_num % 2)))
+        ok = recv_mes()
+        if (ok != "OK\n"):
+            points_1 += (game_num % 2)
+            points_2 += 1 - (game_num % 2)
+            continue
         send("[{0}] DOWN\n".format(2 - (game_num % 2)))
+        ok = recv_mes()
+        if (ok != "OK\n"):
+            points_1 += 1 - (game_num % 2)
+            points_2 += (game_num % 2)
         moving = 1 + (game_num % 2)
 
         while(True):
@@ -121,3 +138,5 @@ def main():
 
     send("[0] END\n")
     send("[{0}, {1}]\n".format(points_1, points_2))
+
+main()
