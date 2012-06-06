@@ -122,29 +122,68 @@ class Game:
 def opponent(x):
     return 3 - x 
 
+################ Communication ###################
+
+received_ints = [[], [], []]
+
+ints_to_send = [[], [], []]
+
+def to_send(player_number, i):
+    global ints_to_send
+    ints_to_send[player].append(i)
+
+def send(player_number):
+    global received_ints
+    global ints_to_send
+    mes = ""
+    for index, i in enumerate(ints_to_send[player_number]):
+        mes += str(i)
+        if index + 1 < len(ints_to_send[player_number]):
+            mes += " "
+    stdout.write("[" + str(player_mnumber) + "]" + mes + "\n")
+    response = map(int, raw_input().split())
+    received_ints[player_number].extend(response)
+
+def read(player_number):
+    global received_ints
+    return received_ints[player_number].pop(0)
+
+################ Communication END ###################
+
 ################  TODO ###################
-# Wypełnić poniższe funkcje
+# Wypelnic ponizsze funkcje
 
 def send_int(player_number, a):
-    pass
+    to_send(player_number, a)
+    send(player_number)
 
 def send_int_list(player_number, intlist):
     """
         At beggining we should send number of ints to be sent
     """
-    pass
+    to_send(player_number, len(intlist))
+    for i in intlist:
+        to_send(player_number, i)
+    send(player_number)
 
 def read_ship_position(player):
     """
         Returns ship_type, x, y
     """
-    return 0,0,0
+    ship_type = read(player)
+    x = read(player)
+    y = read(player)
+    return ship_type, x, y
+    #return 0,0,0
 
 def read_shot(player):
     """
         Returns x, y of player's shot
     """
-    return 0,0
+    x = read(player)
+    y = read(player)
+    return x, y
+    #return 0,0
 
 def end_game(scores):
     """
@@ -206,5 +245,7 @@ def play():
         error_message = e.args[0]
         error_player  = e.args[1]
         end_error(error_player, error_message)
+
+play()
 
 
