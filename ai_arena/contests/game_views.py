@@ -40,6 +40,7 @@ def create_new_game(request):
 
             game.rules_file = request.FILES['game_rules']
             game.judge_source_file = request.FILES['game_judge']
+            game.max_players = request.POST['max_players']
             game.judge_lang = request.POST['judge_language']
             game.save()
             game.moderators.add(request.user)

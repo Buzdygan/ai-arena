@@ -46,7 +46,7 @@ urlpatterns = patterns('',
     url(r'^send_bot_without_name/(?P<game_id>\d+)/$', 'contests.bot_views.send_bot_without_name'),
 
     url(r'^results/match_results_list/$', 'contests.match_views.match_results_list', name='match_results_list'),
-    url(r'^results/show_match_result/(?P<match_id>\d+)/$', 'contests.match_views.show_match_result', name='show_match_result'),
+    url(r'^results/show_match_result/(?P<match_id>\d+)/$', 'contests.match_views.match_details', name='show_match_result'),
     url(r'^launch_match/$', 'contests.match_views.launch_match', name='launch_match'),
     url(r'^launch_match/(?P<game_id>\d+)/(?P<number_of_bots>\d+)/$', 'contests.match_views.launch_match', name='launch_game_match'),
     url(r'^contests/contests_list/$', 'contests.contest_views.contests_list', name='contests_list'),

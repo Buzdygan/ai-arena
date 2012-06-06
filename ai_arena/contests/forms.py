@@ -15,7 +15,7 @@ class GameSelectForm(forms.Form):
     """
     games = Game.objects
     game_field = vModelChoiceField(queryset=games)
-    number_of_bots = forms.IntegerField(min_value=1, max_value=6)
+    number_of_bots = forms.IntegerField(min_value=settings.GAME_MIN_PLAYERS_DEFAULT, max_value=settings.GAME_MAX_PLAYERS_DEFAULT)
 
 class BotsSelectForm(forms.Form):
     """
@@ -38,6 +38,7 @@ class NewGameForm(forms.Form):
     game_name = forms.CharField(max_length=settings.NAME_LENGTH)
     game_rules = forms.FileField()
     game_judge = forms.FileField()
+    max_players = forms.IntegerField(min_value=settings.GAME_MIN_PLAYERS_DEFAULT, max_value=settings.GAME_MAX_PLAYERS_DEFAULT)
     judge_language = forms.ChoiceField(choices= settings.LANGUAGES)
 
 class SendBotForm(forms.Form):

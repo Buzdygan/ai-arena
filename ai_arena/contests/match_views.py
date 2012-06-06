@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from ai_arena.contests.forms import GameSelectForm, BotsSelectForm
+from django.contrib.auth.decorators import login_required
 from ai_arena.contests.models import Game, Match
 from ai_arena.contests.game_launcher import launch_single_match
 
@@ -42,6 +43,19 @@ def show_match_result(request, match_id):
             },
             context_instance=RequestContext(request),
         )
+
+@login_required
+def match_details(request, match_id):
+    """
+        Displays details of a Match object with given match_id.
+    """
+    match = Match.objects.get(id=match_id)
+    return render_to_response('results/match_details.html',
+            {
+                'match': match,
+                'user': request.user,
+            },
+            context_instance=RequestContext(request))
 
 def launch_match(request, game_id=None, number_of_bots=None):
     """
