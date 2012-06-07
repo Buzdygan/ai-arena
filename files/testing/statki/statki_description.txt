@@ -1,0 +1,79 @@
+Ships Game
+
+You probably know the traditional ships game, played on paper.
+This one is the same, but played by computers.
+
+At the beggining of each round, the board size and ships
+types are being picked randomly, then sent to the players.
+Afterwards players send decisions where to place their ships.
+Ships should not be placed on the adjacent fields.
+Finally players shoot at chosen fields to destroy opponent's
+ships. The one who shoots the last opponent's ship is the winner.
+
+
+Protocol:
+Game consists of 50 rounds. The bot knows that the round has come to an end,
+if it received negative number.
+-1 means it won the round
+-2 means it lost the round
+-3 means draw (too many rounds played) 
+
+At beggining of the round, player receives
+integer n signifying the size of board (n x n).
+Then there is integer m. m is the number of ships to place.
+Afterwards player reads m integers which are the types of
+ships given for this round (both players have the same types).
+After reading types of ships, player sends decision about his ship placement.
+
+The decision consists of 3m integers.
+For each ship player sends 3 integers: ship_type, positionx, positiony,
+ship_type - type of ship placed
+positionx, positiony - coordinates of the rightmost field taken by the ship.
+If there are many y coordinates with largest x, choose the lowest one.
+
+Next player sends two integers: x,y which are the coordinates of a shot.
+Then, player receives two integers shot_result, dead.
+shot_result - 0 if it was a miss, or type of ship shot.
+dead - 1 if the shot ship was destroyed, 0 otherwise.
+Shooting is prosecuted until the end of the round.
+
+Ship types:
+
+Those are the descriptions(drawings) of ships (o signifies a field)
+
+TYPE 1: oo
+
+TYPE 2: ooo
+
+TYPE 3: oooo
+
+TYPE 4: oooo
+
+TYPE 5: o
+        o
+
+TYPE 6: o
+        o
+        o
+
+TYPE 7: o
+        o
+        o
+        o
+
+TYPE 8: o
+        o
+        o
+        o
+        o
+
+
+TYPE 9:   o
+         ooo
+          o
+
+TYPE 10: o o
+         ooo
+
+TYPE 11: ooo
+         o o
