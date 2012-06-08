@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel='stylesheet' href='{{ MEDIA_URL }}/testing.css' />
+{% endblock %}
+
+{% block content %}
+<div class='content_container'>
+    <table id='match_details'>
+        <tr>
+            <td></td>
+            {% for player in match.players_results.all %}
+                <td id='players'>
+                    <h3>{{ player.bot.name }} </h3>
+                </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Scores:</td>
+            {% for player in match.players_results.all %}
+                <td>
+                    <span class='player_name'>{{ player.score|floatformat:"-3" }} </span>
+                </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Time(miliseconds):</td>
+            {% for player in match.players_results.all %}
+                <td>
+                    <span class='player_name'>{{ player.time_used }} </span>
+                </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Memory usage:</td>
+            {% for player in match.players_results.all %}
+                <td>
+                    <span class='player_name'>{{ player.memory_used }} </span>
+                </td>
+            {% endfor %}
+        </tr>
+        <tr>
+            <td>Status:</td>
+            {% for player in match.players_results.all %}
+                <td>
+                    <span class='player_name'>{{ player.string_status }} </span>
+                </td>
+            {% endfor %}
+        </tr>
+    </table>
+    <br>
+    {% for botres in match.players_results.all %}
+        {% if botres.bot.owner == user %}
+            Your bot <b> {{ botres.bot.name }} </b> logs: <br>
+            {{ botres.logs }}
+        {% endif %}
+    {% endfor %}    
+</div>
+{% endblock %}
