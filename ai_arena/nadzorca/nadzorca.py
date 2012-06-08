@@ -166,10 +166,10 @@ def limiter(pids_list, stop_indicator, proc_info, max_time, max_memory, time_lim
                 time_elapsed, memory = get_stats(bot_pid)
                 if time_elapsed > time_lmt:
                     os.kill(bot_pid, signal.SIGKILL)
-                    proc_info[proc_num] = exit_status.BOT_TLE
+                    proc_info[pid_num] = exit_status.BOT_TLE
                 elif memory > mem_lmt:
                     os.kill(bot_pid, signal.SIGKILL)
-                    proc_info[proc_num] = exit_status.BOT_MLE
+                    proc_info[pid_num] = exit_status.BOT_MLE
                 max_memory[pid_num] = max(max_memory[pid_num], memory)
                 max_time[pid_num] = max(max_time[pid_num], float(time_elapsed)/ticks_per_second)
         time.sleep(0.1)
