@@ -1,0 +1,279 @@
+Paper soccer
+
+Paper soccer (or as some call it paper hockey) is a popular game for which you
+need only a pice of paper and a pen. Or, in this case, a PC and a good AI :)
+
+The board is a 9x11 rectangle of dots, with extra rows of 3 dots in the middle
+on both ends, which are considered goals. Also, beetween the dots on the
+boundary, the filed lines are draw.
+
+      ._._.
+      |   |
+._._._. . ._._._.
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . * . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+._._._. . ._._._.
+      |   |
+      ._._.
+
+The star is the middle of the field and indicates the starting position of the
+ball. 
+
+The players move in turns. When his turn comes, the player can move the ball
+to one of the eight adjecent dots, and draw a line beetwen the old and new positions
+of the ball.
+
+Example of a first move:
+
+      ._._.                        ._._.
+      |   |                        |   |
+._._._. . ._._._.            ._._._. . ._._._.
+|               |            |               |
+. . . . . . . . .            . . . . . . . . .
+|               |            |               |
+. . . . . . . . .            . . . . . . . . .
+|               |            |               |
+. . . . . . . . .            . . . . . . . . .
+|               |            |               |
+. . . . . . . . .            . . . . . . . . .
+|               |            |               |
+. . . . * . . . .   ----->   . . . . . . . . .
+|               |            |        \      |
+. . . . . . . . .            . . . . . * . . .
+|               |            |               |
+. . . . . . . . .            . . . . . . . . .
+|               |            |               |
+. . . . . . . . .            . . . . . . . . .
+|               |            |               |
+. . . . . . . . .            . . . . . . . . .
+|               |            |               |
+._._._. . ._._._.            ._._._. . ._._._.
+      |   |                        |   |
+      ._._.                        ._._.
+
+
+You can cross the line that was drawn before, but you can't move on top of it.
+
+The extra rule is : if after your move the ball has landed on a line (doesn't
+matter if it's a field line or a line drawn by moving the ball), you have to
+make an extra move.
+
+Also, if you can't make a move, (because all the routes are blocked) you lose.
+The classic example of this is going into a corner - by doing this you
+automatically block the only way out of the corner.
+
+Then the other player makes his move. The game ends when the ball reaches one
+of the goals (the top or bottom row with only three dots) or one of the
+players gets blocked.
+
+Here is an example of few first moves of a possible game:
+
+      ._._.
+      |   |
+._._._. . ._._._.
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . * . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+._._._. . ._._._.
+      |   |
+      ._._.
+
+        |
+        |
+        v
+
+      ._._.
+      |   |
+._._._. . ._._._.
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . * . . .
+|        /      |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+._._._. . ._._._.
+      |   |
+      ._._.
+
+        |
+        |
+        v
+
+      ._._.
+      |   |
+._._._. . ._._._.
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|        /|     |
+. . . . . * . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+._._._. . ._._._.
+      |   |
+      ._._.
+
+        |
+        |
+        v
+      ._._.
+      |   |
+._._._. . ._._._.
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . * . . . . .
+|      \ /|     |
+. . . . ._. . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+. . . . . . . . .
+|               |
+._._._. . ._._._.
+      |   |
+      ._._.
+
+
+In the last move, the player "bounced off the line".
+
+You can read an alternatve game description, and even play the game against
+human opponents in real time on sites:
+
+www.playok.en/soccer
+www.kurnik.pl/pilka
+
+During a faceoff between two bots, foru matches total will be played (each bot
+will have the first move twice). Each bot will get the number of points equal
+to number of matches it won.
+
+Encoding of directions:
+
+7   0   1
+  \ | /
+6 - * - 2
+  / | \
+5   4   3
+
+A move can be considered a sequence of directions, of length at least 0.
+
+The communication protocol for the bots is the following:
+
+If the bot receives the communicate "INIT\n", it signals the start of a new
+match. The bot should send back a communicate "OK\n" and prepare itself.
+
+Right after the "INIT\n" communicate a direction communicate will be sent. It
+will be either "UP\n" or "DONW\n". If you receive an "UP\n" communicate, it
+means the goal you are shooting at is in the "0" direction. Conversly, if you
+receive the "DOWN\n" communicate, you should be shooting at the goal in the
+"4" direction.
+The bot should respond with another "OK\n" communicate.
+
+
+
+Now the fun part. The judge will prompt the bot with communicate "MOVE
+[LIST]\n" where LIST is a list of moves that was performed by the opponent in
+his last turn. If the list is empty, it means there was no previous move, and
+the bot is prompted for a first move in the match.
+The bot should reply with a list of directions in which he kicks the ball.
+
+Example of a communication from the example drawing:
+
+Player1:
+Recv  : "INIT\n"
+Send  : "OK\n"
+
+Player2:
+Recv  : "INIT\n"
+Send  : "OK\n"
+
+Player1:
+Recv  : "UP\n"
+Send  : "OK\n"
+
+Player2:
+Recv  : "DOWN\n"
+Send  : "OK\n"
+
+Player1:
+Recv  : "MOVE []\n"
+Send  : "[1]\n"
+
+Player2:
+Recv  : "MOVE [1]\n"
+Send  : "[4]\n"
+
+Player1:
+Recv  : "MOVE [4]\n"
+Send  : "[6,7]\n"
+
+Player2:
+Recv  : "MOVE [6,7]\n"
+
+(...)
